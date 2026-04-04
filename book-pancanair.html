@@ -4,603 +4,79 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Book Service — PanCanAir | Brampton HVAC</title>
-  <meta name="description" content="Book your HVAC service with PanCanAir in under 60 seconds. Choose your service, pick a time, and we'll be there."/>
+  <meta name="description" content="Book your HVAC service with PanCanAir. Same-day service across Brampton, Toronto & GTA."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Playfair Display','Georgia','serif']},colors:{navy:'#0D1B2A',electric:'#00AEEF',safety:'#FF6700',panred:'#E63329',panblue:'#2B5DA6',gold:'#E63329',cream:'#FAFAF8',lightbg:'#F8FAFB'}}}};
+    tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Playfair Display','Georgia','serif']},colors:{navy:'#0D1B2A',electric:'#00AEEF',panred:'#E63329',panblue:'#2B5DA6',cream:'#FAFAF8'}}}}};
   </script>
+  <!-- Calendly embed styles -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet"/>
   <style>
-    *{scroll-behavior:smooth;box-sizing:border-box}
-    body{background:#FAFBFD;min-height:100vh}
-
-    /* Step transitions */
-    .step-panel{display:none;opacity:0;transform:translateX(30px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
-    .step-panel.active{display:block;opacity:1;transform:translateX(0)}
-    .step-panel.exit-left{opacity:0;transform:translateX(-30px)}
-
-    /* Service card */
-    .svc-card{transition:all .35s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative;overflow:hidden}
-    .svc-card::before{content:'';position:absolute;inset:0;border:2px solid transparent;border-radius:inherit;transition:border-color .3s}
-    .svc-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,174,239,.12)}
-    .svc-card:hover::before{border-color:#00AEEF40}
-    .svc-card.selected{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,174,239,.18)}
-    .svc-card.selected::before{border-color:#00AEEF;border-width:2.5px}
-    .svc-card .check{opacity:0;transform:scale(.5);transition:all .3s cubic-bezier(.16,1,.3,1)}
-    .svc-card.selected .check{opacity:1;transform:scale(1)}
-
-    /* Calendar */
-    .cal-day{transition:all .25s;cursor:pointer;position:relative}
-    .cal-day:not(.disabled):hover{background:#00AEEF15;color:#00AEEF;border-radius:12px}
-    .cal-day.selected{background:#E63329;color:white;border-radius:12px;font-weight:700;box-shadow:0 4px 16px #E6332930}
-    .cal-day.today{font-weight:700;color:#E63329}
-    .cal-day.disabled{opacity:.25;cursor:default;pointer-events:none}
-
-    /* Time slot */
-    .time-slot{transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
-    .time-slot:hover{border-color:#00AEEF80;background:#00AEEF08;transform:translateY(-2px)}
-    .time-slot.selected{border-color:#00AEEF;background:linear-gradient(135deg,#00AEEF10,#2B5DA610);color:#0D1B2A;font-weight:600;box-shadow:0 4px 16px #00AEEF15}
-
-    /* Input focus */
-    .form-input{transition:all .3s}
-    .form-input:focus{border-color:#00AEEF;box-shadow:0 0 0 4px #00AEEF15;outline:none}
-
-    /* Progress bar animation */
-    .progress-fill{transition:width .6s cubic-bezier(.16,1,.3,1)}
-
-    /* Confetti */
-    @keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
-    .confetti{position:fixed;top:-20px;z-index:100;animation:confetti-fall 3s ease-out forwards;pointer-events:none}
-
-    /* Pulse */
-    @keyframes soft-pulse{0%,100%{opacity:1}50%{opacity:.6}}
-    .soft-pulse{animation:soft-pulse 2s ease-in-out infinite}
-
-    /* Checkmark draw */
-    @keyframes draw-check{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
-    .draw-check{stroke-dasharray:60;stroke-dashoffset:60;animation:draw-check .6s cubic-bezier(.16,1,.3,1) .3s forwards}
-
-    @keyframes scale-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
-    .scale-in{animation:scale-in .5s cubic-bezier(.16,1,.3,1) forwards}
-
-    @keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .fade-up{animation:fade-up .6s cubic-bezier(.16,1,.3,1) forwards}
-    .fade-up-d1{animation-delay:.15s;opacity:0}
-    .fade-up-d2{animation-delay:.3s;opacity:0}
-    .fade-up-d3{animation-delay:.45s;opacity:0}
+    body{background:#F8FAFB;min-height:100vh}
+    .calendly-inline-widget{min-width:320px;height:700px}
+    @media(max-width:640px){.calendly-inline-widget{height:650px}}
   </style>
 </head>
 <body class="font-sans antialiased text-navy">
 
-<!-- ══════════ HEADER ══════════ -->
+<!-- HEADER -->
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100">
-  <div class="mx-auto max-w-3xl flex items-center justify-between px-5 py-3">
-    <a href="pancanair-premium.html" class="flex items-center gap-2.5 group">
+  <div class="mx-auto max-w-4xl flex items-center justify-between px-5 py-3">
+    <a href="index.html" class="flex items-center gap-2.5 group">
       <div class="w-9 h-9 shrink-0">
-        <svg viewBox="0 0 100 100" class="w-full h-full"><g><line x1="30" y1="10" x2="30" y2="20" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="14" x2="21" y2="21" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="46" x2="21" y2="39" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="#F5A623"/></g><g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g></svg>
+        <svg viewBox="0 0 100 100" class="w-full h-full"><g><line x1="30" y1="10" x2="30" y2="20" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="14" x2="21" y2="21" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="46" x2="21" y2="39" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="white"/></g><g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g></svg>
       </div>
       <span class="text-lg font-extrabold tracking-tight"><span class="text-panred">Pan</span><span class="text-electric">Can</span><span class="text-navy">Air</span></span>
     </a>
-    <a href="pancanair-premium.html" class="text-sm font-medium text-navy/40 hover:text-navy/70 transition-colors flex items-center gap-1.5">
+    <a href="index.html" class="text-sm font-medium text-navy/40 hover:text-navy/70 transition-colors flex items-center gap-1.5">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Back to Home
     </a>
   </div>
 </header>
 
-<!-- ══════════ PROGRESS BAR ══════════ -->
-<div class="sticky top-[57px] z-40 bg-white border-b border-gray-100">
-  <div class="mx-auto max-w-3xl px-5 py-5">
-    <div class="flex items-center justify-between mb-3">
-      <div class="flex items-center gap-3">
-        <div id="stepBadge" class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-white text-sm font-bold shadow-md shadow-gold/20">1</div>
-        <div>
-          <p id="stepTitle" class="text-sm font-bold text-navy">Choose Your Service</p>
-          <p id="stepSub" class="text-xs text-navy/35">Step 1 of 4</p>
-        </div>
-      </div>
-      <span id="stepPercent" class="text-xs font-bold text-electric">25%</span>
-    </div>
-    <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-      <div id="progressBar" class="progress-fill h-full rounded-full bg-gold" style="width:25%"></div>
-    </div>
-    <!-- Step indicators -->
-    <div class="flex justify-between mt-3">
-      <button onclick="goToStep(1)" class="step-dot flex items-center gap-1.5 text-[11px] font-semibold text-gold">
-        <span class="w-5 h-5 rounded-full bg-gold text-white flex items-center justify-center text-[10px] font-bold">1</span>
-        Service
-      </button>
-      <button onclick="goToStep(2)" class="step-dot flex items-center gap-1.5 text-[11px] font-semibold text-navy/25" id="dot2">
-        <span class="w-5 h-5 rounded-full bg-gray-200 text-navy/40 flex items-center justify-center text-[10px] font-bold" id="dot2c">2</span>
-        Date & Time
-      </button>
-      <button onclick="goToStep(3)" class="step-dot flex items-center gap-1.5 text-[11px] font-semibold text-navy/25" id="dot3">
-        <span class="w-5 h-5 rounded-full bg-gray-200 text-navy/40 flex items-center justify-center text-[10px] font-bold" id="dot3c">3</span>
-        Your Details
-      </button>
-      <button onclick="goToStep(4)" class="step-dot flex items-center gap-1.5 text-[11px] font-semibold text-navy/25" id="dot4">
-        <span class="w-5 h-5 rounded-full bg-gray-200 text-navy/40 flex items-center justify-center text-[10px] font-bold" id="dot4c">4</span>
-        Confirm
-      </button>
-    </div>
+<!-- HERO TEXT -->
+<div class="mx-auto max-w-4xl px-5 pt-10 pb-6 text-center">
+  <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-electric/8 border border-electric/15 text-xs font-bold text-electric tracking-wide uppercase mb-4">
+    <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book Your Service
+  </span>
+  <h1 class="text-3xl sm:text-4xl font-display font-black text-navy tracking-tight">Schedule an Appointment</h1>
+  <p class="mt-3 text-navy/45 text-base max-w-md mx-auto">Pick a time that works for you. We'll confirm within 30 minutes and show up on time.</p>
+
+  <!-- Trust pills -->
+  <div class="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-navy/40">
+    <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-gray-100">
+      <svg class="w-3.5 h-3.5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      2hr appointment slots
+    </span>
+    <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-gray-100">
+      <svg class="w-3.5 h-3.5 text-panred" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Licensed & Insured
+    </span>
+    <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-gray-100">
+      <svg class="w-3.5 h-3.5 text-panblue" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      4.9★ Rated GTA
+    </span>
   </div>
 </div>
 
-<!-- ══════════ MAIN CONTENT ══════════ -->
-<main class="mx-auto max-w-3xl px-5 py-8 pb-32">
-
-  <!-- ═══ STEP 1: SERVICE SELECTION ═══ -->
-  <div id="step1" class="step-panel active">
-    <div class="text-center mb-8">
-      <h1 class="text-2xl sm:text-3xl font-display font-black tracking-tight text-navy">Define Your Service</h1>
-      <p class="mt-2 text-sm text-navy/40 max-w-md mx-auto">Choose from our list of HVAC services to find the right solution for you.</p>
-    </div>
-    <div class="grid grid-cols-2 gap-4" id="serviceGrid">
-      <!-- Service cards — isometric HVAC equipment style like 4Seasons -->
-      <div class="svc-card bg-white rounded-2xl pt-5 pb-4 px-4 border border-gray-100 shadow-sm" data-service="AC Installation">
-        <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-electric flex items-center justify-center z-10"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-electric/5 to-panblue/5 flex items-center justify-center mb-4 relative overflow-hidden">
-          <svg viewBox="0 0 120 100" class="w-24 h-20"><rect x="20" y="15" width="55" height="65" rx="4" fill="#0D1B2A" opacity=".85"/><rect x="25" y="20" width="45" height="30" rx="2" fill="#00AEEF" opacity=".3"/><line x1="30" y1="28" x2="65" y2="28" stroke="#00AEEF" stroke-width="1" opacity=".5"/><line x1="30" y1="35" x2="65" y2="35" stroke="#00AEEF" stroke-width="1" opacity=".5"/><line x1="30" y1="42" x2="65" y2="42" stroke="#00AEEF" stroke-width="1" opacity=".5"/><rect x="45" y="12" width="50" height="60" rx="4" fill="#2B5DA6" opacity=".85"/><rect x="50" y="17" width="40" height="25" rx="2" fill="#00AEEF" opacity=".25"/><circle cx="70" cy="57" r="8" fill="none" stroke="#0D1B2A" stroke-width="1.5" opacity=".5"/><line x1="70" y1="50" x2="70" y2="64" stroke="#0D1B2A" stroke-width="1" opacity=".4"/></svg>
-        </div>
-        <h3 class="text-sm font-bold text-navy text-center">AC Installation</h3>
-        <p class="text-[11px] text-navy/30 text-center mt-1">Central & ductless systems</p>
-      </div>
-
-      <div class="svc-card bg-white rounded-2xl pt-5 pb-4 px-4 border border-gray-100 shadow-sm" data-service="Furnace Repair">
-        <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-electric flex items-center justify-center z-10"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-panred/5 to-amber-500/5 flex items-center justify-center mb-4 relative overflow-hidden">
-          <svg viewBox="0 0 120 100" class="w-24 h-20"><rect x="30" y="10" width="50" height="70" rx="5" fill="#2B5DA6" opacity=".85"/><rect x="35" y="15" width="40" height="20" rx="2" fill="#0D1B2A" opacity=".2"/><line x1="40" y1="22" x2="70" y2="22" stroke="#0D1B2A" stroke-width="1.5" opacity=".3"/><line x1="40" y1="28" x2="70" y2="28" stroke="#0D1B2A" stroke-width="1.5" opacity=".3"/><rect x="40" y="45" width="30" height="25" rx="3" fill="#E63329" opacity=".2"/><path d="M50 52 L55 48 L60 52 L60 65 L50 65Z" fill="#E63329" opacity=".35"/><circle cx="55" cy="58" r="3" fill="#E63329" opacity=".5"/></svg>
-        </div>
-        <h3 class="text-sm font-bold text-navy text-center">Furnace Repair</h3>
-        <p class="text-[11px] text-navy/30 text-center mt-1">Emergency & scheduled</p>
-      </div>
-
-      <div class="svc-card bg-white rounded-2xl pt-5 pb-4 px-4 border border-gray-100 shadow-sm" data-service="Heat Pump">
-        <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-electric flex items-center justify-center z-10"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-panblue/5 to-electric/5 flex items-center justify-center mb-4 relative overflow-hidden">
-          <svg viewBox="0 0 120 100" class="w-24 h-20"><rect x="15" y="20" width="45" height="55" rx="4" fill="#0D1B2A" opacity=".85"/><rect x="20" y="25" width="35" height="22" rx="2" fill="#00AEEF" opacity=".25"/><circle cx="37" cy="60" r="10" fill="none" stroke="#00AEEF" stroke-width="2" opacity=".5"/><path d="M37 52 L37 68" stroke="#00AEEF" stroke-width="1.5" opacity=".4"/><rect x="55" y="15" width="48" height="60" rx="4" fill="#2B5DA6" opacity=".85"/><rect x="60" y="20" width="38" height="28" rx="2" fill="#00AEEF" opacity=".2"/><circle cx="79" cy="60" r="6" fill="#00AEEF" opacity=".3"/><path d="M76 57 L82 63 M82 57 L76 63" stroke="#00AEEF" stroke-width="1.5" opacity=".5"/></svg>
-        </div>
-        <h3 class="text-sm font-bold text-navy text-center">Heat Pump</h3>
-        <p class="text-[11px] text-navy/30 text-center mt-1">Energy-efficient heating</p>
-      </div>
-
-      <div class="svc-card bg-white rounded-2xl pt-5 pb-4 px-4 border border-gray-100 shadow-sm" data-service="Service Call">
-        <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-electric flex items-center justify-center z-10"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-panblue/5 to-electric/5 flex items-center justify-center mb-4 relative overflow-hidden">
-          <svg viewBox="0 0 120 100" class="w-24 h-20"><rect x="25" y="15" width="55" height="60" rx="5" fill="#2B5DA6" opacity=".85"/><rect x="30" y="20" width="45" height="28" rx="2" fill="#00AEEF" opacity=".2"/><path d="M52 28 L48 40 L51 40 L48 48 L57 36 L54 36 L57 28Z" fill="#00AEEF" opacity=".6"/><circle cx="52" cy="60" r="3" fill="#00AEEF" opacity=".5"/><circle cx="52" cy="60" r="8" fill="none" stroke="#00AEEF" stroke-width="1" opacity=".25"/><path d="M75 30 L75 55" stroke="#E63329" stroke-width="2" opacity=".4"/><path d="M80 35 Q85 42 80 50" fill="none" stroke="#E63329" stroke-width="1.5" opacity=".3"/><path d="M85 38 Q92 42 85 48" fill="none" stroke="#E63329" stroke-width="1" opacity=".2"/></svg>
-        </div>
-        <h3 class="text-sm font-bold text-navy text-center">Service Call</h3>
-        <p class="text-[11px] text-navy/30 text-center mt-1">Diagnostics & same-day</p>
-      </div>
-
-      <div class="svc-card bg-white rounded-2xl pt-5 pb-4 px-4 border border-gray-100 shadow-sm" data-service="Emergency Repair">
-        <div class="check absolute top-3 right-3 w-6 h-6 rounded-full bg-electric flex items-center justify-center z-10"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-panred/5 to-safety/5 flex items-center justify-center mb-4 relative overflow-hidden">
-          <svg viewBox="0 0 120 100" class="w-24 h-20"><rect x="25" y="15" width="55" height="65" rx="5" fill="#2B5DA6" opacity=".85"/><rect x="30" y="20" width="45" height="28" rx="2" fill="#E63329" opacity=".15"/><path d="M52 25 L47 40 L51 40 L48 50 L58 35 L54 35 L57 25Z" fill="#E63329" opacity=".6"/><circle cx="52" cy="65" r="3" fill="#E63329" opacity=".5"/><circle cx="52" cy="65" r="8" fill="none" stroke="#E63329" stroke-width="1" opacity=".25"/><circle cx="52" cy="65" r="13" fill="none" stroke="#E63329" stroke-width="1" opacity=".12"/></svg>
-        </div>
-        <h3 class="text-sm font-bold text-navy text-center">Emergency Repair</h3>
-        <p class="text-[11px] text-navy/30 text-center mt-1">24/7 same-day service</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ STEP 2: DATE & TIME ═══ -->
-  <div id="step2" class="step-panel">
-    <div class="text-center mb-8">
-      <h1 class="text-2xl sm:text-3xl font-display font-black tracking-tight text-navy">Your Preferred Date & Time</h1>
-      <p class="mt-2 text-sm text-navy/40 max-w-md mx-auto">Select your first preference from the calendar below.</p>
-    </div>
-
-    <!-- Calendar -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-6">
-      <div class="flex items-center justify-between mb-5">
-        <button id="prevMonth" class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all hover:scale-105 active:scale-95">
-          <svg class="w-4 h-4 text-navy/50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <h3 id="calMonth" class="text-base font-bold text-navy"></h3>
-        <button id="nextMonth" class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all hover:scale-105 active:scale-95">
-          <svg class="w-4 h-4 text-navy/50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-      <div class="grid grid-cols-7 gap-1 mb-2">
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Sun</div>
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Mon</div>
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Tue</div>
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Wed</div>
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Thu</div>
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Fri</div>
-        <div class="text-center text-[11px] font-semibold text-navy/25 py-2">Sat</div>
-      </div>
-      <div id="calGrid" class="grid grid-cols-7 gap-1"></div>
-    </div>
-
-    <!-- Time Slots -->
-    <div id="timeSection" class="hidden">
-      <h3 class="text-sm font-bold text-navy mb-3">Available Time Slots</h3>
-      <div id="timeGrid" class="grid grid-cols-3 gap-3"></div>
-    </div>
-  </div>
-
-  <!-- ═══ STEP 3: YOUR DETAILS ═══ -->
-  <div id="step3" class="step-panel">
-    <div class="text-center mb-8">
-      <h1 class="text-2xl sm:text-3xl font-display font-black tracking-tight text-navy">Your Details</h1>
-      <p class="mt-2 text-sm text-navy/40 max-w-md mx-auto">Almost there! Fill in your information so our technician can reach you.</p>
-    </div>
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs font-semibold text-navy/50 mb-1.5 uppercase tracking-wider">First Name *</label>
-          <input id="fname" type="text" placeholder="Aniket" class="form-input w-full px-4 py-3.5 rounded-xl border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/20 bg-gray-50/50"/>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-navy/50 mb-1.5 uppercase tracking-wider">Last Name *</label>
-          <input id="lname" type="text" placeholder="Gandhi" class="form-input w-full px-4 py-3.5 rounded-xl border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/20 bg-gray-50/50"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-navy/50 mb-1.5 uppercase tracking-wider">Email Address *</label>
-        <input id="email" type="email" placeholder="aniket@example.com" class="form-input w-full px-4 py-3.5 rounded-xl border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/20 bg-gray-50/50"/>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-navy/50 mb-1.5 uppercase tracking-wider">Phone Number *</label>
-        <input id="phone" type="tel" placeholder="(437) 410-2100" class="form-input w-full px-4 py-3.5 rounded-xl border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/20 bg-gray-50/50"/>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-navy/50 mb-1.5 uppercase tracking-wider">Service Address *</label>
-        <input id="address" type="text" placeholder="123 Queen Street, Brampton ON" class="form-input w-full px-4 py-3.5 rounded-xl border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/20 bg-gray-50/50"/>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-navy/50 mb-1.5 uppercase tracking-wider">Additional Notes <span class="text-navy/20">(optional)</span></label>
-        <textarea id="notes" rows="3" placeholder="Describe the issue or any special instructions..." class="form-input w-full px-4 py-3.5 rounded-xl border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/20 bg-gray-50/50 resize-none"></textarea>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ STEP 4: CONFIRMATION ═══ -->
-  <div id="step4" class="step-panel">
-    <div class="text-center mb-8">
-      <div class="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-5 scale-in">
-        <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" class="draw-check"/></svg>
-      </div>
-      <h1 class="text-2xl sm:text-3xl font-display font-black tracking-tight text-navy fade-up">Booking Confirmed!</h1>
-      <p class="mt-2 text-sm text-navy/40 max-w-md mx-auto fade-up fade-up-d1">Your appointment has been scheduled. We'll send a confirmation to your email.</p>
-    </div>
-
-    <!-- Summary Card -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 fade-up fade-up-d2">
-      <div class="flex items-center gap-3 mb-5">
-        <div class="w-10 h-10 rounded-xl bg-electric/10 flex items-center justify-center">
-          <svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-        </div>
-        <div>
-          <p class="text-xs font-semibold text-navy/40 uppercase tracking-wider">Booking Reference</p>
-          <p id="bookingRef" class="text-base font-bold text-navy">PCA-2026-XXXX</p>
-        </div>
-      </div>
-      <div class="h-px bg-gray-100 mb-5"></div>
-      <div class="grid grid-cols-2 gap-y-4 gap-x-6">
-        <div><p class="text-[11px] font-semibold text-navy/30 uppercase tracking-wider mb-1">Service</p><p id="sumService" class="text-sm font-semibold text-navy">—</p></div>
-        <div><p class="text-[11px] font-semibold text-navy/30 uppercase tracking-wider mb-1">Date</p><p id="sumDate" class="text-sm font-semibold text-navy">—</p></div>
-        <div><p class="text-[11px] font-semibold text-navy/30 uppercase tracking-wider mb-1">Time</p><p id="sumTime" class="text-sm font-semibold text-navy">—</p></div>
-        <div><p class="text-[11px] font-semibold text-navy/30 uppercase tracking-wider mb-1">Customer</p><p id="sumName" class="text-sm font-semibold text-navy">—</p></div>
-        <div class="col-span-2"><p class="text-[11px] font-semibold text-navy/30 uppercase tracking-wider mb-1">Address</p><p id="sumAddress" class="text-sm font-semibold text-navy">—</p></div>
-      </div>
-      <div class="h-px bg-gray-100 my-5"></div>
-      <!-- Assigned Tech -->
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-electric to-panblue flex items-center justify-center text-white font-bold shadow-md shadow-electric/20">RK</div>
-        <div class="flex-1">
-          <p class="text-sm font-bold text-navy">Raj Kumar — Assigned</p>
-          <p class="text-xs text-navy/35">Senior HVAC Technician • 4.97★ (312 jobs)</p>
-        </div>
-        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-600 text-[11px] font-bold">
-          <div class="w-1.5 h-1.5 rounded-full bg-green-500 soft-pulse"></div>
-          Confirmed
-        </div>
-      </div>
-    </div>
-
-    <!-- What's Next -->
-    <div class="mt-6 bg-electric/5 rounded-2xl border border-electric/10 p-5 fade-up fade-up-d3">
-      <h3 class="text-sm font-bold text-navy mb-3 flex items-center gap-2">
-        <svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        What happens next?
-      </h3>
-      <div class="space-y-2.5">
-        <div class="flex items-start gap-3"><div class="w-5 h-5 rounded-full bg-electric/10 flex items-center justify-center shrink-0 mt-0.5"><span class="text-[10px] font-bold text-electric">1</span></div><p class="text-sm text-navy/50">Confirmation email sent to your inbox</p></div>
-        <div class="flex items-start gap-3"><div class="w-5 h-5 rounded-full bg-electric/10 flex items-center justify-center shrink-0 mt-0.5"><span class="text-[10px] font-bold text-electric">2</span></div><p class="text-sm text-navy/50">SMS reminder 1 hour before your appointment</p></div>
-        <div class="flex items-start gap-3"><div class="w-5 h-5 rounded-full bg-electric/10 flex items-center justify-center shrink-0 mt-0.5"><span class="text-[10px] font-bold text-electric">3</span></div><p class="text-sm text-navy/50">Track your technician live on the day of service</p></div>
-      </div>
-    </div>
-
-    <div class="mt-6 text-center">
-      <a href="pancanair-premium.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-electric to-panblue hover:scale-[1.03] active:scale-[.97] transition-all shadow-lg shadow-electric/20">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Back to Home
-      </a>
-    </div>
-  </div>
-
-</main>
-
-<!-- ══════════ BOTTOM NAV BAR ══════════ -->
-<div id="bottomBar" class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-[0_-4px_24px_rgba(0,0,0,.06)]">
-  <div class="mx-auto max-w-3xl flex items-center justify-between px-5 py-4">
-    <button id="backBtn" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-navy/50 border border-gray-200 hover:bg-gray-50 hover:scale-[1.02] active:scale-[.97] transition-all" style="display:none">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
-    </button>
-    <div id="spacer"></div>
-    <button id="nextBtn" class="flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-electric to-panblue hover:scale-[1.03] active:scale-[.97] transition-all shadow-lg shadow-electric/20 disabled:opacity-30 disabled:pointer-events-none" disabled>
-      Continue
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </button>
+<!-- CALENDLY EMBED -->
+<div class="mx-auto max-w-4xl px-5 pb-16">
+  <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="calendly-inline-widget" data-url="https://calendly.com/pancanair/30min?hide_gdpr_banner=1&primary_color=00AEEF" style="min-width:320px;height:700px"></div>
   </div>
 </div>
 
-<!-- ══════════ JAVASCRIPT ══════════ -->
-<script>
-// ═══ STATE ═══
-let currentStep=1;
-let selectedService=null;
-let selectedDate=null;
-let selectedTime=null;
-let calYear,calMonth;
+<!-- FOOTER NOTE -->
+<div class="text-center pb-10 text-xs text-navy/25 font-medium">
+  Questions? Call us at <a href="tel:+14374102100" class="text-electric hover:underline">(437) 410-2100</a> or <a href="https://wa.me/14374102100" class="text-electric hover:underline">WhatsApp us</a>
+</div>
 
-const stepTitles=['Choose Your Service','Your Preferred Date & Time','Your Details','Booking Confirmed!'];
-const stepSubs=['Step 1 of 4','Step 2 of 4','Step 3 of 4','Complete!'];
-const timeSlots=['8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
+<!-- Calendly script -->
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
-// Init calendar to current month
-const now=new Date();
-calYear=now.getFullYear();
-calMonth=now.getMonth();
-
-// ═══ SERVICE SELECTION ═══
-document.querySelectorAll('.svc-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    document.querySelectorAll('.svc-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
-    selectedService=card.dataset.service;
-    updateNav();
-  });
-});
-
-// ═══ CALENDAR ═══
-function renderCalendar(){
-  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('calMonth').textContent=months[calMonth]+' '+calYear;
-  const grid=document.getElementById('calGrid');
-  grid.innerHTML='';
-  const firstDay=new Date(calYear,calMonth,1).getDay();
-  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-  const today=new Date();
-
-  // Empty cells
-  for(let i=0;i<firstDay;i++){
-    grid.innerHTML+='<div></div>';
-  }
-  // Day cells
-  for(let d=1;d<=daysInMonth;d++){
-    const date=new Date(calYear,calMonth,d);
-    const isPast=date<new Date(today.getFullYear(),today.getMonth(),today.getDate());
-    const isSunday=date.getDay()===0;
-    const isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
-    const isSelected=selectedDate&&d===selectedDate.getDate()&&calMonth===selectedDate.getMonth()&&calYear===selectedDate.getFullYear();
-    let cls='cal-day w-full aspect-square flex items-center justify-center text-sm rounded-xl';
-    if(isPast||isSunday)cls+=' disabled';
-    if(isToday)cls+=' today';
-    if(isSelected)cls+=' selected';
-    const el=document.createElement('div');
-    el.className=cls;
-    el.textContent=d;
-    if(!isPast&&!isSunday){
-      el.addEventListener('click',()=>{
-        selectedDate=new Date(calYear,calMonth,d);
-        renderCalendar();
-        showTimeSlots();
-        updateNav();
-      });
-    }
-    grid.appendChild(el);
-  }
-}
-
-document.getElementById('prevMonth').addEventListener('click',()=>{
-  calMonth--;
-  if(calMonth<0){calMonth=11;calYear--}
-  renderCalendar();
-});
-document.getElementById('nextMonth').addEventListener('click',()=>{
-  calMonth++;
-  if(calMonth>11){calMonth=0;calYear++}
-  renderCalendar();
-});
-
-function showTimeSlots(){
-  const sec=document.getElementById('timeSection');
-  const grid=document.getElementById('timeGrid');
-  sec.classList.remove('hidden');
-  sec.style.opacity='0';sec.style.transform='translateY(10px)';
-  requestAnimationFrame(()=>{sec.style.transition='all .4s cubic-bezier(.16,1,.3,1)';sec.style.opacity='1';sec.style.transform='translateY(0)'});
-  grid.innerHTML='';
-  // Randomly disable a few slots for realism
-  const disabled=new Set([2,5,8]);
-  timeSlots.forEach((t,i)=>{
-    const el=document.createElement('div');
-    const avail=!disabled.has(i);
-    el.className='time-slot px-4 py-3 rounded-xl border text-sm text-center '+(avail?'border-gray-200 text-navy/60':'border-gray-100 text-navy/15 cursor-default pointer-events-none');
-    if(selectedTime===t)el.classList.add('selected');
-    el.textContent=t;
-    if(avail){
-      el.addEventListener('click',()=>{
-        document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
-        el.classList.add('selected');
-        selectedTime=t;
-        updateNav();
-      });
-    }
-    grid.appendChild(el);
-  });
-}
-
-renderCalendar();
-
-// ═══ NAVIGATION ═══
-function updateNav(){
-  const next=document.getElementById('nextBtn');
-  const back=document.getElementById('backBtn');
-  if(currentStep===1)next.disabled=!selectedService;
-  else if(currentStep===2)next.disabled=!(selectedDate&&selectedTime);
-  else if(currentStep===3){
-    const f=document.getElementById('fname').value.trim();
-    const l=document.getElementById('lname').value.trim();
-    const e=document.getElementById('email').value.trim();
-    const p=document.getElementById('phone').value.trim();
-    const a=document.getElementById('address').value.trim();
-    next.disabled=!(f&&l&&e&&p&&a);
-  }
-  back.style.display=currentStep>1&&currentStep<4?'flex':'none';
-  next.style.display=currentStep<4?'flex':'none';
-  document.getElementById('spacer').style.flex=currentStep===1?'1':'0';
-  if(currentStep===3){next.innerHTML='Confirm Booking <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>'}
-  else{next.innerHTML='Continue <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'}
-}
-
-// Form inputs real-time validation
-['fname','lname','email','phone','address'].forEach(id=>{
-  document.getElementById(id).addEventListener('input',updateNav);
-});
-
-function updateProgress(){
-  const pct=[25,50,75,100][currentStep-1];
-  document.getElementById('progressBar').style.width=pct+'%';
-  document.getElementById('stepPercent').textContent=pct+'%';
-  document.getElementById('stepBadge').textContent=currentStep;
-  document.getElementById('stepTitle').textContent=stepTitles[currentStep-1];
-  document.getElementById('stepSub').textContent=stepSubs[currentStep-1];
-
-  // Update dots
-  for(let i=2;i<=4;i++){
-    const dot=document.getElementById('dot'+i);
-    const dotc=document.getElementById('dot'+i+'c');
-    if(i<=currentStep){
-      dot.classList.remove('text-navy/25');dot.classList.add('text-gold');
-      dotc.classList.remove('bg-gray-200','text-navy/40');dotc.classList.add('bg-gold','text-white');
-    }else{
-      dot.classList.add('text-navy/25');dot.classList.remove('text-gold');
-      dotc.classList.add('bg-gray-200','text-navy/40');dotc.classList.remove('bg-gold','text-white');
-    }
-  }
-}
-
-function goToStep(step){
-  if(step>currentStep)return; // Can only go back
-  if(step===currentStep)return;
-  const oldPanel=document.getElementById('step'+currentStep);
-  const newPanel=document.getElementById('step'+step);
-  oldPanel.classList.remove('active');
-  oldPanel.style.opacity='0';oldPanel.style.transform='translateX(30px)';
-  setTimeout(()=>{
-    oldPanel.style.display='none';
-    currentStep=step;
-    updateProgress();
-    updateNav();
-    newPanel.style.display='block';
-    newPanel.style.opacity='0';
-    newPanel.style.transform=step<currentStep?'translateX(-30px)':'translateX(30px)';
-    requestAnimationFrame(()=>{
-      newPanel.classList.add('active');
-      newPanel.style.opacity='1';
-      newPanel.style.transform='translateX(0)';
-    });
-    window.scrollTo({top:0,behavior:'smooth'});
-  },250);
-}
-
-document.getElementById('nextBtn').addEventListener('click',()=>{
-  if(currentStep>=4)return;
-  const oldPanel=document.getElementById('step'+currentStep);
-  oldPanel.classList.remove('active');
-  oldPanel.style.opacity='0';oldPanel.style.transform='translateX(-30px)';
-
-  setTimeout(()=>{
-    oldPanel.style.display='none';
-    currentStep++;
-
-    // Populate confirmation
-    if(currentStep===4){
-      const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      document.getElementById('sumService').textContent=selectedService;
-      document.getElementById('sumDate').textContent=selectedDate?months[selectedDate.getMonth()]+' '+selectedDate.getDate()+', '+selectedDate.getFullYear():'—';
-      document.getElementById('sumTime').textContent=selectedTime||'—';
-      document.getElementById('sumName').textContent=document.getElementById('fname').value+' '+document.getElementById('lname').value;
-      document.getElementById('sumAddress').textContent=document.getElementById('address').value;
-      document.getElementById('bookingRef').textContent='PCA-2026-'+Math.floor(1000+Math.random()*9000);
-      document.getElementById('bottomBar').style.display='none';
-      // Confetti!
-      launchConfetti();
-    }
-
-    updateProgress();
-    updateNav();
-    const newPanel=document.getElementById('step'+currentStep);
-    newPanel.style.display='block';
-    newPanel.style.opacity='0';
-    newPanel.style.transform='translateX(30px)';
-    requestAnimationFrame(()=>{
-      newPanel.classList.add('active');
-      newPanel.style.opacity='1';
-      newPanel.style.transform='translateX(0)';
-    });
-    window.scrollTo({top:0,behavior:'smooth'});
-  },250);
-});
-
-document.getElementById('backBtn').addEventListener('click',()=>{
-  if(currentStep<=1)return;
-  const oldPanel=document.getElementById('step'+currentStep);
-  oldPanel.classList.remove('active');
-  oldPanel.style.opacity='0';oldPanel.style.transform='translateX(30px)';
-  setTimeout(()=>{
-    oldPanel.style.display='none';
-    currentStep--;
-    updateProgress();
-    updateNav();
-    const newPanel=document.getElementById('step'+currentStep);
-    newPanel.style.display='block';
-    newPanel.style.opacity='0';
-    newPanel.style.transform='translateX(-30px)';
-    requestAnimationFrame(()=>{
-      newPanel.classList.add('active');
-      newPanel.style.opacity='1';
-      newPanel.style.transform='translateX(0)';
-    });
-    window.scrollTo({top:0,behavior:'smooth'});
-  },250);
-});
-
-updateNav();
-
-// ═══ CONFETTI ═══
-function launchConfetti(){
-  const colors=['#00AEEF','#E63329','#2B5DA6','#E63329','#FF6700','#22c55e'];
-  for(let i=0;i<40;i++){
-    const el=document.createElement('div');
-    el.className='confetti';
-    el.style.left=Math.random()*100+'vw';
-    el.style.width=(6+Math.random()*8)+'px';
-    el.style.height=(6+Math.random()*8)+'px';
-    el.style.background=colors[Math.floor(Math.random()*colors.length)];
-    el.style.borderRadius=Math.random()>.5?'50%':'2px';
-    el.style.animationDuration=(2+Math.random()*2)+'s';
-    el.style.animationDelay=(Math.random()*.5)+'s';
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),4000);
-  }
-}
-</script>
 </body>
 </html>
