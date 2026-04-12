@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>PanCanAir — Premium HVAC Services | GTA, Toronto, Brampton, Hamilton</title>
+  <meta name="description" content="PanCanAir — Premium HVAC services across the GTA. Toronto, Brampton, Mississauga, Hamilton & beyond. Live technician tracking, same-day service, 1-year labour warranty."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet"/>
+  <!-- Leaflet Map for GPS Tracker -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Playfair Display','Georgia','serif']},colors:{navy:'#0D1B2A',electric:'#00AEEF',panred:'#E63329',panblue:'#2B5DA6',cream:'#FAFAF8',darkbg:'#080F18',surface:'#111D2C'}}}};
+  </script>
+  <style>
+    *{scroll-behavior:smooth}
+    ::selection{background:#00AEEF20;color:#0D1B2A}
+
+    /* ── Animations ── */
+    .anim{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .anim.v{opacity:1;transform:translateY(0)}
+    .anim-l{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .anim-l.v{opacity:1;transform:translateX(0)}
+    .anim-r{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+    .anim-r.v{opacity:1;transform:translateX(0)}
+    .anim-s{opacity:0;transform:scale(.88);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+    .anim-s.v{opacity:1;transform:scale(1)}
+
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+    @keyframes pulse-r{0%{transform:scale(1);opacity:.35}100%{transform:scale(1.7);opacity:0}}
+    @keyframes gshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+    @keyframes spin-s{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes hero-in{from{opacity:0;transform:translateY(50px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes badge-in{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(0,174,239,.25)}50%{box-shadow:0 0 30px 10px rgba(0,174,239,.08)}}
+    @keyframes truck-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    @keyframes route-dash{to{stroke-dashoffset:0}}
+    @keyframes map-ping{0%{r:6;opacity:.6}100%{r:24;opacity:0}}
+
+    .float{animation:float 4s ease-in-out infinite}
+    .float2{animation:float2 5s ease-in-out infinite}
+    .pulse-r{animation:pulse-r 2s ease-out infinite}
+    .gshift{background-size:200% 200%;animation:gshift 4s ease infinite}
+    .spin-s{animation:spin-s 20s linear infinite}
+    .breathe{animation:breathe 3s ease-in-out infinite}
+    .truck-pulse{animation:truck-pulse 2s ease-in-out infinite}
+
+    .h1{animation:badge-in .6s cubic-bezier(.16,1,.3,1) .1s both}
+    .h2{animation:hero-in .8s cubic-bezier(.16,1,.3,1) .25s both}
+    .h3{animation:hero-in .8s cubic-bezier(.16,1,.3,1) .4s both}
+    .h4{animation:hero-in .8s cubic-bezier(.16,1,.3,1) .55s both}
+    .h5{animation:hero-in .7s cubic-bezier(.16,1,.3,1) .7s both}
+    .h6{animation:hero-in .9s cubic-bezier(.16,1,.3,1) .3s both}
+
+    .shim{position:relative;overflow:hidden}
+    .shim::after{content:'';position:absolute;top:0;left:0;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,0,0,.02),transparent);transform:translateX(-100%)}
+    .shim:hover::after{animation:shimmer .8s ease-out}
+
+    .tgrad{background:linear-gradient(135deg,#E63329,#00AEEF,#2B5DA6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gshift 5s ease infinite}
+
+    /* Brand accent line */
+    .brand-line{height:1px;background:linear-gradient(90deg,transparent,#E6332940,#00AEEF40,transparent)}
+
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#F5F7FA}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#00AEEF,#2B5DA6);border-radius:3px}
+
+    /* Map overrides */
+    .leaflet-container{background:#EEF2F6!important;border-radius:16px}
+    .leaflet-tile{filter:none}
+    .tracker-card{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+
+    /* Premium noise texture overlay */
+    .noise::before{content:'';position:absolute;inset:0;opacity:.008;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+
+    /* ── Premium HVAC Mode Morph Animation ── */
+    /* Smooth transition between cooling & heating with particle effects */
+    @keyframes fan-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes ring-rotate{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+    @keyframes gauge-breathe{0%,100%{opacity:.4;r:88}50%{opacity:.7;r:90}}
+    @keyframes mode-cool{
+      0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}
+    }
+    @keyframes mode-heat{
+      0%,45%{opacity:0}50%,95%{opacity:1}100%{opacity:0}
+    }
+    @keyframes particle-up{
+      0%{transform:translateY(0);opacity:0}
+      10%{opacity:.6}
+      90%{opacity:.6}
+      100%{transform:translateY(-80px);opacity:0}
+    }
+    @keyframes particle-down{
+      0%{transform:translateY(0);opacity:0}
+      10%{opacity:.5}
+      90%{opacity:.5}
+      100%{transform:translateY(80px);opacity:0}
+    }
+    @keyframes needle-cool{
+      0%,45%{transform:rotate(-45deg)}50%,95%{transform:rotate(45deg)}100%{transform:rotate(-45deg)}
+    }
+    @keyframes glow-pulse{
+      0%,100%{filter:drop-shadow(0 0 6px #00AEEF40)}
+      25%{filter:drop-shadow(0 0 14px #00AEEF60)}
+      50%,95%{filter:drop-shadow(0 0 6px #E6332940)}
+      75%{filter:drop-shadow(0 0 14px #E6332960)}
+    }
+    @keyframes status-cool{
+      0%,42%{opacity:1}48%,95%{opacity:0}100%{opacity:1}
+    }
+    @keyframes status-heat{
+      0%,42%{opacity:0}48%,95%{opacity:1}100%{opacity:0}
+    }
+    @keyframes data-tick{
+      0%,100%{opacity:.2}50%{opacity:.5}
+    }
+
+    /* ── Hero Orb & Temp Bar ── */
+    @keyframes hero-orb-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(15px,-20px) scale(1.1)}}
+    .hero-orb{animation:hero-orb-drift 8s ease-in-out infinite}
+    @keyframes temp-fill{from{width:0}to{width:75%}}
+    .hero-temp-bar{animation:temp-fill 2s cubic-bezier(.4,0,.2,1) 1s both}
+
+    /* ── Premium Polish ── */
+    a,button{transition:all .25s cubic-bezier(.4,0,.2,1)}
+    .font-display{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+    footer a:hover{transform:translateX(2px)}
+    img,svg{image-rendering:auto}
+  </style>
+</head>
+<body class="min-h-screen bg-white text-navy font-sans antialiased">
+
+<!-- ══════════════════════════════════════════════════════
+     NAVIGATION — Premium Glassmorphism
+     ══════════════════════════════════════════════════════ -->
+<header id="nav" class="fixed top-4 inset-x-4 lg:inset-x-8 z-50 transition-all duration-500 rounded-full border border-transparent" style="max-width:1340px;margin-left:auto;margin-right:auto">
+  <div class="flex items-center justify-between px-5 py-3 lg:px-8">
+    <a href="#" class="flex items-center gap-1.5 group">
+      <div class="w-12 h-12 shrink-0">
+        <svg viewBox="0 0 100 100" class="w-full h-full"><g><line x1="30" y1="10" x2="30" y2="20" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="14" x2="21" y2="21" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="46" x2="21" y2="39" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="white"/></g><g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g></svg>
+      </div>
+      <div>
+        <span class="text-2xl font-black tracking-tight leading-none font-display"><span class="text-panred">Pan</span><span class="text-electric">Can</span><span class="text-navy">Air</span></span>
+        <span class="block text-[8px] uppercase tracking-[.25em] text-navy/30 font-semibold leading-none mt-0.5">Your Comfort, Our Priority</span>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8">
+      <a href="#services" class="text-[13px] font-medium text-navy/60 hover:text-electric transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-electric after:transition-all after:duration-300 hover:after:w-full">Services</a>
+      <a href="#tracker" class="text-[13px] font-medium text-navy/60 hover:text-electric transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-electric after:transition-all after:duration-300 hover:after:w-full">Track Technician</a>
+      <a href="#about" class="text-[13px] font-medium text-navy/60 hover:text-electric transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-electric after:transition-all after:duration-300 hover:after:w-full">About</a>
+      <a href="#reviews" class="text-[13px] font-medium text-navy/60 hover:text-electric transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-electric after:transition-all after:duration-300 hover:after:w-full">Reviews</a>
+      <a href="#areas" class="text-[13px] font-medium text-navy/60 hover:text-electric transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-electric after:transition-all after:duration-300 hover:after:w-full">Areas</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="book-pancanair.html" class="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-300 hover:scale-[1.04] active:scale-[.97]" style="background:linear-gradient(135deg,#00AEEF,#2B5DA6);box-shadow:0 8px 24px #00AEEF30">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Now
+      </a>
+      <a href="tel:+14374102100" class="hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold text-panred border border-panred/20 hover:bg-panred/5 transition-all duration-300">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        (437) 410-2100
+      </a>
+      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
+        <svg id="ico1" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        <svg id="ico2" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobNav" class="lg:hidden overflow-hidden transition-all duration-400 max-h-0">
+    <nav class="flex flex-col px-5 py-4 gap-1 bg-white/95 backdrop-blur-xl border-t border-gray-200/80">
+      <a href="#services" class="ml py-3 px-4 rounded-xl text-sm font-medium text-navy/70 hover:bg-gray-100 transition-all">Services</a>
+      <a href="#tracker" class="ml py-3 px-4 rounded-xl text-sm font-medium text-navy/70 hover:bg-gray-100 transition-all">Track Technician</a>
+      <a href="#about" class="ml py-3 px-4 rounded-xl text-sm font-medium text-navy/70 hover:bg-gray-100 transition-all">About</a>
+      <a href="#reviews" class="ml py-3 px-4 rounded-xl text-sm font-medium text-navy/70 hover:bg-gray-100 transition-all">Reviews</a>
+      <a href="#areas" class="ml py-3 px-4 rounded-xl text-sm font-medium text-navy/70 hover:bg-gray-100 transition-all">Areas</a>
+      <a href="book-pancanair.html" class="mt-2 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold text-white" style="background:linear-gradient(135deg,#00AEEF,#2B5DA6)"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Now</a>
+      <a href="tel:+14374102100" class="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold text-panred border border-panred/20"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(437) 410-2100</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO — Dark Premium Split
+     ══════════════════════════════════════════════════════ -->
+<section class="relative pt-28 pb-16 lg:pt-40 lg:pb-32 overflow-hidden noise">
+  <div class="absolute inset-0 opacity-[.04]" style="background-image:radial-gradient(circle at 1px 1px,#0D1B2A 1px,transparent 0);background-size:40px 40px"></div>
+  <div class="absolute top-0 -right-32 w-[800px] h-[800px] rounded-full opacity-10 blur-[160px] pointer-events-none" style="background:radial-gradient(circle,#00AEEF60,transparent 70%)"></div>
+  <div class="absolute bottom-0 -left-32 w-[500px] h-[500px] rounded-full opacity-8 blur-[120px] pointer-events-none" style="background:radial-gradient(circle,#E6332940,transparent 70%)"></div>
+
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <div class="max-w-xl">
+      <div class="h1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric/8 border border-electric/15 mb-8">
+        <svg class="w-3.5 h-3.5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="text-xs font-bold text-electric tracking-wide uppercase">Serving the Greater Toronto Area</span>
+      </div>
+
+      <h1 class="h2 font-display text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.02] tracking-tight">
+        <span class="tgrad">Your Comfort,</span><br/>
+        <span class="text-navy relative inline-block mt-2">Our Priority.
+          <svg class="absolute -bottom-3 left-0 w-full" height="10" viewBox="0 0 200 10" fill="none"><path d="M1 7C40 3 80 3 100 5C120 7 160 4 199 6" stroke="url(#ug)" stroke-width="3" stroke-linecap="round" opacity=".5"/><defs><linearGradient id="ug" x1="0" y1="0" x2="200" y2="0"><stop stop-color="#E63329"/><stop offset="1" stop-color="#00AEEF"/></linearGradient></defs></svg>
+        </span>
+      </h1>
+
+      <p class="h3 mt-8 text-lg text-navy/45 leading-relaxed max-w-md">
+        Premium HVAC services across Toronto, Brampton, Mississauga &amp; the GTA. Same-day service, transparent pricing, 1-year labour warranty.
+      </p>
+
+      <!-- Hero CTA -->
+      <div class="h4 mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <a href="book-pancanair.html" class="group relative inline-flex items-center justify-center gap-3 px-9 py-4 rounded-2xl text-base font-bold text-white transition-all duration-300 hover:scale-[1.03] active:scale-[.97] overflow-hidden" style="background:linear-gradient(135deg,#E63329,#C62828);box-shadow:0 12px 40px rgba(230,51,41,.3)">
+          <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,#D32F2F,#E63329)"></span>
+          <svg class="w-5 h-5 relative z-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span class="relative z-10">Book Your Service</span>
+          <svg class="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+14374102100" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-base font-bold text-navy border-2 border-navy/10 hover:border-electric/30 hover:bg-electric/5 transition-all duration-300">
+          <svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (437) 410-2100
+        </a>
+      </div>
+
+      <!-- Minimal trust line -->
+      <div class="h5 mt-8 flex items-center gap-6 text-xs font-semibold text-navy/35">
+        <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Licensed &amp; Insured</span>
+        <span class="text-navy/10">|</span>
+        <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-panred" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.9&#9733; Rated</span>
+        <span class="text-navy/10">|</span>
+        <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-panblue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Same-Day</span>
+      </div>
+    </div>
+
+    <!-- Hero Right — Premium Card -->
+    <div class="hidden lg:block relative h6">
+      <div class="aspect-[4/5] rounded-3xl overflow-hidden relative" style="background:linear-gradient(160deg,#0D1B2A 0%,#0F2337 50%,#0D1B2A 100%);box-shadow:0 32px 80px rgba(13,27,42,.35),0 0 0 1px rgba(255,255,255,.05)">
+        <!-- Subtle animated orbs -->
+        <div class="absolute top-[-15%] right-[-10%] w-[300px] h-[300px] rounded-full opacity-20 blur-[90px] hero-orb" style="background:radial-gradient(circle,#00AEEF,transparent 70%)"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[240px] h-[240px] rounded-full opacity-15 blur-[80px] hero-orb" style="background:radial-gradient(circle,#E63329,transparent 70%);animation-delay:2s"></div>
+        <!-- Single orbit ring -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-[300px] h-[300px] rounded-full border border-white/[.04] spin-s"></div>
+        </div>
+        <!-- Premium HVAC Mode-Morph Animation -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
+          <svg viewBox="0 0 320 340" class="w-[340px] h-[360px]" fill="none">
+            <defs>
+              <linearGradient id="gaugeGradCool" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00AEEF"/><stop offset="1" stop-color="#2B5DA6"/></linearGradient>
+              <linearGradient id="gaugeGradHeat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E63329"/><stop offset="1" stop-color="#FF6B4A"/></linearGradient>
+              <linearGradient id="unitBody" x1="100" y1="120" x2="220" y2="220" gradientUnits="userSpaceOnUse"><stop stop-color="#1a2f47"/><stop offset="1" stop-color="#0f1f33"/></linearGradient>
+              <linearGradient id="unitTop" x1="100" y1="105" x2="220" y2="105" gradientUnits="userSpaceOnUse"><stop stop-color="#1e3550"/><stop offset="1" stop-color="#162b42"/></linearGradient>
+              <radialGradient id="coolGlow" cx="160" cy="170" r="80" gradientUnits="userSpaceOnUse"><stop stop-color="#00AEEF" stop-opacity=".12"/><stop offset="1" stop-color="#00AEEF" stop-opacity="0"/></radialGradient>
+              <radialGradient id="heatGlow" cx="160" cy="170" r="80" gradientUnits="userSpaceOnUse"><stop stop-color="#E63329" stop-opacity=".12"/><stop offset="1" stop-color="#E63329" stop-opacity="0"/></radialGradient>
+              <filter id="softGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+
+            <!-- Outer gauge ring — subtle -->
+            <circle cx="160" cy="170" r="120" fill="none" stroke="white" stroke-opacity=".03" stroke-width="1"/>
+            <circle cx="160" cy="170" r="105" fill="none" stroke="white" stroke-opacity=".04" stroke-width=".5" stroke-dasharray="2 8"/>
+
+            <!-- Gauge arc — COOL mode -->
+            <g style="animation:mode-cool 12s ease-in-out infinite">
+              <circle cx="160" cy="170" r="112" fill="none" stroke="url(#gaugeGradCool)" stroke-width="2" stroke-dasharray="176 528" stroke-dashoffset="-88" stroke-linecap="round" opacity=".5" style="transform-origin:160px 170px;animation:ring-rotate 30s linear infinite"/>
+            </g>
+            <!-- Gauge arc — HEAT mode -->
+            <g style="animation:mode-heat 12s ease-in-out infinite">
+              <circle cx="160" cy="170" r="112" fill="none" stroke="url(#gaugeGradHeat)" stroke-width="2" stroke-dasharray="176 528" stroke-dashoffset="-88" stroke-linecap="round" opacity=".5" style="transform-origin:160px 170px;animation:ring-rotate 30s linear infinite reverse"/>
+            </g>
+
+            <!-- Background glow — morphs -->
+            <circle cx="160" cy="170" r="80" fill="url(#coolGlow)" style="animation:mode-cool 12s ease-in-out infinite"/>
+            <circle cx="160" cy="170" r="80" fill="url(#heatGlow)" style="animation:mode-heat 12s ease-in-out infinite"/>
+
+            <!-- HVAC Unit — Clean minimal -->
+            <!-- Top panel -->
+            <rect x="100" y="118" width="120" height="22" rx="8" fill="url(#unitTop)" stroke="white" stroke-opacity=".08" stroke-width=".5"/>
+            <text x="130" y="133" fill="white" fill-opacity=".12" font-family="Inter" font-size="7" font-weight="800" letter-spacing="2.5">PANCANAIR</text>
+            <!-- Status LED — morphs cool/heat -->
+            <circle cx="210" cy="129" r="2.5" fill="#00AEEF" opacity=".8" style="animation:mode-cool 12s ease-in-out infinite"/>
+            <circle cx="210" cy="129" r="2.5" fill="#E63329" opacity=".8" style="animation:mode-heat 12s ease-in-out infinite"/>
+            <circle cx="210" cy="129" r="5" fill="none" stroke="#00AEEF" stroke-opacity=".15" stroke-width=".5" style="animation:mode-cool 12s ease-in-out infinite"/>
+            <circle cx="210" cy="129" r="5" fill="none" stroke="#E63329" stroke-opacity=".15" stroke-width=".5" style="animation:mode-heat 12s ease-in-out infinite"/>
+
+            <!-- Main body -->
+            <rect x="100" y="140" width="120" height="65" rx="2" fill="url(#unitBody)" stroke="white" stroke-opacity=".06" stroke-width=".5"/>
+            <!-- Vent slats — minimal -->
+            <line x1="112" y1="150" x2="208" y2="150" stroke="white" stroke-opacity=".06" stroke-width="1" stroke-linecap="round"/>
+            <line x1="112" y1="160" x2="208" y2="160" stroke="white" stroke-opacity=".06" stroke-width="1" stroke-linecap="round"/>
+            <line x1="112" y1="170" x2="208" y2="170" stroke="white" stroke-opacity=".06" stroke-width="1" stroke-linecap="round"/>
+            <line x1="112" y1="180" x2="208" y2="180" stroke="white" stroke-opacity=".06" stroke-width="1" stroke-linecap="round"/>
+            <line x1="112" y1="190" x2="208" y2="190" stroke="white" stroke-opacity=".06" stroke-width="1" stroke-linecap="round"/>
+
+            <!-- Fan — center of body -->
+            <circle cx="160" cy="170" r="22" stroke="white" stroke-opacity=".06" stroke-width=".5"/>
+            <g style="transform-origin:160px 170px;animation:fan-spin 4s linear infinite">
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#00AEEF" opacity=".3" transform="rotate(0 160 170)" style="animation:mode-cool 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#00AEEF" opacity=".3" transform="rotate(72 160 170)" style="animation:mode-cool 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#00AEEF" opacity=".3" transform="rotate(144 160 170)" style="animation:mode-cool 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#00AEEF" opacity=".3" transform="rotate(216 160 170)" style="animation:mode-cool 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#00AEEF" opacity=".3" transform="rotate(288 160 170)" style="animation:mode-cool 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#E63329" opacity=".3" transform="rotate(0 160 170)" style="animation:mode-heat 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#E63329" opacity=".3" transform="rotate(72 160 170)" style="animation:mode-heat 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#E63329" opacity=".3" transform="rotate(144 160 170)" style="animation:mode-heat 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#E63329" opacity=".3" transform="rotate(216 160 170)" style="animation:mode-heat 12s ease-in-out infinite"/>
+              <ellipse cx="160" cy="153" rx="5" ry="14" fill="#E63329" opacity=".3" transform="rotate(288 160 170)" style="animation:mode-heat 12s ease-in-out infinite"/>
+            </g>
+            <circle cx="160" cy="170" r="4" fill="#0F2337" stroke="white" stroke-opacity=".1" stroke-width=".5"/>
+
+            <!-- Cool particles — floating down -->
+            <g style="animation:mode-cool 12s ease-in-out infinite">
+              <circle cx="125" cy="215" r="1.5" fill="#00AEEF" opacity=".5" style="animation:particle-down 2.8s ease-in-out infinite"/>
+              <circle cx="140" cy="218" r="1" fill="#00AEEF" opacity=".4" style="animation:particle-down 3.2s ease-in-out .4s infinite"/>
+              <circle cx="160" cy="212" r="2" fill="#00AEEF" opacity=".6" style="animation:particle-down 2.4s ease-in-out .8s infinite"/>
+              <circle cx="178" cy="216" r="1" fill="#00AEEF" opacity=".4" style="animation:particle-down 3s ease-in-out 1.2s infinite"/>
+              <circle cx="195" cy="214" r="1.5" fill="#00AEEF" opacity=".5" style="animation:particle-down 2.6s ease-in-out .6s infinite"/>
+              <circle cx="132" cy="220" r=".8" fill="#00AEEF" opacity=".3" style="animation:particle-down 3.5s ease-in-out 1.6s infinite"/>
+              <circle cx="185" cy="220" r=".8" fill="#00AEEF" opacity=".3" style="animation:particle-down 3.4s ease-in-out 2s infinite"/>
+            </g>
+
+            <!-- Heat particles — floating up -->
+            <g style="animation:mode-heat 12s ease-in-out infinite">
+              <circle cx="125" cy="112" r="1.5" fill="#E63329" opacity=".45" style="animation:particle-up 3s ease-in-out infinite"/>
+              <circle cx="142" cy="110" r="1" fill="#E63329" opacity=".35" style="animation:particle-up 3.4s ease-in-out .5s infinite"/>
+              <circle cx="160" cy="108" r="2" fill="#E63329" opacity=".5" style="animation:particle-up 2.6s ease-in-out 1s infinite"/>
+              <circle cx="178" cy="110" r="1" fill="#E63329" opacity=".35" style="animation:particle-up 3.2s ease-in-out 1.4s infinite"/>
+              <circle cx="195" cy="112" r="1.5" fill="#E63329" opacity=".45" style="animation:particle-up 2.8s ease-in-out .8s infinite"/>
+              <circle cx="150" cy="114" r=".8" fill="#E63329" opacity=".25" style="animation:particle-up 3.6s ease-in-out 1.8s infinite"/>
+              <circle cx="172" cy="114" r=".8" fill="#E63329" opacity=".25" style="animation:particle-up 3.8s ease-in-out 2.2s infinite"/>
+            </g>
+
+            <!-- Temperature display — bottom -->
+            <g filter="url(#softGlow)">
+              <!-- Cool temp -->
+              <g style="animation:status-cool 12s ease-in-out infinite">
+                <text x="160" y="260" text-anchor="middle" fill="#00AEEF" fill-opacity=".6" font-family="Inter" font-size="28" font-weight="200" letter-spacing="-1">21°</text>
+                <text x="160" y="278" text-anchor="middle" fill="#00AEEF" fill-opacity=".25" font-family="Inter" font-size="8" font-weight="700" letter-spacing="4">COOLING</text>
+              </g>
+              <!-- Heat temp -->
+              <g style="animation:status-heat 12s ease-in-out infinite">
+                <text x="160" y="260" text-anchor="middle" fill="#E63329" fill-opacity=".6" font-family="Inter" font-size="28" font-weight="200" letter-spacing="-1">24°</text>
+                <text x="160" y="278" text-anchor="middle" fill="#E63329" fill-opacity=".25" font-family="Inter" font-size="8" font-weight="700" letter-spacing="4">HEATING</text>
+              </g>
+            </g>
+
+            <!-- Minimal data readouts — left & right -->
+            <g opacity=".2">
+              <text x="42" y="145" fill="white" font-family="Inter" font-size="6" font-weight="600" letter-spacing="2">EFFICIENCY</text>
+              <text x="42" y="157" fill="#00AEEF" font-family="Inter" font-size="10" font-weight="300">98.2%</text>
+              <rect x="42" y="162" width="32" height="1" rx=".5" fill="white" opacity=".15"/>
+            </g>
+            <g opacity=".2">
+              <text x="248" y="145" fill="white" font-family="Inter" font-size="6" font-weight="600" letter-spacing="2" text-anchor="end">AIRFLOW</text>
+              <text x="248" y="157" fill="#00AEEF" font-family="Inter" font-size="10" font-weight="300" text-anchor="end">420 CFM</text>
+              <rect x="216" y="162" width="32" height="1" rx=".5" fill="white" opacity=".15"/>
+            </g>
+
+            <!-- Tick marks around gauge -->
+            <g opacity=".08">
+              <line x1="160" y1="50" x2="160" y2="56" stroke="white" stroke-width=".5"/>
+              <line x1="218" y1="62" x2="215" y2="67" stroke="white" stroke-width=".5"/>
+              <line x1="258" y1="110" x2="253" y2="112" stroke="white" stroke-width=".5"/>
+              <line x1="270" y1="170" x2="264" y2="170" stroke="white" stroke-width=".5"/>
+              <line x1="258" y1="228" x2="253" y2="226" stroke="white" stroke-width=".5"/>
+              <line x1="102" y1="62" x2="105" y2="67" stroke="white" stroke-width=".5"/>
+              <line x1="62" y1="110" x2="67" y2="112" stroke="white" stroke-width=".5"/>
+              <line x1="50" y1="170" x2="56" y2="170" stroke="white" stroke-width=".5"/>
+              <line x1="62" y1="228" x2="67" y2="226" stroke="white" stroke-width=".5"/>
+            </g>
+
+            <!-- Bottom status bar -->
+            <rect x="120" y="295" width="80" height="1" rx=".5" fill="white" opacity=".06"/>
+            <text x="160" y="312" text-anchor="middle" fill="white" fill-opacity=".08" font-family="Inter" font-size="7" font-weight="700" letter-spacing="4">COMFORT ZONE</text>
+          </svg>
+          <!-- Brand name below -->
+          <p class="-mt-4 text-2xl font-black font-display tracking-tight"><span class="text-panred">Pan</span><span class="text-electric">Can</span><span class="text-white">Air</span></p>
+          <p class="text-[10px] uppercase tracking-[.3em] text-white/25 font-semibold mt-1.5">Premium HVAC · GTA</p>
+        </div>
+        <!-- Corner accents -->
+        <div class="absolute top-7 left-7 w-6 h-6 border-l border-t border-white/[.08] rounded-tl"></div>
+        <div class="absolute top-7 right-7 w-6 h-6 border-r border-t border-white/[.08] rounded-tr"></div>
+        <div class="absolute bottom-7 left-7 w-6 h-6 border-l border-b border-white/[.08] rounded-bl"></div>
+        <div class="absolute bottom-7 right-7 w-6 h-6 border-r border-b border-white/[.08] rounded-br"></div>
+      </div>
+      <!-- Just one floating card — clean -->
+      <div class="absolute -left-6 bottom-24 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-100 float2" style="box-shadow:0 20px 60px rgba(13,27,42,.12)">
+        <div class="flex items-center gap-3"><div class="w-11 h-11 rounded-xl bg-electric/10 flex items-center justify-center"><svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><p class="text-xl font-extrabold text-navy">2,500+</p><p class="text-[11px] text-navy/30 font-medium">GTA homes serviced</p></div></div>
+      </div>
+      <div class="absolute -right-3 top-16 px-4 py-2.5 rounded-xl float" style="animation-delay:1s;background:linear-gradient(135deg,#E63329,#C62828);box-shadow:0 8px 24px rgba(230,51,41,.3)">
+        <div class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="text-[11px] font-bold text-white uppercase tracking-wide">24/7 Emergency</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brand-line mx-auto max-w-5xl"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     SERVICE GRID — Premium Dark Cards
+     ══════════════════════════════════════════════════════ -->
+<section id="services" class="py-24 lg:py-32 relative noise">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="anim text-center max-w-2xl mx-auto mb-16">
+      <span class="text-[11px] font-bold uppercase tracking-[.3em] text-panred/60">Our Expertise</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-black tracking-tight text-navy">Complete Home Comfort</h2>
+      <p class="mt-5 text-base text-navy/35 leading-relaxed">From emergency repairs to full system installations, <span class="font-semibold text-navy/60">PanCanAir</span> delivers premium HVAC services across the Greater Toronto Area.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="anim shim group p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:border-panred/30 hover:bg-panred/[.03] hover:shadow-2xl hover:shadow-panred/10 hover:scale-[1.04] transition-all duration-500 cursor-pointer"><div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 bg-panred/10 border border-panred/10"><svg class="w-6 h-6 text-panred transition-transform duration-500 group-hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg></div><h3 class="text-lg font-bold text-navy mb-2">Heating</h3><p class="text-sm text-navy/35 leading-relaxed mb-5">Furnace installation, repair & maintenance. Stay warm with energy-efficient heating.</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Furnace Install</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Boiler Service</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Heat Pumps</span></div><div class="mt-5 flex items-center gap-1.5 text-sm font-bold text-panred opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">Learn more <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="anim shim group p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:border-electric/30 hover:bg-electric/[.03] hover:shadow-2xl hover:shadow-electric/10 hover:scale-[1.04] transition-all duration-500 cursor-pointer" style="transition-delay:100ms"><div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 bg-electric/10 border border-electric/10"><svg class="w-6 h-6 text-electric transition-transform duration-500 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l.642 3.358a4 4 0 003 3L19 9l-3.358.642a4 4 0 00-3 3L12 16l-.642-3.358a4 4 0 00-3-3L5 9l3.358-.642a4 4 0 003-3L12 2zM2 12h2M20 12h2M12 20v2"/></svg></div><h3 class="text-lg font-bold text-navy mb-2">Cooling</h3><p class="text-sm text-navy/35 leading-relaxed mb-5">Central AC, ductless mini-splits, and emergency cooling repairs for hot summers.</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Central AC</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Mini-Splits</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">AC Repair</span></div><div class="mt-5 flex items-center gap-1.5 text-sm font-bold text-electric opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">Learn more <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="anim shim group p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:border-panblue/30 hover:bg-panblue/[.03] hover:shadow-2xl hover:shadow-panblue/10 hover:scale-[1.04] transition-all duration-500 cursor-pointer" style="transition-delay:200ms"><div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 bg-panblue/10 border border-panblue/10"><svg class="w-6 h-6 text-panblue transition-transform duration-500 group-hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="text-lg font-bold text-navy mb-2">Heat Pumps</h3><p class="text-sm text-navy/35 leading-relaxed mb-5">Energy-efficient heat pump installation, repair & seasonal maintenance for year-round comfort.</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Installation</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Repair</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Maintenance</span></div><div class="mt-5 flex items-center gap-1.5 text-sm font-bold text-panblue opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">Learn more <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="anim shim group p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:border-panred/30 hover:bg-panred/[.03] hover:shadow-2xl hover:shadow-panred/10 hover:scale-[1.04] transition-all duration-500 cursor-pointer" style="transition-delay:300ms"><div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 bg-panred/10 border border-panred/10"><svg class="w-6 h-6 text-panred transition-transform duration-500 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><h3 class="text-lg font-bold text-navy mb-2">Service Call</h3><p class="text-sm text-navy/35 leading-relaxed mb-5">On-call service as per your needs. Premium emergency charges apply. Fast diagnostics &amp; on-site repairs.</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">On-Call</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Premium Rates</span><span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-50 border border-gray-200/80 text-navy/40">Same-Day</span></div><div class="mt-5 flex items-center gap-1.5 text-sm font-bold text-panred opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">Learn more <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="brand-line mx-auto max-w-5xl"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     LIVE GPS TECHNICIAN TRACKER — Uber-Style
+     ══════════════════════════════════════════════════════ -->
+<section id="tracker" class="py-24 lg:py-32 relative noise">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="anim text-center max-w-2xl mx-auto mb-12">
+      <span class="text-[11px] font-bold uppercase tracking-[.3em] text-electric">Live Tracking</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-display font-black tracking-tight text-navy">Track Your Technician</h2>
+      <p class="mt-5 text-base text-navy/35 leading-relaxed">Like Uber, but for HVAC. Enter your booking code and watch your technician's truck arrive in real-time on a live map.</p>
+    </div>
+
+    <div class="anim grid lg:grid-cols-5 gap-6 items-start">
+      <!-- Tracker Input Card -->
+      <div class="lg:col-span-2 space-y-5">
+        <!-- Booking Lookup -->
+        <div class="p-6 rounded-2xl bg-gray-50 border border-gray-200/80 tracker-card">
+          <h3 class="text-base font-bold text-navy mb-1">Enter Booking Code</h3>
+          <p class="text-xs text-navy/30 mb-4">We sent this via SMS when you booked your appointment.</p>
+          <div class="flex gap-2">
+            <input id="bookingCode" type="text" placeholder="e.g. PCA-2024-7891" class="flex-1 px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm font-medium text-navy placeholder:text-navy/25 outline-none focus:ring-2 focus:ring-electric/30 focus:border-electric/40 transition-all"/>
+            <button id="trackBtn" class="px-5 py-3 rounded-xl text-sm font-bold text-white bg-electric hover:bg-electric/80 hover:scale-[1.03] active:scale-[.97] transition-all duration-300" style="box-shadow:0 6px 24px #00AEEF25">Track</button>
+          </div>
+        </div>
+
+        <!-- Technician Card (appears after tracking) -->
+        <div id="techCard" class="hidden p-6 rounded-2xl bg-gray-50 border border-electric/20 tracker-card transition-all">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-electric to-panblue flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-electric/20">RK</div>
+            <div class="flex-1">
+              <h4 class="font-bold text-navy">Raj Kumar</h4>
+              <p class="text-xs text-navy/40">Senior HVAC Technician</p>
+              <div class="flex items-center gap-1 mt-1"><svg class="w-3 h-3 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span class="text-[11px] text-panred font-semibold">4.97</span><span class="text-[11px] text-navy/25">(312 jobs)</span></div>
+            </div>
+            <a href="tel:+14374102100" class="w-10 h-10 rounded-xl bg-electric/10 border border-electric/20 flex items-center justify-center hover:scale-110 transition-transform"><svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+          </div>
+          <div class="brand-line mb-4"></div>
+          <!-- Status Timeline -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center"><svg class="w-3 h-3 text-green-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div><p class="text-sm font-medium text-navy/70">Dispatched</p><p class="text-[11px] text-navy/25">10:02 AM</p></div></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-electric/20 border border-electric/40 flex items-center justify-center truck-pulse"><svg class="w-3 h-3 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><p class="text-sm font-semibold text-electric">En Route</p><p class="text-[11px] text-navy/25" id="etaText">ETA: ~12 minutes</p></div></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-white/5 border border-gray-200 flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white/20"></div></div><div><p class="text-sm text-navy/30">Arrived</p></div></div>
+            <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-full bg-white/5 border border-gray-200 flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white/20"></div></div><div><p class="text-sm text-navy/30">Job Complete</p></div></div>
+          </div>
+          <div class="brand-line mt-4 mb-4"></div>
+          <div class="flex items-center justify-between">
+            <div><p class="text-[11px] text-navy/25 uppercase tracking-wider font-semibold">Service</p><p class="text-sm font-semibold text-navy/70">Furnace Repair</p></div>
+            <div class="text-right"><p class="text-[11px] text-navy/25 uppercase tracking-wider font-semibold">Vehicle</p><p class="text-sm font-semibold text-navy/70">Ford Transit #PCA-07</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Map -->
+      <div class="lg:col-span-3">
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-2xl shadow-gray-300/40 relative" style="height:480px">
+          <div id="map" class="w-full h-full"></div>
+          <!-- Map Overlay - Branding -->
+          <div class="absolute top-4 left-4 z-[1000] px-3 py-2 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <span class="text-[11px] font-bold text-navy/60 uppercase tracking-wider">Live Tracking</span>
+            </div>
+          </div>
+          <!-- Placeholder before tracking -->
+          <div id="mapOverlay" class="absolute inset-0 z-[999] flex flex-col items-center justify-center bg-white/70 backdrop-blur-sm transition-opacity duration-500">
+            <div class="w-20 h-20 rounded-full bg-white/5 border border-gray-200 flex items-center justify-center mb-4">
+              <svg class="w-10 h-10 text-electric/50" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <p class="text-navy/40 text-sm font-medium mb-1">Enter your booking code</p>
+            <p class="text-navy/20 text-xs">to see your technician's live location</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brand-line mx-auto max-w-5xl"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     STATS BAND
+     ══════════════════════════════════════════════════════ -->
+<section class="py-16 relative overflow-hidden" style="background:linear-gradient(135deg,#F0F4F8,#E8EDF2)">
+  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-panred/20 to-transparent"></div>
+  <div class="absolute inset-0 opacity-[.03]" style="background-image:radial-gradient(circle at 1px 1px,#0D1B2A 1px,transparent 0);background-size:24px 24px"></div>
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="anim text-center"><div class="w-12 h-12 rounded-xl bg-electric/10 border border-electric/10 flex items-center justify-center mx-auto mb-3"><svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div><p class="text-3xl sm:text-4xl font-black text-navy mb-1">15+</p><p class="text-sm text-navy/30 font-medium">Years Experience</p></div>
+      <div class="anim text-center" style="transition-delay:100ms"><div class="w-12 h-12 rounded-xl bg-panblue/10 border border-panblue/10 flex items-center justify-center mx-auto mb-3"><svg class="w-5 h-5 text-panblue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><p class="text-3xl sm:text-4xl font-black text-navy mb-1">2,500+</p><p class="text-sm text-navy/30 font-medium">Homes Serviced</p></div>
+      <div class="anim text-center" style="transition-delay:200ms"><div class="w-12 h-12 rounded-xl bg-panred/10 border border-panred/10 flex items-center justify-center mx-auto mb-3"><svg class="w-5 h-5 text-panred" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="text-3xl sm:text-4xl font-black text-navy mb-1">4.9&#9733;</p><p class="text-sm text-navy/30 font-medium">Google Rating</p></div>
+      <div class="anim text-center" style="transition-delay:300ms"><div class="w-12 h-12 rounded-xl bg-panred/10 border border-panred/10 flex items-center justify-center mx-auto mb-3"><svg class="w-5 h-5 text-panred" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><p class="text-3xl sm:text-4xl font-black text-navy mb-1">24/7</p><p class="text-sm text-navy/30 font-medium">Emergency Service</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     WHY CHOOSE US
+     ══════════════════════════════════════════════════════ -->
+<section id="about" class="py-24 lg:py-32 noise">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="anim-l">
+        <span class="text-[11px] font-bold uppercase tracking-[.3em] text-panred/60">Why PanCanAir</span>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-display font-black tracking-tight text-navy">The GTA's Most Trusted<br/><span class="tgrad">HVAC Team</span></h2>
+        <p class="mt-5 text-base text-navy/35 leading-relaxed">We combine premium equipment with meticulous craftsmanship. Every job is completed on time, on budget, and backed by the strongest warranty in the business.</p>
+        <div class="mt-8 flex items-center gap-3"><div class="flex -space-x-3"><div class="w-10 h-10 rounded-full bg-panblue flex items-center justify-center text-white text-xs font-bold border-2 border-white">JK</div><div class="w-10 h-10 rounded-full bg-electric flex items-center justify-center text-white text-xs font-bold border-2 border-white">SM</div><div class="w-10 h-10 rounded-full bg-panred flex items-center justify-center text-white text-xs font-bold border-2 border-white">AR</div><div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-white text-xs font-bold border-2 border-white">+12</div></div><div><p class="text-sm font-bold text-navy/80">Certified Technicians</p><p class="text-xs text-navy/25">All factory-trained & licensed</p></div></div>
+      </div>
+      <div class="space-y-5">
+        <div class="anim-r shim flex gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:shadow-electric/5 hover:border-electric/20 hover:-translate-y-1 transition-all duration-500"><div class="w-12 h-12 rounded-xl bg-electric/10 border border-electric/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><h3 class="font-bold text-navy mb-1">Licensed & Certified</h3><p class="text-sm text-navy/35 leading-relaxed">Fully licensed technicians with manufacturer certifications on all major brands.</p></div></div>
+        <div class="anim-r shim flex gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:shadow-panblue/5 hover:border-panblue/20 hover:-translate-y-1 transition-all duration-500" style="transition-delay:120ms"><div class="w-12 h-12 rounded-xl bg-panblue/10 border border-panblue/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-panblue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3 class="font-bold text-navy mb-1">Same-Day Service</h3><p class="text-sm text-navy/35 leading-relaxed">Emergency? We dispatch within 60 minutes across Brampton and surrounding areas.</p></div></div>
+        <div class="anim-r shim flex gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:shadow-panred/5 hover:border-panred/20 hover:-translate-y-1 transition-all duration-500" style="transition-delay:240ms"><div class="w-12 h-12 rounded-xl bg-panred/10 border border-panred/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-panred" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h3 class="font-bold text-navy mb-1">1-Year Labour Warranty</h3><p class="text-sm text-navy/35 leading-relaxed">Every job backed by our comprehensive labour warranty. Your investment is fully protected.</p></div></div>
+        <div class="anim-r shim flex gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:shadow-electric/5 hover:border-electric/20 hover:-translate-y-1 transition-all duration-500" style="transition-delay:360ms"><div class="w-12 h-12 rounded-xl bg-electric/10 border border-electric/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h3 class="font-bold text-navy mb-1">Live GPS Tracking</h3><p class="text-sm text-navy/35 leading-relaxed">Track your technician's truck in real-time, like Uber. Know exactly when they'll arrive.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     TESTIMONIALS
+     ══════════════════════════════════════════════════════ -->
+<section id="reviews" class="py-24 lg:py-32 noise">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="anim text-center max-w-2xl mx-auto mb-16">
+      <span class="text-[11px] font-bold uppercase tracking-[.3em] text-panred/60">Testimonials</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-display font-black tracking-tight text-navy">What Our Clients Say</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="anim-s shim p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:-translate-y-2 transition-all duration-500"><div class="flex gap-0.5 mb-4"><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="text-sm text-navy/45 leading-relaxed mb-5">"PanCanAir installed our new furnace in one day. The GPS tracking was amazing — I knew exactly when the tech arrived. Best HVAC experience we've had."</p><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-panblue flex items-center justify-center text-white text-xs font-bold">SP</div><div><p class="text-sm font-bold text-navy/80">Sarah P.</p><p class="text-xs text-navy/25">Brampton, ON</p></div></div></div>
+      <div class="anim-s shim p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:-translate-y-2 transition-all duration-500" style="transition-delay:150ms"><div class="flex gap-0.5 mb-4"><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="text-sm text-navy/45 leading-relaxed mb-5">"Called at 11pm on a Friday — had a technician at my door by midnight. I watched the truck on the live map the whole way. Absolutely incredible."</p><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-panred flex items-center justify-center text-white text-xs font-bold">MR</div><div><p class="text-sm font-bold text-navy/80">Mike R.</p><p class="text-xs text-navy/25">Mississauga, ON</p></div></div></div>
+      <div class="anim-s shim p-6 rounded-2xl bg-gray-50 border border-gray-200/80 hover:shadow-xl hover:-translate-y-2 transition-all duration-500" style="transition-delay:300ms"><div class="flex gap-0.5 mb-4"><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg class="w-4 h-4 text-panred fill-panred" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="text-sm text-navy/45 leading-relaxed mb-5">"Their maintenance plan dropped our energy bill 22% last quarter. The online booking with live tracking feels like a premium experience. Worth every penny."</p><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-electric flex items-center justify-center text-white text-xs font-bold">DK</div><div><p class="text-sm font-bold text-navy/80">David K.</p><p class="text-xs text-navy/25">Caledon, ON</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CTA BAND
+     ══════════════════════════════════════════════════════ -->
+<section class="py-16 relative overflow-hidden" style="background:linear-gradient(135deg,#E63329,#D32F2F)">
+  <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 1px 1px,white 1px,transparent 0);background-size:20px 20px"></div>
+  <div class="relative mx-auto max-w-4xl px-5 lg:px-8 text-center anim">
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-white mb-4">Need HVAC Service Today?</h2>
+    <p class="text-lg text-navy/80 mb-8 max-w-xl mx-auto">Get a free, no-obligation quote from Brampton's top-rated HVAC team. We respond in under 30 minutes.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="tel:+14374102100" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold bg-white text-panred hover:scale-[1.04] active:scale-[.97] transition-all duration-300 shadow-xl shadow-gray-200/40"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(437) 410-2100</a>
+      <a href="book-pancanair.html" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white border-2 border-white/30 hover:bg-gray-100 hover:border-white/60 hover:scale-[1.04] active:scale-[.97] transition-all duration-300">Book Online <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════ -->
+<footer id="areas" class="text-white pt-16 pb-8" style="background:linear-gradient(180deg,#0D1B2A,#080F18)">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+      <div>
+        <div class="flex items-center gap-1.5 mb-5"><div class="w-12 h-12 shrink-0"><svg viewBox="0 0 100 100" class="w-full h-full"><g><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="white"/><line x1="30" y1="10" x2="30" y2="20" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#E63329" stroke-width="3" stroke-linecap="round"/></g><g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g></svg></div><div><span class="text-2xl font-black tracking-tight leading-none font-display"><span class="text-panred">Pan</span><span class="text-electric">Can</span><span class="text-white">Air</span></span><span class="block text-[8px] uppercase tracking-[.25em] text-white/30 font-semibold leading-none mt-0.5">Your Comfort, Our Priority</span></div></div>
+        <p class="text-sm text-white/50 leading-relaxed mb-4">Premium heating, cooling &amp; HVAC services across the Greater Toronto Area.</p>
+        <a href="https://instagram.com/pancanair" target="_blank" class="inline-flex items-center gap-2 text-sm text-white/50 hover:text-electric transition-colors mb-5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@pancanair</a>
+        <div class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-panred/30 bg-panred/10 hover:bg-panred/20 transition-colors"><div class="relative"><svg class="w-4 h-4 text-panred" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-panred rounded-full animate-ping"></span><span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-panred rounded-full"></span></div><div><p class="text-[10px] uppercase tracking-wider text-panred font-bold">24/7 Emergency</p><p class="text-sm font-bold text-white">(437) 410-2100</p></div></div>
+      </div>
+      <div>
+        <h4 class="text-[11px] font-bold uppercase tracking-[.2em] text-white/40 mb-5">Services</h4>
+        <ul class="space-y-3"><li><a href="#" class="text-sm text-white/55 hover:text-electric transition-colors flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>AC Installation</a></li><li><a href="#" class="text-sm text-white/55 hover:text-electric transition-colors flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>Heating &amp; Furnace</a></li><li><a href="#" class="text-sm text-white/55 hover:text-electric transition-colors flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>Heat Pumps</a></li><li><a href="#" class="text-sm text-white/55 hover:text-electric transition-colors flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>Service Call</a></li><li><a href="#" class="text-sm text-white/55 hover:text-electric transition-colors flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>Emergency Repair</a></li></ul>
+      </div>
+      <div>
+        <h4 class="text-[11px] font-bold uppercase tracking-[.2em] text-white/40 mb-5">Service Areas</h4>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-2"><span class="text-sm text-white/55">Toronto</span><span class="text-sm text-white/55">Brampton</span><span class="text-sm text-white/55">Mississauga</span><span class="text-sm text-white/55">Hamilton</span><span class="text-sm text-white/55">Oakville</span><span class="text-sm text-white/55">Burlington</span><span class="text-sm text-white/55">Milton</span><span class="text-sm text-white/55">Vaughan</span><span class="text-sm text-white/55">Richmond Hill</span><span class="text-sm text-white/55">Markham</span><span class="text-sm text-white/55">Caledon</span><span class="text-sm text-white/55">Etobicoke</span><span class="text-sm text-white/55">Scarborough</span><span class="text-sm text-white/55">North York</span></div>
+        <p class="text-xs text-white/30 mt-3">+ All GTA &amp; surrounding areas</p>
+      </div>
+      <div id="contact">
+        <h4 class="text-[11px] font-bold uppercase tracking-[.2em] text-white/40 mb-5">Contact</h4>
+        <div class="space-y-4">
+          <a href="tel:+14374102100" class="flex items-center gap-3 text-sm text-white/55 hover:text-white transition-colors"><svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(437) 410-2100</a>
+          <a href="mailto:info@pancanair.com" class="flex items-center gap-3 text-sm text-white/55 hover:text-white transition-colors"><svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@pancanair.com</a>
+          <a href="mailto:service@pancanair.com" class="flex items-center gap-3 text-sm text-white/55 hover:text-white transition-colors"><svg class="w-4 h-4 text-panred" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>service@pancanair.com</a>
+          <a href="https://wa.me/14374102100?text=Hi%20PanCanAir%2C%20I%20need%20HVAC%20service" target="_blank" class="flex items-center gap-3 text-sm text-white/55 hover:text-white transition-colors"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp Us</a>
+          <div class="flex items-start gap-3 text-sm text-white/50"><svg class="w-4 h-4 text-electric mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>104 Naperton Dr<br/>Brampton, ON L6R 0Z9</span></div>
+          <div class="flex items-center gap-3 text-sm text-white/50"><svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mon-Sat: 7AM - 9PM</div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/30">&copy; 2026 PanCanAir. All rights reserved. TSSA Licensed.</p>
+      <div class="flex items-center gap-6"><a href="https://instagram.com/pancanair" target="_blank" class="text-white/30 hover:text-electric transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="https://wa.me/14374102100" target="_blank" class="text-white/30 hover:text-[#25D366] transition-colors"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="#" class="text-xs text-white/30 hover:text-white/60 transition-colors">Privacy Policy</a><a href="#" class="text-xs text-white/30 hover:text-white/60 transition-colors">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky Mobile Buttons — Phone + WhatsApp -->
+<div id="sp" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 opacity-0 translate-y-4 scale-90 pointer-events-none transition-all duration-500">
+  <a href="https://wa.me/14374102100?text=Hi%20PanCanAir%2C%20I%20need%20HVAC%20service" target="_blank" class="w-14 h-14 rounded-2xl flex items-center justify-center text-white relative" style="background:#25D366;box-shadow:0 8px 32px rgba(37,211,102,.4)">
+    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="absolute inset-0 rounded-2xl pulse-r" style="background:#25D366"></span>
+  </a>
+  <a href="tel:+14374102100" class="w-14 h-14 rounded-2xl flex items-center justify-center text-white relative" style="background:linear-gradient(135deg,#E63329,#D32F2F);box-shadow:0 8px 32px #E6332960">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  </a>
+</div>
+
+<!-- Desktop Floating WhatsApp -->
+<a href="https://wa.me/14374102100?text=Hi%20PanCanAir%2C%20I%20need%20HVAC%20service" target="_blank" class="hidden sm:flex fixed bottom-6 left-6 z-50 items-center gap-2.5 px-5 py-3 rounded-full text-white text-sm font-bold transition-all duration-300 hover:scale-[1.05] active:scale-[.97]" style="background:#25D366;box-shadow:0 8px 32px rgba(37,211,102,.35)">
+  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Chat on WhatsApp
+</a>
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT
+     ══════════════════════════════════════════════════════ -->
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('backdrop-blur-xl',scrollY>20);nav.classList.toggle('bg-white/90',scrollY>20);nav.classList.toggle('shadow-lg',scrollY>20);nav.classList.toggle('shadow-gray-200/50',scrollY>20);if(scrollY>20){nav.style.borderColor='rgba(229,231,235,.8)'}else{nav.style.borderColor='transparent'}},{passive:true});
+
+// Mobile menu
+const mb=document.getElementById('menuBtn'),mn=document.getElementById('mobNav'),i1=document.getElementById('ico1'),i2=document.getElementById('ico2');let mo=false;
+mb.addEventListener('click',()=>{mo=!mo;mn.style.maxHeight=mo?'400px':'0';i1.classList.toggle('hidden',mo);i2.classList.toggle('hidden',!mo)});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{mo=false;mn.style.maxHeight='0';i1.classList.remove('hidden');i2.classList.add('hidden')}));
+
+// Scroll animations
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('v')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.anim,.anim-l,.anim-r,.anim-s').forEach(el=>obs.observe(el));
+
+// Sticky phone
+const sp=document.getElementById('sp');
+window.addEventListener('scroll',()=>{sp.classList.toggle('opacity-0',scrollY<=300);sp.classList.toggle('translate-y-4',scrollY<=300);sp.classList.toggle('scale-90',scrollY<=300);sp.classList.toggle('pointer-events-none',scrollY<=300);sp.classList.toggle('opacity-100',scrollY>300);sp.classList.toggle('translate-y-0',scrollY>300);sp.classList.toggle('scale-100',scrollY>300)},{passive:true});
+
+// ══════════════════════════════════════════
+// GPS TRACKER — Leaflet Map with simulated truck
+// ══════════════════════════════════════════
+const map=L.map('map',{zoomControl:false,attributionControl:false}).setView([43.7315,-79.7624],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{opacity:0.6}).addTo(map);
+L.control.zoom({position:'bottomright'}).addTo(map);
+
+// Custom truck icon
+const truckIcon=L.divIcon({className:'',html:`<div style="width:40px;height:40px;background:linear-gradient(135deg,#00AEEF,#2B5DA6);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px #00AEEF50;border:2px solid #fff3;animation:truck-pulse 2s ease-in-out infinite"><svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>`,iconSize:[40,40],iconAnchor:[20,20]});
+
+// Home icon
+const homeIcon=L.divIcon({className:'',html:`<div style="width:36px;height:36px;background:linear-gradient(135deg,#E63329,#D32F2F);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px #E6332950;border:2px solid #fff3"><svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>`,iconSize:[36,36],iconAnchor:[18,18]});
+
+// Simulated route (Brampton area)
+const routePoints=[
+  [43.7115,-79.7824],[43.7145,-79.7790],[43.7180,-79.7750],[43.7210,-79.7710],
+  [43.7240,-79.7670],[43.7265,-79.7640],[43.7290,-79.7610],[43.7310,-79.7580],
+  [43.7330,-79.7560],[43.7350,-79.7540],[43.7370,-79.7520],[43.7385,-79.7500],
+  [43.7395,-79.7480],[43.7400,-79.7460],[43.7410,-79.7440]
+];
+
+let truckMarker=null;
+let homeMarker=null;
+let routeLine=null;
+let animIdx=0;
+let animInterval=null;
+
+document.getElementById('trackBtn').addEventListener('click',()=>{
+  const code=document.getElementById('bookingCode').value.trim();
+  if(!code){document.getElementById('bookingCode').classList.add('ring-2','ring-panred/40');setTimeout(()=>document.getElementById('bookingCode').classList.remove('ring-2','ring-panred/40'),1500);return}
+
+  // Show tech card
+  document.getElementById('techCard').classList.remove('hidden');
+  document.getElementById('techCard').style.opacity='0';
+  document.getElementById('techCard').style.transform='translateY(10px)';
+  requestAnimationFrame(()=>{document.getElementById('techCard').style.transition='all .5s cubic-bezier(.16,1,.3,1)';document.getElementById('techCard').style.opacity='1';document.getElementById('techCard').style.transform='translateY(0)'});
+
+  // Remove overlay
+  const ov=document.getElementById('mapOverlay');
+  ov.style.opacity='0';setTimeout(()=>ov.style.display='none',500);
+
+  // Clear previous
+  if(truckMarker)map.removeLayer(truckMarker);
+  if(homeMarker)map.removeLayer(homeMarker);
+  if(routeLine)map.removeLayer(routeLine);
+  if(animInterval)clearInterval(animInterval);
+
+  // Draw route
+  routeLine=L.polyline(routePoints,{color:'#00AEEF',weight:4,opacity:.6,dashArray:'8 12'}).addTo(map);
+
+  // Home marker
+  const dest=routePoints[routePoints.length-1];
+  homeMarker=L.marker(dest,{icon:homeIcon}).addTo(map);
+
+  // Add a pulsing circle at home
+  L.circle(dest,{radius:80,color:'#E63329',fillColor:'#E63329',fillOpacity:.1,weight:1,opacity:.3}).addTo(map);
+
+  // Truck marker
+  animIdx=0;
+  truckMarker=L.marker(routePoints[0],{icon:truckIcon}).addTo(map);
+
+  // Fit bounds
+  map.fitBounds(routeLine.getBounds().pad(.15));
+
+  // Animate truck
+  animInterval=setInterval(()=>{
+    animIdx++;
+    if(animIdx>=routePoints.length){
+      clearInterval(animInterval);
+      document.getElementById('etaText').textContent='Arrived!';
+      document.getElementById('etaText').classList.add('text-green-400');
+      return;
+    }
+    truckMarker.setLatLng(routePoints[animIdx]);
+    const remaining=routePoints.length-animIdx;
+    const eta=Math.max(1,Math.round(remaining*.8));
+    document.getElementById('etaText').textContent='ETA: ~'+eta+' minutes';
+
+    // Update route line to show remaining
+    const remaining_pts=routePoints.slice(animIdx);
+    routeLine.setLatLngs(remaining_pts);
+  },1200);
+});
+</script>
+</body>
+</html>

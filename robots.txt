@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://pancanair.com/sitemap.xml
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
