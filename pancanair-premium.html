@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>PanCanAir — Commercial HVAC Maintenance Contracts · GTA Toronto Brampton</title>
+  <meta name="description" content="PanCanAir delivers commercial HVAC maintenance contracts, 24/7 emergency dispatch, and complete HVAC management for high-rise condos and commercial properties across the GTA. Serving Toronto, Brampton, Mississauga, Vaughan, Markham."/>
+  <meta name="keywords" content="commercial HVAC Toronto, HVAC maintenance contract GTA, high-rise HVAC Brampton, commercial furnace repair Toronto, HVAC company Brampton, preventive HVAC maintenance GTA, property manager HVAC contract"/>
+  <link rel="canonical" href="https://pancanair.com/"/>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="PanCanAir — Commercial HVAC Maintenance Contracts · GTA"/>
+  <meta property="og:description" content="Commercial HVAC maintenance contracts, 24/7 emergency dispatch, and complete building management for GTA high-rises. Essential from $22/unit/mo."/>
+  <meta property="og:url" content="https://pancanair.com/"/>
+  <meta property="og:image" content="https://lh3.googleusercontent.com/gps-cs-s/APNQkAG5O65raxe6_jVqRZu03rYXbJ4dBck1Q3EHn9fq--EEISBx6A5OxDjMMpSjiM5Letgg3rDhMoXUdhk6QXpvQrbpCfaKuxU34KgN364ZMEHqp5Sw_dILU17tpYGoLXhSqT6FQGP_Yw=w1200-h900-k-no"/>
+  <meta property="og:site_name" content="PanCanAir"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="PanCanAir — Commercial HVAC · GTA"/>
+  <meta name="twitter:description" content="Commercial HVAC maintenance contracts for GTA high-rises and property managers. 24/7 emergency dispatch, assigned technicians, digital reports."/>
+  <!-- Google Search Console (replace with your verification code) -->
+  <!-- <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE"/> -->
+  <!-- ── Supabase: replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY below ── -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPA_URL  = 'YOUR_SUPABASE_URL';   // e.g. https://xxxx.supabase.co
+    const SUPA_KEY  = 'YOUR_SUPABASE_ANON_KEY';
+    const _supa = (SUPA_URL !== 'YOUR_SUPABASE_URL')
+      ? supabase.createClient(SUPA_URL, SUPA_KEY)
+      : null;
+    async function saveLeadToSupabase(data) {
+      if (!_supa) return; // silently skip if not configured
+      try { await _supa.from('leads').insert([data]); } catch(e) { console.warn('Supabase insert failed', e); }
+    }
+  </script>
+  <!-- GAP 8: GA4 — replace G-XXXXXXXXXX with your Measurement ID from analytics.google.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <!-- GAP 5: LocalBusiness + HVACBusiness Schema (local SEO signal) -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["LocalBusiness","HVACBusiness"],"name":"PanCanAir","description":"Commercial HVAC maintenance contracts, 24/7 emergency dispatch, and full building management for GTA high-rise condominiums and commercial properties.","url":"https://pancanair.com","telephone":"+14374102100","email":"info@pancanair.com","priceRange":"$$$","openingHours":"Mo-Su 00:00-23:59","address":{"@type":"PostalAddress","addressLocality":"Toronto","addressRegion":"ON","addressCountry":"CA"},"geo":{"@type":"GeoCoordinates","latitude":43.7,"longitude":-79.42},"areaServed":[{"@type":"City","name":"Toronto"},{"@type":"City","name":"Mississauga"},{"@type":"City","name":"Brampton"},{"@type":"City","name":"Vaughan"},{"@type":"City","name":"North York"},{"@type":"City","name":"Markham"},{"@type":"City","name":"Oakville"},{"@type":"City","name":"Hamilton"},{"@type":"City","name":"Burlington"},{"@type":"City","name":"Caledon"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"12","bestRating":"5"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Barlow+Condensed:wght@500;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={theme:{extend:{colors:{ink:"#080808",panel:"#0F0F0F",rail:"#141414",border:"rgba(255,255,255,0.07)",red:"#E5312A",elec:"#00AEEF",blue:"#1D4EA0"}}}}
+  </script>
+  <style>
+    *{scroll-behavior:smooth;box-sizing:border-box}
+    body{background:#080808;color:#fff;font-family:"DM Sans","system-ui",sans-serif}
+    ::selection{background:rgba(229,49,42,.25)}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:#080808}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(#E5312A,#1D4EA0);border-radius:4px}
+
+    /* ── Floating Pill Nav ── */
+    .pill-nav{display:flex;align-items:center;gap:1px;padding:0;background:none;border:none;backdrop-filter:none}
+    .pill-link{padding:8px 18px;border-radius:100px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,0.42);transition:all .18s;white-space:nowrap;letter-spacing:.01em}
+    .pill-link:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+
+    /* ── Display type ── */
+    .bc{font-family:"Barlow Condensed",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.92}
+
+    /* ── Scroll animations ── */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+    .reveal.on{opacity:1;transform:translateY(0)}
+    .reveal-l{opacity:0;transform:translateX(-24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+    .reveal-l.on{opacity:1;transform:translateX(0)}
+    .reveal-r{opacity:0;transform:translateX(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+    .reveal-r.on{opacity:1;transform:translateX(0)}
+
+    /* ── Hero ── */
+    #hero{position:relative;min-height:100vh;min-height:100dvh;overflow:hidden}
+    #hero-img{position:absolute;inset:-15%;background-image:url('https://lh3.googleusercontent.com/gps-cs-s/AHVAweovHfSmK_jTk5LcFshcP0K5GR-yV0kfG2xiicn4MjlcxP3Ivo5B3L29-ehItK6km0bZhIakEiFgVrZyr2WmU3Tj4aJMgJretxWVKLn3aCUGUbkDC-mqABrDloS7GnFrtSp1qoK9TQ=w1600-h900-k-no');background-size:cover;background-position:center;opacity:.22;transform-origin:top center}
+    #hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#080808 45%,rgba(8,8,8,0.3) 100%)}
+
+    /* ── Feature rows ── */
+    .feat-row{border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;display:grid;grid-template-columns:64px 1fr auto;gap:0 28px;align-items:start;transition:background .2s}
+    .feat-row:hover{background:rgba(255,255,255,0.02)}
+    .feat-num{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,0.18);padding-top:3px}
+    .feat-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;min-width:200px}
+    .tag{padding:5px 11px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.35)}
+    .tag.hi{border-color:rgba(229,49,42,0.35);color:rgba(229,49,42,0.8);background:rgba(229,49,42,0.06)}
+    .tag.elec{border-color:rgba(0,174,239,0.3);color:rgba(0,174,239,0.75);background:rgba(0,174,239,0.05)}
+
+    /* ── Marquee ── */
+    @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes mq-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+    .mq-track{display:flex;width:max-content;white-space:nowrap}
+    .mq-fwd{animation:mq 32s linear infinite}
+    .mq-rev{animation:mq-r 28s linear infinite}
+    .mq-wrap{overflow:hidden}
+
+    /* ── Stat band ── */
+    .stat-n{font-family:"Barlow Condensed",sans-serif;font-weight:900;line-height:.88;letter-spacing:-.02em}
+
+    /* ── Testimonial ── */
+    .testi-q{font-size:clamp(18px,2.2vw,26px);line-height:1.45;font-style:italic;color:rgba(255,255,255,0.72);font-weight:300}
+
+    /* ── Scroll indicator ── */
+    @keyframes sdrop{0%{transform:translateY(-100%)}100%{transform:translateY(220%)}}
+    @keyframes sdot{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.7)}}
+    #scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;z-index:30;pointer-events:none;transition:opacity .4s ease}
+    .s-track{width:1px;height:48px;background:rgba(255,255,255,0.08);position:relative;overflow:hidden;border-radius:1px}
+    .s-beam{position:absolute;top:0;left:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,#E5312A,transparent);animation:sdrop 1.5s ease-in-out infinite}
+    .s-dot{width:4px;height:4px;border-radius:50%;background:#E5312A;animation:sdot 1.5s ease-in-out infinite}
+
+    /* ── Gemini effect ── */
+    #gemini-wrap{height:360vh;position:relative}
+    #gemini-sticky{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;background:#080808;display:flex;align-items:center;justify-content:center}
+    #gemini-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+    /* ── CTA ── */
+    .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:100px;font-weight:700;font-size:15px;letter-spacing:.04em;transition:all .2s}
+
+    /* ── Floating Pill Nav ── */
+    #nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:200;width:min(calc(100vw - 24px),1140px);background:rgba(9,9,9,0.76);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,0.1);border-radius:100px;transition:all .35s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 24px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,0.04) inset}
+    #nav.scrolled{background:rgba(8,8,8,0.96);box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,0.07),0 1px 0 rgba(255,255,255,0.04) inset;top:12px}
+    #nav-inner{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 22px;gap:8px}
+    #mob-drop{margin-top:8px;background:rgba(12,12,12,0.98);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,0.08);border-radius:24px;overflow:hidden;max-height:0;opacity:0;transition:max-height .35s cubic-bezier(.16,1,.3,1),opacity .25s ease}
+    #mob-drop.open{max-height:440px;opacity:1}
+    .nav-divider{width:1px;height:20px;background:rgba(255,255,255,0.08);flex-shrink:0}
+
+    /* ── Stat band ── */
+    @media(min-width:1024px){#sb-grid{grid-template-columns:repeat(4,1fr)}}
+    @media(min-width:1024px){#sb-grid>div{border-bottom:none!important}}
+
+    /* ── Hero dismantle perf hints ── */
+    #hero h1,#hero .h1a,#hero .h3a,#hero .h4a,#hero .h5a{will-change:transform,opacity}
+    #hero .h6a{will-change:transform,opacity}
+    #hero-img{will-change:transform}
+
+    /* ── Weather widget ── */
+    #weatherCanvas{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45}
+    @keyframes tglow{0%,100%{text-shadow:0 0 20px currentColor}50%{text-shadow:0 0 40px currentColor,0 0 80px currentColor}}
+    .tg{animation:tglow 4s ease-in-out infinite}
+
+    /* ── Weather keyframes ── */
+    @keyframes snow-fall{0%{transform:translateY(-10px) translateX(0);opacity:0}10%{opacity:.8}90%{opacity:.6}100%{transform:translateY(220px) translateX(20px);opacity:0}}
+    @keyframes rain-fall{0%{transform:translateY(-20px);opacity:0}10%{opacity:.6}90%{opacity:.4}100%{transform:translateY(220px);opacity:0}}
+    @keyframes cloud-drift{0%{transform:translateX(-20px)}100%{transform:translateX(20px)}}
+    @keyframes fog-drift{0%,100%{opacity:.08;transform:translateX(0)}50%{opacity:.18;transform:translateX(15px)}}
+    @keyframes lightning{0%,92%,100%{opacity:0}93%{opacity:.7}94%{opacity:0}96%{opacity:.5}97%{opacity:0}}
+    @keyframes sun-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    @keyframes sun-pulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.55;transform:scale(1.08)}}
+    @keyframes orb-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,-14px)}}
+    @keyframes badge-in{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes hero-in{from{opacity:0;transform:translateY(32px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .orb-a{animation:orb-drift 8s ease-in-out infinite}
+    .float-a{animation:float 4.5s ease-in-out infinite}
+    .h1a{animation:badge-in .6s cubic-bezier(.16,1,.3,1) .1s both}
+    .h2a{animation:hero-in .85s cubic-bezier(.16,1,.3,1) .18s both}
+    .h3a{animation:hero-in .85s cubic-bezier(.16,1,.3,1) .32s both}
+    .h4a{animation:hero-in .85s cubic-bezier(.16,1,.3,1) .46s both}
+    .h5a{animation:hero-in .8s cubic-bezier(.16,1,.3,1) .6s both}
+    .h6a{animation:hero-in .9s cubic-bezier(.16,1,.3,1) .22s both}
+  </style>
+</head>
+<body>
+<canvas id="weatherCanvas"></canvas>
+
+<!-- ════════════════ NAV ════════════════ -->
+<header id="nav">
+  <div id="nav-inner">
+
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2.5 shrink-0">
+      <div style="width:38px;height:38px;flex-shrink:0;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 100 100" width="34" height="34">
+          <g><line x1="30" y1="10" x2="30" y2="20" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="14" x2="21" y2="21" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="46" x2="21" y2="39" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="white"/></g>
+          <g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g>
+        </svg>
+      </div>
+      <div>
+        <p style="font-size:19px;font-weight:900;letter-spacing:-.4px;line-height:1"><span style="color:#00AEEF">Pan</span><span style="color:#E63329">Can</span><span style="color:rgba(255,255,255,0.92)">Air</span></p>
+        <p style="font-size:6.5px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.28);text-transform:uppercase;margin-top:1px">Commercial HVAC · GTA</p>
+      </div>
+    </a>
+
+    <!-- Divider -->
+    <div class="nav-divider hidden lg:block"></div>
+
+    <!-- Pill Nav Links -->
+    <div class="pill-nav hidden lg:flex">
+      <a href="#services" class="pill-link">Services</a>
+      <a href="#why-us" class="pill-link">Why Us</a>
+      <a href="#pricing" class="pill-link">Pricing</a>
+      <a href="#reviews" class="pill-link">Clients</a>
+      <a href="#contact" class="pill-link">Contact</a>
+    </div>
+
+    <!-- Divider -->
+    <div class="nav-divider hidden lg:block"></div>
+
+    <!-- CTAs -->
+    <div class="flex items-center gap-2">
+      <a href="tel:+14374102100" class="hidden lg:flex items-center gap-2" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.45);padding:7px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.07);transition:all .18s" onmouseover="this.style.color='rgba(255,255,255,0.8)';this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.color='rgba(255,255,255,0.45)';this.style.borderColor='rgba(255,255,255,0.07)'">
+        <span style="width:5px;height:5px;border-radius:50%;background:#E5312A;display:inline-block;animation:sdot 1.5s ease-in-out infinite"></span>
+        (437) 410-2100
+      </a>
+      <a href="book-pancanair.html" class="cta-btn text-white" style="background:#E5312A;box-shadow:0 6px 20px rgba(229,49,42,.35);padding:9px 20px;font-size:13px;font-weight:700">
+        Get Quote
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button id="menuBtn" class="lg:hidden w-9 h-9 rounded-full border flex items-center justify-center shrink-0" style="border-color:rgba(255,255,255,.12)">
+        <svg id="ico1" class="w-4 h-4" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        <svg id="ico2" class="w-4 h-4 hidden" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown (floats below the pill) -->
+  <div id="mob-drop">
+    <div class="flex flex-col p-4 gap-0.5">
+      <a href="#services" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Services</a>
+      <a href="#why-us" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Why Us</a>
+      <a href="#pricing" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Pricing</a>
+      <a href="#reviews" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Clients</a>
+      <a href="#contact" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Contact</a>
+      <div class="flex gap-3 mt-3 pt-3" style="border-top:1px solid rgba(255,255,255,.07)">
+        <a href="book-pancanair.html" class="flex-1 text-center py-3 rounded-2xl text-sm font-bold text-white" style="background:#E5312A">Request Quote</a>
+        <a href="tel:+14374102100" class="flex-1 text-center py-3 rounded-2xl text-sm font-bold" style="color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1)">(437) 410-2100</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<!-- ════════════════ HERO ════════════════ -->
+<section id="hero">
+  <div id="hero-img"></div>
+
+  <!-- Ambient orbs -->
+  <div class="absolute inset-0 pointer-events-none" style="z-index:2">
+    <div class="orb-a absolute" style="top:-10%;right:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.08),transparent 70%);filter:blur(80px)"></div>
+    <div class="orb-a absolute" style="bottom:-5%;left:0;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(229,49,42,0.07),transparent 70%);filter:blur(100px);animation-delay:3s"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center min-h-screen pt-28 pb-24" style="z-index:10">
+
+    <!-- Left — Statement -->
+    <div>
+      <!-- Live badge -->
+      <div class="h1a inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-8" style="background:rgba(229,49,42,0.1);border:1px solid rgba(229,49,42,0.2)">
+        <span style="width:6px;height:6px;border-radius:50%;background:#E5312A;animation:sdot 1.5s ease-in-out infinite"></span>
+        <span style="font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#E5312A">GBP Verified · TSSA Licensed · GTA High-Rise Specialists</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="h2a bc text-white" style="font-size:clamp(48px,7vw,96px)">
+        WE MANAGE<br/>
+        <span style="background:linear-gradient(135deg,#E5312A,#FF6B4A 40%,#00AEEF 75%,#1D4EA0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">THE HVAC.</span><br/>
+        YOU MANAGE<br/>
+        <span style="color:rgba(255,255,255,0.55)">EVERYTHING ELSE.</span>
+      </h1>
+
+      <!-- Sub -->
+      <p class="h3a mt-6 text-base leading-relaxed max-w-md" style="color:rgba(255,255,255,0.45)">
+        Full-building HVAC contracts for <strong style="color:rgba(255,255,255,0.75);font-weight:600">property managers and condo boards</strong> overseeing 50–1,000+ unit high-rises across the GTA — preventive maintenance, priority emergency dispatch, and one point of accountability.
+      </p>
+
+      <!-- CTAs -->
+      <div class="h4a flex flex-wrap gap-3 mt-10">
+        <a href="book-pancanair.html" class="cta-btn font-bold text-white" style="background:#E5312A;box-shadow:0 12px 40px rgba(229,49,42,.32)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Request Commercial Quote
+        </a>
+        <a href="tel:+14374102100" class="cta-btn font-semibold" style="color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04)">
+          <svg width="17" height="17" style="color:#00AEEF" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (437) 410-2100
+        </a>
+      </div>
+
+      <!-- AC Season chip -->
+      <div class="h4a" style="margin-top:14px">
+        <a href="https://calendly.com/pancanair/30min" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:100px;background:rgba(0,174,239,0.07);border:1px solid rgba(0,174,239,0.18);text-decoration:none;transition:background .18s" onmouseover="this.style.background='rgba(0,174,239,0.13)'" onmouseout="this.style.background='rgba(0,174,239,0.07)'">
+          <span style="width:5px;height:5px;border-radius:50%;background:#00AEEF;flex-shrink:0;animation:sdot 1.5s ease-in-out infinite"></span>
+          <span style="font-size:11px;font-weight:700;color:rgba(0,174,239,0.85);letter-spacing:.04em">Q2 AC Slots Open — Book Free Audit →</span>
+        </a>
+      </div>
+
+      <!-- Trust marks + ACMO/BOMA badges -->
+      <div class="h5a mt-10" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-wrap:wrap;gap-x:20px;gap-y:6px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,0.28);letter-spacing:.06em;display:flex;flex-wrap:wrap;gap:6px 20px">
+          <span>TSSA Licensed</span>
+          <span style="color:rgba(255,255,255,0.1)">—</span>
+          <span>4.9★ Google</span>
+          <span style="color:rgba(255,255,255,0.1)">—</span>
+          <span>24/7 · 365</span>
+          <span style="color:rgba(255,255,255,0.1)">—</span>
+          <span>15+ Years GTA</span>
+        </div>
+        <!-- Association badges -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,174,239,0.8)" stroke-width="2" stroke-linecap="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7z"/></svg>
+            <span style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.5)">ACMO Member</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(229,49,42,0.8)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+            <span style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.5)">BOMA Recognized</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.5)">GBP Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — Building photo + weather + stats -->
+    <div class="hidden lg:block relative h6a">
+      <!-- Main photo card -->
+      <div class="relative rounded-3xl overflow-hidden" style="aspect-ratio:3/4;background:#111;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06)">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&fit=crop" alt="High-rise condominium" loading="eager" style="width:100%;height:100%;object-fit:cover;opacity:.7;mix-blend-mode:luminosity"/>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.9) 0%,rgba(8,8,8,.2) 50%,transparent 100%)"></div>
+
+        <!-- Bottom stats overlay — premium 2×2 -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 18px;background:linear-gradient(to top,rgba(6,6,8,0.97) 0%,rgba(6,6,8,0.7) 70%,transparent 100%)">
+          <div class="grid grid-cols-2" style="gap:1px;background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden">
+            <div style="position:relative;background:rgba(8,8,10,0.85);backdrop-filter:blur(12px);padding:14px 16px;border-top:1.5px solid rgba(255,255,255,0.14);overflow:hidden">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:rgba(255,255,255,0.9);line-height:1" id="h-cnt1">—</p>
+              <p style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:5px">Properties · GTA</p>
+            </div>
+            <div style="position:relative;background:rgba(8,8,10,0.85);backdrop-filter:blur(12px);padding:14px 16px;border-top:1.5px solid rgba(255,255,255,0.14);overflow:hidden">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:rgba(255,255,255,0.9);line-height:1" id="h-cnt2">—</p>
+              <p style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:5px">TSSA Technicians</p>
+            </div>
+            <div style="position:relative;background:rgba(8,8,10,0.85);backdrop-filter:blur(12px);padding:14px 16px;border-top:1.5px solid rgba(255,255,255,0.14);overflow:hidden">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:rgba(255,255,255,0.9);line-height:1" id="h-cnt3">—</p>
+              <p style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:5px">Google Rating ★</p>
+            </div>
+            <div style="position:relative;background:rgba(8,8,10,0.85);backdrop-filter:blur(12px);padding:14px 16px;border-top:1.5px solid rgba(255,255,255,0.14);overflow:hidden">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:rgba(255,255,255,0.9);line-height:1" id="h-cnt4">—</p>
+              <p style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:5px">Yrs GTA Experience</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating weather card -->
+      <div id="wx-card" class="float-a absolute -left-8 top-[15%] rounded-2xl p-4" style="background:#0F0F0F;border:1px solid rgba(255,255,255,0.09);box-shadow:0 20px 50px rgba(0,0,0,.5);min-width:180px">
+        <div class="flex items-center gap-2 mb-3">
+          <span style="width:5px;height:5px;border-radius:50%;background:#34D399;animation:sdot 2s ease-in-out infinite;display:inline-block"></span>
+          <span style="font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3)" id="wxLocation">GTA Live</span>
+          <span style="font-size:9px;color:rgba(255,255,255,.2);margin-left:auto" id="wxUpdated"></span>
+        </div>
+        <div class="flex items-end gap-3 mb-3">
+          <div id="wxIcon"></div>
+          <div>
+            <p class="tg" style="font-size:38px;font-family:'Barlow Condensed',sans-serif;font-weight:900;line-height:1;color:#00AEEF" id="wxTemp">--°</p>
+            <p style="font-size:10px;color:rgba(255,255,255,.35);margin-top:2px">Feels <span id="wxFeels">--°</span></p>
+          </div>
+          <div class="ml-auto text-right">
+            <p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.75)" id="wxCondition">…</p>
+            <p style="font-size:10px;color:rgba(255,255,255,.3)" id="wxDesc"></p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+          <div style="text-align:center;background:rgba(255,255,255,.04);padding:6px;border-radius:8px">
+            <p style="font-size:11px;font-weight:700;color:white" id="wxHumidity">--%</p>
+            <p style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.06em">HUM</p>
+          </div>
+          <div style="text-align:center;background:rgba(255,255,255,.04);padding:6px;border-radius:8px">
+            <p style="font-size:11px;font-weight:700;color:white" id="wxWind">--</p>
+            <p style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.06em">KM/H</p>
+          </div>
+          <div style="text-align:center;background:rgba(255,255,255,.04);padding:6px;border-radius:8px">
+            <p style="font-size:11px;font-weight:700;color:white" id="wxUV">--</p>
+            <p style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.06em">UV</p>
+          </div>
+        </div>
+        <!-- HVAC alert -->
+        <div id="wxAlert" class="mt-3 p-2.5 rounded-xl" style="background:rgba(229,49,42,0.08);border:1px solid rgba(229,49,42,0.18)">
+          <p style="font-size:10px;color:rgba(255,255,255,.5);line-height:1.5" id="wxAlertText">Checking conditions…</p>
+        </div>
+      </div>
+
+      <!-- Priority badge top right -->
+      <div class="float-a absolute -right-4 top-8 px-4 py-2.5 rounded-2xl" style="animation-delay:1.2s;background:linear-gradient(135deg,#E5312A,#C02020);box-shadow:0 8px 28px rgba(229,49,42,.4)">
+        <p style="font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:white">⚡ 24/7 Priority</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div id="scroll-ind">
+    <span style="font-size:8px;font-weight:800;letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,0.2);font-family:'Barlow Condensed',sans-serif">Scroll</span>
+    <div class="s-track"><div class="s-beam"></div></div>
+    <div class="s-dot"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:4px;opacity:.3">
+      <svg width="10" height="6" fill="none" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <svg width="10" height="6" fill="none" viewBox="0 0 10 6" style="opacity:.5"><path d="M1 1l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- GAP 1: Inline Lead Capture — frictionless above-fold first touch -->
+<section style="background:#0A0A0A;border-top:1px solid rgba(255,255,255,0.05);padding:52px 24px">
+  <div class="max-w-5xl mx-auto" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+    <div class="reveal" style="grid-column:1/-1" id="audit-form-wrap"><!-- override grid on mobile via JS --></div>
+  </div>
+  <div class="max-w-5xl mx-auto reveal" style="display:grid;gap:48px;align-items:center" id="audit-grid">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center">
+      <div>
+        <p style="font-size:11px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(229,49,42,0.65);margin-bottom:10px">Free Building Audit</p>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,4.5vw,56px);font-weight:900;color:white;line-height:1.05;text-transform:uppercase;margin-bottom:14px">WE'LL COME<br/><span style="color:rgba(255,255,255,0.3)">TO YOU.</span></h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:380px">Drop your details. We walk your mechanical room, assess your equipment, and give you a scoped program recommendation — at zero cost. You decide after.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:22px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <svg width="14" height="14" fill="none" stroke="#00AEEF" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:600">No commitment</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <svg width="14" height="14" fill="none" stroke="#00AEEF" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:600">Same week scheduling</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <svg width="14" height="14" fill="none" stroke="#00AEEF" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:600">Written scope included</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form onsubmit="auditSubmit(event)" style="display:flex;flex-direction:column;gap:11px">
+          <input type="text" id="al-name" placeholder="Your name *" required style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
+          <input type="tel" id="al-phone" placeholder="Phone number *" required style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
+          <input type="email" id="al-email" placeholder="Email address (optional)" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
+          <input type="text" id="al-addr" placeholder="Building address or city" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
+          <button type="submit" id="audit-btn" style="display:flex;align-items:center;justify-content:center;gap:9px;padding:15px 24px;border-radius:10px;background:#E5312A;border:none;color:white;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 8px 28px rgba(229,49,42,.25);transition:background .15s" onmouseover="this.style.background='#BF0A30'" onmouseout="this.style.background='#E5312A'">
+            Book My Free Audit
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p style="font-size:11px;color:rgba(255,255,255,0.18);text-align:center;line-height:1.5">We respond within 1 business day — no sales call, just the audit.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+function auditSubmit(e){
+  e.preventDefault();
+  var n=document.getElementById('al-name').value.trim();
+  var p=document.getElementById('al-phone').value.trim();
+  var em=document.getElementById('al-email').value.trim()||null;
+  var a=document.getElementById('al-addr').value.trim()||'not provided';
+  // Save to Supabase
+  saveLeadToSupabase({
+    name: n, phone: p, email: em, building: a,
+    source: 'homepage-audit-form',
+    page_url: window.location.href,
+    submitted_at: new Date().toISOString()
+  });
+  // WhatsApp fallback — always fires
+  var emailLine=em?'\n📧 Email: '+em:'';
+  var msg='🏗 Free Audit Request — PanCanAir\n\n👤 Name: '+n+'\n📞 Phone: '+p+emailLine+'\n📍 Building: '+a+'\n\n_Submitted from pancanair.com_';
+  var btn=document.getElementById('audit-btn');
+  btn.textContent='✓ Sent — we\'ll be in touch';
+  btn.style.background='#1a7a4e';
+  window.open('https://wa.me/14374102100?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+
+<!-- ════════════════ MARQUEE ════════════════ -->
+<div style="background:#0C0C0C;border-top:1px solid rgba(229,49,42,0.12);border-bottom:1px solid rgba(229,49,42,0.12);padding:13px 0;overflow:hidden">
+  <div class="mq-wrap"><div class="mq-track mq-fwd">
+    <span style="display:inline-flex;align-items:center;color:rgba(255,255,255,0.5);font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif">
+      <em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>BOILER MAINTENANCE<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>CHILLER PLANTS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>ROOFTOP UNITS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>EMERGENCY RESPONSE<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>HIGH-RISE HVAC<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>PREVENTIVE CONTRACTS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>TSSA CERTIFIED<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>60-MIN DISPATCH<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>GTA COMMERCIAL<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>1,000-UNIT BUILDINGS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>IAQ TESTING<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>
+    </span>
+    <span style="display:inline-flex;align-items:center;color:rgba(255,255,255,0.5);font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif">
+      BOILER MAINTENANCE<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>CHILLER PLANTS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>ROOFTOP UNITS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>EMERGENCY RESPONSE<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>HIGH-RISE HVAC<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>PREVENTIVE CONTRACTS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>TSSA CERTIFIED<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>60-MIN DISPATCH<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>GTA COMMERCIAL<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>1,000-UNIT BUILDINGS<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>IAQ TESTING<em style="color:#E5312A;margin:0 20px;font-style:normal">✦</em>
+    </span>
+  </div></div>
+</div>
+
+
+<!-- ════════════════ SERVICES ════════════════ -->
+<section id="services" style="background:#080808;padding:80px 0 60px">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="reveal mb-14">
+      <p style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(229,49,42,0.6)">What We Do</p>
+      <h2 class="bc text-white mt-3" style="font-size:clamp(40px,5.5vw,68px)">Commercial Services</h2>
+    </div>
+
+    <!-- Numbered feature rows -->
+    <div>
+      <div class="feat-row reveal" style="transition-delay:0ms">
+        <div class="feat-num">01</div>
+        <div>
+          <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;letter-spacing:-.01em">Preventive Maintenance Contracts</h3>
+          <p style="font-size:14px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:520px">Scheduled semi-annual and annual HVAC care for your entire building portfolio. Every visit documented — service records your board and insurer will never question.</p>
+        </div>
+        <div class="feat-tags">
+          <span class="tag elec">Annual Plans</span>
+          <span class="tag">Service Records</span>
+          <span class="tag">Compliance Docs</span>
+        </div>
+      </div>
+
+      <div class="feat-row reveal" style="transition-delay:60ms">
+        <div class="feat-num">02</div>
+        <div>
+          <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;letter-spacing:-.01em">24/7 Priority Emergency Response</h3>
+          <p style="font-size:14px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:520px">Contract clients go to the front of the queue. Boiler down at 11pm on a Friday? We mobilize immediately — fast-tracking your call above all others. 365 days a year, no exceptions.</p>
+        </div>
+        <div class="feat-tags">
+          <span class="tag hi">Priority Dispatch</span>
+          <span class="tag">365 Days</span>
+          <span class="tag">Priority Queue</span>
+        </div>
+      </div>
+
+      <div class="feat-row reveal" style="transition-delay:120ms">
+        <div class="feat-num">03</div>
+        <div>
+          <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;letter-spacing:-.01em">Commercial HVAC Installation</h3>
+          <p style="font-size:14px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:520px">Full system design, supply and installation for condominiums and multi-unit commercial buildings. Rooftop units, split systems, boilers and chiller plants — engineered to last.</p>
+        </div>
+        <div class="feat-tags">
+          <span class="tag elec">Rooftop Units</span>
+          <span class="tag">Boiler Systems</span>
+          <span class="tag">Chiller Plants</span>
+        </div>
+      </div>
+
+      <div class="feat-row reveal" style="border-bottom:1px solid rgba(255,255,255,0.07);transition-delay:180ms">
+        <div class="feat-num">04</div>
+        <div>
+          <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px;letter-spacing:-.01em">Air Quality & Ventilation Systems</h3>
+          <p style="font-size:14px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:520px">IAQ assessments, HRV/ERV installation and commercial ventilation design. Meet ASHRAE standards — keep your building's air healthy for every tenant on every floor.</p>
+        </div>
+        <div class="feat-tags">
+          <span class="tag">IAQ Assessment</span>
+          <span class="tag">HRV / ERV</span>
+          <span class="tag">ASHRAE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ GEMINI — SCROLL-DRAW PATHS: "60 MIN OR WE'RE THERE" ════════ -->
+<div id="gemini-wrap">
+  <div id="gemini-sticky">
+    <!-- Label -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:10;pointer-events:none;width:min(700px,90vw)">
+      <p id="g-label" style="font-size:10px;font-weight:800;letter-spacing:.45em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px;font-family:'Barlow Condensed',sans-serif;opacity:0;transition:opacity .8s ease">Priority Emergency Dispatch — Contract Clients First</p>
+      <h2 id="g-head" class="bc text-white" style="font-size:clamp(44px,7.5vw,88px);opacity:0;transform:translateY(20px);transition:opacity 1s ease .2s,transform 1s ease .2s">
+        RAPID RESPONSE.<br/>
+        <span style="background:linear-gradient(135deg,#FFB7C5,#FFDDB7,#B1C5FF,#4FABFF,#076EFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">WE'RE ON IT.</span>
+      </h2>
+      <p id="g-sub" style="font-size:16px;font-weight:500;color:rgba(255,255,255,.65);margin-top:20px;opacity:0;transition:opacity .8s ease .5s;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.6">When a building goes down at 2am, you need one call — not a voicemail. Contract clients get priority dispatch, day or night, 365 days a year.</p>
+      <div id="g-cta" style="margin-top:32px;opacity:0;transition:opacity .7s ease .7s">
+        <a href="tel:+14374102100" style="display:inline-flex;align-items:center;gap:10px;padding:14px 34px;border-radius:100px;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:white;background:#E5312A;box-shadow:0 12px 40px rgba(229,49,42,.4)">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call Emergency Line
+        </a>
+      </div>
+    </div>
+    <!-- Dark radial vignette so text reads over the lines -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(8,8,8,0.88) 0%,rgba(8,8,8,0.55) 45%,transparent 72%);pointer-events:none;z-index:6"></div>
+    <!-- Paths SVG -->
+    <svg id="gemini-svg" viewBox="0 0 1440 890" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><filter id="gblur"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter></defs>
+      <path d="M0 663C145.5 663 191 666.265 269 647C326.5 630 339.5 621 397.5 566C439 531.5 455 529.5 490 523C509.664 519.348 521 503.736 538 504.236C553.591 504.236 562.429 514.739 584.66 522.749C607.356 523.019 624.755 515.195 657 496.735C693.545 519.572 730.902 525.965 782 496.735C822.469 518.515 862.827 520.069 903.5 503.736C945.817 515.673 972.199 524.954 1034 549C1082.5 594.5 1140 629 1206 670 1440 662.5" stroke="#FFB7C5" stroke-width="2.5" fill="none" filter="url(#gblur)" opacity=".5"/>
+      <path d="M0 587.5C147 587.5 310 573.5 408 535C434 523.5 479 515.235 534.5 512.735C554.5 516.735 576 523.735 633 497.235C684.774 524.942 757.5 498.742 810.403 527.654C849.246 518.893 879.5 501.742 982.951 520.063C1056.5 537 1116.5 570.704 1180.5 579.235C1257.5 589.5 1440 588" stroke="#FFDDB7" stroke-width="2.5" fill="none" filter="url(#gblur)" opacity=".5"/>
+      <path d="M0 514C147.5 514.333 380.5 513.735 559.508 511.197C575 513.735 627.5 519.402 680.5 499.235C742 528.735 791.793 500.59 866 524.235C921.814 505.392 989.5 514.735 1055.5 513.235C1177.5 513.235 1317.5 514.402 1440 513.235" stroke="#B1C5FF" stroke-width="2.5" fill="none" filter="url(#gblur)" opacity=".5"/>
+      <path d="M0 438.5C150.5 438.5 323.5 456.5 487 507.735C523 518.735 584.5 501.235 643 528.569C695.751 501.972 767 529.569 819.903 500.657C891 523.735 963 506.735 1071 481.5C1122.5 457 1185 446.5 1255.5 436 1439.5 439" stroke="#4FABFF" stroke-width="2.5" fill="none" filter="url(#gblur)" opacity=".5"/>
+      <path d="M0.5 364C145.288 362.349 265.5 378 411 467.5C496.259 502.699 551.5 521.236 611.5 498.736C652.5 529.236 721.274 501.036 794 528.736C848.364 502.179 916 520.236 967.5 501.736C1029.5 480 1128.5 403.5 1180.5 369.5 1275 360.374 1439 364" stroke="#076EFF" stroke-width="2.5" fill="none" filter="url(#gblur)" opacity=".5"/>
+      <path id="gpath1" d="M0 663C145.5 663 191 666.265 269 647C326.5 630 339.5 621 397.5 566C439 531.5 455 529.5 490 523C509.664 519.348 521 503.736 538 504.236C553.591 504.236 562.429 514.739 584.66 522.749C607.356 523.019 624.755 515.195 657 496.735C693.545 519.572 730.902 525.965 782 496.735C822.469 518.515 862.827 520.069 903.5 503.736C945.817 515.673 972.199 524.954 1034 549C1082.5 594.5 1140 629 1206 670 1440 662.5" stroke="#FFB7C5" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path id="gpath2" d="M0 587.5C147 587.5 310 573.5 408 535C434 523.5 479 515.235 534.5 512.735C554.5 516.735 576 523.735 633 497.235C684.774 524.942 757.5 498.742 810.403 527.654C849.246 518.893 879.5 501.742 982.951 520.063C1056.5 537 1116.5 570.704 1180.5 579.235C1257.5 589.5 1440 588" stroke="#FFDDB7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path id="gpath3" d="M0 514C147.5 514.333 380.5 513.735 559.508 511.197C575 513.735 627.5 519.402 680.5 499.235C742 528.735 791.793 500.59 866 524.235C921.814 505.392 989.5 514.735 1055.5 513.235C1177.5 513.235 1317.5 514.402 1440 513.235" stroke="#B1C5FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path id="gpath4" d="M0 438.5C150.5 438.5 323.5 456.5 487 507.735C523 518.735 584.5 501.235 643 528.569C695.751 501.972 767 529.569 819.903 500.657C891 523.735 963 506.735 1071 481.5C1122.5 457 1185 446.5 1255.5 436 1439.5 439" stroke="#4FABFF" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path id="gpath5" d="M0.5 364C145.288 362.349 265.5 378 411 467.5C496.259 502.699 551.5 521.236 611.5 498.736C652.5 529.236 721.274 501.036 794 528.736C848.364 502.179 916 520.236 967.5 501.736C1029.5 480 1128.5 403.5 1180.5 369.5 1275 360.374 1439 364" stroke="#076EFF" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+
+<!-- ════════════════ STAT BAND ════════════════ -->
+<section id="stat-band" style="background:#080808;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:0">
+  <div class="max-w-6xl mx-auto px-6 lg:px-10">
+    <div id="sb-grid" style="display:grid;grid-template-columns:repeat(4,1fr)">
+
+      <!-- Tile 1 -->
+      <div class="reveal" style="position:relative;padding:36px 28px 32px;border-right:1px solid rgba(255,255,255,0.05);overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.14),transparent)"></div>
+        <div style="position:absolute;bottom:-20px;left:-10px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none"></div>
+        <p style="font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:14px">Properties</p>
+        <p id="sb1" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5.5vw,76px);line-height:.9;letter-spacing:-.03em;color:rgba(255,255,255,0.92)">—</p>
+        <div style="width:28px;height:1px;background:rgba(255,255,255,0.1);margin:14px 0 10px"></div>
+        <p style="font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6);letter-spacing:.02em">Served across GTA</p>
+        <p style="font-size:10.5px;color:rgba(255,255,255,0.22);margin-top:3px">High-rise & commercial</p>
+      </div>
+
+      <!-- Tile 2 -->
+      <div class="reveal" style="position:relative;padding:36px 28px 32px;border-right:1px solid rgba(255,255,255,0.05);overflow:hidden;transition-delay:80ms">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.14),transparent)"></div>
+        <div style="position:absolute;bottom:-20px;left:-10px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none"></div>
+        <p style="font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:14px">Technicians</p>
+        <p id="sb2" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5.5vw,76px);line-height:.9;letter-spacing:-.03em;color:rgba(255,255,255,0.92)">—</p>
+        <div style="width:28px;height:1px;background:rgba(255,255,255,0.1);margin:14px 0 10px"></div>
+        <p style="font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6);letter-spacing:.02em">Certified field team</p>
+        <p style="font-size:10.5px;color:rgba(255,255,255,0.22);margin-top:3px">TSSA Licensed</p>
+      </div>
+
+      <!-- Tile 3 -->
+      <div class="reveal" style="position:relative;padding:36px 28px 32px;border-right:1px solid rgba(255,255,255,0.05);overflow:hidden;transition-delay:160ms">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.14),transparent)"></div>
+        <div style="position:absolute;bottom:-20px;left:-10px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);pointer-events:none"></div>
+        <p style="font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:14px">Google Rating</p>
+        <p id="sb3" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5.5vw,76px);line-height:.9;letter-spacing:-.03em;color:rgba(255,255,255,0.92)">—</p>
+        <div style="width:28px;height:1px;background:rgba(255,255,255,0.1);margin:14px 0 10px"></div>
+        <p style="font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6);letter-spacing:.02em">Verified reviews</p>
+        <p style="font-size:10.5px;color:rgba(255,255,255,0.22);margin-top:3px">Above GTA average</p>
+      </div>
+
+      <!-- Tile 4 -->
+      <div class="reveal" style="position:relative;padding:36px 28px 32px;overflow:hidden;transition-delay:240ms">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.25),transparent)"></div>
+        <div style="position:absolute;bottom:-20px;left:-10px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);pointer-events:none"></div>
+        <p style="font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:14px">Experience</p>
+        <p id="sb4" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5.5vw,76px);line-height:.9;letter-spacing:-.03em;color:rgba(255,255,255,0.85)">—</p>
+        <div style="width:28px;height:1px;background:rgba(255,255,255,0.15);margin:14px 0 10px"></div>
+        <p style="font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6);letter-spacing:.02em">Years in GTA</p>
+        <p style="font-size:10.5px;color:rgba(255,255,255,0.22);margin-top:3px">Commercial HVAC</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ SECOND MARQUEE ════════ -->
+<div style="background:#090909;border-bottom:1px solid rgba(0,174,239,0.08);padding:11px 0;overflow:hidden">
+  <div class="mq-wrap"><div class="mq-track mq-rev">
+    <span style="display:inline-flex;align-items:center;color:rgba(0,174,239,0.35);font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif">
+      <em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>DEDICATED ACCOUNT MANAGER<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>COMPLIANCE DOCUMENTATION<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>ASHRAE CERTIFIED<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>BOARD-READY REPORTS<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>1-YEAR LABOUR WARRANTY<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>TSSA LICENSED<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>PRIORITY CONTRACT CLIENTS<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>BRAMPTON · TORONTO · GTA<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>
+    </span>
+    <span style="display:inline-flex;align-items:center;color:rgba(0,174,239,0.35);font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif">
+      DEDICATED ACCOUNT MANAGER<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>COMPLIANCE DOCUMENTATION<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>ASHRAE CERTIFIED<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>BOARD-READY REPORTS<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>1-YEAR LABOUR WARRANTY<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>TSSA LICENSED<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>PRIORITY CONTRACT CLIENTS<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>BRAMPTON · TORONTO · GTA<em style="color:rgba(0,174,239,0.5);margin:0 20px;font-style:normal">◆</em>
+    </span>
+  </div></div>
+</div>
+
+
+<!-- ════════ PAIN POINTS — "What PMs Tell Us" ════════ -->
+<section style="background:#060606;padding:80px 0;border-top:1px solid rgba(255,255,255,0.05)">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="reveal mb-14">
+      <p style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(229,49,42,0.6)">The Reality</p>
+      <h2 class="bc text-white mt-3" style="font-size:clamp(36px,5vw,60px)">What Property Managers<br/>Tell Us When They Call.</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.35);margin-top:14px;max-width:500px;line-height:1.65">These aren't edge cases. They're the most common reasons GTA property managers decide it's time to make a change.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+
+      <!-- Card 1: No answer at 2am -->
+      <div class="reveal" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;transition-delay:0ms">
+        <p style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic">"Called at 2am, got voicemail. Again."</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px;line-height:1.55">Contract clients get a direct line. A real person answers — nights, weekends, holidays. No call centre, no ticket queue.</p>
+      </div>
+
+      <!-- Card 2: Rotating techs -->
+      <div class="reveal" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;transition-delay:60ms">
+        <p style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic">"Different tech every visit. Nobody knows our building."</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px;line-height:1.55">You get one assigned technician who knows your mechanical room, your equipment history, and your quirks. Every time.</p>
+      </div>
+
+      <!-- Card 3: Missing service records -->
+      <div class="reveal" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;transition-delay:120ms">
+        <p style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic">"Can't get service records for our AGM or insurance audit."</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px;line-height:1.55">Full digital service report after every single visit. Formatted for boards, insurers, and property management software.</p>
+      </div>
+
+      <!-- Card 4: Hidden costs / surprise invoice -->
+      <div class="reveal" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;transition-delay:180ms">
+        <p style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic">"Quoted one price. Saw a different number on the invoice."</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px;line-height:1.55">Contracts are scoped in writing before work begins. What we quote is what you pay — fixed rates, no hidden labour markups.</p>
+      </div>
+
+      <!-- Card 5: 5-day wait, no priority -->
+      <div class="reveal" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;transition-delay:240ms">
+        <p style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic">"AC went down in July. Nobody available for 5 days."</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px;line-height:1.55">Contract clients are dispatched first — always. You're not competing with walk-ins or whoever calls first. Your SLA is in writing.</p>
+      </div>
+
+      <!-- Card 6: Unknown failure / no preventive -->
+      <div class="reveal" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:26px 28px;transition-delay:300ms">
+        <p style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.75);line-height:1.5;font-style:italic">"We didn't know the system needed repair until it was too late."</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:10px;line-height:1.55">Preventive maintenance catches 90% of failures before they happen. Scheduled visits, documented findings, proactive recommendations.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ WHY US ════════════════ -->
+<section id="why-us" style="background:#080808;padding:80px 0 80px">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+      <div class="reveal-l" style="position:sticky;top:120px">
+        <p style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(229,49,42,0.6)">Why Property Managers Choose Us</p>
+        <h2 class="bc text-white mt-3" style="font-size:clamp(38px,5vw,62px)">Different by Design.</h2>
+        <p class="mt-5 text-base leading-relaxed" style="color:rgba(255,255,255,0.38);max-width:400px">We understand what property managers actually need — reliability, documentation, clear communication, and zero surprises. Everything we do is built around your building, not our schedule.</p>
+        <a href="book-pancanair.html" class="cta-btn mt-8 font-bold text-white inline-flex" style="background:#E5312A;box-shadow:0 8px 28px rgba(229,49,42,.3)">
+          Get a Commercial Quote
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <!-- Cert row -->
+        <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8" style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.22)">
+          <span>TSSA Licensed</span><span>·</span><span>Fully Insured</span><span>·</span><span>ASHRAE</span>
+        </div>
+      </div>
+
+      <!-- Feature list — NO ICON TILES -->
+      <div class="space-y-0">
+        <div class="reveal-r" style="border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;transition-delay:0ms">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+            <div>
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;color:rgba(0,174,239,0.6);margin-bottom:8px">01</p>
+              <h3 style="font-size:17px;font-weight:700;color:white;margin-bottom:8px">Dedicated Account Manager</h3>
+              <p style="font-size:13px;line-height:1.65;color:rgba(255,255,255,0.38);max-width:340px">One contact who knows your building, its history, and every system in it. No repeating yourself. No starting over.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-r" style="border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;transition-delay:80ms">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;color:rgba(229,49,42,0.6);margin-bottom:8px">02</p>
+          <h3 style="font-size:17px;font-weight:700;color:white;margin-bottom:8px">Priority Emergency Dispatch</h3>
+          <p style="font-size:13px;line-height:1.65;color:rgba(255,255,255,0.38);max-width:340px">Contract clients jump the queue — fast-track dispatch across Brampton, Toronto and the GTA. You know exactly when your technician arrives. 365 days a year, no exceptions.</p>
+          <span class="tag hi" style="margin-top:12px;display:inline-block">Priority Queue</span>
+        </div>
+
+        <div class="reveal-r" style="border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;transition-delay:160ms">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;color:rgba(29,78,160,0.7);margin-bottom:8px">03</p>
+          <h3 style="font-size:17px;font-weight:700;color:white;margin-bottom:8px">Compliance-Ready Documentation</h3>
+          <p style="font-size:13px;line-height:1.65;color:rgba(255,255,255,0.38);max-width:340px">Detailed service reports after every visit — formatted for board meetings, insurance audits and property management reviews. Never scramble before an audit again.</p>
+        </div>
+
+        <div class="reveal-r" style="border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);padding:28px 0;transition-delay:240ms">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;color:rgba(52,211,153,0.6);margin-bottom:8px">04</p>
+          <h3 style="font-size:17px;font-weight:700;color:white;margin-bottom:8px">1-Year Labour Warranty</h3>
+          <p style="font-size:13px;line-height:1.65;color:rgba(255,255,255,0.38);max-width:340px">Every job — repair, installation, or service — backed by our comprehensive labour warranty. Your building's investment is fully protected from day one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════ WORK GALLERY ════════════════ -->
+<section id="gallery" style="background:#080808;padding:72px 0 0;overflow:hidden">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10 reveal mb-10">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <p style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(229,49,42,0.6)">Our Work</p>
+        <h2 class="bc text-white mt-3" style="font-size:clamp(36px,5vw,58px)">Real Jobs.<br/>Real Buildings.</h2>
+      </div>
+      <a href="https://www.google.com/maps/place/PanCanAir+Heating+and+Cooling/@43.901344,-79.3819226,17z" target="_blank" rel="noopener" style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.45);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding-bottom:6px;transition:color .15s" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">View all on Google <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+  <!-- Photo grid — full bleed below heading -->
+  <div style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 220px;gap:3px">
+    <!-- Tall hero photo spans 2 rows -->
+    <div style="grid-column:1/2;grid-row:1/3;overflow:hidden;background:#111;position:relative">
+      <img loading="lazy" src="assets/photos/gallery-1.jpg" alt="PanCanAir — rooftop flue stack installation, Toronto skyline" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 60%);pointer-events:none"></div>
+    </div>
+    <!-- Top-right cell 1 -->
+    <div style="grid-column:2/3;grid-row:1/2;overflow:hidden;background:#111">
+      <img loading="lazy" src="assets/photos/gallery-2.jpg" alt="PanCanAir commercial mechanical room installation GTA" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+    </div>
+    <!-- Top-right cell 2 -->
+    <div style="grid-column:3/4;grid-row:1/2;overflow:hidden;background:#111">
+      <img loading="lazy" src="assets/photos/gallery-3.jpg" alt="PanCanAir new furnace installation GTA" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+    </div>
+    <!-- Bottom-right cell 3 -->
+    <div style="grid-column:2/3;grid-row:2/3;overflow:hidden;background:#111">
+      <img loading="lazy" src="assets/photos/gallery-4.jpg" alt="PanCanAir refrigerant pressure gauges HVAC service" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+    </div>
+    <!-- Bottom-right cell 4 -->
+    <div style="grid-column:3/4;grid-row:2/3;overflow:hidden;background:#111">
+      <img loading="lazy" src="assets/photos/gallery-5.jpg" alt="PanCanAir crane RTU rooftop installation GTA" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ TESTIMONIALS ════════════════ -->
+<section id="reviews" style="background:#0A0A0A;padding:80px 0;border-top:1px solid rgba(255,255,255,0.06)">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="reveal mb-6">
+      <p style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(229,49,42,0.6)">Client Reviews</p>
+      <h2 class="bc text-white mt-3" style="font-size:clamp(38px,5vw,62px)">Trusted by Managers<br/>Who Can't Afford Downtime.</h2>
+    </div>
+    <!-- GBP aggregate badge — live data via Places API when configured -->
+    <div class="reveal mb-10" style="display:inline-flex;align-items:center;gap:14px;padding:12px 20px;border-radius:14px;background:#0F0F0F;border:1px solid rgba(255,255,255,0.08)">
+      <svg width="22" height="22" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      <div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span id="gbp-rating" style="font-size:22px;font-weight:800;color:white;font-family:'Barlow Condensed',sans-serif">5.0</span>
+          <span style="color:#FBBC05;font-size:14px;letter-spacing:1px">★★★★★</span>
+        </div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:1px">Google Business Profile · <span id="gbp-count">4</span> reviews</p>
+      </div>
+      <a href="https://www.google.com/maps/place/PanCanAir+Heating+and+Cooling/@43.901344,-79.3819226,17z" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:#4285F4;text-decoration:none;padding:6px 14px;border:1px solid rgba(66,133,244,0.25);border-radius:100px;margin-left:8px">View on Google →</a>
+    </div>
+
+    <!-- Live GBP review cards — populated by fetchGBPReviews() or static fallback -->
+    <div id="gbp-reviews-grid" class="grid md:grid-cols-3 gap-6">
+      <!-- Static fallback reviews shown until API key is configured -->
+      <!-- LIVE REVIEWS: Set GOOGLE_PLACES_KEY + PLACES_ID in the script below to auto-populate -->
+    </div>
+
+    <!-- Static reviews (shown when Places API is not yet configured) -->
+    <div id="gbp-static-reviews" class="grid md:grid-cols-3 gap-6">
+      <div class="reveal" style="background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px;transition-delay:0ms">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1D4EA0,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">AF</div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:white">Ahsan F.</p>
+              <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px">Verified Google Review</p>
+            </div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div style="color:#FBBC05;font-size:13px;letter-spacing:1px;margin-bottom:10px">★★★★★</div>
+        <p class="testi-q" style="font-size:14px">"Great service, would highly recommend. Very professional and knowledgeable."</p>
+        <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px">via Google · 5.0 ★</p>
+      </div>
+      <div class="reveal" style="background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px;transition-delay:100ms">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#E63329,#C02020);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">R</div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:white">Reviewer</p>
+              <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px">Verified Google Review</p>
+            </div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div style="color:#FBBC05;font-size:13px;letter-spacing:1px;margin-bottom:10px">★★★★★</div>
+        <p class="testi-q" style="font-size:14px">"Fast response, fair pricing, and they actually explained everything clearly. Exactly what you want from an HVAC company."</p>
+        <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px">via Google · 5.0 ★</p>
+      </div>
+      <div class="reveal" style="background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px;transition-delay:200ms">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0D6E6E,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">R</div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:white">Reviewer</p>
+              <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px">Verified Google Review</p>
+            </div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div style="color:#FBBC05;font-size:13px;letter-spacing:1px;margin-bottom:10px">★★★★★</div>
+        <p class="testi-q" style="font-size:14px">"Replaced our furnace same week. Clean install, no mess left behind. Technician was thorough and answered every question."</p>
+        <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px">via Google · 5.0 ★</p>
+      </div>
+    </div>
+
+    <!-- ── Google Places API live review loader ─────────────────────────────
+         HOW TO ACTIVATE LIVE GBP REVIEWS:
+         1. Go to console.cloud.google.com → Enable "Places API"
+         2. Create an API key (restrict to your domain)
+         3. Find your Place ID: maps.googleapis.com/maps/api/place/findplacefromtext/json
+            ?input=PanCanAir+Heating+and+Cooling+Brampton&inputtype=textquery&key=YOUR_KEY
+         4. Replace YOUR_GOOGLE_PLACES_KEY and YOUR_PLACE_ID below
+         5. For CORS: use a Supabase Edge Function as a proxy (see supabase-setup.sql)
+    ──────────────────────────────────────────────────────────────────────── -->
+    <script>
+    (function(){
+      var PLACES_KEY = 'YOUR_GOOGLE_PLACES_KEY';  // ← paste key here
+      var PLACE_ID   = 'YOUR_PLACE_ID';            // ← paste place_id here
+      if(PLACES_KEY==='YOUR_GOOGLE_PLACES_KEY'||PLACE_ID==='YOUR_PLACE_ID') return; // skip if not configured
+      // When configured, fetch live reviews via your Supabase proxy endpoint
+      fetch('/api/gbp-reviews?place_id='+PLACE_ID)
+        .then(r=>r.json())
+        .then(function(data){
+          if(!data||!data.result||!data.result.reviews) return;
+          var r=data.result;
+          document.getElementById('gbp-rating').textContent = r.rating.toFixed(1);
+          document.getElementById('gbp-count').textContent = r.user_ratings_total;
+          var grid=document.getElementById('gbp-reviews-grid');
+          var static_=document.getElementById('gbp-static-reviews');
+          if(static_) static_.style.display='none';
+          grid.innerHTML = r.reviews.slice(0,3).map(function(rv){
+            var initials=(rv.author_name||'R').split(' ').map(function(w){return w[0]}).join('').slice(0,2).toUpperCase();
+            var stars='★'.repeat(rv.rating)+'☆'.repeat(5-rv.rating);
+            return '<div class="reveal" style="background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px">'
+              +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">'
+              +'<div style="display:flex;align-items:center;gap:10px">'
+              +(rv.profile_photo_url
+                ?'<img src="'+rv.profile_photo_url+'" width="40" height="40" style="border-radius:50%;object-fit:cover;flex-shrink:0" alt=""/>'
+                :'<div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1D4EA0,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">'+initials+'</div>')
+              +'<div><p style="font-size:13px;font-weight:700;color:white">'+rv.author_name+'</p>'
+              +'<p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px">Verified Google Review</p></div></div>'
+              +'<svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>'
+              +'</div>'
+              +'<div style="color:#FBBC05;font-size:13px;letter-spacing:1px;margin-bottom:10px">'+stars+'</div>'
+              +'<p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.72)">'+rv.text+'</p>'
+              +'<p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px">'+rv.relative_time_description+' · via Google</p>'
+              +'</div>';
+          }).join('');
+          grid.style.display='grid';
+        })
+        .catch(function(){/* silently keep static reviews */});
+    })();
+    </script>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════ PACKAGES / PRICING ════════════════ -->
+<section id="pricing" style="background:#060606;padding:80px 0;border-top:1px solid rgba(255,255,255,0.05)">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="reveal mb-12 text-center">
+      <p style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,174,239,0.6)">Maintenance Programs</p>
+      <h2 class="bc text-white mt-3" style="font-size:clamp(36px,5vw,58px)">Flat-Rate Contracts.<br/>No Surprises.</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.45);margin-top:12px;max-width:520px;margin-left:auto;margin-right:auto">Per-unit pricing scales with your portfolio. Minimum 20 units. No hidden fees.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Essential -->
+      <div class="reveal" style="transition-delay:0ms;border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:#0F0F0F;padding:32px 28px;display:flex;flex-direction:column">
+        <p style="font-size:10px;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,0.32)">Essential</p>
+        <div style="margin-top:12px;margin-bottom:4px;display:flex;align-items:flex-end;gap:6px">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;line-height:1;color:white">$22</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.35);padding-bottom:9px">/unit/mo</span>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:24px">From $440/mo · min 20 units</p>
+        <ul style="display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:28px">
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Bi-annual filter &amp; coil service</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>24/7 emergency response</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Dedicated technician assigned</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Digital inspection reports</li>
+        </ul>
+        <a href="book-pancanair.html" style="display:block;text-align:center;padding:13px;border-radius:100px;border:1px solid rgba(255,255,255,0.14);font-size:13.5px;font-weight:700;color:rgba(255,255,255,0.7);text-decoration:none;transition:all .18s" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='white'" onmouseout="this.style.background='';this.style.color='rgba(255,255,255,0.7)'">Get Quote →</a>
+      </div>
+
+      <!-- Preferred (featured) -->
+      <div class="reveal" style="transition-delay:80ms;border-radius:20px;border:1px solid rgba(229,49,42,0.35);background:linear-gradient(145deg,rgba(229,49,42,0.07),rgba(8,8,8,0) 60%),#0F0F0F;padding:32px 28px;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(229,49,42,0.14) inset,0 20px 60px rgba(229,49,42,0.12)">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <p style="font-size:10px;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:rgba(229,49,42,0.7)">Preferred</p>
+          <span style="font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#E5312A;background:rgba(229,49,42,0.12);border:1px solid rgba(229,49,42,0.25);padding:3px 9px;border-radius:100px">Most Popular</span>
+        </div>
+        <div style="margin-top:12px;margin-bottom:4px;display:flex;align-items:flex-end;gap:6px">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;line-height:1;color:white">$34</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.35);padding-bottom:9px">/unit/mo</span>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:24px">From $680/mo · min 20 units</p>
+        <ul style="display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:28px">
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.75)"><span style="color:#E5312A;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Everything in Essential</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.75)"><span style="color:#E5312A;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Quarterly full-system inspections</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.75)"><span style="color:#E5312A;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Priority response &lt; 4 hours</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.75)"><span style="color:#E5312A;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Predictive failure alerts</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.75)"><span style="color:#E5312A;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Compliance documentation included</li>
+        </ul>
+        <a href="book-pancanair.html" style="display:block;text-align:center;padding:13px;border-radius:100px;background:#E5312A;font-size:13.5px;font-weight:700;color:white;text-decoration:none;box-shadow:0 8px 24px rgba(229,49,42,.3);transition:all .18s" onmouseover="this.style.boxShadow='0 12px 32px rgba(229,49,42,.45)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(229,49,42,.3)';this.style.transform='translateY(0)'">Get Quote →</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="reveal" style="transition-delay:160ms;border-radius:20px;border:1px solid rgba(0,174,239,0.2);background:#0F0F0F;padding:32px 28px;display:flex;flex-direction:column">
+        <p style="font-size:10px;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:rgba(0,174,239,0.5)">Enterprise</p>
+        <div style="margin-top:12px;margin-bottom:4px;display:flex;align-items:flex-end;gap:6px">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;line-height:1;color:white">Custom</span>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:24px">Portfolio contracts · 100+ units</p>
+        <ul style="display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:28px">
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Everything in Preferred</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Dedicated account manager</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Portfolio-wide volume discounts</li>
+          <li style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.65)"><span style="color:#00AEEF;flex-shrink:0;font-weight:700;margin-top:1px">✓</span>Custom SLA &amp; escalation paths</li>
+        </ul>
+        <a href="book-pancanair.html" style="display:block;text-align:center;padding:13px;border-radius:100px;border:1px solid rgba(0,174,239,0.25);font-size:13.5px;font-weight:700;color:#00AEEF;text-decoration:none;transition:all .18s" onmouseover="this.style.background='rgba(0,174,239,0.07)';this.style.borderColor='rgba(0,174,239,0.45)'" onmouseout="this.style.background='';this.style.borderColor='rgba(0,174,239,0.25)'">Contact Sales →</a>
+      </div>
+
+    </div>
+    <div class="text-center mt-10 reveal">
+      <a href="packages.html" style="font-size:13.5px;font-weight:700;color:rgba(255,255,255,0.35);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .15s" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">See full feature comparison &amp; ROI calculator <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════ CTA ════════════════ -->
+<section style="padding:80px 0;background:#E5312A;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.07) 1px,transparent 0);background-size:22px 22px;pointer-events:none"></div>
+  <div style="position:absolute;top:0;right:0;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,100,100,.25),transparent 70%);filter:blur(80px);pointer-events:none"></div>
+  <div class="relative max-w-4xl mx-auto px-6 lg:px-10 text-center reveal">
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;background:rgba(255,255,255,0.15);margin-bottom:24px">
+      <span style="width:5px;height:5px;border-radius:50%;background:white;animation:sdot 1.5s ease-in-out infinite"></span>
+      <span style="font-size:10px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:white">Commercial Enquiries Open</span>
+    </div>
+    <h2 class="bc text-white" style="font-size:clamp(36px,6vw,72px)">
+      READY TO PROTECT<br/>
+      YOUR BUILDING?
+    </h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.75);max-width:520px;margin:16px auto 0;line-height:1.7">No-obligation commercial HVAC assessment for your property. We respond within 2 hours. Serving high-rise condos and commercial buildings across the GTA.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:36px">
+      <a href="tel:+14374102100" class="cta-btn font-bold" style="background:white;color:#E5312A;box-shadow:0 12px 40px rgba(0,0,0,.25)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        (437) 410-2100
+      </a>
+      <a href="book-pancanair.html" class="cta-btn font-bold text-white" style="border:2px solid rgba(255,255,255,0.4)">
+        Request Commercial Quote
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer id="contact" style="background:#060608;padding:64px 0 32px;border-top:1px solid rgba(255,255,255,0.05)">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12" style="border-bottom:1px solid rgba(255,255,255,0.06)">
+
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <div style="width:40px;height:40px;flex-shrink:0;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 100 100" width="34" height="34">
+              <g><line x1="30" y1="10" x2="30" y2="20" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="14" x2="21" y2="21" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="46" x2="21" y2="39" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="white"/></g>
+              <g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g>
+            </svg>
+          </div>
+          <div>
+            <p style="font-size:20px;font-weight:900;letter-spacing:-.4px;line-height:1"><span style="color:#00AEEF">Pan</span><span style="color:#E63329">Can</span><span style="color:rgba(255,255,255,0.92)">Air</span></p>
+            <p style="font-size:7px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:2px">Commercial HVAC · GTA</p>
+          </div>
+        </div>
+        <p style="font-size:13px;line-height:1.65;color:rgba(255,255,255,0.38);margin-bottom:16px">Commercial HVAC for property managers, high-rise condominiums and commercial buildings across the GTA.</p>
+        <div style="display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:14px;background:rgba(229,49,42,0.08);border:1px solid rgba(229,49,42,0.2)">
+          <span style="width:6px;height:6px;border-radius:50%;background:#E5312A;animation:sdot 1.5s ease-in-out infinite;flex-shrink:0"></span>
+          <div>
+            <p style="font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#E5312A">24/7 Emergency</p>
+            <p style="font-size:14px;font-weight:800;color:white">(437) 410-2100</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:18px">Services</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px">
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.45);transition:color .15s" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Maintenance Contracts</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Commercial Installation</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Emergency Response</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Air Quality & Ventilation</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Heating & Furnace</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Heat Pumps</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:18px">Service Areas</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 12px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.4)">Toronto</span><span style="font-size:13px;color:rgba(255,255,255,0.4)">Brampton</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.4)">Mississauga</span><span style="font-size:13px;color:rgba(255,255,255,0.4)">Vaughan</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.4)">Oakville</span><span style="font-size:13px;color:rgba(255,255,255,0.4)">Markham</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.4)">Hamilton</span><span style="font-size:13px;color:rgba(255,255,255,0.4)">Burlington</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.4)">Caledon</span><span style="font-size:13px;color:rgba(255,255,255,0.4)">North York</span>
+        </div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:10px">+ All GTA & surrounding areas</p>
+      </div>
+
+      <div>
+        <h4 style="font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:18px">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="tel:+14374102100" style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+            <svg width="14" height="14" style="color:#00AEEF;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            (437) 410-2100
+          </a>
+          <a href="mailto:info@pancanair.com" style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+            <svg width="14" height="14" style="color:#00AEEF;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@pancanair.com
+          </a>
+          <a href="https://wa.me/14374102100" target="_blank" style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.45)" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,0.38)">
+            <svg width="14" height="14" style="color:#00AEEF;flex-shrink:0;margin-top:2px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>104 Naperton Dr<br/>Brampton, ON L6R 0Z9</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.38)">
+            <svg width="14" height="14" style="color:#00AEEF;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Mon–Sat: 7AM – 9PM
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+      <p style="font-size:11px;color:rgba(255,255,255,0.2)">&copy; 2026 PanCanAir. All rights reserved. TSSA Licensed.</p>
+      <div style="display:flex;align-items:center;gap:20px">
+        <a href="https://instagram.com/pancanair" target="_blank" style="color:rgba(255,255,255,0.25)" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" style="font-size:11px;color:rgba(255,255,255,0.2)" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.2)'">Privacy</a>
+        <a href="#" style="font-size:11px;color:rgba(255,255,255,0.2)" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.2)'">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════ Mobile sticky buttons ════════ -->
+<div id="sp" style="position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(16px);pointer-events:none;transition:all .4s ease">
+  <a href="https://wa.me/14374102100?text=Hi%20PanCanAir%2C%20I%20need%20commercial%20HVAC%20service" target="_blank" style="width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,.4);position:relative">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span style="position:absolute;inset:0;border-radius:50%;background:#25D366;animation:sdot 2s ease-out infinite;opacity:.4"></span>
+  </a>
+  <a href="tel:+14374102100" style="width:52px;height:52px;border-radius:50%;background:#E5312A;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(229,49,42,.5)">
+    <svg width="22" height="22" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  </a>
+</div>
+
+
+<script>
+// ── Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  // Scroll indicator fade
+  const si = document.getElementById('scroll-ind');
+  if (si) si.style.opacity = window.scrollY > 80 ? '0' : '1';
+  // Sticky buttons
+  const sp = document.getElementById('sp');
+  if (sp) { if (window.scrollY > 300) { sp.style.opacity='1'; sp.style.transform='translateY(0)'; sp.style.pointerEvents='auto'; } else { sp.style.opacity='0'; sp.style.transform='translateY(16px)'; sp.style.pointerEvents='none'; } }
+}, {passive:true});
+
+// ── Mobile nav (pill dropdown)
+const menuBtn = document.getElementById('menuBtn');
+const mobDrop = document.getElementById('mob-drop');
+const ico1 = document.getElementById('ico1');
+const ico2 = document.getElementById('ico2');
+if (menuBtn) menuBtn.addEventListener('click', () => {
+  const open = mobDrop.classList.contains('open');
+  mobDrop.classList.toggle('open', !open);
+  ico1.classList.toggle('hidden', !open);
+  ico2.classList.toggle('hidden', open);
+});
+document.querySelectorAll('#mob-drop .ml').forEach(a => a.addEventListener('click', () => {
+  mobDrop.classList.remove('open');
+  ico1.classList.remove('hidden');
+  ico2.classList.add('hidden');
+}));
+
+// ── Intersection observer for scroll reveals
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); revObs.unobserve(e.target); } });
+}, {threshold: 0.12, rootMargin: '0px 0px -60px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.observe(el));
+
+// ── Count-up for hero stats
+function countUp(el, end, suffix, dur, dec) {
+  if (!el) return;
+  const steps = Math.round(dur / (1000/60));
+  let s = 0;
+  const t = setInterval(() => {
+    s++;
+    const p = 1 - Math.pow(1 - Math.min(s/steps, 1), 3);
+    el.textContent = (dec ? (end*p).toFixed(dec) : Math.floor(end*p)) + suffix;
+    if (s >= steps) { el.textContent = (dec ? end.toFixed(dec) : end) + suffix; clearInterval(t); }
+  }, 1000/60);
+}
+let heroAnimated = false;
+const heroObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !heroAnimated) {
+    heroAnimated = true;
+    countUp(document.getElementById('h-cnt1'), 2500, '+', 1800, 0);
+    countUp(document.getElementById('h-cnt2'), 12, '+', 1000, 0);
+    countUp(document.getElementById('h-cnt3'), 4.9, '★', 1400, 1);
+    countUp(document.getElementById('h-cnt4'), 15, '+', 1100, 0);
+  }
+}, {threshold: 0.3});
+const hc = document.getElementById('h-cnt1');
+if (hc) heroObs.observe(hc.closest('[style]') || document.getElementById('hero'));
+
+// ── Gemini scroll-draw paths
+(function(){
+  const wrap = document.getElementById('gemini-wrap');
+  if (!wrap) return;
+  const paths = [1,2,3,4,5].map(i => document.getElementById('gpath'+i));
+  const ghead = document.getElementById('g-head');
+  const gsub  = document.getElementById('g-sub');
+  const gcta  = document.getElementById('g-cta');
+  const glab  = document.getElementById('g-label');
+  const lengths = paths.map(p => p ? p.getTotalLength() : 0);
+  const starts  = [0.2, 0.15, 0.1, 0.05, 0];
+  paths.forEach((p,i) => { if (!p) return; p.style.strokeDasharray = lengths[i]; p.style.strokeDashoffset = lengths[i]; });
+  function update() {
+    const rect  = wrap.getBoundingClientRect();
+    const total = wrap.offsetHeight - window.innerHeight;
+    const prog  = Math.max(0, Math.min(1, -rect.top / total));
+    paths.forEach((p,i) => {
+      if (!p) return;
+      const raw = starts[i] + (1.0 - starts[i]) * (prog / 0.75);
+      p.style.strokeDashoffset = lengths[i] * (1 - Math.max(0, Math.min(1, raw)));
+    });
+    const show = prog > 0.5;
+    if (ghead) { ghead.style.opacity = show ? '1' : '0'; ghead.style.transform = show ? 'translateY(0)' : 'translateY(20px)'; }
+    if (gsub)  gsub.style.opacity = show ? '1' : '0';
+    if (gcta)  gcta.style.opacity = show ? '1' : '0';
+    if (glab)  glab.style.opacity = show ? '1' : '0';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+
+// ── WEATHER — WMO code map
+const WX = {
+  0:{l:'Clear',t:'sun',d:'Clear skies'},1:{l:'Mainly Clear',t:'sun',d:'Mostly clear'},2:{l:'Partly Cloudy',t:'cloud',d:'Some clouds'},3:{l:'Overcast',t:'cloud',d:'Full cloud cover'},
+  45:{l:'Foggy',t:'fog',d:'Dense fog'},48:{l:'Icy Fog',t:'fog',d:'Rime fog'},
+  51:{l:'Light Drizzle',t:'rain',d:'Light drizzle'},53:{l:'Drizzle',t:'rain',d:'Moderate drizzle'},55:{l:'Heavy Drizzle',t:'rain',d:'Dense drizzle'},
+  61:{l:'Light Rain',t:'rain',d:'Light rain'},63:{l:'Rain',t:'rain',d:'Moderate rain'},65:{l:'Heavy Rain',t:'rain',d:'Heavy rain'},
+  71:{l:'Light Snow',t:'snow',d:'Light snowfall'},73:{l:'Snow',t:'snow',d:'Moderate snowfall'},75:{l:'Heavy Snow',t:'snow',d:'Heavy snowfall'},77:{l:'Snow Grains',t:'snow',d:'Snow grains'},
+  80:{l:'Showers',t:'rain',d:'Light showers'},81:{l:'Showers',t:'rain',d:'Moderate showers'},82:{l:'Heavy Showers',t:'rain',d:'Heavy showers'},
+  85:{l:'Snow Showers',t:'snow',d:'Light snow showers'},86:{l:'Heavy Snow',t:'snow',d:'Heavy snow showers'},
+  95:{l:'Thunderstorm',t:'thunder',d:'Thunderstorm'},96:{l:'Thunder+Hail',t:'thunder',d:'Thunder with hail'},99:{l:'Thunder+Hail',t:'thunder',d:'Heavy hail'}
+};
+function getTempColor(t){return t<=0?'#64b5f6':t<=10?'#81d4fa':t<=20?'#a5d6a7':t<=28?'#fff176':'#ef9a9a'}
+function getHvacAlert(t, type){
+  const mo = new Date().getMonth(); // 0=Jan … 11=Dec
+  const isAcSeason = mo >= 3 && mo <= 8; // April – September
+  if(t<=0||type==='snow') return '⚠ Extreme cold — boiler & heating at peak load. 24/7 emergency dispatch ready.';
+  if(t>=32||type==='thunder') return '⚠ Heat alert — cooling systems under max load. A/C emergency response available now.';
+  if(isAcSeason) return '🌡 AC season — book your commercial cooling system check before the GTA heat peaks.';
+  if(t<=8) return 'Heating season — schedule your furnace & boiler inspection before peak demand.';
+  return 'Conditions stable — ideal window to schedule preventive maintenance. Call (437) 410-2100.';
+}
+function wxIcon(type, temp){
+  const c = getTempColor(temp);
+  const icons={
+    sun:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.5"><circle cx="12" cy="12" r="4" style="animation:sun-pulse 3s ease-in-out infinite"/><g style="animation:sun-rot 12s linear infinite;transform-origin:12px 12px"><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>`,
+    cloud:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" style="animation:cloud-drift 4s ease-in-out infinite alternate"/></svg>`,
+    rain:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#81d4fa" stroke-width="1.5"><path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25"/><line x1="8" y1="19" x2="8" y2="21" style="animation:rain-fall 1.2s ease-in-out infinite"/><line x1="12" y1="19" x2="12" y2="21" style="animation:rain-fall 1.2s ease-in-out .3s infinite"/><line x1="16" y1="19" x2="16" y2="21" style="animation:rain-fall 1.2s ease-in-out .6s infinite"/></svg>`,
+    snow:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B1C5FF" stroke-width="1.5"><path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25"/><line x1="12" y1="11" x2="12" y2="21"/><polyline points="8 15 12 19 16 15"/></svg>`,
+    fog:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"><line x1="3" y1="10" x2="21" y2="10" style="animation:fog-drift 3s ease-in-out infinite alternate"/><line x1="3" y1="14" x2="21" y2="14" style="animation:fog-drift 3.5s ease-in-out infinite alternate-reverse"/><line x1="3" y1="18" x2="18" y2="18" style="animation:fog-drift 2.8s ease-in-out infinite alternate"/></svg>`,
+    thunder:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffd54f" stroke-width="1.5"><path d="M19 16.9A5 5 0 0018 7h-1.26a8 8 0 10-11.62 9"/><polyline points="13 11 11 15 14 15 12 19" style="animation:lightning 4s ease-in-out infinite"/></svg>`
+  };
+  return icons[type]||icons.cloud;
+}
+
+// ── Canvas particle system
+let wxCanvas, wxCtx, wxAnimId, wxType='cloud';
+function initParticles(type){
+  if(!wxCanvas){wxCanvas=document.getElementById('weatherCanvas');wxCtx=wxCanvas.getContext('2d');}
+  wxCanvas.width=window.innerWidth;wxCanvas.height=window.innerHeight;
+  if(wxAnimId)cancelAnimationFrame(wxAnimId);
+  wxType=type;
+  const particles=[];
+  function mkP(){
+    const p={x:Math.random()*wxCanvas.width,y:-10,op:0};
+    if(type==='snow'){p.sz=Math.random()*2.5+1;p.sp=Math.random()*.8+.4;p.sw=Math.random()*Math.PI*2;p.sr=Math.random()*.02-.01;}
+    else if(type==='rain'){p.w=Math.random()*1+.5;p.h=Math.random()*14+8;p.sp=Math.random()*8+6;}
+    else if(type==='sun'){p.sz=Math.random()*2+.5;p.sp=Math.random()*1.5+.5;p.x=Math.random()*wxCanvas.width;p.y=Math.random()*wxCanvas.height;}
+    else{p.rw=Math.random()*120+60;p.rh=Math.random()*60+30;p.sp=Math.random()*.3+.1;}
+    return p;
+  }
+  const count={snow:80,rain:120,sun:50,cloud:12,fog:8,thunder:90}[type]||15;
+  for(let i=0;i<count;i++){const p=mkP();p.y=Math.random()*wxCanvas.height;particles.push(p);}
+  function draw(){
+    wxCtx.clearRect(0,0,wxCanvas.width,wxCanvas.height);
+    if(type==='snow'){
+      particles.forEach(p=>{
+        p.sw+=p.sr;p.x+=Math.sin(p.sw)*.5;p.y+=p.sp;p.op=Math.min(p.op+.02,.7);
+        if(p.y>wxCanvas.height){p.y=-10;p.x=Math.random()*wxCanvas.width;p.op=0;}
+        wxCtx.beginPath();wxCtx.arc(p.x,p.y,p.sz,0,Math.PI*2);
+        wxCtx.fillStyle=`rgba(200,220,255,${p.op})`;wxCtx.fill();
+      });
+    } else if(type==='rain'||type==='thunder'){
+      particles.forEach(p=>{
+        p.y+=p.sp;p.x-=p.sp*.15;p.op=Math.min(p.op+.04,.5);
+        if(p.y>wxCanvas.height){p.y=-p.h;p.x=Math.random()*wxCanvas.width;p.op=0;}
+        wxCtx.beginPath();wxCtx.moveTo(p.x,p.y);wxCtx.lineTo(p.x-1,p.y+p.h);
+        wxCtx.strokeStyle=`rgba(150,200,255,${p.op})`;wxCtx.lineWidth=p.w;wxCtx.stroke();
+      });
+      if(type==='thunder'&&Math.random()<.003){
+        wxCtx.fillStyle='rgba(255,240,150,.25)';wxCtx.fillRect(0,0,wxCanvas.width,wxCanvas.height);
+      }
+    } else if(type==='sun'){
+      particles.forEach(p=>{
+        p.y-=p.sp;p.op=p.op<.5?p.op+.01:p.op-.005;
+        if(p.y<-10){p.y=wxCanvas.height;p.x=Math.random()*wxCanvas.width;p.op=0;}
+        wxCtx.beginPath();wxCtx.arc(p.x,p.y,p.sz,0,Math.PI*2);
+        wxCtx.fillStyle=`rgba(255,210,100,${p.op})`;wxCtx.fill();
+      });
+    } else {
+      particles.forEach(p=>{
+        p.x+=p.sp;p.op=Math.min(p.op+.005,.12);
+        if(p.x>wxCanvas.width+p.rw){p.x=-p.rw;p.y=Math.random()*wxCanvas.height;p.op=0;}
+        const g=wxCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.rw);
+        g.addColorStop(0,`rgba(200,210,230,${p.op})`);g.addColorStop(1,'transparent');
+        wxCtx.beginPath();wxCtx.ellipse(p.x,p.y,p.rw,p.rh,0,0,Math.PI*2);
+        wxCtx.fillStyle=g;wxCtx.fill();
+      });
+    }
+    wxAnimId=requestAnimationFrame(draw);
+  }
+  draw();
+}
+window.addEventListener('resize',()=>{if(wxCanvas){wxCanvas.width=window.innerWidth;wxCanvas.height=window.innerHeight;}});
+
+// ── Fetch live weather
+async function fetchWeather(lat=43.7315,lon=-79.7624){
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,cloud_cover,is_day&hourly=uv_index&temperature_unit=celsius&wind_speed_unit=kmh&timezone=America%2FToronto&forecast_days=1`;
+  try{
+    const r=await fetch(url);
+    if(!r.ok)throw new Error();
+    const d=await r.json();
+    const c=d.current;
+    if(!c||c.temperature_2m===undefined)throw new Error();
+    const info=WX[c.weather_code]||WX[0]||{l:'Clear',t:'sun',d:'Live GTA conditions'};
+    const temp=Math.round(c.temperature_2m);
+    const feels=Math.round(c.apparent_temperature);
+    let uv='--';
+    try{const hr=new Date().getHours();const u=d.hourly&&d.hourly.uv_index;if(u&&u[hr]!==undefined)uv=parseFloat(u[hr]).toFixed(1);}catch(_){}
+    const tc=getTempColor(temp);
+    document.getElementById('wxTemp').textContent=temp+'°C';
+    document.getElementById('wxTemp').style.color=tc;
+    document.getElementById('wxFeels').textContent=feels+'°C';
+    document.getElementById('wxCondition').textContent=info.l;
+    document.getElementById('wxDesc').textContent=info.d;
+    document.getElementById('wxHumidity').textContent=c.relative_humidity_2m+'%';
+    document.getElementById('wxWind').textContent=Math.round(c.wind_speed_10m);
+    document.getElementById('wxUV').textContent=uv;
+    document.getElementById('wxIcon').innerHTML=wxIcon(info.t,temp);
+    document.getElementById('wxAlertText').textContent=getHvacAlert(temp,info.t);
+    const alertEl=document.getElementById('wxAlert');
+    if(temp<=0||temp>=32||info.t==='thunder'){alertEl.style.background='rgba(229,49,42,0.1)';alertEl.style.borderColor='rgba(229,49,42,0.25)';}
+    else if(temp<=8||info.t==='snow'||info.t==='rain'){alertEl.style.background='rgba(251,191,36,0.08)';alertEl.style.borderColor='rgba(251,191,36,0.2)';}
+    else{alertEl.style.background='rgba(52,211,153,0.07)';alertEl.style.borderColor='rgba(52,211,153,0.18)';}
+    const now=new Date();
+    document.getElementById('wxUpdated').textContent=now.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit',timeZone:'America/Toronto'});
+    wxType=info.t;
+    initParticles(info.t);
+  } catch(e){
+    document.getElementById('wxCondition').textContent='GTA Weather';
+    document.getElementById('wxAlertText').textContent='24/7 support available — (437) 410-2100';
+    initParticles('cloud');
+  }
+}
+fetchWeather();
+setInterval(fetchWeather,600000);
+
+// ── Stat band count-up
+let sbAnimated = false;
+const sbObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !sbAnimated) {
+    sbAnimated = true;
+    // Delay to sync with reveal CSS transition (0.7s) so numbers animate WHILE visible
+    setTimeout(()=>countUp(document.getElementById('sb1'), 2500, '+', 2200, 0),  80);
+    setTimeout(()=>countUp(document.getElementById('sb2'), 12,   '+', 1600, 0), 260);
+    setTimeout(()=>countUp(document.getElementById('sb3'), 4.9,  '★', 1900, 1), 380);
+    setTimeout(()=>countUp(document.getElementById('sb4'), 15,   '+', 1700, 0), 490);
+  }
+}, {threshold: 0.05, rootMargin:'0px 0px -40px 0px'});
+const sbEl = document.getElementById('sb1');
+if (sbEl) {
+  let p = sbEl.parentElement;
+  while (p && p.tagName !== 'SECTION') p = p.parentElement;
+  if (p) sbObs.observe(p); else sbObs.observe(sbEl);
+}
+
+// ── Hero scroll-to-dismantle
+(function() {
+  const hero    = document.getElementById('hero');
+  if (!hero) return;
+  const badge   = hero.querySelector('.h1a');
+  const hl      = hero.querySelector('h1');
+  const sub     = hero.querySelector('.h3a');
+  const ctas    = hero.querySelector('.h4a');
+  const trust   = hero.querySelector('.h5a');
+  const right   = hero.querySelector('.h6a');
+  const heroImg = document.getElementById('hero-img');
+
+  let ticking = false;
+  function applyDismantle() {
+    const prog = Math.max(0, Math.min(1, window.scrollY / (hero.offsetHeight * 0.72)));
+    const ease = 1 - Math.pow(1 - prog, 2); // ease-in-quad for snappy feel
+
+    if (badge) {
+      badge.style.transform = `translateY(${-ease*48}px) translateX(${-ease*20}px)`;
+      badge.style.opacity   = Math.max(0, 1 - ease * 2.8);
+    }
+    if (hl) {
+      hl.style.transform = `translateY(${-ease*72}px) scale(${1 - ease*0.05})`;
+      hl.style.opacity   = Math.max(0, 1 - ease * 1.7);
+    }
+    if (sub) {
+      sub.style.transform = `translateY(${ease*32}px)`;
+      sub.style.opacity   = Math.max(0, 1 - ease * 3.2);
+    }
+    if (ctas) {
+      ctas.style.transform = `translateY(${ease*44}px)`;
+      ctas.style.opacity   = Math.max(0, 1 - ease * 3.2);
+    }
+    if (trust) {
+      trust.style.opacity = Math.max(0, 1 - ease * 4.5);
+    }
+    if (right) {
+      right.style.transform = `translateX(${ease*56}px) translateY(${-ease*24}px) scale(${1 - ease*0.07})`;
+      right.style.opacity   = Math.max(0, 1 - ease * 1.8);
+    }
+    // Parallax background — moves at 0.3× scroll speed
+    if (heroImg) {
+      heroImg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(applyDismantle); ticking = true; }
+  }, {passive: true});
+  applyDismantle();
+})();
+</script>
+
+<!-- ════ GRAIN TEXTURE OVERLAY ════ -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" result="noise"/>
+    <feColorMatrix type="saturate" values="0" in="noise" result="greyNoise"/>
+    <feBlend in="SourceGraphic" in2="greyNoise" mode="overlay" result="blended"/>
+    <feComposite in="blended" in2="SourceGraphic" operator="in"/>
+  </filter>
+</svg>
+<div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.038;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%221%22/></svg>');background-repeat:repeat;background-size:200px 200px"></div>
+</body>
+</html>
