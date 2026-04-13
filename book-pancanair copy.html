@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Get a Commercial HVAC Maintenance Quote — PanCanAir · GTA</title>
+  <meta name="description" content="Request a free building audit and HVAC maintenance contract quote from PanCanAir. Serving Toronto, Brampton, Mississauga, Vaughan, and the GTA. Takes 2 minutes."/>
+  <link rel="canonical" href="https://pancanair.com/book-pancanair.html"/>
+  <meta property="og:title" content="Get a Commercial HVAC Quote — PanCanAir · GTA"/>
+  <meta property="og:description" content="Free building audit. Commercial HVAC maintenance contracts for GTA property managers. Takes 2 minutes."/>
+  <meta name="robots" content="noindex,follow"/><!-- Booking pages don't need to rank -->
+  <!-- ── Supabase: replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY below ── -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPA_URL = 'YOUR_SUPABASE_URL';
+    const SUPA_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const _supa = (SUPA_URL !== 'YOUR_SUPABASE_URL')
+      ? supabase.createClient(SUPA_URL, SUPA_KEY)
+      : null;
+    async function saveLeadToSupabase(data) {
+      if (!_supa) return;
+      try { await _supa.from('leads').insert([data]); } catch(e) { console.warn('Supabase insert failed', e); }
+    }
+  </script>
+  <!-- GAP 8: GA4 — replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:#080808;color:#fff;font-family:"DM Sans","system-ui",sans-serif;overflow:hidden}
+    ::selection{background:rgba(229,49,42,.25)}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:#080808}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(#E5312A,#1D4EA0);border-radius:4px}
+    #bg-orb1{position:fixed;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.055),transparent 70%);filter:blur(80px);pointer-events:none;z-index:0}
+    #bg-orb2{position:fixed;bottom:-20%;left:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(229,49,42,0.045),transparent 70%);filter:blur(100px);pointer-events:none;z-index:0}
+    #shell{position:relative;z-index:1;display:flex;flex-direction:column;height:100vh;max-height:100vh}
+
+    /* Top bar */
+    #topbar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;border-bottom:1px solid rgba(255,255,255,0.07);background:rgba(8,8,8,0.72);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+    #back-link{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.28);display:flex;align-items:center;gap:7px;text-decoration:none;transition:all .18s;padding:8px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.07)}
+    #back-link:hover{color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.04)}
+
+    /* Progress */
+    #progress-track{flex-shrink:0;height:2px;background:rgba(255,255,255,0.05)}
+    #progress-fill{height:100%;background:linear-gradient(90deg,#E5312A,#00AEEF);transition:width .48s cubic-bezier(.16,1,.3,1)}
+
+    /* Step label */
+    #step-label{flex-shrink:0;padding:13px 28px 0;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+
+    /* Review chips */
+    #review-bar{flex-shrink:0;padding:9px 28px;display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;align-items:center;scrollbar-width:none}
+    #review-bar::-webkit-scrollbar{display:none}
+    .rv-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);font-size:10px;font-weight:600;color:rgba(255,255,255,0.26);transition:all .22s;white-space:nowrap;flex-shrink:0}
+    .rv-chip.on{background:rgba(0,174,239,0.07);border-color:rgba(0,174,239,0.22);color:rgba(0,174,239,0.72)}
+    .rv-chip .chip-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+    /* Stage */
+    #stage{flex:1;overflow:hidden;position:relative}
+    .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 8px;transition:transform .42s cubic-bezier(.16,1,.3,1),opacity .3s ease;will-change:transform,opacity;overflow-y:auto}
+    .slide.active{transform:translateX(0);opacity:1;pointer-events:auto}
+    .slide.left{transform:translateX(-100%);opacity:0;pointer-events:none}
+    .slide.right{transform:translateX(100%);opacity:0;pointer-events:none}
+    .slide-inner{width:100%;max-width:760px}
+
+    /* Question */
+    .q-label{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:rgba(229,49,42,0.75);margin-bottom:10px}
+    .q-text{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:clamp(38px,6.5vw,64px);text-transform:uppercase;letter-spacing:-.02em;line-height:.9;color:white;margin-bottom:8px}
+    .q-sub{font-size:15px;color:rgba(255,255,255,0.38);margin-bottom:18px;line-height:1.5}
+    @media(max-width:480px){.q-text{font-size:clamp(30px,9vw,44px)}.q-sub{font-size:13.5px}}
+
+    /* Tiles */
+    .tiles{display:grid;gap:11px}
+    .tiles.cols2{grid-template-columns:1fr 1fr}
+    @media(max-width:400px){.tiles.cols2{grid-template-columns:1fr}}
+    .tile{position:relative;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.035);cursor:pointer;transition:all .15s;text-align:left}
+    .tile:hover{border-color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.065)}
+    .tile.sel{border-color:rgba(229,49,42,0.5);background:rgba(229,49,42,0.08);box-shadow:0 0 0 1px rgba(229,49,42,0.28) inset}
+    .tile.multi.sel{border-color:rgba(0,174,239,0.5);background:rgba(0,174,239,0.08);box-shadow:0 0 0 1px rgba(0,174,239,0.28) inset}
+    .tile-n{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);display:block;margin-bottom:9px}
+    .tile-title{font-size:17px;font-weight:700;color:white;line-height:1.2;display:block;padding-right:28px}
+    .tile-sub{font-size:13.5px;color:rgba(255,255,255,0.36);margin-top:6px;display:block;line-height:1.5;padding-right:8px}
+    @media(max-width:480px){.tile{padding:16px 18px}.tile-title{font-size:15.5px}.tile-sub{font-size:12.5px}}
+    .tile-check{position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;transition:all .13s;flex-shrink:0}
+    .tile.sel .tile-check{background:#E5312A;border-color:#E5312A}
+    .tile.multi.sel .tile-check{background:#00AEEF;border-color:#00AEEF}
+    .tile-check svg{opacity:0;transition:opacity .13s}
+    .tile.sel .tile-check svg,.tile.multi.sel .tile-check svg{opacity:1}
+
+    /* Form */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:520px){.form-grid{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:5px}
+    .field.full{grid-column:1/-1}
+    label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+    input,textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;color:white;font-size:16px;font-family:"DM Sans",sans-serif;padding:11px 14px;transition:border-color .16s;outline:none;width:100%}
+    input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.17)}
+    input:focus,textarea:focus{border-color:rgba(229,49,42,0.48)}
+    input.err{border-color:rgba(229,49,42,0.65);background:rgba(229,49,42,0.05)}
+    textarea{resize:none;height:74px}
+
+    /* Send options */
+    .send-grid{display:grid;gap:9px;margin-top:20px}
+    .send-btn{display:flex;align-items:center;gap:13px;padding:16px 20px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);cursor:pointer;transition:all .18s;text-decoration:none;color:white}
+    .send-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.26)}
+    .send-btn.primary{background:#E5312A;border-color:#E5312A;box-shadow:0 7px 22px rgba(229,49,42,.26)}
+    .send-btn.primary:hover{background:#C8102E;box-shadow:0 11px 32px rgba(229,49,42,.36)}
+    .send-btn.cal{border-color:rgba(0,174,239,0.3);background:rgba(0,174,239,0.06)}
+    .send-btn.cal:hover{border-color:rgba(0,174,239,0.5);background:rgba(0,174,239,0.1)}
+    .s-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,0.1)}
+    .send-btn.primary .s-ico{background:rgba(255,255,255,0.15)}
+    .send-btn.cal .s-ico{background:rgba(0,174,239,0.15)}
+    .s-info{flex:1;text-align:left}
+    .s-lbl{font-size:13.5px;font-weight:700;display:block}
+    .s-desc{font-size:11px;color:rgba(255,255,255,0.38);display:block;margin-top:2px}
+    .send-btn.primary .s-desc{color:rgba(255,255,255,0.6)}
+    .send-btn.cal .s-desc{color:rgba(0,174,239,0.7)}
+
+    /* Nav */
+    #nav-btns{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:12px 28px 18px;border-top:1px solid rgba(255,255,255,0.05)}
+    #btn-back{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.27);background:none;border:none;cursor:pointer;padding:8px 14px;border-radius:100px;transition:all .16s}
+    #btn-back:hover{color:rgba(255,255,255,0.62);background:rgba(255,255,255,0.05)}
+    #btn-back:disabled{opacity:0;pointer-events:none}
+    #btn-next{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:white;background:#E5312A;border:none;cursor:pointer;padding:11px 24px;border-radius:100px;box-shadow:0 6px 20px rgba(229,49,42,.26);transition:all .18s}
+    #btn-next:hover{background:#C8102E;box-shadow:0 9px 26px rgba(229,49,42,.36);transform:translateY(-1px)}
+    #btn-next:disabled{opacity:.32;pointer-events:none;transform:none}
+    .dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.13);transition:all .26s}
+    .dot.active{background:#E5312A;width:16px;border-radius:3px}
+    .dot.done{background:rgba(229,49,42,0.3)}
+
+    /* Success */
+    #success-screen{display:none;position:fixed;inset:0;z-index:999;background:#080808;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px}
+    #success-screen.show{display:flex}
+    @keyframes check-in{0%{transform:scale(0) rotate(-12deg);opacity:0}80%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+    .check-circle{width:64px;height:64px;border-radius:50%;background:rgba(229,49,42,0.1);border:2px solid rgba(229,49,42,0.3);display:flex;align-items:center;justify-content:center;animation:check-in .5s cubic-bezier(.16,1,.3,1) both;margin:0 auto 20px}
+
+    /* Multi-select hint */
+    .multi-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:rgba(0,174,239,0.62);margin-bottom:18px}
+  </style>
+</head>
+<body>
+<div id="bg-orb1"></div>
+<div id="bg-orb2"></div>
+
+<div id="shell">
+  <!-- Topbar -->
+  <div id="topbar">
+    <a href="pancanair-premium.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:white">
+      <div style="width:36px;height:36px;flex-shrink:0;border-radius:9px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 100 100" width="30" height="30">
+          <g><line x1="30" y1="10" x2="30" y2="20" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="30" x2="20" y2="30" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="14" x2="21" y2="21" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><line x1="14" y1="46" x2="21" y2="39" stroke="#E63329" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="30" r="12" fill="#E63329" opacity=".9"/><circle cx="30" cy="30" r="8" fill="white"/></g>
+          <g><line x1="65" y1="35" x2="65" y2="75" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="45" y1="55" x2="85" y2="55" stroke="#2B5DA6" stroke-width="3" stroke-linecap="round"/><line x1="51" y1="41" x2="79" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><line x1="79" y1="41" x2="51" y2="69" stroke="#2B5DA6" stroke-width="2.5" stroke-linecap="round"/><circle cx="65" cy="55" r="4" fill="#00AEEF"/></g>
+        </svg>
+      </div>
+      <div>
+        <p style="font-size:15px;font-weight:900;letter-spacing:-.3px;line-height:1"><span style="color:#00AEEF">Pan</span><span style="color:#E63329">Can</span><span style="color:rgba(255,255,255,0.92)">Air</span></p>
+        <p style="font-size:6.5px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.28);text-transform:uppercase;margin-top:2px">Commercial HVAC · GTA</p>
+      </div>
+    </a>
+    <a href="pancanair-premium.html" id="back-link">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+  </div>
+
+  <div id="progress-track"><div id="progress-fill" style="width:16.66%"></div></div>
+  <div id="step-label">Step <span id="step-cur">1</span> of 5</div>
+
+  <!-- Review chips -->
+  <div id="review-bar">
+    <span id="rv-svc" class="rv-chip"><span class="chip-dot"></span><span id="rv-svc-t">Service</span></span>
+    <span id="rv-prop" class="rv-chip"><span class="chip-dot"></span><span id="rv-prop-t">Property</span></span>
+    <span id="rv-sz" class="rv-chip"><span class="chip-dot"></span><span id="rv-sz-t">Scale</span></span>
+    <span id="rv-urg" class="rv-chip"><span class="chip-dot"></span><span id="rv-urg-t">Timeline</span></span>
+    <span id="rv-contact" class="rv-chip"><span class="chip-dot"></span><span id="rv-contact-t">Contact</span></span>
+  </div>
+
+  <!-- Stage -->
+  <div id="stage">
+
+    <!-- STEP 1 — SERVICE -->
+    <div class="slide active" id="step-1">
+      <div class="slide-inner">
+        <p class="q-label">01 / Service</p>
+        <h2 class="q-text">What do<br/>you need?</h2>
+        <p class="multi-tag">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+          Select all that apply
+        </p>
+        <div class="tiles cols2">
+          <div class="tile multi" data-group="svc" data-val="Preventive Maintenance Contract" onclick="toggleMulti(this)">
+            <span class="tile-n">01</span>
+            <span class="tile-title">Preventive Maintenance</span>
+            <span class="tile-sub">Scheduled visits, filters, inspections</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile multi" data-group="svc" data-val="Emergency Repair" onclick="toggleMulti(this)">
+            <span class="tile-n">02</span>
+            <span class="tile-title">Emergency Repair</span>
+            <span class="tile-sub">System down — 24/7 same-day response</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile multi" data-group="svc" data-val="Equipment Installation" onclick="toggleMulti(this)">
+            <span class="tile-n">03</span>
+            <span class="tile-title">Equipment Install</span>
+            <span class="tile-sub">RTUs, air handlers, boilers, fan coils</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile multi" data-group="svc" data-val="Building Assessment" onclick="toggleMulti(this)">
+            <span class="tile-n">04</span>
+            <span class="tile-title">Building Assessment</span>
+            <span class="tile-sub">Full audit — new contracts or takeovers</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile multi" data-group="svc" data-val="Consultation" onclick="toggleMulti(this)" style="grid-column:1/-1">
+            <span class="tile-n">05</span>
+            <span class="tile-title">Consultation</span>
+            <span class="tile-sub">Talk it through — no obligation, no strings attached</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 — PROPERTY TYPE -->
+    <div class="slide right" id="step-2">
+      <div class="slide-inner">
+        <p class="q-label">02 / Property</p>
+        <h2 class="q-text">Type of<br/>property?</h2>
+        <p class="q-sub">Helps us send the right specialist.</p>
+        <div class="tiles cols2">
+          <div class="tile" data-group="prop" data-val="High-Rise Condominium" onclick="selectSingle(this,'prop')">
+            <span class="tile-n">01</span><span class="tile-title">High-Rise Condo</span>
+            <span class="tile-sub">Condo board or PM-managed</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="prop" data-val="Commercial Office" onclick="selectSingle(this,'prop')">
+            <span class="tile-n">02</span><span class="tile-title">Commercial Office</span>
+            <span class="tile-sub">Office tower or mixed-use</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="prop" data-val="Rental Apartment" onclick="selectSingle(this,'prop')">
+            <span class="tile-n">03</span><span class="tile-title">Rental Apartment</span>
+            <span class="tile-sub">Purpose-built multi-unit rental</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="prop" data-val="Industrial / Warehouse" onclick="selectSingle(this,'prop')">
+            <span class="tile-n">04</span><span class="tile-title">Industrial</span>
+            <span class="tile-sub">Factory, distribution, warehouse</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="prop" data-val="Retail / Restaurant" onclick="selectSingle(this,'prop')">
+            <span class="tile-n">05</span><span class="tile-title">Retail / Restaurant</span>
+            <span class="tile-sub">Storefront, plaza, food service</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="prop" data-val="Other" onclick="selectSingle(this,'prop')">
+            <span class="tile-n">06</span><span class="tile-title">Other</span>
+            <span class="tile-sub">Describe it in notes</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 — SCALE -->
+    <div class="slide right" id="step-3">
+      <div class="slide-inner">
+        <p class="q-label">03 / Scale</p>
+        <h2 class="q-text">Building<br/>size?</h2>
+        <p class="q-sub">Larger portfolios get preferred pricing and a dedicated technician.</p>
+        <div class="tiles cols2">
+          <div class="tile" data-group="sz" data-val="Under 50 units" onclick="selectSingle(this,'sz')">
+            <span class="tile-n">01</span><span class="tile-title">Under 50 units</span>
+            <span class="tile-sub">Boutique or small residential</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="sz" data-val="50–150 units" onclick="selectSingle(this,'sz')">
+            <span class="tile-n">02</span><span class="tile-title">50 – 150 units</span>
+            <span class="tile-sub">Mid-rise condo or apartment</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="sz" data-val="150–500 units" onclick="selectSingle(this,'sz')">
+            <span class="tile-n">03</span><span class="tile-title">150 – 500 units</span>
+            <span class="tile-sub">Large high-rise — dedicated tech</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="sz" data-val="500–1,000 units" onclick="selectSingle(this,'sz')">
+            <span class="tile-n">04</span><span class="tile-title">500 – 1,000 units</span>
+            <span class="tile-sub">Full complex — enterprise eligible</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="sz" data-val="1,000+ units or multi-building portfolio" onclick="selectSingle(this,'sz')">
+            <span class="tile-n">05</span><span class="tile-title">1,000+ / Portfolio</span>
+            <span class="tile-sub">Multi-building PM or condo group</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="sz" data-val="Commercial sqft" onclick="selectSingle(this,'sz')">
+            <span class="tile-n">06</span><span class="tile-title">Measured by sq ft</span>
+            <span class="tile-sub">Office, industrial, retail space</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 — TIMELINE -->
+    <div class="slide right" id="step-4">
+      <div class="slide-inner">
+        <p class="q-label">04 / Timeline</p>
+        <h2 class="q-text">When do<br/>you need us?</h2>
+        <p class="q-sub">We match dispatch and response to your timeline.</p>
+        <div class="tiles cols2">
+          <div class="tile" data-group="urg" data-val="Emergency — I need help today" onclick="selectSingle(this,'urg')">
+            <span class="tile-n">01</span><span class="tile-title">Today — Emergency</span>
+            <span class="tile-sub">System down, no AC, heating failure</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="urg" data-val="This week" onclick="selectSingle(this,'urg')">
+            <span class="tile-n">02</span><span class="tile-title">This week</span>
+            <span class="tile-sub">Urgent but can wait a day or two</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="urg" data-val="2–4 weeks" onclick="selectSingle(this,'urg')">
+            <span class="tile-n">03</span><span class="tile-title">2 – 4 weeks</span>
+            <span class="tile-sub">Planned work or AC season prep</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+          <div class="tile" data-group="urg" data-val="Planning ahead — next season or renewal" onclick="selectSingle(this,'urg')">
+            <span class="tile-n">04</span><span class="tile-title">Planning ahead</span>
+            <span class="tile-sub">Contract renewal or new PM onboarding</span>
+            <div class="tile-check"><svg width="8" height="8" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          </div>
+        </div>
+        <!-- Calendly shortcut for planners -->
+        <div style="margin-top:20px;padding:14px 18px;border-radius:12px;border:1px solid rgba(0,174,239,0.2);background:rgba(0,174,239,0.05);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div>
+            <p style="font-size:12.5px;font-weight:700;color:rgba(255,255,255,0.7)">Rather talk it through first?</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.32);margin-top:2px">Book a 30-min call — Pankaj walks you through your options.</p>
+          </div>
+          <a href="https://calendly.com/pancanair/30min" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:100px;background:rgba(0,174,239,0.15);border:1px solid rgba(0,174,239,0.3);color:#00AEEF;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Book a Call
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 — CONTACT -->
+    <div class="slide right" id="step-5">
+      <div class="slide-inner">
+        <p class="q-label">05 / Contact</p>
+        <h2 class="q-text">Last step.</h2>
+        <p class="q-sub">We'll reach out within 1 business day — sooner if it's urgent.</p>
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Your Name *</label>
+            <input type="text" id="f-name" placeholder="First Last" oninput="syncUI()"/>
+          </div>
+          <div class="field">
+            <label for="f-company">Company / Building</label>
+            <input type="text" id="f-company" placeholder="GTA Property Management"/>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone *</label>
+            <input type="tel" id="f-phone" placeholder="(416) 555-0100" oninput="syncUI()"/>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" placeholder="you@company.com"/>
+          </div>
+          <div class="field full">
+            <label for="f-address">Building Address</label>
+            <input type="text" id="f-address" placeholder="123 Yonge St, Toronto ON"/>
+          </div>
+          <div class="field full">
+            <label for="f-notes">Anything else we should know</label>
+            <textarea id="f-notes" placeholder="Systems, issues, context — whatever helps us come prepared."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 — SEND -->
+    <div class="slide right" id="step-6">
+      <div class="slide-inner">
+        <p class="q-label">You're set</p>
+        <h2 class="q-text">How do you<br/>want to<br/>connect?</h2>
+        <p class="q-sub">Pick your preferred channel:</p>
+        <div class="send-grid">
+          <!-- WhatsApp -->
+          <a href="#" class="send-btn primary" onclick="doWhatsApp();return false">
+            <div class="s-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </div>
+            <div class="s-info">
+              <span class="s-lbl">Send via WhatsApp</span>
+              <span class="s-desc">Opens with your request pre-filled — fastest response</span>
+            </div>
+            <svg width="13" height="13" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <!-- GAP 7: Phone fallback for non-WhatsApp users (iOS deep link issues) -->
+          <p style="text-align:center;font-size:11px;color:rgba(255,255,255,0.22);margin-top:2px;margin-bottom:4px">Not on WhatsApp? <a href="tel:+14374102100" style="color:rgba(0,174,239,0.65);text-decoration:none;font-weight:600">(437) 410-2100</a> — Pankaj picks up.</p>
+          <!-- Calendly -->
+          <a href="https://calendly.com/pancanair/30min" target="_blank" class="send-btn cal" onclick="trackCalendly()">
+            <div class="s-ico">
+              <svg width="19" height="19" fill="none" stroke="#00AEEF" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="s-info">
+              <span class="s-lbl" style="color:white">Book a 30-min Call</span>
+              <span class="s-desc">Schedule directly — pick a time that works</span>
+            </div>
+            <svg width="13" height="13" fill="none" stroke="rgba(0,174,239,0.5)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="#" class="send-btn" onclick="doEmail();return false">
+            <div class="s-ico">
+              <svg width="18" height="18" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+            </div>
+            <div class="s-info">
+              <span class="s-lbl">Send via Email</span>
+              <span class="s-desc">Opens your email client with the request written</span>
+            </div>
+            <svg width="13" height="13" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <!-- Call -->
+          <a href="tel:+14374102100" class="send-btn">
+            <div class="s-ico">
+              <svg width="18" height="18" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="s-info">
+              <span class="s-lbl">Call (437) 410-2100</span>
+              <span class="s-desc">24/7 for emergencies — Pankaj picks up</span>
+            </div>
+            <svg width="13" height="13" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /stage -->
+
+  <!-- Nav buttons -->
+  <div id="nav-btns">
+    <button id="btn-back" onclick="prevStep()" disabled>
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </button>
+    <div style="display:flex;gap:5px;align-items:center">
+      <div class="dot active" data-s="1"></div>
+      <div class="dot" data-s="2"></div>
+      <div class="dot" data-s="3"></div>
+      <div class="dot" data-s="4"></div>
+      <div class="dot" data-s="5"></div>
+      <div class="dot" data-s="6"></div>
+    </div>
+    <button id="btn-next" onclick="nextStep()" disabled>
+      Continue
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- GAP 4: Partial Lead Capture — appears after step 3, rescues drop-offs -->
+<div id="rescue-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:500;background:#0F0F0F;border-top:1px solid rgba(0,174,239,0.2);padding:14px 20px;box-shadow:0 -8px 32px rgba(0,0,0,.5)">
+  <div style="max-width:480px;margin:0 auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div>
+        <p style="font-size:13px;font-weight:700;color:white;line-height:1.2">Don't lose your progress</p>
+        <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-top:2px">Drop your number — we'll reach out even if you close this.</p>
+      </div>
+      <button onclick="dismissRescue()" style="background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;padding:4px;font-size:18px;line-height:1" title="Dismiss">✕</button>
+    </div>
+    <div style="display:flex;gap:8px">
+      <input type="tel" id="rescue-phone" placeholder="Your phone number" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:13px;color:white;outline:none;font-family:inherit" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+      <button onclick="rescueSend()" style="padding:10px 18px;border-radius:8px;background:#00AEEF;border:none;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Save Spot</button>
+    </div>
+  </div>
+</div>
+
+<!-- Success -->
+<div id="success-screen">
+  <div class="check-circle">
+    <svg width="26" height="26" fill="none" stroke="#E5312A" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,6vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:10px">Request Sent</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,0.4);max-width:340px;line-height:1.65">We'll follow up within <strong style="color:rgba(255,255,255,0.7)">1 business day</strong>. Emergency? Call <a href="tel:+14374102100" style="color:#E5312A;font-weight:700;text-decoration:none">(437) 410-2100</a>.</p>
+  <a href="pancanair-premium.html" style="margin-top:28px;display:inline-flex;align-items:center;gap:7px;padding:11px 24px;border-radius:100px;background:#E5312A;color:white;font-weight:700;font-size:13.5px;text-decoration:none">
+    Back to PanCanAir
+    <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<script>
+  let cur = 1;
+  const TOTAL = 6;
+  const state = { svcs: [], prop: null, sz: null, urg: null };
+
+  function getSlide(n){ return document.getElementById('step-' + n); }
+
+  function goTo(next) {
+    if (next < 1 || next > TOTAL) return;
+    const dir = next > cur ? 'left' : 'right';
+    const curEl = getSlide(cur), nextEl = getSlide(next);
+    if (!curEl || !nextEl) return;
+    curEl.classList.remove('active'); curEl.classList.add(dir);
+    nextEl.classList.remove('left','right'); nextEl.classList.add('active');
+    cur = next; syncUI();
+  }
+
+  function nextStep(){ if (canAdvance()) goTo(cur + 1); }
+  function prevStep(){ if (cur > 1) goTo(cur - 1); }
+
+  function canAdvance() {
+    if (cur === 1) return state.svcs.length > 0;
+    if (cur === 2) return !!state.prop;
+    if (cur === 3) return !!state.sz;
+    if (cur === 4) return !!state.urg;
+    if (cur === 5) {
+      clearErr(); let ok = true;
+      if (!v('f-name')){ err('f-name'); ok = false; }
+      if (!v('f-phone')){ err('f-phone'); ok = false; }
+      return ok;
+    }
+    return true;
+  }
+
+  const v = id => (document.getElementById(id)?.value||'').trim();
+  const err = id => document.getElementById(id)?.classList.add('err');
+  const clearErr = () => document.querySelectorAll('.err').forEach(e=>e.classList.remove('err'));
+
+  function toggleMulti(el) {
+    el.classList.toggle('sel');
+    state.svcs = [...document.querySelectorAll('[data-group="svc"].sel')].map(t=>t.dataset.val);
+    syncUI();
+  }
+
+  function selectSingle(el, group) {
+    document.querySelectorAll('[data-group="'+group+'"]').forEach(t=>t.classList.remove('sel'));
+    el.classList.add('sel');
+    if (group==='prop') state.prop = el.dataset.val;
+    if (group==='sz')   state.sz   = el.dataset.val;
+    if (group==='urg')  state.urg  = el.dataset.val;
+    syncUI();
+    setTimeout(() => { if (canAdvance()) goTo(cur + 1); }, 310);
+  }
+
+  function syncUI() {
+    document.getElementById('progress-fill').style.width = ((cur/TOTAL)*100)+'%';
+    const lbl = document.getElementById('step-label');
+    lbl.style.display = cur === TOTAL ? 'none' : '';
+    document.getElementById('step-cur').textContent = Math.min(cur, 5);
+    document.querySelectorAll('.dot').forEach(d => {
+      const s = parseInt(d.dataset.s);
+      d.classList.toggle('active', s===cur); d.classList.toggle('done', s<cur);
+    });
+    document.getElementById('btn-back').disabled = cur <= 1;
+    const nb = document.getElementById('btn-next');
+    nb.style.display = cur === TOTAL ? 'none' : '';
+    nb.disabled = !canAdvance();
+    nb.innerHTML = cur===5
+      ? 'See Send Options <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'
+      : 'Continue <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    // chips
+    const sLbl = state.svcs.length
+      ? state.svcs[0].split(' ').slice(0,2).join(' ')+(state.svcs.length>1?' +'+(state.svcs.length-1):'')
+      : 'Service';
+    chip('rv-svc','rv-svc-t',sLbl,state.svcs.length>0);
+    chip('rv-prop','rv-prop-t',state.prop||'Property',!!state.prop);
+    chip('rv-sz','rv-sz-t',state.sz?state.sz.split(' ').slice(0,2).join(' '):'Scale',!!state.sz);
+    chip('rv-urg','rv-urg-t',state.urg?state.urg.split(' ').slice(0,2).join(' '):'Timeline',!!state.urg);
+    const nm = v('f-name'); chip('rv-contact','rv-contact-t',nm||'Contact',!!nm);
+  }
+
+  const chip = (wid,tid,text,on) => {
+    document.getElementById(wid)?.classList.toggle('on',on);
+    const t=document.getElementById(tid); if(t) t.textContent=text;
+  };
+
+  function buildMsg() {
+    const name=v('f-name'), co=v('f-company'), ph=v('f-phone'), em=v('f-email'), addr=v('f-address'), notes=v('f-notes');
+    const svcs = state.svcs.join(', ') || '—';
+    const lines = [
+      '👋 Hi PanCanAir — new quote request:',
+      '',
+      `📋 *Services:* ${svcs}`,
+      `🏢 *Property:* ${state.prop||'—'} (${state.sz||'size not set'})`,
+      `⏱ *Timeline:* ${state.urg||'—'}`,
+      '',
+      `👤 *Name:* ${name}${co?' @ '+co:''}`,
+      `📞 *Phone:* ${ph}`,
+      em ? `✉️ *Email:* ${em}` : null,
+      addr ? `📍 *Address:* ${addr}` : null,
+      notes ? `\n💬 *Notes:* ${notes}` : null,
+      '',
+      '_Sent from pancanair.com_'
+    ].filter(l=>l!==null).join('\n');
+    return lines;
+  }
+
+  function doWhatsApp() {
+    // Save full wizard lead to Supabase
+    saveLeadToSupabase({
+      name:        v('f-name'),
+      phone:       v('f-phone'),
+      email:       v('f-email')||null,
+      building:    v('f-addr')||null,
+      notes:       v('f-notes')||null,
+      services:    state.svcs,
+      property_type: state.prop,
+      building_size: state.sz,
+      urgency:     state.urg,
+      source:      'booking-wizard',
+      page_url:    window.location.href,
+      submitted_at: new Date().toISOString()
+    });
+    window.open('https://wa.me/14374102100?text='+encodeURIComponent(buildMsg()),'_blank');
+    setTimeout(showSuccess, 500);
+  }
+  function doEmail() {
+    const sub = encodeURIComponent('HVAC Quote — '+(v('f-company')||v('f-name')));
+    const body = encodeURIComponent(buildMsg().replace(/[*_]/g,''));
+    window.open('mailto:info@pancanair.com?subject='+sub+'&body='+body,'_blank');
+    setTimeout(showSuccess, 500);
+  }
+  function trackCalendly(){ if(typeof gtag!=='undefined') gtag('event','calendly_click'); }
+  function showSuccess(){ document.getElementById('success-screen').classList.add('show'); }
+
+  // GAP 4: Rescue bar logic — show after step 3 completion
+  var rescueDismissed = false;
+  var rescueSent = false;
+  function checkRescueBar(){
+    var bar = document.getElementById('rescue-bar');
+    if(rescueDismissed||rescueSent) return;
+    if(cur >= 4 && state.prop && state.sz){ bar.style.display='block'; }
+    else if(cur <= 3){ bar.style.display='none'; }
+  }
+  function dismissRescue(){ rescueDismissed=true; document.getElementById('rescue-bar').style.display='none'; }
+  function rescueSend(){
+    var ph = (document.getElementById('rescue-phone').value||'').trim();
+    if(!ph){ document.getElementById('rescue-phone').style.borderColor='rgba(229,49,42,0.6)'; return; }
+    var svcs = state.svcs.join(', ')||'browsing';
+    var prop = state.prop||'—';
+    var sz = state.sz||'—';
+    var msg = '⚡ Partial lead — PanCanAir wizard\n\n📞 Phone: '+ph+'\n📋 Services: '+svcs+'\n🏢 Property: '+prop+' ('+sz+')\n\n_Captured before full form submission_';
+    window.open('https://wa.me/14374102100?text='+encodeURIComponent(msg),'_blank');
+    rescueSent = true;
+    document.getElementById('rescue-bar').innerHTML='<p style="text-align:center;font-size:13px;font-weight:700;color:#00AEEF;padding:4px 0">✓ Got it — we\'ll follow up at '+ph+'</p>';
+    setTimeout(()=>{ document.getElementById('rescue-bar').style.display='none'; }, 3500);
+  }
+
+  // Hook into goTo to trigger rescue bar check
+  var _origGoTo = goTo;
+  // Patch syncUI to also check rescue bar
+  var _origSyncUI = syncUI;
+  syncUI = function(){ _origSyncUI(); checkRescueBar(); };
+
+  syncUI();
+</script>
+<div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.038;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%221%22/></svg>');background-repeat:repeat;background-size:200px 200px"></div>
+</body>
+</html>
