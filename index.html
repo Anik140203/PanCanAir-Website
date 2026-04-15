@@ -130,8 +130,10 @@
     #hero-img{will-change:transform}
 
     /* ── Hero typewriter ── */
-    #hero-type-wrap{display:inline-block;position:relative;min-width:4ch}
+    #hero-type-wrap{display:inline-block;position:relative;min-width:3ch}
     #hero-type{
+      display:inline-block;
+      color:#E5312A; /* solid fallback for unsupported gradient-text */
       background:linear-gradient(135deg,#E5312A,#FF6B4A 40%,#00AEEF 75%,#1D4EA0);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
     }
@@ -1015,6 +1017,101 @@
     }
     @media(prefers-reduced-motion:reduce){
       #chat-fab,#chat-fab:hover{animation:none}
+    }
+
+    /* ════════════════════════════════════════════
+       MOBILE MASTER FIX — all devices
+    ════════════════════════════════════════════ */
+
+    /* 1. Prevent any section from causing horizontal overflow */
+    html,body{overflow-x:hidden;-webkit-overflow-scrolling:touch}
+    img,svg,video,iframe{max-width:100%;height:auto}
+
+    /* 2. Hero — 100dvh for mobile browsers (avoids iOS URL-bar resize jump) */
+    #hero{min-height:100vh;min-height:100dvh}
+
+    /* 3. Typewriter — static gradient fallback for prefers-reduced-motion
+       The text shows as solid red-to-blue gradient without animation           */
+    @media(prefers-reduced-motion:reduce){
+      #hero-cursor{display:none!important}
+      #hero-type{
+        background:linear-gradient(135deg,#E5312A,#00AEEF);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;color:#E5312A
+      }
+    }
+
+    /* 4. Hero headline — better sizing at small breakpoints */
+    @media(max-width:480px){
+      #hero h1.h2a{font-size:clamp(36px,10vw,52px)!important;line-height:.96!important}
+      #hero-type-wrap{min-width:2ch}
+    }
+    @media(max-width:360px){
+      #hero h1.h2a{font-size:clamp(32px,9.5vw,46px)!important}
+    }
+
+    /* 5. Prevent iOS input zoom — all inputs ≥ 16px */
+    input,select,textarea,
+    #chat-input{font-size:16px!important}
+
+    /* 6. Founder section — center photo on mobile, proper stacking */
+    @media(max-width:640px){
+      #founder>div>div{
+        align-items:center!important;
+        text-align:center!important;
+      }
+      .founder-photo,.founder-monogram{
+        align-self:center!important;
+        margin:0 auto 4px!important;
+      }
+      #founder .linkedin-btn,
+      #founder [href*="linkedin"]{
+        margin:0 auto!important;
+      }
+      .founder-stat-row{justify-content:center!important}
+    }
+
+    /* 7. Comparison table — ensure it never breaks layout */
+    @media(max-width:640px){
+      #comparison{padding:52px 0!important}
+      #comparison>.max-w-5xl{padding-left:14px!important;padding-right:14px!important}
+      #comparison table th,
+      #comparison table td{padding:12px 10px!important;font-size:12px!important}
+    }
+
+    /* 8. Bento grid typography — tighten on very small screens */
+    @media(max-width:360px){
+      .bt-card{padding:14px 12px!important}
+      .bt-metric-val{font-size:15px!important}
+      .bt-title{font-size:12.5px!important}
+    }
+
+    /* 9. Chat FAB — safe area + smaller on very small phones */
+    @supports(padding-bottom:env(safe-area-inset-bottom)){
+      #chat-fab{bottom:calc(26px + env(safe-area-inset-bottom))}
+      #chat-label{bottom:calc(38px + env(safe-area-inset-bottom))}
+      #chat-panel{bottom:calc(106px + env(safe-area-inset-bottom))}
+    }
+    @media(max-width:360px){
+      #chat-fab{width:58px;height:58px;right:14px}
+    }
+
+    /* 10. Pricing + reviews — ensure no overflow */
+    @media(max-width:768px){
+      #pricing .grid>div{box-sizing:border-box!important}
+    }
+
+    /* 11. Touch: remove hover effects on touch devices to prevent sticky states */
+    @media(hover:none) and (pointer:coarse){
+      .bt-card:hover,.founder-photo:hover,.cta-btn:hover{
+        transform:none!important;box-shadow:inherit!important
+      }
+    }
+
+    /* 12. Wipe labels + clip reveals — simplify on mobile for perf */
+    @media(max-width:768px){
+      .wipe-label-inner{transform:none!important;opacity:1!important}
+      .clip-reveal-inner,.blur-reveal{clip-path:none!important;filter:none!important;opacity:1!important;transform:none!important}
     }
   </style>
 </head>
@@ -2283,7 +2380,7 @@ function auditSubmit(e){
         onerror="this.style.display='none';document.getElementById('founder-monogram').style.display='flex'"
       />
       <!-- Fallback monogram if photo fails to load -->
-      <div id="founder-monogram" class="founder-monogram reveal" style="display:none">PO</div>
+      <div id="founder-monogram" class="founder-monogram" style="display:none;opacity:1;transform:none">PO</div>
 
       <!-- Text -->
       <div style="flex:1;min-width:280px" class="reveal">
@@ -2579,14 +2676,16 @@ const revObs = new IntersectionObserver((entries) => {
       revObs.unobserve(e.target);
     }
   });
-}, {threshold: 0.10, rootMargin: '0px 0px -48px 0px'});
+}, {threshold: 0.06, rootMargin: '0px 0px -16px 0px'});
 document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.observe(el));
 
 // ── Bento tiles: full interactivity system ──
 (function(){
   var cards = document.querySelectorAll('.bt-card');
+  var isTouch = window.matchMedia('(hover:none)').matches;
 
-  // 1. Mouse-follow glow
+  // 1. Mouse-follow glow — desktop only
+  if(!isTouch){
   cards.forEach(function(card){
     card.addEventListener('mousemove', function(e){
       var r = card.getBoundingClientRect();
@@ -2597,6 +2696,7 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => revObs.ob
       // keep last position, just hide via CSS opacity on :hover
     });
   });
+  } // end !isTouch
 
   // 2. Touch press feedback (mobile)
   cards.forEach(function(card){
@@ -2864,8 +2964,9 @@ if (sbEl) {
   if (p) sbObs.observe(p); else sbObs.observe(sbEl);
 }
 
-// ── Hero scroll-to-dismantle
+// ── Hero scroll-to-dismantle (desktop only — skip on mobile for perf)
 (function() {
+  if (window.innerWidth < 768) return;  // skip on mobile
   const hero    = document.getElementById('hero');
   if (!hero) return;
   const badge   = hero.querySelector('.h1a');
@@ -2918,9 +3019,12 @@ if (sbEl) {
 })();
 </script>
 
-<!-- ════ INTERACTIVE TILE GLOW — mouse spotlight ════ -->
+<!-- ════ INTERACTIVE TILE GLOW — mouse spotlight (desktop only) ════ -->
 <script>
 (function(){
+  // Skip entirely on touch devices — saves ~40 event listeners + DOM nodes
+  if(window.matchMedia('(hover:none)').matches) return;
+
   // Mouse spotlight on feat-rows and pricing cards
   var glow = document.querySelectorAll('.feat-row, #pricing .grid > div, #why-us .grid > div, .reveal[style*="border-radius:20px"], .reveal[style*="border-radius:16px"]');
   glow.forEach(function(el){
@@ -3026,52 +3130,10 @@ if (sbEl) {
     </a>
   </div>
 
-  <!-- Divider -->
-  <div style="display:flex;align-items:center;gap:10px;padding:0 18px;margin:4px 0">
-    <div style="flex:1;height:1px;background:rgba(255,255,255,0.06)"></div>
-    <span style="font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:.08em;text-transform:uppercase">or describe your issue</span>
-    <div style="flex:1;height:1px;background:rgba(255,255,255,0.06)"></div>
-  </div>
-
-  <!-- Message feed -->
-  <div id="chat-msgs">
-    <div class="chat-msg">
-      <div class="chat-msg-inner">
-        <div class="chat-msg-time">Just now</div>
-        <div class="chat-msg-bubble">
-          <strong style="color:#E5312A;display:block;margin-bottom:4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase">⚡ PanCanAir Dispatch</strong>
-          HVAC emergency or maintenance question? Select an option above for fastest response, or type your issue below and our on-call team will reply immediately.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Typing indicator -->
-  <div id="chat-typing" style="display:none">
-    <span></span><span></span><span></span>
-  </div>
-
-  <!-- Emergency quick-reply chips -->
-  <div id="chat-quick">
-    <button class="chat-qr" data-msg="No heat in the building">🔥 No Heat</button>
-    <button class="chat-qr" data-msg="AC not working — tenants complaining">❄️ AC Failure</button>
-    <button class="chat-qr" data-msg="Boiler is down">⚙️ Boiler Down</button>
-    <button class="chat-qr" data-msg="I need a maintenance contract quote">📋 Get Quote</button>
-    <button class="chat-qr" data-msg="What areas do you service?">📍 Coverage</button>
-  </div>
-
-  <!-- Input row -->
-  <div id="disp-input-row">
-    <input id="chat-input" type="text" placeholder="Describe your HVAC emergency…" autocomplete="off" maxlength="300" aria-label="Emergency message"/>
-    <button id="chat-send" aria-label="Send message">
-      <svg width="14" height="14" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
-    </button>
-  </div>
-
   <!-- Footer -->
   <div id="disp-footer">
     <svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.3)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-    Encrypted · (437) 410-2100 · GTA
+    Available 24/7 · (437) 410-2100 · GTA
   </div>
 
 </div>
@@ -3080,75 +3142,12 @@ if (sbEl) {
 (function(){
   var fab      = document.getElementById('chat-fab');
   var panel    = document.getElementById('chat-panel');
-  var msgs     = document.getElementById('chat-msgs');
-  var input    = document.getElementById('chat-input');
-  var send     = document.getElementById('chat-send');
-  var qrs      = document.getElementById('chat-quick');
   var label    = document.getElementById('chat-label');
-  var typing   = document.getElementById('chat-typing');
   var closeBtn = document.getElementById('disp-close');
   var callBtn  = document.getElementById('disp-call-btn');
   var waBtn    = document.getElementById('disp-wa-btn');
   var open     = false;
   var labelShown = false;
-
-  // ── Bot responses ──────────────────────────────────────────
-  var responses = {
-    heat      : 'No heat is a <strong style="color:#E5312A">Priority 1 emergency</strong>. Our on-call tech covers the full GTA — call <a href="tel:+14374102100" style="color:#E5312A">(437) 410-2100</a> now or tap <strong>Call Now</strong> above for fastest dispatch. Target response: 90 min.',
-    ac        : 'AC failure in a commercial building is a <strong style="color:#E5312A">critical issue</strong>. Call <a href="tel:+14374102100" style="color:#E5312A">(437) 410-2100</a> directly — our tech will assess remotely and dispatch within 90 minutes across the GTA.',
-    boiler    : 'Boiler down is a <strong style="color:#E5312A">Priority 1</strong>. Do NOT attempt a manual restart without a TSSA-licensed tech. Call us immediately: <a href="tel:+14374102100" style="color:#E5312A">(437) 410-2100</a>.',
-    emergency : 'Got it — this sounds urgent. Call <a href="tel:+14374102100" style="color:#E5312A">(437) 410-2100</a> or tap <strong>Call Now</strong> above for a 90-minute GTA dispatch. Our on-call tech is standing by.',
-    quote     : 'Maintenance contracts start at <strong>$22/unit/month</strong> (Essential), $38 (Standard), or $65 (Premium). Pankaj will follow up within 2 hours — or <a href="#contact" style="color:#E5312A">request a quote →</a>',
-    areas     : 'We cover the full GTA: Toronto, Brampton, Mississauga, Vaughan, North York, Markham, Oakville, Hamilton and Burlington.',
-    call      : 'Call Pankaj directly: <a href="tel:+14374102100" style="color:#E5312A">(437) 410-2100</a>. Available 24/7 for emergencies.',
-    price     : 'Flat-rate contracts: $22/unit/mo (Essential) · $38 (Standard) · $65 (Premium). No hidden fees. <a href="#pricing" style="color:#E5312A">See full pricing →</a>',
-    default   : 'Message received. For fastest response, tap <strong>Call Now</strong> or <strong>WhatsApp</strong> above. Our dispatch team monitors this chat and will reply within minutes.'
-  };
-
-  function getBotReply(text){
-    var t = text.toLowerCase();
-    if(t.includes('no heat') || t.includes('heat') && t.includes('not') || t.includes('heating')) return responses.heat;
-    if(t.includes('ac') || t.includes('cooling') || t.includes('air condition') || t.includes('cool')) return responses.ac;
-    if(t.includes('boiler')) return responses.boiler;
-    if(t.includes('emergenc') || t.includes('urgent') || t.includes('broken') || t.includes('not working') || t.includes('repair') || t.includes('down')) return responses.emergency;
-    if(t.includes('quote') || t.includes('contract') || t.includes('cost') || t.includes('how much') || t.includes('price') || t.includes('per unit')) return responses.quote;
-    if(t.includes('area') || t.includes('cover') || t.includes('serve') || t.includes('locat') || t.includes('toronto') || t.includes('brampton') || t.includes('mississauga')) return responses.areas;
-    if(t.includes('call') || t.includes('phone') || t.includes('speak') || t.includes('talk')) return responses.call;
-    return responses.default;
-  }
-
-  function addMsg(html, isUser){
-    var now  = new Date();
-    var time = now.getHours() + ':' + ('0'+now.getMinutes()).slice(-2);
-    var wrap = document.createElement('div');
-    wrap.className = 'chat-msg' + (isUser ? ' chat-msg-user' : '');
-    wrap.innerHTML = '<div class="chat-msg-inner"><div class="chat-msg-time">' + time + '</div><div class="chat-msg-bubble">' + html + '</div></div>';
-    msgs.appendChild(wrap);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-
-  function showTyping(){
-    typing.style.display = 'flex';
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-  function hideTyping(){
-    typing.style.display = 'none';
-  }
-
-  function sendMsg(text){
-    if(!text.trim()){ return; }
-    addMsg(text, true);
-    input.value = '';
-    if(qrs){ qrs.style.display = 'none'; }
-    showTyping();
-    setTimeout(function(){
-      hideTyping();
-      addMsg(getBotReply(text), false);
-      if(typeof gtag !== 'undefined'){
-        gtag('event','chat_message',{event_category:'engagement',event_label:text.slice(0,50)});
-      }
-    }, 900 + Math.random()*500);
-  }
 
   function togglePanel(forceOpen){
     open = (forceOpen !== undefined) ? forceOpen : !open;
@@ -3156,53 +3155,23 @@ if (sbEl) {
     panel.classList.toggle('open', open);
     fab.setAttribute('aria-expanded', open);
     panel.setAttribute('aria-hidden', !open);
-    if(open){
-      if(label){ label.classList.remove('show'); }
-      setTimeout(function(){ input.focus(); }, 320);
-      if(typeof gtag !== 'undefined'){
-        gtag('event','chat_opened',{event_category:'engagement'});
-      }
+    if(open && label){ label.classList.remove('show'); }
+    if(open && typeof gtag !== 'undefined'){
+      gtag('event','dispatch_opened',{event_category:'engagement'});
     }
   }
 
-  // FAB click
   fab.addEventListener('click', function(){ togglePanel(); });
-
-  // Close button inside panel
   if(closeBtn){ closeBtn.addEventListener('click', function(){ togglePanel(false); }); }
 
-  // Quick reply chips
-  if(qrs){
-    qrs.querySelectorAll('.chat-qr').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        sendMsg(btn.getAttribute('data-msg'));
-      });
-    });
-  }
+  if(callBtn){ callBtn.addEventListener('click', function(){
+    if(typeof gtag !== 'undefined') gtag('event','emergency_call',{event_category:'dispatch'});
+  }); }
+  if(waBtn){ waBtn.addEventListener('click', function(){
+    if(typeof gtag !== 'undefined') gtag('event','emergency_whatsapp',{event_category:'dispatch'});
+  }); }
 
-  // Send button + Enter key
-  send.addEventListener('click', function(){ sendMsg(input.value); });
-  input.addEventListener('keydown', function(e){
-    if(e.key === 'Enter'){ sendMsg(input.value); }
-  });
-
-  // GA4: track Call and WhatsApp taps
-  if(callBtn){
-    callBtn.addEventListener('click', function(){
-      if(typeof gtag !== 'undefined'){
-        gtag('event','emergency_call',{event_category:'dispatch',event_label:'call_now_btn'});
-      }
-    });
-  }
-  if(waBtn){
-    waBtn.addEventListener('click', function(){
-      if(typeof gtag !== 'undefined'){
-        gtag('event','emergency_whatsapp',{event_category:'dispatch',event_label:'wa_btn'});
-      }
-    });
-  }
-
-  // Show tooltip label after 8 seconds (once only)
+  // Show tooltip label after 8s
   setTimeout(function(){
     if(!open && label && !labelShown){
       labelShown = true;
@@ -3210,14 +3179,6 @@ if (sbEl) {
       setTimeout(function(){ label.classList.remove('show'); }, 5000);
     }
   }, 8000);
-
-  // Proactive nudge: open panel briefly after 30s if user hasn't interacted
-  setTimeout(function(){
-    if(!open && !labelShown){
-      if(label){ label.classList.add('show'); labelShown = true; }
-    }
-  }, 30000);
-
 })();
 </script>
 
@@ -3311,10 +3272,12 @@ if (sbEl) {
 })();
 </script>
 
-<!-- ════ CINEMATIC SCROLL ENGINE ════ -->
+<!-- ════ CINEMATIC SCROLL ENGINE (desktop only) ════ -->
 <script>
 (function(){
   'use strict';
+  // Skip on mobile — saves rAF loop + wipe/clip observer overhead
+  if(window.innerWidth < 768){ return; }
 
   /* ── 1. SCROLL PROGRESS BAR ── */
   var progBar = document.getElementById('scroll-prog-bar');
