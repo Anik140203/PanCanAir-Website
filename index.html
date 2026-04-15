@@ -187,12 +187,10 @@
        MOBILE RESPONSIVE — full overhaul
     ══════════════════════════════════════════════ */
 
-    /* ── Mobile nav: ensure call button visible ── */
+    /* ── Mobile nav: tighten top-pill on mobile ── */
     @media(max-width:1023px){
       #nav{top:10px;width:calc(100vw - 16px)}
       #nav-inner{padding:7px 7px 7px 14px}
-      /* Show call as icon-only in nav on mobile */
-      .nav-call-mobile{display:flex!important}
     }
 
     /* ── Feat rows: stack on mobile ── */
@@ -1113,6 +1111,71 @@
       .wipe-label-inner{transform:none!important;opacity:1!important}
       .clip-reveal-inner,.blur-reveal{clip-path:none!important;filter:none!important;opacity:1!important;transform:none!important}
     }
+
+    /* ════════════════════════════════════════════
+       PREMIUM MOBILE BOTTOM NAV
+    ════════════════════════════════════════════ */
+    #mobile-bottom-nav{
+      display:none; /* hidden on desktop */
+    }
+    @media(max-width:1023px){
+      #mobile-bottom-nav{
+        display:flex;
+        position:fixed;
+        bottom:0;left:0;right:0;
+        z-index:1000;
+        align-items:center;
+        justify-content:space-around;
+        padding-bottom:env(safe-area-inset-bottom,0px);
+        background:rgba(10,10,12,0.92);
+        backdrop-filter:blur(20px) saturate(1.4);
+        -webkit-backdrop-filter:blur(20px) saturate(1.4);
+        border-top:1px solid rgba(255,255,255,0.07);
+        box-shadow:0 -8px 40px rgba(0,0,0,0.6),0 -1px 0 rgba(229,49,42,0.15);
+        height:calc(60px + env(safe-area-inset-bottom,0px));
+      }
+      /* give page enough bottom space so content isn't obscured */
+      body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+      /* adjust FAB so it sits above the bottom nav */
+      #chat-fab{bottom:calc(76px + env(safe-area-inset-bottom,0px))!important}
+      #chat-panel{bottom:calc(148px + env(safe-area-inset-bottom,0px))!important}
+      #chat-label{bottom:calc(88px + env(safe-area-inset-bottom,0px))!important}
+    }
+    .mbn-item{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:3px;padding:6px 4px;flex:1;text-decoration:none;
+      color:rgba(255,255,255,0.38);transition:color .18s;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .mbn-item span{
+      font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+      line-height:1;
+    }
+    .mbn-item:active,.mbn-item.mbn-active{color:rgba(255,255,255,0.9)}
+    .mbn-item.mbn-active svg{stroke:#E5312A}
+    .mbn-item.mbn-active span{color:#E5312A}
+    /* Center call button */
+    .mbn-call{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:3px;flex:1;text-decoration:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .mbn-call>svg{
+      width:42px;height:42px;padding:10px;
+      background:linear-gradient(145deg,#B81A14,#E5312A,#FF4A3A);
+      border-radius:14px;
+      box-shadow:0 0 16px rgba(229,49,42,0.55),0 4px 12px rgba(0,0,0,0.4);
+      margin-top:-16px;/* lift above bar */
+      transition:transform .15s;
+    }
+    .mbn-call span{
+      font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+      color:rgba(255,255,255,0.7);line-height:1;
+    }
+    .mbn-call:active>svg{transform:scale(.93)}
+    /* Quote item — subtle highlight */
+    .mbn-quote.mbn-active span{color:#4a9eff}
+    .mbn-quote.mbn-active svg{stroke:#4a9eff}
   </style>
 </head>
 <body>
@@ -1163,32 +1226,34 @@
         Get Quote
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <!-- Mobile: always-visible call icon -->
-      <a href="tel:+14374102100" class="nav-call-mobile hidden lg:hidden items-center justify-center" style="display:none;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.12);flex-shrink:0;color:rgba(255,255,255,0.7)">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      </a>
-      <button id="menuBtn" class="lg:hidden w-9 h-9 rounded-full border flex items-center justify-center shrink-0" style="border-color:rgba(255,255,255,.12)">
-        <svg id="ico1" class="w-4 h-4" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-        <svg id="ico2" class="w-4 h-4 hidden" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile dropdown (floats below the pill) -->
-  <div id="mob-drop">
-    <div class="flex flex-col p-4 gap-0.5">
-      <a href="#services" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Services</a>
-      <a href="#why-us" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Why Us</a>
-      <a href="#pricing" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Pricing</a>
-      <a href="#reviews" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Clients</a>
-      <a href="#contact" class="ml py-3 px-4 rounded-xl text-sm font-medium" style="color:rgba(255,255,255,0.55)">Contact</a>
-      <div class="flex gap-3 mt-3 pt-3" style="border-top:1px solid rgba(255,255,255,.07)">
-        <a href="book-pancanair.html" class="flex-1 text-center py-3 rounded-2xl text-sm font-bold text-white" style="background:#E5312A">Request Quote</a>
-        <a href="tel:+14374102100" class="flex-1 text-center py-3 rounded-2xl text-sm font-bold" style="color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1)">(437) 410-2100</a>
-      </div>
     </div>
   </div>
 </header>
+
+<!-- ════ PREMIUM MOBILE BOTTOM NAV ════ -->
+<nav id="mobile-bottom-nav" aria-label="Mobile navigation">
+  <a href="#services" class="mbn-item" data-section="services">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <span>Services</span>
+  </a>
+  <a href="#pricing" class="mbn-item" data-section="pricing">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>
+    <span>Pricing</span>
+  </a>
+  <!-- Center CTA — call button -->
+  <a href="tel:+14374102100" class="mbn-call" aria-label="Call PanCanAir">
+    <svg width="22" height="22" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9 19.79 19.79 0 012.12 4.27 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <span>Call Now</span>
+  </a>
+  <a href="#reviews" class="mbn-item" data-section="reviews">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <span>Reviews</span>
+  </a>
+  <a href="#contact" class="mbn-item mbn-quote" data-section="contact">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    <span>Quote</span>
+  </a>
+</nav>
 
 
 
@@ -1405,28 +1470,62 @@
   </div>
 </section>
 <script>
-function auditSubmit(e){
+// ── API endpoint — update this once your backend is deployed ──────────────────
+// Local dev:  'http://localhost:3001/api/quote'
+// Production: 'https://pancanair-api.vercel.app/api/quote'
+var PANCANAIR_API = 'https://pancanair-api.vercel.app/api/quote';
+
+async function auditSubmit(e) {
   e.preventDefault();
-  var n=document.getElementById('al-name').value.trim();
-  var p=document.getElementById('al-phone').value.trim();
-  var em=document.getElementById('al-email').value.trim()||null;
-  var a=document.getElementById('al-addr').value.trim()||'not provided';
-  // Save to Supabase
-  saveLeadToSupabase({
-    name: n, phone: p, email: em, building: a,
-    source: 'homepage-audit-form',
-    page_url: window.location.href,
-    submitted_at: new Date().toISOString()
-  });
-  // WhatsApp fallback — always fires
-  var emailLine=em?'\n📧 Email: '+em:'';
-  var msg='🏗 Free Audit Request — PanCanAir\n\n👤 Name: '+n+'\n📞 Phone: '+p+emailLine+'\n📍 Building: '+a+'\n\n_Submitted from pancanair.com_';
-  var btn=document.getElementById('audit-btn');
-  btn.textContent='✓ Sent — we\'ll be in touch';
-  btn.style.background='#1a7a4e';
-  window.open('https://wa.me/14374102100?text='+encodeURIComponent(msg),'_blank');
+  var n  = document.getElementById('al-name').value.trim();
+  var p  = document.getElementById('al-phone').value.trim();
+  var em = document.getElementById('al-email').value.trim() || null;
+  var a  = document.getElementById('al-addr').value.trim()  || null;
+  var btn = document.getElementById('audit-btn');
+
+  // ── Optimistic UI: show loading state ─────────────────────────────────────
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Sending...';
+  btn.style.opacity = '0.8';
+
+  // ── Post to backend ────────────────────────────────────────────────────────
+  var apiOk = false;
+  try {
+    var resp = await fetch(PANCANAIR_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: n, phone: p, email: em, address: a, source: 'homepage-audit-form' })
+    });
+    var data = await resp.json();
+    if (resp.ok && data.success) apiOk = true;
+  } catch (err) {
+    console.warn('[PanCanAir] API unreachable — falling back to WhatsApp', err);
+  }
+
+  // ── Success state ──────────────────────────────────────────────────────────
+  btn.disabled = false;
+  btn.style.opacity = '1';
+  if (apiOk) {
+    btn.innerHTML = '✓ Request sent — we\'ll call you soon';
+    btn.style.background = '#1a7a4e';
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'quote_submitted', { event_category: 'lead', event_label: 'homepage-audit-form' });
+    }
+  } else {
+    // Fallback: open WhatsApp if API failed
+    var emailLine = em ? '\n📧 Email: ' + em : '';
+    var addrLine  = a  ? '\n📍 Building: ' + a  : '';
+    var msg = '🏗 Free Audit Request — PanCanAir\n\n👤 Name: ' + n + '\n📞 Phone: ' + p + emailLine + addrLine + '\n\n_Submitted from pancanair.com_';
+    btn.innerHTML = '✓ Opening WhatsApp — we\'ll be in touch';
+    btn.style.background = '#075E54';
+    window.open('https://wa.me/14374102100?text=' + encodeURIComponent(msg), '_blank');
+  }
 }
 </script>
+
+<style>
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
 
 <!-- ════════════════ MARQUEE ════════════════ -->
 <div style="background:#0C0C0C;border-top:1px solid rgba(229,49,42,0.12);border-bottom:1px solid rgba(229,49,42,0.12);padding:13px 0;overflow:hidden">
@@ -2376,7 +2475,8 @@ function auditSubmit(e){
         id="founder-headshot"
         src="assets/pankaj-oberoi.jpg"
         alt="Pankaj Oberoi — Founder, PanCanAir"
-        class="founder-photo reveal"
+        class="founder-photo"
+        style="opacity:1;transform:none"
         onerror="this.style.display='none';document.getElementById('founder-monogram').style.display='flex'"
       />
       <!-- Fallback monogram if photo fails to load -->
@@ -2651,22 +2751,32 @@ window.addEventListener('scroll', () => {
   // (sticky buttons merged into emergency dispatch widget)
 }, {passive:true});
 
-// ── Mobile nav (pill dropdown)
-const menuBtn = document.getElementById('menuBtn');
-const mobDrop = document.getElementById('mob-drop');
-const ico1 = document.getElementById('ico1');
-const ico2 = document.getElementById('ico2');
-if (menuBtn) menuBtn.addEventListener('click', () => {
-  const open = mobDrop.classList.contains('open');
-  mobDrop.classList.toggle('open', !open);
-  ico1.classList.toggle('hidden', !open);
-  ico2.classList.toggle('hidden', open);
-});
-document.querySelectorAll('#mob-drop .ml').forEach(a => a.addEventListener('click', () => {
-  mobDrop.classList.remove('open');
-  ico1.classList.remove('hidden');
-  ico2.classList.add('hidden');
-}));
+// ── Premium bottom nav — active section highlight
+(function(){
+  var items = document.querySelectorAll('#mobile-bottom-nav .mbn-item');
+  if (!items.length) return;
+  var sections = [];
+  items.forEach(function(a){
+    var sec = a.getAttribute('data-section');
+    if (sec) {
+      var el = document.getElementById(sec);
+      if (el) sections.push({el:el, a:a});
+    }
+  });
+  function setActive(){
+    var scrollY = window.scrollY || window.pageYOffset;
+    var wh = window.innerHeight;
+    var active = null;
+    sections.forEach(function(s){
+      var top = s.el.getBoundingClientRect().top + scrollY;
+      if (scrollY >= top - wh * 0.4) active = s;
+    });
+    items.forEach(function(a){ a.classList.remove('mbn-active'); });
+    if (active) active.a.classList.add('mbn-active');
+  }
+  window.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+})();
 
 // ── Intersection observer for scroll reveals (upgraded spring + stagger)
 const revObs = new IntersectionObserver((entries) => {
