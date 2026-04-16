@@ -1607,48 +1607,335 @@
 </section>
 
 
-<!-- GAP 1: Inline Lead Capture — frictionless above-fold first touch -->
-<section style="background:#0A0A0A;border-top:1px solid rgba(255,255,255,0.05);padding:52px 24px">
-  <div class="max-w-5xl mx-auto" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
-    <div style="grid-column:1/-1" id="audit-form-wrap"></div>
-  </div>
-  <div class="max-w-5xl mx-auto" style="display:grid;gap:48px;align-items:center" id="audit-grid">
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center">
-      <div>
-        <p style="font-size:11px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(229,49,42,0.65);margin-bottom:10px">Free Building Audit</p>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,4.5vw,56px);font-weight:900;color:white;line-height:1.05;text-transform:uppercase;margin-bottom:14px">WE'LL COME<br/><span style="color:rgba(255,255,255,0.3)">TO YOU.</span></h3>
-        <p style="font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:380px">Drop your details. We walk your mechanical room, assess your equipment, and give you a scoped program recommendation — at zero cost. You decide after.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:22px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <svg width="14" height="14" fill="none" stroke="#00AEEF" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:600">No commitment</span>
+<!-- ════════════════ QUOTE SECTION ════════════════ -->
+<style>
+/* Quote section premium styles */
+#quote-section {
+  background: #080809;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+#quote-section::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(229,49,42,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+#quote-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,174,239,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.quote-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+.quote-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 15px 18px;
+  font-size: 15px;
+  color: white;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition:
+    border-color 150ms cubic-bezier(0,0,0.2,1),
+    background   150ms cubic-bezier(0,0,0.2,1),
+    box-shadow   200ms cubic-bezier(0.25,0.46,0.45,0.94),
+    transform    150ms cubic-bezier(0.34,1.56,0.64,1);
+}
+.quote-input::placeholder { color: rgba(255,255,255,0.28); }
+.quote-input:focus {
+  border-color: rgba(0,174,239,0.5);
+  background: rgba(0,174,239,0.04);
+  box-shadow: 0 0 0 3px rgba(0,174,239,0.08), 0 4px 16px rgba(0,174,239,0.1);
+  transform: translateY(-1px);
+}
+.quote-input:focus::placeholder { color: rgba(255,255,255,0.15); }
+#quote-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: #E5312A;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: .01em;
+  box-shadow: 0 8px 32px rgba(229,49,42,0.3), 0 2px 8px rgba(229,49,42,0.2);
+  transition:
+    background     150ms cubic-bezier(0,0,0.2,1),
+    transform      150ms cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow     200ms cubic-bezier(0.25,0.46,0.45,0.94),
+    opacity        100ms cubic-bezier(0,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+}
+#quote-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+#quote-submit:not([disabled]):hover {
+  transform: scale(1.02) translateY(-2px);
+  box-shadow: 0 16px 48px rgba(229,49,42,0.4), 0 4px 16px rgba(229,49,42,0.25);
+  background: #D42820;
+}
+#quote-submit:not([disabled]):active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 16px rgba(229,49,42,0.2);
+  transition-duration: 80ms;
+}
+#quote-submit[disabled] { opacity: 0.35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+#quote-submit { transition: background 150ms, transform 150ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 200ms, opacity 200ms !important; }
+
+/* Success state */
+#quote-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 0;
+  gap: 16px;
+}
+#quote-success.visible { display: flex; }
+.success-check {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(26,122,78,0.15);
+  border: 1px solid rgba(26,122,78,0.3);
+  display: flex; align-items: center; justify-content: center;
+  animation: successPop 400ms cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes successPop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.success-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+.success-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  animation: stepIn 350ms cubic-bezier(0.16,1,0.3,1) both;
+}
+.success-step:nth-child(1) { animation-delay: 200ms; }
+.success-step:nth-child(2) { animation-delay: 350ms; }
+.success-step:nth-child(3) { animation-delay: 500ms; }
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.step-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(229,49,42,0.12);
+  border: 1px solid rgba(229,49,42,0.25);
+  color: rgba(229,49,42,0.9);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+/* Trust badges */
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+}
+.trust-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #00AEEF;
+  flex-shrink: 0;
+}
+@media(max-width:768px){
+  #quote-section { padding: 56px 20px; }
+  .quote-card { padding: 28px 20px; }
+  #quote-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  #quote-name-phone-row, #quote-name-email-row { grid-template-columns: 1fr !important; }
+}
+</style>
+
+<section id="quote-section">
+  <div class="max-w-5xl mx-auto" id="quote-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center;position:relative;z-index:1">
+
+    <!-- Left: Value prop -->
+    <div class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(229,49,42,0.08);border:1px solid rgba(229,49,42,0.2);border-radius:100px;margin-bottom:20px">
+        <span style="width:5px;height:5px;border-radius:50%;background:#E5312A;animation:sdot 1.5s ease-in-out infinite;flex-shrink:0"></span>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(229,49,42,0.85)">Free Building Audit</span>
+      </div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(38px,5vw,62px);font-weight:900;color:white;line-height:1.0;text-transform:uppercase;margin-bottom:16px">WE COME<br/><span style="color:rgba(255,255,255,0.22)">TO YOU.</span></h2>
+      <p style="font-size:14px;color:rgba(255,255,255,0.38);line-height:1.75;max-width:340px;margin-bottom:28px">We walk your mechanical room, assess your equipment, and give you a written program recommendation. No cost, no pressure — you decide after.</p>
+
+      <!-- What happens next timeline -->
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;align-items:flex-start;gap:14px;padding-bottom:20px;position:relative">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(229,49,42,0.1);border:1px solid rgba(229,49,42,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1">
+            <span style="font-size:12px;font-weight:800;color:#E5312A">1</span>
           </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <svg width="14" height="14" fill="none" stroke="#00AEEF" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:600">Same week scheduling</span>
+          <div style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:rgba(255,255,255,0.06)"></div>
+          <div>
+            <p style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:2px">Submit your info</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.5">Takes 20 seconds. Name and phone is all we need.</p>
           </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <svg width="14" height="14" fill="none" stroke="#00AEEF" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:600">Written scope included</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding-bottom:20px;position:relative">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(0,174,239,0.08);border:1px solid rgba(0,174,239,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1">
+            <span style="font-size:12px;font-weight:800;color:#00AEEF">2</span>
+          </div>
+          <div style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:rgba(255,255,255,0.06)"></div>
+          <div>
+            <p style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:2px">Pankaj calls you back</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.5">Usually within 2 hours during business hours.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,0.5)">3</span>
+          </div>
+          <div>
+            <p style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:2px">We schedule your free audit</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.5">Same week, at your building. Written scope included.</p>
           </div>
         </div>
       </div>
-      <div>
-        <form onsubmit="auditSubmit(event)" style="display:flex;flex-direction:column;gap:11px">
-          <!-- Honeypot — bots fill this, humans don't. Hidden from view. -->
+    </div>
+
+    <!-- Right: Form card -->
+    <div class="reveal" style="animation-delay:100ms">
+      <div class="quote-card">
+        <!-- Card header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+          <div>
+            <p style="font-size:16px;font-weight:700;color:white;margin-bottom:3px">Book your free audit</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.3)">Takes 20 seconds &nbsp;·&nbsp; No commitment</p>
+          </div>
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(229,49,42,0.1);border:1px solid rgba(229,49,42,0.2);display:flex;align-items:center;justify-content:center">
+            <svg width="16" height="16" fill="none" stroke="#E5312A" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+        </div>
+
+        <!-- Form — phone first, one tap -->
+        <form onsubmit="auditSubmit(event)" id="quote-form" style="display:flex;flex-direction:column;gap:10px">
+          <!-- Honeypot -->
           <input type="text" id="al-hp" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"/>
-          <input type="text" id="al-name" placeholder="Your name *" required style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
-          <input type="tel" id="al-phone" placeholder="Phone number *" required pattern="[\d\s\(\)\-\+]{7,20}" title="Please enter a valid phone number" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
-          <input type="email" id="al-email" placeholder="Email address (optional)" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
-          <input type="text" id="al-addr" placeholder="Building address or city" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
-          <button type="submit" id="audit-btn" style="display:flex;align-items:center;justify-content:center;gap:9px;padding:15px 24px;border-radius:10px;background:#E5312A;border:none;color:white;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 8px 28px rgba(229,49,42,.25);transition:background .15s" onmouseover="this.style.background='#BF0A30'" onmouseout="this.style.background='#E5312A'">
-            Book My Free Audit
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+
+          <!-- Phone — primary, big, auto-formats -->
+          <div style="position:relative">
+            <div style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none">
+              <svg width="16" height="16" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9 19.79 19.79 0 012.12 4.27 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <input type="tel" id="al-phone" class="quote-input" placeholder="(416) 555 — 0000" required autocomplete="tel" inputmode="numeric" maxlength="14"
+              style="padding-left:42px;font-size:18px;font-weight:600;letter-spacing:.03em;height:56px"
+              oninput="fmtPhone(this)"/>
+          </div>
+
+          <!-- Name + Email required -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="quote-name-email-row">
+            <input type="text"  id="al-name"  class="quote-input" placeholder="Your name"    required autocomplete="name"  style="font-size:14px" oninput="checkQuoteReady()"/>
+            <input type="email" id="al-email" class="quote-input" placeholder="Email"        required autocomplete="email" style="font-size:14px" oninput="checkQuoteReady()"/>
+          </div>
+          <!-- Address optional -->
+          <input type="text" id="al-addr" class="quote-input" placeholder="Building / city (optional)" autocomplete="street-address" style="font-size:14px"/>
+
+          <!-- Submit — disabled until phone valid, lights up automatically -->
+          <button type="submit" id="quote-submit" disabled style="margin-top:2px;opacity:0.35;cursor:not-allowed">
+            <span id="quote-btn-text">Call Me Back</span>
+            <svg id="quote-btn-arrow" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9 19.79 19.79 0 012.12 4.27 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <svg id="quote-btn-spin" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:none;animation:spin 0.8s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
           </button>
-          <p style="font-size:11px;color:rgba(255,255,255,0.18);text-align:center;line-height:1.5">We respond within 1 business day — no sales call, just the audit.</p>
+
+          <p style="font-size:11px;color:rgba(255,255,255,0.14);text-align:center;line-height:1.6">
+            TSSA licensed · GTA coverage · No sales pressure
+          </p>
         </form>
+
+        <!-- Success state (hidden until submit) -->
+        <div id="quote-success">
+          <div class="success-check">
+            <svg width="22" height="22" fill="none" stroke="#1a7a4e" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <p style="font-size:17px;font-weight:700;color:white;margin-bottom:4px">Request received</p>
+            <p style="font-size:13px;color:rgba(255,255,255,0.4)">Pankaj will call you back shortly.</p>
+          </div>
+          <div class="success-steps">
+            <div class="success-step">
+              <div class="step-num">1</div>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.4"><strong style="color:rgba(255,255,255,0.8)">Watch for a call</strong> — usually within 2 hours</p>
+            </div>
+            <div class="success-step">
+              <div class="step-num">2</div>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.4"><strong style="color:rgba(255,255,255,0.8)">We schedule the audit</strong> — same week, your building</p>
+            </div>
+            <div class="success-step">
+              <div class="step-num">3</div>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.4"><strong style="color:rgba(255,255,255,0.8)">You get a written scope</strong> — zero obligation</p>
+            </div>
+          </div>
+          <a href="tel:+14374102100" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:100px;text-decoration:none;font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);margin-top:4px">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9 19.79 19.79 0 012.12 4.27 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Urgent? Call (437) 410-2100
+          </a>
+        </div>
+      </div>
+
+      <!-- Trust pills below card -->
+      <div class="trust-row" style="justify-content:center;margin-top:16px">
+        <div class="trust-pill"><div class="trust-dot"></div>TSSA Licensed</div>
+        <div class="trust-pill"><div class="trust-dot"></div>GTA Coverage</div>
+        <div class="trust-pill"><div class="trust-dot"></div>Response &lt; 2hrs</div>
+        <div class="trust-pill"><div class="trust-dot"></div>No Commitment</div>
       </div>
     </div>
+
   </div>
 </section>
 <script>
@@ -1657,47 +1944,65 @@
 // Leads are saved to the `leads` table automatically. WhatsApp opens if Supabase
 // is not yet configured (zero-downtime fallback).
 
+// ── Phone auto-format: (416) 555-1234 ────────────────────────────────────────
+function fmtPhone(input) {
+  var raw = input.value.replace(/\D/g, '').substring(0, 10);
+  var fmt = raw;
+  if (raw.length >= 7)      fmt = '(' + raw.substring(0,3) + ') ' + raw.substring(3,6) + '-' + raw.substring(6);
+  else if (raw.length >= 4) fmt = '(' + raw.substring(0,3) + ') ' + raw.substring(3);
+  else if (raw.length >= 1) fmt = '(' + raw;
+  input.value = fmt;
+  checkQuoteReady();
+}
+
+// ── Activate button only when phone + name + email are all filled ─────────────
+function checkQuoteReady() {
+  var phone = document.getElementById('al-phone').value.replace(/\D/g,'').length >= 10;
+  var name  = (document.getElementById('al-name').value  || '').trim().length > 0;
+  var email = (document.getElementById('al-email').value || '').trim().length > 0;
+  var btn   = document.getElementById('quote-submit');
+  var ready = phone && name && email;
+  btn.disabled      = !ready;
+  btn.style.opacity = ready ? '1'        : '0.35';
+  btn.style.cursor  = ready ? 'pointer'  : 'not-allowed';
+}
+
+// ── Form submit ───────────────────────────────────────────────────────────────
 async function auditSubmit(e) {
   e.preventDefault();
-  var n   = document.getElementById('al-name').value.trim();
   var p   = document.getElementById('al-phone').value.trim();
-  var em  = document.getElementById('al-email').value.trim() || null;
-  var a   = document.getElementById('al-addr').value.trim()  || null;
+  var n   = (document.getElementById('al-name').value  || '').trim() || null;
+  var em  = (document.getElementById('al-email').value || '').trim() || null;
+  var a   = (document.getElementById('al-addr').value  || '').trim() || null;
   var hp  = document.getElementById('al-hp').value;
-  var btn = document.getElementById('audit-btn');
+  var btn = document.getElementById('quote-submit');
 
-  // ── Honeypot check — silently reject bots ─────────────────────────────────
-  if (hp) { e.preventDefault(); return; }
+  // Honeypot — silently reject bots
+  if (hp) return;
 
-  // ── Loading state ──────────────────────────────────────────────────────────
+  // Loading state
   btn.disabled = true;
-  btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Sending...';
-  btn.style.opacity = '0.8';
+  document.getElementById('quote-btn-text').textContent = 'Sending...';
+  document.getElementById('quote-btn-arrow').style.display = 'none';
+  document.getElementById('quote-btn-spin').style.display  = 'block';
 
-  // ── 1. Try Supabase (primary) ──────────────────────────────────────────────
+  // Try Supabase
   var supaOk = false;
   if (_supa) {
     try {
       var res = await _supa.from('leads').insert([{
-        name: n,
-        phone: p,
-        email: em,
-        address: a,
-        source: 'homepage-audit-form',
+        name: n || 'Unknown', phone: p, email: em, address: a,
+        source: 'homepage-quote-form',
         created_at: new Date().toISOString()
       }]);
       if (!res.error) supaOk = true;
       else console.warn('[PanCanAir] Supabase error:', res.error.message);
     } catch(err) {
-      console.warn('[PanCanAir] Supabase unreachable — falling back to WhatsApp', err);
+      console.warn('[PanCanAir] Supabase unreachable', err);
     }
   }
 
-  // ── 2. Reset button ────────────────────────────────────────────────────────
-  btn.disabled = false;
-  btn.style.opacity = '1';
-
-  // ── GA4 fires on both paths ────────────────────────────────────────────────
+  // GA4
   if (typeof gtag !== 'undefined') {
     gtag('event', 'quote_submitted', {
       event_category: 'lead',
@@ -1706,16 +2011,23 @@ async function auditSubmit(e) {
   }
 
   if (supaOk) {
-    // ── Supabase success ───────────────────────────────────────────────────
-    btn.innerHTML = '&#10003; Request sent — we\'ll call you soon';
-    btn.style.background = '#1a7a4e';
+    // Premium success — form out, steps in
+    document.getElementById('quote-form').style.display    = 'none';
+    document.getElementById('quote-success').style.display = 'flex';
+    document.getElementById('quote-success').classList.add('visible');
   } else {
-    // ── WhatsApp fallback (Supabase not configured or failed) ──────────────
-    var emailLine = em ? '\nEmail: ' + em : '';
-    var addrLine  = a  ? '\nBuilding: ' + a  : '';
-    var msg = 'Free Audit Request - PanCanAir\n\nName: ' + n + '\nPhone: ' + p + emailLine + addrLine + '\n\nSubmitted from pancanair.com';
-    btn.innerHTML = '&#10003; Opening WhatsApp — we\'ll be in touch';
+    // WhatsApp fallback
+    btn.disabled = false;
+    document.getElementById('quote-btn-text').textContent = 'Opening WhatsApp...';
+    document.getElementById('quote-btn-spin').style.display  = 'none';
+    document.getElementById('quote-btn-arrow').style.display = 'block';
     btn.style.background = '#075E54';
+    var msg = 'Free Audit Request - PanCanAir\n\n'
+      + (n  ? 'Name: '     + n  + '\n' : '')
+      + 'Phone: ' + p
+      + (em ? '\nEmail: '  + em : '')
+      + (a  ? '\nBuilding: '+ a  : '')
+      + '\n\nSubmitted from pancanair.com';
     window.open('https://wa.me/14374102100?text=' + encodeURIComponent(msg), '_blank');
   }
 }
