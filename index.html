@@ -1486,8 +1486,10 @@
       </div>
       <div>
         <form onsubmit="auditSubmit(event)" style="display:flex;flex-direction:column;gap:11px">
+          <!-- Honeypot — bots fill this, humans don't. Hidden from view. -->
+          <input type="text" id="al-hp" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"/>
           <input type="text" id="al-name" placeholder="Your name *" required style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
-          <input type="tel" id="al-phone" placeholder="Phone number *" required style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
+          <input type="tel" id="al-phone" placeholder="Phone number *" required pattern="[\d\s\(\)\-\+]{7,20}" title="Please enter a valid phone number" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
           <input type="email" id="al-email" placeholder="Email address (optional)" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
           <input type="text" id="al-addr" placeholder="Building address or city" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 16px;font-size:16px;color:white;outline:none;font-family:inherit;transition:border .15s" onfocus="this.style.borderColor='rgba(0,174,239,0.4)'" onblur="this.style.borderColor='rgba(255,255,255,0.09)'"/>
           <button type="submit" id="audit-btn" style="display:flex;align-items:center;justify-content:center;gap:9px;padding:15px 24px;border-radius:10px;background:#E5312A;border:none;color:white;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 8px 28px rgba(229,49,42,.25);transition:background .15s" onmouseover="this.style.background='#BF0A30'" onmouseout="this.style.background='#E5312A'">
@@ -1512,7 +1514,11 @@ async function auditSubmit(e) {
   var p   = document.getElementById('al-phone').value.trim();
   var em  = document.getElementById('al-email').value.trim() || null;
   var a   = document.getElementById('al-addr').value.trim()  || null;
+  var hp  = document.getElementById('al-hp').value;
   var btn = document.getElementById('audit-btn');
+
+  // ── Honeypot check — silently reject bots ─────────────────────────────────
+  if (hp) { e.preventDefault(); return; }
 
   // ── Loading state ──────────────────────────────────────────────────────────
   btn.disabled = true;
@@ -1542,17 +1548,22 @@ async function auditSubmit(e) {
   btn.disabled = false;
   btn.style.opacity = '1';
 
+  // ── GA4 fires on both paths ────────────────────────────────────────────────
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'quote_submitted', {
+      event_category: 'lead',
+      event_label: supaOk ? 'supabase' : 'whatsapp-fallback'
+    });
+  }
+
   if (supaOk) {
     // ── Supabase success ───────────────────────────────────────────────────
     btn.innerHTML = '&#10003; Request sent — we\'ll call you soon';
     btn.style.background = '#1a7a4e';
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'quote_submitted', { event_category: 'lead', event_label: 'homepage-audit-form' });
-    }
   } else {
     // ── WhatsApp fallback (Supabase not configured or failed) ──────────────
-    var emailLine = em ? '\n&#128231; Email: ' + em : '';
-    var addrLine  = a  ? '\n&#128205; Building: ' + a  : '';
+    var emailLine = em ? '\nEmail: ' + em : '';
+    var addrLine  = a  ? '\nBuilding: ' + a  : '';
     var msg = 'Free Audit Request - PanCanAir\n\nName: ' + n + '\nPhone: ' + p + emailLine + addrLine + '\n\nSubmitted from pancanair.com';
     btn.innerHTML = '&#10003; Opening WhatsApp — we\'ll be in touch';
     btn.style.background = '#075E54';
