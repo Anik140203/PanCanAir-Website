@@ -296,17 +296,166 @@
     .bc{letter-spacing:-.035em!important;line-height:.90}
     h1.bc,h2.bc{letter-spacing:-.04em!important}
 
-    /* ── CTA button: targeted property transitions (replaces 'all') ── */
+    /* ── PREMIUM MOTION SYSTEM ─────────────────────────────────────────────── */
+
+    /* 1. CTA Buttons — spring press + lift */
     .cta-btn{
       transition:
-        background-color var(--dur-fast) var(--ease-out),
-        color            var(--dur-fast) var(--ease-out),
+        background-color var(--dur-fast)     var(--ease-out),
+        color            var(--dur-fast)     var(--ease-out),
         box-shadow       var(--dur-moderate) var(--ease-smooth),
-        border-color     var(--dur-fast) var(--ease-out),
-        transform        var(--dur-normal) var(--ease-spring),
-        opacity          var(--dur-fast) var(--ease-out) !important;
+        border-color     var(--dur-fast)     var(--ease-out),
+        transform        150ms              var(--ease-spring),
+        opacity          var(--dur-fast)     var(--ease-out) !important;
     }
-    .cta-btn:hover{transform:translateY(-1px)!important}
+    .cta-btn:hover {
+      transform: translateY(-2px) scale(1.02) !important;
+      box-shadow: 0 8px 28px rgba(229,49,42,0.28) !important;
+    }
+    .cta-btn:active {
+      transform: scale(0.97) translateY(0) !important;
+      box-shadow: none !important;
+      transition-duration: 80ms !important;
+    }
+
+    /* 2. All <a> and <button> elements — tactile press feedback */
+    a[href]:not(.mbn-item):not(.mbn-call):not(.disp-cta):not(.cta-btn),
+    button:not(#audit-btn):not(#chat-fab):not(#disp-close):not(#chat-send) {
+      transition: opacity 100ms var(--ease-out),
+                  transform 120ms var(--ease-spring) !important;
+    }
+    a[href]:not(.mbn-item):not(.mbn-call):not(.disp-cta):not(.cta-btn):active,
+    button:not(#audit-btn):not(#chat-fab):not(#disp-close):not(#chat-send):active {
+      transform: scale(0.97) !important;
+      opacity: 0.85 !important;
+    }
+
+    /* 3. Audit form submit button — full spring press */
+    #audit-btn {
+      transition:
+        background-color 150ms var(--ease-out),
+        transform        150ms var(--ease-spring),
+        box-shadow       200ms var(--ease-smooth),
+        opacity          100ms var(--ease-out) !important;
+    }
+    #audit-btn:not([disabled]):hover {
+      transform: scale(1.02) translateY(-1px) !important;
+      box-shadow: 0 10px 32px rgba(229,49,42,0.35) !important;
+    }
+    #audit-btn:not([disabled]):active {
+      transform: scale(0.96) !important;
+      box-shadow: none !important;
+      transition-duration: 80ms !important;
+    }
+
+    /* 4. Form inputs — focus lift + border glow */
+    #audit-btn,
+    input#al-name, input#al-phone, input#al-email, input#al-addr {
+      transition:
+        border-color 150ms var(--ease-out),
+        box-shadow   200ms var(--ease-smooth),
+        transform    150ms var(--ease-spring) !important;
+    }
+    input#al-name:focus, input#al-phone:focus,
+    input#al-email:focus, input#al-addr:focus {
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 16px rgba(0,174,239,0.12) !important;
+    }
+
+    /* 5. Service / feature cards — elevation lift */
+    .feat-row:hover,
+    [style*="border-radius:16px"]:not(#chat-panel):not(#mobile-bottom-nav):hover,
+    [style*="border-radius:12px"]:not(input):not(button):not(#chat-fab):hover {
+      transform: translateY(-3px) !important;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.25),
+        0 4px 16px rgba(229,49,42,0.06) !important;
+      transition:
+        transform    220ms var(--ease-smooth),
+        box-shadow   220ms var(--ease-smooth) !important;
+    }
+
+    /* 6. Mobile bottom nav — active scale pulse */
+    .mbn-item, .mbn-call {
+      transition:
+        color       150ms var(--ease-out),
+        transform   150ms var(--ease-spring),
+        opacity     150ms var(--ease-out) !important;
+    }
+    .mbn-item:hover { transform: translateY(-2px) scale(1.08) !important; }
+    .mbn-item:active, .mbn-call:active { transform: scale(0.88) !important; }
+    .mbn-item.active {
+      transform: scale(1.0) !important;
+      transition: transform 200ms var(--ease-spring) !important;
+    }
+
+    /* 7. Emergency dispatch FAB — improved spring */
+    #chat-fab {
+      transition:
+        box-shadow 200ms var(--ease-smooth),
+        transform  200ms var(--ease-spring) !important;
+    }
+    #chat-fab:hover {
+      transform: scale(1.08) translateY(-2px) !important;
+      box-shadow: 0 16px 40px rgba(229,49,42,0.4) !important;
+    }
+    #chat-fab:active {
+      transform: scale(0.93) !important;
+      transition-duration: 80ms !important;
+    }
+
+    /* 8. Chat panel — smooth spring entrance */
+    #chat-panel {
+      transition:
+        opacity    250ms var(--ease-out),
+        transform  300ms var(--ease-spring) !important;
+    }
+    #chat-panel.hidden-panel {
+      opacity: 0 !important;
+      transform: translateY(12px) scale(0.97) !important;
+      pointer-events: none !important;
+    }
+
+    /* 9. Dispatch quick chips — spring pop */
+    .dc {
+      transition:
+        background-color 120ms var(--ease-out),
+        border-color     120ms var(--ease-out),
+        transform        150ms var(--ease-spring),
+        color            120ms var(--ease-out) !important;
+    }
+    .dc:hover { transform: scale(1.04) !important; }
+    .dc:active { transform: scale(0.95) !important; }
+
+    /* 10. Scroll reveal — staggered groups */
+    section .reveal:nth-child(1),
+    section .reveal-l:nth-child(1),
+    section .reveal-r:nth-child(1) { transition-delay: 0ms !important; }
+    section .reveal:nth-child(2),
+    section .reveal-l:nth-child(2) { transition-delay: 80ms !important; }
+    section .reveal:nth-child(3),
+    section .reveal-l:nth-child(3) { transition-delay: 160ms !important; }
+    section .reveal:nth-child(4)   { transition-delay: 240ms !important; }
+    section .reveal:nth-child(5)   { transition-delay: 320ms !important; }
+
+    /* 11. Pill nav links — snappy active state */
+    .pill-link{
+      transition:
+        background var(--dur-fast) var(--ease-out),
+        color      var(--dur-fast) var(--ease-out),
+        transform  150ms var(--ease-spring) !important;
+    }
+    .pill-link:hover { transform: scale(1.04) !important; }
+    .pill-link:active { transform: scale(0.96) !important; }
+
+    /* 12. Pricing tiers — premium glow lift on hover */
+    #pricing .reveal:hover,
+    [id*="plan"] .reveal:hover {
+      transform: translateY(-4px) !important;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(229,49,42,0.15) !important;
+    }
+
+    /* ─────────────────────────────────────────────────────────────────────── */
     .cta-btn:active{transform:scale(0.97)!important;transition-duration:80ms!important}
 
     /* ── Vercel shadow-as-border: pricing + why-us cards ── */
