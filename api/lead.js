@@ -90,7 +90,7 @@ const SERVICE_COPY = {
     nextLabel: "What happens next on your contract",
     next: [
       "We review your building size, system mix, and current pain points.",
-      "We benchmark against 240+ GTA buildings we manage to ground your flat rate.",
+      "We benchmark against the 20+ active GTA buildings we manage (1,100+ units serviced) to ground your flat rate.",
       "You get a one-page contract proposal — boilers, chillers, RTUs, MAUs, controls — all-in, no asterisks."
     ]
   },
