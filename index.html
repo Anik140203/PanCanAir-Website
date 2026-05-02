@@ -149,7 +149,7 @@ nav.scrolled{background:rgba(8,18,44,1);box-shadow:0 2px 24px rgba(0,0,0,.28)}
   position:relative;overflow:hidden;
   /* Rich multi-stop gradient base */
   background:
-    radial-gradient(ellipse 72% 90% at 90% 6%,  rgba(0,174,239,.13) 0%,  transparent 52%),
+    radial-gradient(ellipse 72% 90% at 90% 6%,  rgba(0,174,239,.06) 0%,  transparent 52%),
     radial-gradient(ellipse 62% 72% at 5%  92%,  rgba(29,78,160,.09)  0%,  transparent 50%),
     radial-gradient(ellipse 52% 58% at 16% 4%,   rgba(217,74,43,.12)  0%,  transparent 48%),
     radial-gradient(ellipse 40% 44% at 55% 96%,  rgba(0,174,239,.06)  0%,  transparent 45%),
@@ -176,7 +176,7 @@ nav.scrolled{background:rgba(8,18,44,1);box-shadow:0 2px 24px rgba(0,0,0,.28)}
 .hero-glow{
   position:absolute;top:-120px;right:-80px;
   width:640px;height:640px;border-radius:50%;
-  background:radial-gradient(circle,rgba(0,174,239,.07) 0%,rgba(29,78,160,.05) 35%,transparent 68%);
+  background:radial-gradient(circle,rgba(0,174,239,.04) 0%,rgba(29,78,160,.05) 35%,transparent 68%);
   pointer-events:none;z-index:1;
 }
 .hero-left{padding:80px 40px 80px clamp(20px,6vw,80px);display:flex;flex-direction:column}
@@ -425,7 +425,7 @@ footer{border-top:none;padding:72px 0 40px;background:#08122c}
 /* ── TYPEWRITER ── */
 #hero-type{
   display:inline;
-  background:linear-gradient(135deg,#E5312A 0%,#FF6B4A 38%,#00AEEF 72%,#1D4EA0 100%);
+  background:linear-gradient(135deg,#E5312A 0%,#FF6B4A 50%,#1D4EA0 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
   background-size:200% auto;
@@ -493,7 +493,7 @@ nav{transition:background .2s cubic-bezier(.25,.46,.45,.94),box-shadow .2s cubic
 }
 .hero-blob-b{
   width:580px;height:580px;opacity:1;
-  background:radial-gradient(circle,rgba(0,174,239,.28) 0%,rgba(29,78,160,.08) 45%,transparent 68%);
+  background:radial-gradient(circle,rgba(0,174,239,.10) 0%,rgba(29,78,160,.08) 45%,transparent 68%);
   bottom:-100px;left:-60px;
   animation:blobB 20s ease-in-out infinite alternate;
 }
@@ -506,7 +506,7 @@ nav{transition:background .2s cubic-bezier(.25,.46,.45,.94),box-shadow .2s cubic
 /* Extra accent blob — electric blue on right panel side */
 .hero-blob-e{
   width:380px;height:380px;opacity:.9;
-  background:radial-gradient(circle,rgba(0,174,239,.22),transparent 65%);
+  background:radial-gradient(circle,rgba(217,74,43,.10),transparent 65%);
   top:30%;right:5%;
   animation:blobE 18s ease-in-out infinite alternate;
 }
@@ -525,7 +525,7 @@ nav{transition:background .2s cubic-bezier(.25,.46,.45,.94),box-shadow .2s cubic
 @keyframes shimBtn{0%,60%,100%{transform:translateX(-130%)}32%{transform:translateX(130%)}}
 
 /* ── SCROLL PROGRESS BAR ── */
-#spb{position:fixed;top:0;left:0;height:2.5px;z-index:300;background:linear-gradient(90deg,#E5312A,#FF6B4A 40%,#00AEEF 80%,#1D4EA0);width:0%;pointer-events:none;transition:width .06s linear}
+#spb{position:fixed;top:0;left:0;height:2.5px;z-index:300;background:linear-gradient(90deg,#E5312A 0%,#FF6B4A 50%,#1D4EA0 100%);width:0%;pointer-events:none;transition:width .06s linear}
 
 /* ── SECTION LABEL — ANIMATED LEADING LINE ── */
 .sec-lbl{display:inline-flex;align-items:center;gap:10px}
@@ -857,8 +857,503 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
   .emer-fab-num{display:none;}
 }
 </style>
+<style>
+.btn-ghost-hr{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-size:13px;font-weight:600;color:var(--accent);padding:14px 20px;border-radius:100px;background:transparent;border:1px solid var(--accent);transition:background .15s,transform .15s}
+.btn-ghost-hr:hover{background:var(--a-soft);transform:translateY(-1px)}
+</style>
+<style>
+/* -- 3-TAP BOOKING -- (scoped to .book-sec to avoid collisions) */
+.book-sec{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.book-head{text-align:center;max-width:640px;margin:0 auto 56px}
+.book-head .sec-sub{margin-left:auto;margin-right:auto;margin-bottom:0}
+
+.book-card{
+  position:relative;max-width:760px;margin:0 auto;
+  background:var(--s0);
+  border:1px solid var(--border);border-radius:28px;
+  box-shadow:var(--card-shadow);
+  padding:36px 36px 40px;
+  overflow:hidden;
+}
+.book-card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 60% at 100% 0%, var(--a-soft), transparent 60%);
+}
+
+/* progress rail */
+.bk-rail{position:relative;height:32px;margin-bottom:28px;display:flex;align-items:center;justify-content:center}
+.bk-rail::before{content:'';position:absolute;left:14%;right:14%;top:50%;height:2px;background:var(--s2);border-radius:2px}
+.bk-rail-fill{position:absolute;left:14%;top:50%;height:2px;background:var(--accent);border-radius:2px;width:0;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.bk-rail-dots{position:relative;display:flex;justify-content:space-between;width:72%;z-index:2}
+.bk-dot{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--s0);border:2px solid var(--s2);
+  display:grid;place-items:center;
+  font-family:var(--body);font-size:12px;font-weight:700;color:var(--t3);
+  transition:all .25s;
+}
+.bk-dot.active{border-color:var(--accent);color:var(--accent);background:var(--s0);box-shadow:0 0 0 4px var(--a-soft)}
+.bk-dot.done{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* steps */
+.bk-step{display:none;animation:bkIn .28s cubic-bezier(.2,.6,.2,1) both}
+.bk-step.active{display:block}
+@keyframes bkIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bk-step-h{
+  font-family:var(--ds);font-size:clamp(22px,2.6vw,30px);
+  letter-spacing:-.02em;color:var(--t1);margin-bottom:22px;text-align:center;
+}
+.bk-back{
+  position:absolute;top:24px;left:24px;
+  background:none;border:none;cursor:pointer;
+  font-family:var(--body);font-size:12px;font-weight:600;color:var(--t3);
+  padding:6px 10px;border-radius:var(--r-sm);transition:color .15s,background .15s
+}
+.bk-back:hover{color:var(--accent);background:var(--a-soft)}
+
+/* chips */
+.bk-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bk-chip{
+  position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  padding:18px 16px;
+  background:var(--s0);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-sm);
+  font-family:var(--body);font-size:14px;font-weight:600;color:var(--t1);
+  cursor:pointer;text-align:left;
+  transition:border-color .18s,background .18s,transform .12s,box-shadow .18s;
+}
+.bk-chip svg{color:var(--accent);opacity:.85}
+.bk-chip:hover{border-color:var(--accent);background:var(--s0);transform:translateY(-2px);box-shadow:0 8px 24px var(--a-glow)}
+.bk-chip:active{transform:scale(.98)}
+.bk-chip.selected{border-color:var(--accent);background:var(--a-soft);box-shadow:0 0 0 3px var(--a-soft)}
+
+.bk-chips-size{grid-template-columns:repeat(3,1fr)}
+.bk-chips-size .bk-chip{align-items:center;text-align:center;font-family:var(--ds);font-size:22px;letter-spacing:-.01em;padding:22px 10px}
+.bk-chips-size .bk-chip small{display:block;font-family:var(--body);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--t3);margin-top:4px}
+.bk-chip-hot::after{
+  content:'PRIORITY';position:absolute;top:-9px;right:10px;
+  font-size:9px;font-weight:800;letter-spacing:.14em;
+  color:#fff;background:var(--accent);padding:3px 8px;border-radius:100px;
+}
+
+/* summary chip on step 3 */
+.bk-summary{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
+.bk-summary span{
+  background:var(--a-soft);color:var(--accent);
+  font-size:12px;font-weight:700;letter-spacing:.04em;
+  padding:6px 12px;border-radius:100px;
+}
+
+/* fields */
+.bk-fields{display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto 18px}
+.bk-phone{font-size:18px!important;font-weight:600;text-align:center;letter-spacing:.02em;padding:16px!important}
+.bk-submit{width:100%;max-width:420px;margin:0 auto;display:block;font-size:15px;padding:16px}
+.bk-fineprint{text-align:center;font-size:11px;color:var(--t3);margin-top:14px;letter-spacing:.04em}
+
+/* done state */
+.bk-done{text-align:center;padding:24px 0 16px}
+.bk-done-ring{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--a-soft);color:var(--accent);
+  display:grid;place-items:center;margin:0 auto 22px;
+}
+.bk-done-ring svg{width:34px;height:34px}
+.bk-done-h{font-family:var(--ds);font-size:clamp(28px,3.6vw,40px);letter-spacing:-.02em;color:var(--t1);margin-bottom:10px}
+.bk-done-sub{font-size:15px;color:var(--t2);max-width:440px;margin:0 auto 22px;line-height:1.6}
+.bk-done-call{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);padding:10px 20px;border-radius:100px;background:var(--a-soft);transition:filter .15s}
+.bk-done-call:hover{filter:brightness(1.05)}
+
+/* responsive */
+@media(max-width:720px){
+  .book-card{padding:28px 18px 32px;border-radius:22px}
+  .bk-chips,.bk-chips-size{grid-template-columns:repeat(2,1fr)}
+  .bk-chip{font-size:13px;padding:14px 12px}
+  .bk-chips-size .bk-chip{font-size:18px}
+  .bk-back{top:18px;left:14px}
+}
+</style>
+<style>
+/* -- HIGH-RISE SECTION -- (scoped to .hr-sec) */
+.hr-sec{background:var(--s0);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hr-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.hr-head .sec-sub{margin-left:auto;margin-right:auto;margin-bottom:0}
+
+.hr-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:minmax(220px,auto);
+  gap:18px;
+}
+.hr-tile{
+  position:relative;overflow:hidden;
+  background:var(--s0);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:32px 28px;
+  transition:border-color .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s cubic-bezier(.2,.7,.2,1),transform .3s cubic-bezier(.2,.7,.2,1);
+  display:flex;flex-direction:column;
+  isolation:isolate;
+}
+.hr-tile::before{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 100% 80% at 100% 0%, var(--a-soft), transparent 60%);
+  opacity:0;transition:opacity .35s ease;
+}
+.hr-tile:hover{border-color:rgba(217,74,43,.28);box-shadow:0 12px 40px rgba(217,74,43,.10),0 0 0 1px rgba(217,74,43,.12);transform:translateY(-3px)}
+.hr-tile:hover::before{opacity:1}
+.hr-tile:hover .hr-icon{background:var(--accent);color:#fff;transform:scale(1.06)}
+.hr-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--a-soft);color:var(--accent);
+  display:grid;place-items:center;margin-bottom:20px;
+  transition:background .3s cubic-bezier(.2,.7,.2,1),color .3s cubic-bezier(.2,.7,.2,1),transform .3s cubic-bezier(.2,.7,.2,1);
+  box-shadow:0 0 0 1px rgba(217,74,43,.06);
+}
+.hr-tile-h{font-family:var(--ds);font-size:23px;line-height:1.16;letter-spacing:-.018em;color:var(--t1);margin-bottom:10px}
+.hr-tile-h .hr-stat{font-style:italic;color:var(--accent)}
+.hr-tile-p{font-size:14px;line-height:1.65;color:var(--t2);letter-spacing:-.005em}
+.hr-tile-p b{color:var(--t1);font-weight:700}
+
+/* spans for bento rhythm */
+.hr-tile-anchor   {grid-column:span 2;background:linear-gradient(135deg, var(--s0) 0%, var(--s1) 100%)}
+.hr-tile-anchor::after{content:"";position:absolute;top:0;right:0;width:50%;height:60%;background:radial-gradient(ellipse at top right, var(--a-soft), transparent 60%);pointer-events:none;z-index:-1}
+.hr-tile-anchor .hr-tile-h{font-size:28px}
+.hr-tile-accent   {background:linear-gradient(135deg, var(--a-soft) 0%, rgba(217,74,43,.02) 100%);border-color:rgba(217,74,43,.18)}
+.hr-tile-accent .hr-icon{background:var(--accent);color:#fff}
+.hr-tile-wide     {grid-column:span 2}
+.hr-tile-compliance{grid-column:span 2;background:linear-gradient(135deg, var(--s1) 0%, var(--s0) 100%)}
+.hr-tile-compliance::after{content:"";position:absolute;bottom:-30%;right:-10%;width:60%;height:80%;background:radial-gradient(ellipse, var(--a-soft), transparent 70%);pointer-events:none;z-index:-1;opacity:.6}
+
+/* system list pills inside wide tile */
+.hr-syslist{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.hr-syslist span{
+  font-size:11px;font-weight:700;letter-spacing:.06em;
+  padding:5px 10px;border-radius:100px;
+  background:var(--s1);color:var(--t2);border:1px solid var(--border);
+}
+
+/* compliance badges */
+.hr-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hr-badge{
+  font-family:var(--body);font-size:11px;font-weight:800;letter-spacing:.14em;
+  padding:6px 12px;border-radius:6px;
+  background:var(--s0);color:var(--t1);border:1px solid var(--bh);
+}
+
+.hr-cta{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:48px;flex-wrap:wrap}
+.hr-cta-sub{font-size:12px;color:var(--t3);letter-spacing:.04em}
+
+@media(max-width:1100px){
+  .hr-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .hr-tile-anchor,.hr-tile-wide,.hr-tile-compliance{grid-column:span 2}
+}
+@media(max-width:768px){
+  .hr-grid{gap:14px}
+  .hr-tile{padding:26px 22px;min-height:auto}
+  .hr-icon{width:46px;height:46px;border-radius:12px;margin-bottom:16px}
+  .hr-icon svg{width:24px;height:24px}
+  .hr-tile-h{font-size:20px}
+  .hr-tile-anchor .hr-tile-h{font-size:24px}
+  .hr-cta{flex-direction:column;gap:14px;margin-top:36px}
+  .hr-cta .btn-primary,.hr-cta .btn-ghost-hr{width:100%;max-width:320px;justify-content:center}
+}
+@media(max-width:560px){
+  .hr-grid{grid-template-columns:1fr;gap:12px}
+  .hr-tile-anchor,.hr-tile-wide,.hr-tile-compliance{grid-column:span 1}
+  .hr-tile{padding:24px 20px;border-radius:18px}
+  .hr-icon{width:42px;height:42px;border-radius:11px;margin-bottom:14px}
+  .hr-icon svg{width:22px;height:22px}
+  .hr-tile-h{font-size:19px}
+  .hr-tile-anchor .hr-tile-h{font-size:22px}
+  .hr-tile-p{font-size:13.5px}
+  .hr-syslist span,.hr-badge{font-size:10px;padding:5px 9px}
+}
+
+/* ── HIGH-RISE TILE ANIMATIONS ── */
+@keyframes hr-radar-ping {
+  0%   { transform: scale(.45); opacity: 0; }
+  18%  { opacity: .9; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+@keyframes hr-beacon-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(.78); opacity: .55; }
+}
+@keyframes hr-spin   { to { transform: rotate(360deg); } }
+@keyframes hr-blink  { 0%,40%,100% { opacity: 1; } 60%,80% { opacity: .15; } }
+@keyframes hr-blink2 { 0%,55%,100% { opacity: .55; } 70%,90% { opacity: 1; } }
+@keyframes hr-zone-pulse {
+  0%, 100% { opacity: 1;  transform: scale(1); }
+  50%      { opacity: .25; transform: scale(.6); }
+}
+@keyframes hr-window-twinkle {
+  0%, 92%, 100% { opacity: 1; }
+  94%, 97%      { opacity: .18; }
+}
+@keyframes hr-gauge-sweep {
+  0%, 100% { transform: rotate(-25deg); }
+  50%      { transform: rotate(40deg);  }
+}
+@keyframes hr-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes hr-bar-grow {
+  from { transform: scaleY(.35); }
+  to   { transform: scaleY(1);   }
+}
+
+/* SVG transform setup — use fill-box so transform-origin maps to element center */
+.hr-icon svg { overflow: visible; }
+.hr-icon svg * { transform-box: fill-box; }
+
+/* Tile 1 — zone dots breathe in stagger */
+.hr-zone   { transform-origin: center; animation: hr-zone-pulse 2.4s ease-in-out infinite; }
+.hr-zone-1 { animation-delay: 0s;    }
+.hr-zone-2 { animation-delay: .25s;  }
+.hr-zone-3 { animation-delay: .5s;   }
+.hr-zone-4 { animation-delay: .75s;  }
+.hr-zone-5 { animation-delay: 1.05s; }
+
+/* Tile 2 — windows twinkle (active occupancy) */
+.hr-win   { animation: hr-window-twinkle 4s ease-in-out infinite; }
+.hr-win-1 { animation-delay: 0s;   }
+.hr-win-2 { animation-delay: .8s;  }
+.hr-win-3 { animation-delay: 1.6s; }
+.hr-win-4 { animation-delay: 2.4s; }
+.hr-win-5 { animation-delay: 3.2s; }
+.hr-win-6 { animation-delay: 1.2s; }
+
+/* Tile 3 — bars rise on tile hover */
+.hr-bar   { transform-origin: center bottom; transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.hr-tile-accent:hover .hr-bar-1 { animation: hr-bar-grow .55s cubic-bezier(.2,.7,.2,1) both;   }
+.hr-tile-accent:hover .hr-bar-2 { animation: hr-bar-grow .55s cubic-bezier(.2,.7,.2,1) both;   animation-delay: .08s; }
+.hr-tile-accent:hover .hr-bar-3 { animation: hr-bar-grow .55s cubic-bezier(.2,.7,.2,1) both;   animation-delay: .16s; }
+
+/* Tile 4 — radar always pinging (the moving emergency clock the user wanted) */
+.hr-ring   { transform-origin: 14px 14px; }
+.hr-ring-1 { animation: hr-radar-ping 2.4s ease-out infinite; animation-delay: 0s;   }
+.hr-ring-2 { animation: hr-radar-ping 2.4s ease-out infinite; animation-delay: .8s;  }
+.hr-ring-3 { animation: hr-radar-ping 2.4s ease-out infinite; animation-delay: 1.6s; }
+.hr-beacon { transform-origin: 14px 14px; animation: hr-beacon-pulse 1.6s ease-in-out infinite; }
+
+/* Tile 5 — pump rotor spins + control LEDs blink */
+.hr-pump-rotor { transform-origin: 8.7px 19.5px; animation: hr-spin 4s linear infinite; }
+.hr-led-1      { animation: hr-blink  1.6s ease-in-out infinite; }
+.hr-led-2      { animation: hr-blink2 1.6s ease-in-out infinite; animation-delay: .4s; }
+
+/* Tile 6 — checks tick in on hover (stagger) */
+.hr-check { stroke-dasharray: 14; stroke-dashoffset: 14; transition: stroke-dashoffset .45s ease-out; }
+.hr-tile:hover .hr-check-1 { stroke-dashoffset: 0; transition-delay: 0s;    }
+.hr-tile:hover .hr-check-2 { stroke-dashoffset: 0; transition-delay: .12s;  }
+.hr-tile:hover .hr-check-3 { stroke-dashoffset: 0; transition-delay: .24s;  }
+
+/* Tile 7 — shield check draws on hover */
+.hr-shield-check { stroke-dasharray: 22; stroke-dashoffset: 22; transition: stroke-dashoffset .55s cubic-bezier(.2,.7,.2,1); }
+.hr-tile-compliance:hover .hr-shield-check { stroke-dashoffset: 0; }
+
+/* Tile 8 — gauge needle sweeps continuously */
+.hr-gauge { transform-origin: 14px 11px; animation: hr-gauge-sweep 3.2s ease-in-out infinite; }
+
+/* Respect motion prefs */
+@media (prefers-reduced-motion: reduce) {
+  .hr-zone,.hr-win,.hr-ring,.hr-beacon,.hr-pump-rotor,.hr-led-1,.hr-led-2,.hr-gauge { animation: none !important; }
+  .hr-check,.hr-shield-check { stroke-dashoffset: 0 !important; }
+}
+
+
+/* Tile 3 — premium savings curve animations */
+@keyframes hr-line-draw { from { stroke-dashoffset: 50; } to { stroke-dashoffset: 0; } }
+@keyframes hr-pulse-soft { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.85); opacity: .6; } }
+.hr-plan-line { stroke-dasharray: 50; stroke-dashoffset: 50; transition: stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1) .15s; }
+.hr-tile-accent:hover .hr-plan-line { stroke-dashoffset: 0; }
+.hr-plan-line { animation: hr-line-draw 1.6s cubic-bezier(.2,.7,.2,1) .3s both; }
+.hr-plan-dot { transform-origin: center; animation: hr-pulse-soft 2.4s ease-in-out infinite; }
+.hr-plan-dot-1 { animation-delay: 0s; }
+.hr-plan-dot-2 { animation-delay: .8s; }
+.hr-save-fill { transition: opacity .3s; }
+.hr-tile-accent:hover .hr-save-fill { opacity: .22; }
+.hr-reactive-line { animation: hr-line-draw 1.6s cubic-bezier(.2,.7,.2,1) .8s both; stroke-dasharray: 2 2; }
+@media (prefers-reduced-motion: reduce) {
+  .hr-plan-line,.hr-reactive-line { stroke-dashoffset: 0 !important; animation: none !important; }
+  .hr-plan-dot { animation: none !important; }
+}
+</style>
+<style>
+/* ── STICKY MOBILE CTA BAR ── */
+.sticky-cta{
+  display:none;position:fixed;bottom:14px;left:14px;right:14px;z-index:90;
+  align-items:center;gap:12px;
+  padding:12px 16px;
+  background:var(--accent);color:#fff;
+  border-radius:16px;
+  box-shadow:0 12px 32px rgba(217,74,43,.34),0 0 0 1px rgba(255,255,255,.06);
+  text-decoration:none;
+  animation:stickyIn .5s cubic-bezier(.2,.7,.2,1) .8s both;
+}
+.sticky-cta-icon{flex:0 0 36px;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.18);display:grid;place-items:center;color:#fff}
+.sticky-cta-text{flex:1;display:flex;flex-direction:column;line-height:1.2;color:#fff}
+.sticky-cta-text b{font-family:var(--body);font-size:14px;font-weight:800;letter-spacing:-.005em}
+.sticky-cta-text small{font-size:11px;font-weight:500;opacity:.85;margin-top:2px}
+.sticky-cta-arrow{font-size:20px;font-weight:700;flex-shrink:0}
+@keyframes stickyIn{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+@media(max-width:860px){.sticky-cta{display:flex}}
+@media(max-width:860px){body{padding-bottom:84px}}
+/* hide sticky CTA when user is already on the booking section */
+.sticky-cta.hide{transform:translateY(120%);opacity:0;pointer-events:none}
+</style>
+<style>
+/* ── MID-FUNNEL CTA STRIPS ── */
+.cta-strip{
+  position:relative;padding:36px 0;
+  background:linear-gradient(135deg, var(--navy) 0%, #122047 100%);
+  color:#fff;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
+}
+.cta-strip-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.cta-strip-text{flex:1;min-width:220px}
+.cta-strip-h{font-family:var(--ds);font-size:clamp(22px,2.4vw,28px);line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:4px}
+.cta-strip-h em{font-style:italic;color:#f37855}
+.cta-strip-p{font-size:13px;color:rgba(255,255,255,.65);letter-spacing:.02em}
+.cta-strip-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;font-weight:700;font-size:14px;
+  padding:14px 28px;border-radius:100px;border:none;cursor:pointer;
+  transition:all .2s;text-decoration:none;
+}
+.cta-strip-btn:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 12px 32px rgba(217,74,43,.45)}
+@media(max-width:768px){.cta-strip{padding:28px 0}.cta-strip-inner{flex-direction:column;align-items:flex-start;gap:16px}.cta-strip-btn{width:100%;justify-content:center}}
+</style>
+<style>
+/* ── QUICK BOOK STRIP — self-contained 3-step mini-flow ── */
+.quick-book-strip{position:relative;z-index:5;margin-top:-40px;margin-bottom:0;padding:0 0 32px}
+.qb-card{
+  background:var(--s0);border:1px solid var(--border);border-radius:24px;
+  padding:24px 28px;
+  box-shadow:0 16px 48px rgba(0,0,0,.10),0 0 0 1px rgba(0,0,0,.04);
+  position:relative;overflow:hidden;
+}
+.qb-card::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 70% at 100% 0%, var(--a-soft), transparent 60%);opacity:.6}
+
+.qb-step{display:none;animation:qbIn .3s cubic-bezier(.2,.7,.2,1) both}
+.qb-step.active{display:block}
+@keyframes qbIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Step 1 layout */
+.qb-step-1{display:none;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.qb-step-1.active{display:grid}
+.qb-header{display:flex;flex-direction:column;gap:4px;min-width:0}
+.qb-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--accent)}
+.qb-h{font-family:var(--ds);font-size:22px;line-height:1.15;letter-spacing:-.015em;color:var(--t1)}
+.qb-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.qb-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 14px;
+  background:var(--s1);border:1px solid var(--border);border-radius:100px;
+  font-family:var(--body);font-size:13px;font-weight:600;color:var(--t1);
+  cursor:pointer;transition:all .15s;
+}
+.qb-chip svg{color:var(--accent);opacity:.85}
+.qb-chip:hover{background:var(--s0);border-color:var(--accent);transform:translateY(-1px)}
+.qb-chip.selected{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 4px 16px var(--a-glow)}
+.qb-chip.selected svg{color:#fff;opacity:1}
+
+/* Step 2: phone input */
+.qb-back{position:absolute;top:18px;left:20px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:700;color:var(--t3);padding:6px 10px;border-radius:8px;transition:all .15s;z-index:2}
+.qb-back:hover{color:var(--accent);background:var(--a-soft)}
+.qb-summary{display:flex;justify-content:flex-start;gap:6px;margin-bottom:8px;padding-left:30px}
+.qb-summary span{background:var(--a-soft);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 10px;border-radius:100px}
+.qb-step-2 .qb-h{font-size:20px;margin-bottom:14px}
+.qb-row{display:flex;gap:8px;align-items:stretch}
+.qb-input{
+  flex:1;
+  background:var(--s0);color:var(--t1);
+  border:1.5px solid var(--bh);border-radius:100px;
+  padding:14px 22px;font-family:var(--body);font-size:16px;font-weight:600;
+  letter-spacing:.01em;transition:all .15s;appearance:none;
+}
+.qb-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a-soft)}
+.qb-input.qb-error{border-color:var(--accent);box-shadow:0 0 0 3px var(--a-glow);animation:qbShake .3s}
+@keyframes qbShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.qb-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent);color:#fff;font-weight:700;font-size:14px;
+  padding:14px 24px;border-radius:100px;border:none;cursor:pointer;
+  transition:all .2s;flex-shrink:0;
+}
+.qb-cta:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 12px 32px var(--a-glow)}
+.qb-cta:disabled{opacity:.6;cursor:not-allowed}
+.qb-fineprint{font-size:11px;color:var(--t3);margin-top:10px;letter-spacing:.04em;padding-left:4px}
+
+/* Step 3: success */
+.qb-done{display:flex;align-items:center;gap:18px}
+.qb-done-ring{flex:0 0 56px;width:56px;height:56px;border-radius:50%;background:var(--a-soft);color:var(--accent);display:grid;place-items:center}
+.qb-done-ring svg{width:30px;height:30px}
+.qb-done-h{font-family:var(--ds);font-size:24px;line-height:1.15;color:var(--t1);margin-bottom:4px}
+.qb-done-sub{font-size:14px;color:var(--t2);line-height:1.5}
+.qb-cta-ghost{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:var(--accent);padding:8px 18px;border-radius:100px;background:var(--a-soft);text-decoration:none;transition:filter .15s}
+.qb-cta-ghost:hover{filter:brightness(1.05)}
+
+/* Mobile */
+@media(max-width:1100px){
+  .qb-step-1.active{grid-template-columns:1fr;text-align:left;gap:16px}
+  .qb-chips{justify-content:flex-start}
+}
+@media(max-width:560px){
+  .quick-book-strip{margin-top:-20px;padding:0 0 16px}
+  .qb-card{padding:20px 18px;border-radius:18px}
+  .qb-h{font-size:18px}
+  .qb-chip{font-size:12px;padding:8px 12px}
+  .qb-row{flex-direction:column;gap:10px}
+  .qb-cta{width:100%;justify-content:center}
+  .qb-done-h{font-size:20px}
+}
+</style>
+<style>
+/* ── Sticky CTA + Emergency FAB collision fix (mobile) ── */
+@media(max-width:860px){
+  /* Lift the Emergency FAB above the sticky bar so they stack, not overlap */
+  .emer-fab{bottom:96px !important;right:14px !important;padding:11px 16px 11px 12px !important;font-size:12px !important;border-radius:100px !important}
+  .emer-fab .emer-fab-icon{width:32px !important;height:32px !important}
+  .emer-fab .emer-fab-text{line-height:1.15}
+  .emer-fab .emer-fab-label{font-size:10px}
+  .emer-fab .emer-fab-num{font-size:13px}
+  /* Body padding compensates for the stacked CTAs (sticky 64px + emer 56px + gap) */
+  body{padding-bottom:96px !important}
+  /* Hide Emergency FAB when user is already on the booking section to free vertical space */
+  .sticky-cta.hide ~ .emer-fab,
+  body:has(.sticky-cta.hide) .emer-fab{bottom:24px !important}
+}
+/* When sticky is hidden (over booking section), let emergency FAB return to normal position */
+@media(max-width:860px){
+  body:has(.sticky-cta.hide) .emer-fab{bottom:24px !important}
+}
+</style>
+<style>
+@media(max-width:860px){
+  body.cta-hidden .emer-fab{bottom:24px !important}
+  body.cta-hidden{padding-bottom:24px !important}
+}
+</style>
+<style>
+.qb-fields{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.qb-input{flex:1;background:var(--s0);color:var(--t1);border:1.5px solid var(--bh);border-radius:14px;padding:14px 18px;font-family:var(--body);font-size:15px;font-weight:500;letter-spacing:.005em;transition:all .15s;appearance:none;width:100%}
+.qb-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--a-soft)}
+.qb-input.qb-error{border-color:var(--accent);box-shadow:0 0 0 3px var(--a-glow);animation:qbShake .3s}
+.qb-cta{width:100%;justify-content:center}
+@keyframes qbShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+</style>
 </head>
 <body>
+<!-- STICKY MOBILE CTA BAR -->
+<a href="#book" class="sticky-cta" aria-label="Book a free building audit">
+  <span class="sticky-cta-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 14l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  <span class="sticky-cta-text"><b>Book Site Visit</b><small>3 taps. Free. 24-hour proposal.</small></span>
+  <span class="sticky-cta-arrow">&rarr;</span>
+</a>
+
 <div id="spb"></div>
 
 <!-- NAV -->
@@ -867,13 +1362,14 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
     <a class="nav-wm" href="#"><b>Pan</b><span class="wm-can">Can</span><span class="wm-air">Air</span></a>
     <div class="nav-links">
       <a href="#services">Services</a>
-      <a href="#why">Why Us</a>
+      <a href="#highrise">High-Rises</a>
       <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
     </div>
     <div class="nav-cta">
       <span class="nav-phone">+1 (437) 410-2100</span>
-      <button class="btn-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Contract</button>
+      <button class="btn-sm" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Site Visit</button>
       <button class="nav-ham" id="nav-ham" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -883,10 +1379,14 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
 <!-- Mobile menu -->
 <div id="mob-menu" role="navigation" aria-label="Mobile navigation">
   <a href="#services" id="mob-services">Services</a>
-  <a href="#why" id="mob-why">Why PanCanAir</a>
+  <a href="#highrise" id="mob-highrise">High-Rises</a>
   <a href="#pricing" id="mob-pricing">Pricing</a>
+  <a href="#reviews" id="mob-reviews">Reviews</a>
+  <a href="about.html" id="mob-about">About</a>
+  <a href="faq.html" id="mob-faq">FAQ</a>
+  <a href="#book" id="mob-book">Book a Visit</a>
   <a href="#contact" id="mob-contact">Contact</a>
-  <button class="mob-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});document.getElementById('mob-menu').classList.remove('open')">Request Contract →</button>
+  <button class="mob-cta" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'});document.getElementById('mob-menu').classList.remove('open')">Book Site Visit &rarr;</button>
 </div>
 
 <!-- EMERGENCY FAB -->
@@ -952,7 +1452,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
         <pattern id="wC" x="0" y="0" width="8" height="10" patternUnits="userSpaceOnUse">
           <rect x="1"   y="1"   width="2.5" height="3.5" fill="rgba(0,174,239,.16)" rx=".3"/>
           <rect x="4.5" y="1"   width="2.5" height="3.5" fill="rgba(100,210,255,.11)" rx=".3"/>
-          <rect x="1"   y="5.5" width="2.5" height="3.5" fill="rgba(0,174,239,.13)" rx=".3"/>
+          <rect x="1"   y="5.5" width="2.5" height="3.5" fill="rgba(0,174,239,.06)" rx=".3"/>
           <rect x="4.5" y="5.5" width="2.5" height="3.5" fill="rgba(0,174,239,.14)" rx=".3"/>
         </pattern>
       </defs>
@@ -995,7 +1495,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
           <rect x="357" y="206" width="78" height="274" fill="url(#bCool)" rx="2"/>
           <rect x="357" y="206" width="78" height="274" fill="url(#wC)"/>
           <rect x="367" y="185" width="58" height="23"  fill="rgba(0,174,239,.34)" rx="1"/>
-          <rect x="379" y="164" width="34" height="23"  fill="rgba(0,174,239,.28)" rx="1"/>
+          <rect x="379" y="164" width="34" height="23"  fill="rgba(0,174,239,.10)" rx="1"/>
           <rect x="393" y="148" width="6"  height="17"  fill="rgba(0,174,239,.55)"/>
           <ellipse cx="396" cy="164" rx="46" ry="13" fill="url(#gBlue)" opacity="0.75"/>
           <circle cx="396" cy="164" r="5" fill="none" stroke="#00AEEF" stroke-width="1.4" class="sky-pulse" style="animation:pulseBlue 2.8s ease-out 1.1s infinite"/>
@@ -1075,7 +1575,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
     </h1>
     <p class="hero-p">Full-building HVAC contracts for property managers and condo boards overseeing 50–1,000+ unit high-rises across the GTA. Flat-rate pricing. 24/7 emergency dispatch. Zero surprises.</p>
     <div class="hero-btns">
-      <button class="btn-primary" data-magnetic onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a Quote →</button>
+      <button class="btn-primary" data-magnetic onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Site Visit &rarr;</button>
       <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">See Services</button>
     </div>
     <div class="hero-trust">
@@ -1108,7 +1608,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
         <div id="wxIcon" style="flex-shrink:0;width:36px;display:flex;align-items:center;justify-content:center"></div>
         <div style="flex:1">
           <div style="display:flex;align-items:baseline;gap:4px">
-            <span style="font-family:var(--ds);font-size:80px;font-style:italic;line-height:.9;color:var(--elec);letter-spacing:-.04em" id="wxTemp">--°</span>
+            <span style="font-family:var(--ds);font-size:80px;font-style:italic;line-height:.9;color:var(--accent);letter-spacing:-.04em" id="wxTemp">--°</span>
           </div>
           <div style="font-size:11px;color:var(--t3);margin-top:1px">Feels <span id="wxFeels">--°C</span></div>
         </div>
@@ -1148,70 +1648,68 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
   </div>
 </section>
 
-<!-- MARQUEE TRUST BELT -->
-<div class="marquee-sec">
-  <div class="mq-wrap">
-    <div class="mq-track">
-      <span class="mq-item"><span class="mq-dot"></span>TSSA Licensed</span>
-      <span class="mq-item"><span class="mq-dot"></span>ASHRAE Certified</span>
-      <span class="mq-item"><span class="mq-dot"></span>ACMO Member</span>
-      <span class="mq-item"><span class="mq-dot"></span>BOMA Recognized</span>
-      <span class="mq-item"><span class="mq-dot"></span>$5M Liability Insurance</span>
-      <span class="mq-item"><span class="mq-dot"></span>24/7 Emergency Dispatch</span>
-      <span class="mq-item"><span class="mq-dot"></span>Toronto · Mississauga · Brampton</span>
-      <span class="mq-item"><span class="mq-dot"></span>Vaughan · North York · Markham</span>
-      <span class="mq-item"><span class="mq-dot"></span>Flat-Rate Contracts</span>
-      <span class="mq-item"><span class="mq-dot"></span>240+ Properties Managed</span>
-      <span class="mq-item"><span class="mq-dot"></span>Digital Compliance Reports</span>
-      <!-- duplicate for seamless loop -->
-      <span class="mq-item"><span class="mq-dot"></span>TSSA Licensed</span>
-      <span class="mq-item"><span class="mq-dot"></span>ASHRAE Certified</span>
-      <span class="mq-item"><span class="mq-dot"></span>ACMO Member</span>
-      <span class="mq-item"><span class="mq-dot"></span>BOMA Recognized</span>
-      <span class="mq-item"><span class="mq-dot"></span>$5M Liability Insurance</span>
-      <span class="mq-item"><span class="mq-dot"></span>24/7 Emergency Dispatch</span>
-      <span class="mq-item"><span class="mq-dot"></span>Toronto · Mississauga · Brampton</span>
-      <span class="mq-item"><span class="mq-dot"></span>Vaughan · North York · Markham</span>
-      <span class="mq-item"><span class="mq-dot"></span>Flat-Rate Contracts</span>
-      <span class="mq-item"><span class="mq-dot"></span>240+ Properties Managed</span>
-      <span class="mq-item"><span class="mq-dot"></span>Digital Compliance Reports</span>
-    </div>
-  </div>
-</div>
-
-<!-- PROOF BAR -->
-<div class="proof-bar">
-  <div class="proof-inner">
-    <span><b>240+</b> properties managed</span>
-    <span class="proof-dot">·</span>
-    <span><b>15 years</b> GTA experience</span>
-    <span class="proof-dot">·</span>
-    <span>from <b>$18</b> /unit monthly</span>
-    <span class="proof-dot">·</span>
-    <span><b>&lt;90 min</b> response time</span>
-    <span class="proof-dot">·</span>
-    <span><b>$0</b> hidden fees</span>
-  </div>
-</div>
-
-<!-- BRANDS STRIP -->
-<div class="brands-strip">
+<!-- QUICK BOOK STRIP — under hero, fires /api/lead directly -->
+<div class="quick-book-strip">
   <div class="wrap">
-    <p class="brands-lbl">Systems we service</p>
-    <div class="brands-row">
-      <span class="brand-tag">Carrier</span>
-      <span class="brand-tag">Trane</span>
-      <span class="brand-tag">York</span>
-      <span class="brand-tag">Lennox</span>
-      <span class="brand-tag">Daikin</span>
-      <span class="brand-tag">Mitsubishi</span>
-      <span class="brand-tag">Bosch</span>
-      <span class="brand-tag">Johnson Controls</span>
+    <div class="qb-card" id="qbCard">
+      <!-- Step 1: pick a service -->
+      <div class="qb-step qb-step-1 active" data-step="1">
+        <div class="qb-header">
+          <div class="qb-tag">3 taps. Free. 24-hour proposal.</div>
+          <div class="qb-h">Book a free building audit</div>
+        </div>
+        <div class="qb-chips" id="qbChips">
+          <button class="qb-chip" data-v="Maintenance Contract">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Maintenance</span>
+          </button>
+          <button class="qb-chip" data-v="24/7 Emergency Dispatch">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Emergency</span>
+          </button>
+          <button class="qb-chip" data-v="Free Building Audit">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Free Audit</span>
+          </button>
+          <button class="qb-chip" data-v="Boilers + Hydronic">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M12 2v6m0 0a4 4 0 014 4v6a2 2 0 01-2 2h-4a2 2 0 01-2-2v-6a4 4 0 014-4z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Boilers</span>
+          </button>
+          <button class="qb-chip" data-v="Chillers + Cooling Towers">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07L19.07 4.93" stroke="currentColor" stroke-width="1.4"/></svg>
+            <span>Chillers</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: contact details (all required) -->
+      <div class="qb-step qb-step-2" data-step="2">
+        <button class="qb-back" type="button">&larr;</button>
+        <div class="qb-summary" id="qbSummary"></div>
+        <div class="qb-h">Tell us where to send the proposal</div>
+        <div class="qb-fields">
+          <input id="qbName"  type="text"  class="qb-input" placeholder="Your name *"      autocomplete="name"  required/>
+          <input id="qbEmail" type="email" class="qb-input" placeholder="Email *"          autocomplete="email" required/>
+          <input id="qbPhone" type="tel"   class="qb-input" placeholder="(437) 410-2100 *" autocomplete="tel" inputmode="tel" required/>
+        </div>
+        <button class="qb-cta" id="qbSubmit" type="button">Send to Pan &rarr;</button>
+        <p class="qb-fineprint">All fields required. We confirm within 1 business hour. No spam, ever.</p>
+      </div>
+      <!-- Step 3: success -->
+      <div class="qb-step qb-step-3" data-step="3">
+        <div class="qb-done">
+          <span class="qb-done-ring"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div>
+            <div class="qb-done-h">You're booked.</div>
+            <div class="qb-done-sub">Pan or a senior tech will call you within 1 business hour.</div>
+          </div>
+        </div>
+        <a href="tel:+14374102100" class="qb-cta-ghost">Need it sooner? (437) 410-2100</a>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- SERVICES -->
 <section id="services" class="sec">
   <div class="wrap">
     <div class="sec-lbl">What We Do</div>
@@ -1324,45 +1822,199 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
   </div>
 </section>
 
-<!-- PAIN -->
-<section id="pain" class="sec" style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<!--
+================================================================
+  PanCanAir &mdash; "Built for High-Rises" differentiator section
+  Recommended slot: directly after the SERVICES section,
+  before the PAIN section (paste between line 1326 and 1327
+  of index.html).
+  Uses existing tokens &mdash; no globals added.
+================================================================-->
+<section id="highrise" class="sec hr-sec">
   <div class="wrap">
-    <div class="pain-inner">
-      <div class="rv">
-        <div class="sec-lbl">Sound familiar?</div>
-        <p class="pain-quote">Your last HVAC contractor showed up late, charged extra, and left paperwork in a pile.</p>
-        <p style="font-size:14px;color:var(--t2);line-height:1.65;max-width:380px">Property managers lose thousands every year to reactive HVAC spend, failed compliance audits, and tenant complaints that could have been prevented.</p>
+    <div class="hr-head">
+      <div class="sec-lbl">Built for High-Rises</div>
+      <h2 class="sec-h">50 to 1,000+ units. <em>One contractor.</em></h2>
+      <p class="sec-sub">PanCanAir is purpose-built for centralized mechanical rooms &mdash; boilers, chillers, MAUs, RTUs, and the controls that tie them together. Most outfits dabble in commercial. We only do this.</p>
+    </div>
+
+    <div class="hr-grid">
+
+      <!-- Tile 1 &mdash; Full-building contracts (anchor) -->
+      <div class="hr-tile hr-tile-anchor">
+        <div class="hr-icon">
+          <svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <path d="M3 26h22" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".35"/>
+            <path d="M7 26V5l7-2 7 2v21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M7 11h14M7 18h14" stroke="currentColor" stroke-width="1.3" opacity=".5"/>
+            <circle class="hr-zone hr-zone-1" cx="11" cy="8.5" r="1.1" fill="currentColor"/><circle class="hr-zone hr-zone-2" cx="17" cy="8.5" r="1.1" fill="currentColor"/>
+            <circle class="hr-zone hr-zone-3" cx="11" cy="14.8" r="1.1" fill="currentColor"/><circle class="hr-zone hr-zone-4" cx="17" cy="14.8" r="1.1" fill="currentColor"/>
+            <circle class="hr-zone hr-zone-5" cx="14" cy="22" r="1.4" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="hr-tile-h">Full-building HVAC contracts</div>
+        <div class="hr-tile-p">One flat rate covers every system in the building. Boilers, chillers, MAUs, pumps, controls, RTUs &mdash; all under one contract, one phone number, one accountable team.</div>
       </div>
-      <div class="rv">
-        <div class="pain-items">
-          <div class="pain-item">
-            <span class="pain-num">01</span>
-            <div>
-              <div class="pain-item-h">Tenant comfort complaints spike in July</div>
-              <p class="pain-item-p">When your rooftop unit fails during a heatwave, you get a hundred calls and a city bylaw notice — not an apology from your HVAC guy.</p>
-            </div>
-          </div>
-          <div class="pain-item">
-            <span class="pain-num">02</span>
-            <div>
-              <div class="pain-item-h">Compliance audits catch you off guard</div>
-              <p class="pain-item-p">TSSA certificates, ASHRAE logs, filter change records — a flat-rate contract means these are filed automatically, not scrambled the night before.</p>
-            </div>
-          </div>
-          <div class="pain-item">
-            <span class="pain-num">03</span>
-            <div>
-              <div class="pain-item-h">Emergency calls get billed by the hour</div>
-              <p class="pain-item-p">PanCanAir contract clients get 24/7 dispatch with no premium surcharge. One flat monthly rate, every situation covered.</p>
-            </div>
-          </div>
+
+      <!-- Tile 2 &mdash; High-rise specialty -->
+      <div class="hr-tile">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <path d="M3 26h22" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".35"/>
+            <path d="M4 26V14h4v12" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity=".75"/>
+            <rect x="5.2" y="16.5" width="1.3" height="1.3" fill="currentColor" opacity=".55"/><rect class="hr-win hr-win-6" x="5.2" y="19.5" width="1.3" height="1.3" fill="currentColor"/><rect x="5.2" y="22.5" width="1.3" height="1.3" fill="currentColor" opacity=".55"/>
+            <path d="M10 26V5h6v21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <rect class="hr-win hr-win-1" x="11.2" y="7.5" width="1.2" height="1.2" fill="currentColor"/><rect x="13.6" y="7.5" width="1.2" height="1.2" fill="currentColor"/>
+            <rect x="11.2" y="10.5" width="1.2" height="1.2" fill="currentColor"/><rect class="hr-win hr-win-2" x="13.6" y="10.5" width="1.2" height="1.2" fill="currentColor"/>
+            <rect x="11.2" y="13.5" width="1.2" height="1.2" fill="currentColor"/><rect x="13.6" y="13.5" width="1.2" height="1.2" fill="currentColor"/>
+            <rect class="hr-win hr-win-3" x="11.2" y="16.5" width="1.2" height="1.2" fill="currentColor"/><rect x="13.6" y="16.5" width="1.2" height="1.2" fill="currentColor"/>
+            <rect x="11.2" y="19.5" width="1.2" height="1.2" fill="currentColor"/><rect x="13.6" y="19.5" width="1.2" height="1.2" fill="currentColor"/>
+            <rect x="11.2" y="22.5" width="1.2" height="1.2" fill="currentColor"/><rect class="hr-win hr-win-4" x="13.6" y="22.5" width="1.2" height="1.2" fill="currentColor"/>
+            <path d="M18 26V10h6v16" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <rect x="19.4" y="12.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/><rect x="21.6" y="12.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/>
+            <rect class="hr-win hr-win-5" x="19.4" y="15.5" width="1.3" height="1.3" fill="currentColor"/><rect x="21.6" y="15.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/>
+            <rect x="19.4" y="18.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/><rect x="21.6" y="18.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/>
+            <rect x="19.4" y="21.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/><rect x="21.6" y="21.5" width="1.3" height="1.3" fill="currentColor" opacity=".75"/>
+          </svg></div>
+        <div class="hr-tile-h">Specialized in condos<br><span class="hr-stat">50 &rarr; 1,000+</span> units</div>
+        <div class="hr-tile-p">Centralized hydronic, multi-loop chiller plants, makeup-air units in stack penthouses &mdash; the systems generic contractors avoid.</div>
+      </div>
+
+      <!-- Tile 3 &mdash; Pricing (premium savings curve) -->
+      <div class="hr-tile hr-tile-accent">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <!-- Axis -->
+            <path d="M4.5 23h19.5" stroke="currentColor" stroke-width="1" opacity=".25" stroke-linecap="round"/>
+            <path d="M5 23V5" stroke="currentColor" stroke-width="1" opacity=".25" stroke-linecap="round"/>
+            <!-- Savings shaded area between the lines -->
+            <path class="hr-save-fill" d="M5 19 L9 16 L13 11 L17 7 L21 4 L21 17 L17 17 L13 17 L9 17 L5 18 Z" fill="currentColor" opacity=".10"/>
+            <!-- Reactive cost line (dashed, climbing) -->
+            <path class="hr-reactive-line" d="M5 19 L9 16 L13 11 L17 7 L21 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".42" stroke-dasharray="2 2"/>
+            <!-- PanCanAir flat plan line (solid, premium) -->
+            <path class="hr-plan-line" d="M5 18 L9 17 L13 17 L17 17 L21 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- Pinpoint dots on plan line -->
+            <circle class="hr-plan-dot hr-plan-dot-1" cx="9"  cy="17" r="1.4" fill="currentColor"/>
+            <circle class="hr-plan-dot hr-plan-dot-2" cx="17" cy="17" r="1.4" fill="currentColor"/>
+            <!-- "$" pill anchor — top right -->
+            <circle cx="22" cy="5.5" r="2.6" fill="currentColor"/>
+            <path d="M22 4v3M21.2 4.5c0-.4.4-.65 .8-.65s.8.25 .8 .55-.4 .55-.8 .65-.8 .35-.8 .65 .4 .55 .8 .55" stroke="#fff" stroke-width=".8" stroke-linecap="round" fill="none" opacity=".95"/>
+          </svg></div>
+        <div class="hr-tile-h">Highly competitive pricing</div>
+        <div class="hr-tile-p">Flat-rate proposals from <b>$18/unit/month</b>. We ground every quote in real GTA comps &mdash; no padding, no surprise change orders.</div>
+      </div>
+
+      <!-- Tile 4 &mdash; 24/7 dispatch -->
+      <div class="hr-tile">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <circle class="hr-ring hr-ring-1" cx="14" cy="14" r="11.5" stroke="currentColor" stroke-width="1.1"/>
+            <circle class="hr-ring hr-ring-2" cx="14" cy="14" r="8" stroke="currentColor" stroke-width="1.3"/>
+            <circle class="hr-ring hr-ring-3" cx="14" cy="14" r="4.6" stroke="currentColor" stroke-width="1.5"/>
+            <circle class="hr-beacon" cx="14" cy="14" r="2" fill="currentColor"/>
+            <path d="M14 4v2.5M14 21.5V24M4 14h2.5M21.5 14H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M21 7l-2 2M9 19l-2 2M19 19l2 2M7 7l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".45"/>
+          </svg></div>
+        <div class="hr-tile-h">24/7 emergency dispatch</div>
+        <div class="hr-tile-p">Average on-site response under <b>2 hours</b> across the GTA &mdash; including nights, weekends, and statutory holidays.</div>
+      </div>
+
+      <!-- Tile 5 &mdash; Complete system management -->
+      <div class="hr-tile hr-tile-wide">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <rect x="2.5" y="2.5" width="23" height="23" rx="2.5" stroke="currentColor" stroke-width="1.2" opacity=".35" stroke-dasharray="2 2"/>
+            <rect x="5" y="5.5" width="7.5" height="7.5" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="8.7" cy="9.2" r="1.4" fill="currentColor"/>
+            <path d="M8.7 7v.5M8.7 11v.5" stroke="currentColor" stroke-width="1" opacity=".6"/>
+            <rect x="15.5" y="5.5" width="7.5" height="7.5" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M16.7 7.6h5.1M16.7 9.4h5.1M16.7 11.2h5.1" stroke="currentColor" stroke-width="1.1" opacity=".7"/>
+            <circle cx="8.7" cy="19.5" r="3.3" stroke="currentColor" stroke-width="1.5"/>
+            <g class="hr-pump-rotor"><path d="M8.7 17v5M6.2 19.5h5" stroke="currentColor" stroke-width="1.2"/></g>
+            <rect x="15.5" y="16" width="7.5" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <circle class="hr-led hr-led-1" cx="17.5" cy="18" r=".7" fill="currentColor"/>
+            <circle class="hr-led hr-led-2" cx="19.6" cy="18" r=".7" fill="currentColor"/>
+            <path d="M16.5 21h5.5" stroke="currentColor" stroke-width="1"/>
+            <path d="M12.5 9.2h3M12.5 19.5h3M8.7 13v3M19.3 13v3" stroke="currentColor" stroke-width="1.1" opacity=".4" stroke-dasharray="1.4 1.4"/>
+          </svg></div>
+        <div class="hr-tile-h">Complete system management</div>
+        <div class="hr-tile-p">Boilers &middot; Chillers &middot; MAUs &middot; Pumps &middot; Controls &middot; RTUs &middot; Cooling Towers &middot; BAS Integration. End-to-end ownership of the mechanical room &mdash; not piecemeal.</div>
+        <div class="hr-syslist">
+          <span>Boilers</span><span>Chillers</span><span>MAUs</span><span>Pumps</span><span>Controls</span><span>RTUs</span><span>Cooling Towers</span><span>BAS</span>
         </div>
       </div>
+
+      <!-- Tile 6 &mdash; Preventive maintenance -->
+      <div class="hr-tile">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <rect x="3.5" y="6" width="21" height="19" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M3.5 11h21" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M9 3v5M19 3v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path class="hr-check hr-check-1" d="M6.5 16l1.4 1.4 2.7-2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hr-check hr-check-2" d="M12.5 16l1.4 1.4 2.7-2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hr-check hr-check-3" d="M18.5 16l1.4 1.4 2.7-2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="8" cy="21.5" r="1.3" stroke="currentColor" stroke-width="1.3"/>
+            <circle cx="14" cy="21.5" r="1.3" fill="currentColor"/>
+            <circle cx="20" cy="21.5" r="1.3" stroke="currentColor" stroke-width="1.3" opacity=".5"/>
+          </svg></div>
+        <div class="hr-tile-h">Preventive maintenance programs</div>
+        <div class="hr-tile-p">Quarterly inspections, seasonal changeovers, and tracked component lifecycles &mdash; designed to drop reactive call-outs by <b>60&ndash;80%</b>.</div>
+      </div>
+
+      <!-- Tile 7 &mdash; Compliance (anchor) -->
+      <div class="hr-tile hr-tile-compliance">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <path d="M14 2.5l10 4.2v6.6c0 6-4 10.5-10 12.7-6-2.2-10-6.7-10-12.7V6.7l10-4.2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path class="hr-shield-check" d="M9 14l3.5 3.5L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 6v3M14 22v2" stroke="currentColor" stroke-width="1" opacity=".3" stroke-linecap="round"/>
+          </svg></div>
+        <div class="hr-tile-h">Compliant by default</div>
+        <div class="hr-tile-p">Every contract ships standards-mapped to:</div>
+        <div class="hr-badges">
+          <span class="hr-badge">TSSA</span>
+          <span class="hr-badge">ASHRAE</span>
+          <span class="hr-badge">ACMO</span>
+          <span class="hr-badge">BOMA</span>
+        </div>
+        <div class="hr-tile-p" style="margin-top:14px">Monthly digital compliance reports &mdash; audit-ready, board-ready.</div>
+      </div>
+
+      <!-- Tile 8 &mdash; Mechanical rooms -->
+      <div class="hr-tile">
+        <div class="hr-icon"><svg viewBox="0 0 28 28" fill="none" width="28" height="28">
+            <path d="M11 2h6M14 2v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <rect x="6" y="4.5" width="16" height="20" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="14" cy="11" r="3.5" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="14" cy="11" r=".8" fill="currentColor"/>
+            <g class="hr-gauge"><path d="M14 11l2-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+            <path d="M11.5 9.5l-.8-.8M16.5 9.5l.8-.8M11.5 12.5l-.8.8M16.5 12.5l.8.8" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+            <rect x="9" y="17" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.3" opacity=".75"/>
+            <path d="M11 17v-1.5M14 17v-1.5M17 17v-1.5" stroke="currentColor" stroke-width="1" opacity=".5"/>
+            <path d="M9.5 24.5v2M14 24.5v2M18.5 24.5v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg></div>
+        <div class="hr-tile-h">Mechanical rooms &amp; centralized plants</div>
+        <div class="hr-tile-p">Pressure vessels, three-way valves, VFDs, header isolation, glycol loops &mdash; we operate where the building's spine lives.</div>
+      </div>
+
+    </div>
+
+    <div class="hr-cta">
+      <a href="#book" class="btn-primary">Book a free building audit &rarr;</a>
+      <a href="services/condo-high-rise.html" class="btn-ghost-hr">See full high-rise playbook &rarr;</a>
+      <span class="hr-cta-sub">No obligation &middot; Proposal in 24 hours</span>
     </div>
   </div>
 </section>
 
-<!-- WHY US -->
+
+<!-- CTA STRIP (post-services) -->
+<div class="cta-strip">
+  <div class="wrap">
+    <div class="cta-strip-inner">
+      <div class="cta-strip-text">
+        <div class="cta-strip-h">Like what you see? <em>Skip the long form.</em></div>
+        <div class="cta-strip-p">Three taps. Free building audit. Proposal in 24 hours.</div>
+      </div>
+      <a href="#book" class="cta-strip-btn">Book Site Visit &rarr;</a>
+    </div>
+  </div>
+</div>
 <section id="why" class="sec">
   <div class="wrap">
     <div class="sec-lbl">Why PanCanAir</div>
@@ -1374,7 +2026,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
         <p class="why-big-p">Flat-rate contracts mean we have every reason to do maintenance right the first time. No upselling, no manufactured urgency. Our revenue is predictable — so your costs are too.</p>
         <div class="why-stats">
           <div><div class="wstat-v">from <b>$18</b></div><div class="wstat-l">per unit / mo</div></div>
-          <div><div class="wstat-v"><b>4</b>hr</div><div class="wstat-l">max response</div></div>
+          <div><div class="wstat-v"><b>&lt;2</b>hr</div><div class="wstat-l">max response</div></div>
           <div><div class="wstat-v"><b>240</b>+</div><div class="wstat-l">properties</div></div>
           <div><div class="wstat-v"><b>0</b></div><div class="wstat-l">hidden fees</div></div>
         </div>
@@ -1421,7 +2073,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
           <tr><td>Flat monthly pricing</td><td class="yes hl-col">Yes — from $18/unit</td><td class="no">Per-call billing</td><td class="no">Bundled markups</td></tr>
           <tr><td>24/7 emergency dispatch</td><td class="yes hl-col">Included</td><td class="no">Premium surcharge</td><td class="yes">Included</td></tr>
           <tr><td>Compliance documentation</td><td class="yes hl-col">Digital, every visit</td><td class="no">On request only</td><td class="no">Quarterly PDF</td></tr>
-          <tr><td>Response time guarantee</td><td class="yes hl-col">4hr max</td><td class="no">Best effort</td><td class="no">8hr SLA</td></tr>
+          <tr><td>Response time guarantee</td><td class="yes hl-col">&lt;2hr</td><td class="no">Best effort</td><td class="no">8hr SLA</td></tr>
           <tr><td>TSSA-licensed technicians</td><td class="yes hl-col">All staff</td><td class="yes">Most staff</td><td class="no">Subcontracted</td></tr>
           <tr><td>No hidden fees</td><td class="yes hl-col">Guaranteed</td><td class="no">Parts + labour variable</td><td class="no">Admin fees apply</td></tr>
         </tbody>
@@ -1430,124 +2082,43 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
   </div>
 </section>
 
-<!-- OUR PROCESS -->
-<section id="process" class="sec" style="background:var(--s0);border-top:1px solid var(--border)">
+<section id="pain" class="sec" style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="wrap">
-    <div style="text-align:center;max-width:560px;margin:0 auto 0">
-      <div class="sec-lbl">How It Works</div>
-      <h2 class="sec-h">Three steps.<br><em>Zero guesswork.</em></h2>
-      <p class="sec-sub">From first call to full coverage — most buildings are under contract within a week.</p>
-    </div>
-    <div class="process-grid rv">
-      <div class="process-step">
-        <div class="process-num">01</div>
-        <h3>Free Building Audit</h3>
-        <p>We inspect your systems, document every unit, and deliver a full HVAC assessment within 48 hours. No commitment required. No cost.</p>
+    <div class="pain-inner">
+      <div class="rv">
+        <div class="sec-lbl">Sound familiar?</div>
+        <p class="pain-quote">Your last HVAC contractor showed up late, charged extra, and left paperwork in a pile.</p>
+        <p style="font-size:14px;color:var(--t2);line-height:1.65;max-width:380px">Property managers lose thousands every year to reactive HVAC spend, failed compliance audits, and tenant complaints that could have been prevented.</p>
       </div>
-      <div class="process-arrow">→</div>
-      <div class="process-step">
-        <div class="process-num">02</div>
-        <h3>Flat-Rate Contract</h3>
-        <p>One monthly rate covers everything — preventive maintenance, parts, emergency dispatch. No surprises. Our incentive is your uptime, not your breakdowns.</p>
-      </div>
-      <div class="process-arrow">→</div>
-      <div class="process-step">
-        <div class="process-num">03</div>
-        <h3>24/7 Coverage + Monthly Reports</h3>
-        <p>On-call around the clock. Every month you receive a full digital compliance and maintenance report — shareable with your board in one click.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews" class="sec" style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="wrap">
-    <div class="sec-lbl">Client Reviews</div>
-    <h2 class="sec-h">Trusted by managers who <em>can't afford downtime.</em></h2>
-    <!-- Google rating badge -->
-    <div style="display:inline-flex;align-items:center;gap:14px;padding:12px 20px;border-radius:var(--r);background:var(--s0);border:1px solid var(--border);box-shadow:var(--card-shadow);margin-bottom:36px">
-      <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      <div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="font-family:var(--ds);font-size:20px;font-style:italic;color:var(--t1)">5.0</span>
-          <span style="color:var(--amber);font-size:13px;letter-spacing:1px">★★★★★</span>
-        </div>
-        <p style="font-size:10px;color:var(--t3);margin-top:1px">Google Business Profile · 4 verified reviews</p>
-      </div>
-      <a href="https://www.google.com/maps/place/PanCanAir+Heating+and+Cooling/@43.901344,-79.3819226,17z" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:#4285F4;padding:6px 14px;border:1px solid rgba(66,133,244,.22);border-radius:100px;white-space:nowrap">View on Google →</a>
-    </div>
-    <div class="review-grid">
-      <div class="rc rv-l">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#1D4EA0,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">AF</div>
-          <div>
-            <div class="rc-name">Ahsan F.</div>
-            <div class="rc-role">Verified Google Review</div>
+      <div class="rv">
+        <div class="pain-items">
+          <div class="pain-item">
+            <span class="pain-num">01</span>
+            <div>
+              <div class="pain-item-h">Tenant comfort complaints spike in July</div>
+              <p class="pain-item-p">When your rooftop unit fails during a heatwave, you get a hundred calls and a city bylaw notice — not an apology from your HVAC guy.</p>
+            </div>
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:auto;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </div>
-        <div class="rc-stars">★★★★★</div>
-        <p class="rc-text">Great service, would highly recommend. Very professional and knowledgeable.</p>
-      </div>
-      <div class="rc rv">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#E5312A,#C02020);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">R</div>
-          <div>
-            <div class="rc-name">Google Reviewer</div>
-            <div class="rc-role">Verified Google Review</div>
+          <div class="pain-item">
+            <span class="pain-num">02</span>
+            <div>
+              <div class="pain-item-h">Compliance audits catch you off guard</div>
+              <p class="pain-item-p">TSSA certificates, ASHRAE logs, filter change records — a flat-rate contract means these are filed automatically, not scrambled the night before.</p>
+            </div>
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:auto;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </div>
-        <div class="rc-stars">★★★★★</div>
-        <p class="rc-text">Fast response, fair pricing, and they actually explained everything clearly. Exactly what you want from an HVAC company.</p>
-      </div>
-      <div class="rc rv-r">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0D6E6E,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">R</div>
-          <div>
-            <div class="rc-name">Google Reviewer</div>
-            <div class="rc-role">Verified Google Review</div>
+          <div class="pain-item">
+            <span class="pain-num">03</span>
+            <div>
+              <div class="pain-item-h">Emergency calls get billed by the hour</div>
+              <p class="pain-item-p">PanCanAir contract clients get 24/7 dispatch with no premium surcharge. One flat monthly rate, every situation covered.</p>
+            </div>
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:auto;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </div>
-        <div class="rc-stars">★★★★★</div>
-        <p class="rc-text">Replaced our furnace same week. Clean install, no mess left behind. Technician was thorough and answered every question.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOUNDER -->
-<section id="founder" class="sec" style="background:var(--s0);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:flex-start">
-      <!-- Monogram / photo -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;flex-shrink:0">
-        <div style="width:130px;height:130px;border-radius:50%;overflow:hidden;overflow:hidden;flex-shrink:0;box-shadow:0 24px 56px rgba(217,74,43,.20);outline:4px solid rgba(217,74,43,.14);outline-offset:4px;background:linear-gradient(135deg,#E5312A,#00AEEF)"><img style="width:100%;height:180%;object-fit:cover;object-position:50% 0%;display:block" src="data:image/jpeg;base64,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" alt="Pan — Founder, PanCanAir"/></div>
-        <a href="https://www.linkedin.com/in/pancanair-heating-and-cooling-inc-951949403/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--blue);padding:7px 16px;border:1px solid var(--b-soft);border-radius:100px;transition:background .15s,border-color .15s;white-space:nowrap">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          Connect on LinkedIn
-        </a>
-      </div>
-      <!-- Content -->
-      <div>
-        <div class="sec-lbl rv">Founder</div>
-        <h2 class="sec-h rv" style="margin-bottom:6px">Pan</h2>
-        <p style="font-family:var(--ds);font-size:19px;font-style:italic;color:var(--t2);margin-bottom:18px;line-height:1.3">15 years building HVAC systems GTA property managers can actually rely on.</p>
-        <p style="font-size:14px;color:var(--t2);line-height:1.72;max-width:580px;margin-bottom:32px">PanCanAir started from a simple frustration: property managers were being nickel-and-dimed by contractors with every incentive to let systems fail. Pankaj built the flat-rate model to flip that incentive — we profit when your systems run, not when they break down.</p>
-        <div style="display:flex;gap:36px;flex-wrap:wrap">
-          <div><div class="wstat-v"><b>15</b>+</div><div class="wstat-l">Years GTA</div></div>
-          <div><div class="wstat-v"><b>240</b>+</div><div class="wstat-l">Properties</div></div>
-          <div><div class="wstat-v" style="color:var(--amber)"><b style="color:var(--amber)">4.9</b>★</div><div class="wstat-l">Google Rating</div></div>
-          <div><div class="wstat-v"><b>$0</b></div><div class="wstat-l">Hidden Fees</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ROI CALCULATOR -->
 <section id="roi" class="sec roi-sec">
   <div class="wrap">
     <div class="roi-inner">
@@ -1606,7 +2177,6 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
   </div>
 </section>
 
-<!-- PRICING -->
 <section id="pricing" class="sec">
   <div class="wrap">
     <div class="sec-lbl">Pricing</div>
@@ -1627,7 +2197,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
           <li>Emergency dispatch at standard rate</li>
           <li>2-year labour warranty</li>
         </ul>
-        <button class="btn-pc btn-pc-g" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+        <button class="btn-pc btn-pc-g" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Site Visit</button>
       </div>
       <div class="pc featured rv-s">
         <span class="pc-badge">Most Popular</span>
@@ -1643,7 +2213,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
           <li>Digital records, board-ready</li>
           <li>Dedicated account manager</li>
         </ul>
-        <button class="btn-pc btn-pc-a" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+        <button class="btn-pc btn-pc-a" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Site Visit</button>
       </div>
       <div class="pc rv-s">
         <span class="pc-badge">Full Coverage</span>
@@ -1665,110 +2235,168 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="sec" style="border-top:1px solid var(--border)">
+
+<!-- CTA STRIP (post-pricing — peak-intent moment) -->
+<div class="cta-strip">
   <div class="wrap">
-    <div class="faq-inner">
-      <div class="rv">
-        <div class="sec-lbl">FAQ</div>
-        <h2 class="sec-h">Questions property<br><em>managers always ask.</em></h2>
-        <p style="font-size:14px;color:var(--t2);line-height:1.65;margin-top:16px">Still on the fence? These are the five questions every property manager asks before signing — answered straight.</p>
+    <div class="cta-strip-inner">
+      <div class="cta-strip-text">
+        <div class="cta-strip-h">Ready when you are. <em>Free audit, no commitment.</em></div>
+        <div class="cta-strip-p">Pan or a senior tech walks your building, maps every system, sends a flat-rate proposal.</div>
       </div>
-      <div class="faq-list rv">
-        <div class="faq-item">
-          <button class="faq-q">What if we already have a contractor?</button>
-          <div class="faq-a">We work alongside or replace existing contractors. Most buildings we onboard have had the same contractor for years. We start with a free audit so you can compare coverage and cost side-by-side before making any change — zero pressure.</div>
+      <a href="#book" class="cta-strip-btn">Start the 3-tap booking &rarr;</a>
+    </div>
+  </div>
+</div>
+<section id="reviews" class="sec" style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-lbl">Client Reviews</div>
+    <h2 class="sec-h">Trusted by managers who <em>can't afford downtime.</em></h2>
+    <!-- Google rating badge -->
+    <div style="display:inline-flex;align-items:center;gap:14px;padding:12px 20px;border-radius:var(--r);background:var(--s0);border:1px solid var(--border);box-shadow:var(--card-shadow);margin-bottom:36px">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      <div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-family:var(--ds);font-size:20px;font-style:italic;color:var(--t1)">5.0</span>
+          <span style="color:var(--amber);font-size:13px;letter-spacing:1px">★★★★★</span>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">What's actually included in flat-rate?</button>
-          <div class="faq-a">Preventive maintenance visits, all labour on covered repairs, 24/7 emergency dispatch response, parts for standard wear items, and monthly digital compliance reports. The only things outside the flat rate are major capital replacements (full system swaps), which we quote separately and transparently.</div>
+        <p style="font-size:10px;color:var(--t3);margin-top:1px">Google Business Profile · 4 verified reviews</p>
+      </div>
+      <a href="https://www.google.com/maps/place/PanCanAir+Heating+and+Cooling/@43.901344,-79.3819226,17z" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:#4285F4;padding:6px 14px;border:1px solid rgba(66,133,244,.22);border-radius:100px;white-space:nowrap">View on Google →</a>
+    </div>
+    <div class="review-grid">
+      <div class="rc rv-l">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#1D4EA0,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">AF</div>
+          <div>
+            <div class="rc-name">Ahsan F.</div>
+            <div class="rc-role">Verified Google Review</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:auto;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">What happens if a system fails at 2am?</button>
-          <div class="faq-a">You call our emergency line at (437) 410-2100 and a licensed technician is dispatched within 90 minutes — guaranteed, with no emergency surcharge. That number is staffed 24 hours, 365 days. There is no voicemail on that line.</div>
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">Great service, would highly recommend. Very professional and knowledgeable.</p>
+      </div>
+      <div class="rc rv">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#E5312A,#C02020);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">R</div>
+          <div>
+            <div class="rc-name">Google Reviewer</div>
+            <div class="rc-role">Verified Google Review</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:auto;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">Do you handle older or complex buildings?</button>
-          <div class="faq-a">It's our specialty. Most of our portfolio is 1970s–2000s high-rise construction — older boilers, mixed systems, and buildings that other contractors pass on. We carry parts inventory specifically for legacy GTA building stock.</div>
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">Fast response, fair pricing, and they actually explained everything clearly. Exactly what you want from an HVAC company.</p>
+      </div>
+      <div class="rc rv-r">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0D6E6E,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0">R</div>
+          <div>
+            <div class="rc-name">Google Reviewer</div>
+            <div class="rc-role">Verified Google Review</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:auto;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">Is there a minimum contract length?</button>
-          <div class="faq-a">Our standard contracts are 12 months, renewable annually. We don't do month-to-month because preventive maintenance only works over a full seasonal cycle. That said, we've never had a board request early termination — our churn rate is effectively zero.</div>
-        </div>
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">Replaced our furnace same week. Clean install, no mess left behind. Technician was thorough and answered every question.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact-sec">
+<!--
+================================================================
+  PanCanAir &mdash; 3-Tap Booking Section (drop-in)
+  Paste before the CONTACT section (above line 1703 of index.html).
+  Uses existing tokens (-accent, -t1, -bg, -r, etc.) &mdash; no new globals.
+  Posts to the same Supabase `leads` table &rarr; Edge Function fires Resend.
+  source = 'booking_3tap'  (so you can segment in dashboards)
+================================================================-->
+<section id="book" class="sec book-sec">
   <div class="wrap">
-    <div class="contact-inner">
-      <div class="rv">
-        <div class="sec-lbl">Get in Touch</div>
-        <h2 class="sec-h" style="margin-bottom:8px">Let's talk about<br><em>your buildings.</em></h2>
-        <p style="font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:32px;max-width:360px">Tell us about your property — units, system types, current issues. We'll come back with a flat-rate proposal, usually within 24 hours.</p>
-        <div>
-          <div class="contact-info-row">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.5 2.82 2 2 0 012.49.84h3a2 2 0 012 1.72c.127.96.36 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5"/></svg>
-            +1 (437) 410-2100
-          </div>
-          <div class="contact-info-row">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8l10 6 10-6" stroke="currentColor" stroke-width="1.5"/></svg>
-            info@pancanair.com
-          </div>
-          <div class="contact-info-row">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
-            Toronto · Mississauga · Brampton · Vaughan · Markham
-          </div>
+    <div class="book-head">
+      <div class="sec-lbl">Book a Site Visit</div>
+      <h2 class="sec-h">Three taps. <em>Done.</em></h2>
+      <p class="sec-sub">No long forms. Pick what you need, pick your size, drop a number &mdash; we call within an hour during business hours.</p>
+    </div>
+
+    <div class="book-card" id="bookCard">
+      <!-- Progress rail -->
+      <div class="bk-rail" aria-hidden="true">
+        <div class="bk-rail-fill" id="bkRailFill"></div>
+        <div class="bk-rail-dots">
+          <span class="bk-dot active" data-step="1">1</span>
+          <span class="bk-dot" data-step="2">2</span>
+          <span class="bk-dot" data-step="3">3</span>
         </div>
       </div>
-      <div>
-        <div class="form" id="contact-form">
-          <div class="form-row">
-            <input type="text" class="inp" id="cf-name" placeholder="Your name"/>
-            <input type="text" class="inp" id="cf-company" placeholder="Company / Property"/>
-          </div>
-          <div class="form-row">
-            <input type="email" class="inp" id="cf-email" placeholder="Email address"/>
-            <input type="tel" class="inp" id="cf-phone" placeholder="Phone"/>
-          </div>
-          <select class="inp" id="cf-building">
-            <option value="" disabled selected>Building type</option>
-            <option>Residential Condo (High-rise)</option>
-            <option>Mixed-Use (Residential + Commercial)</option>
-            <option>Commercial Office</option>
-            <option>Retail / Industrial</option>
-            <option>Other</option>
-          </select>
-          <div class="form-row">
-            <select class="inp" id="cf-units">
-              <option value="" disabled selected>Number of units</option>
-              <option>50 – 100 units</option>
-              <option>100 – 250 units</option>
-              <option>250 – 500 units</option>
-              <option>500 – 1,000 units</option>
-              <option>1,000+ units</option>
-            </select>
-            <select class="inp" id="cf-service">
-              <option value="" disabled selected>HVAC systems</option>
-              <option>Boilers + Hydronic</option>
-              <option>Rooftop Units (RTU)</option>
-              <option>Chillers + Cooling Towers</option>
-              <option>Mixed / Multiple Systems</option>
-              <option>Not sure</option>
-            </select>
-          </div>
-          <select class="inp" id="cf-pain">
-            <option value="" disabled selected>Biggest pain point</option>
-            <option>Emergency response time</option>
-            <option>Unpredictable costs / surprise bills</option>
-            <option>Compliance and reporting gaps</option>
-            <option>Aging systems / deferred maintenance</option>
-            <option>Current contractor performance</option>
-          </select>
-          <button type="button" class="form-btn" id="cf-submit">Send Request →</button>
+
+      <!-- Step 1: Service -->
+      <div class="bk-step active" data-step="1">
+        <div class="bk-step-h">What do you need?</div>
+        <div class="bk-chips" data-field="service">
+          <button class="bk-chip" data-v="Maintenance Contract">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Maintenance Contract</span>
+          </button>
+          <button class="bk-chip" data-v="24/7 Emergency Dispatch">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Emergency Call</span>
+          </button>
+          <button class="bk-chip" data-v="Free Building Audit">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Free Building Audit</span>
+          </button>
+          <button class="bk-chip" data-v="Boilers + Hydronic">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 2v6m0 0a4 4 0 014 4v6a2 2 0 01-2 2h-4a2 2 0 01-2-2v-6a4 4 0 014-4z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>Boilers</span>
+          </button>
+          <button class="bk-chip" data-v="Chillers + Cooling Towers">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07L19.07 4.93" stroke="currentColor" stroke-width="1.4"/></svg>
+            <span>Chillers</span>
+          </button>
+          <button class="bk-chip" data-v="Rooftop Units (RTU)">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M3 21V8l9-5 9 5v13M3 21h18M9 21v-7h6v7" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>RTUs / MAUs</span>
+          </button>
         </div>
+      </div>
+
+      <!-- Step 2: Building size -->
+      <div class="bk-step" data-step="2">
+        <button class="bk-back" type="button">&larr; back</button>
+        <div class="bk-step-h">How big is the building?</div>
+        <div class="bk-chips bk-chips-size" data-field="units">
+          <button class="bk-chip" data-v="50 &ndash; 100 units">50&ndash;100<small>units</small></button>
+          <button class="bk-chip" data-v="100 &ndash; 250 units">100&ndash;250<small>units</small></button>
+          <button class="bk-chip" data-v="250 &ndash; 500 units">250&ndash;500<small>units</small></button>
+          <button class="bk-chip" data-v="500 &ndash; 1,000 units">500&ndash;1,000<small>units</small></button>
+          <button class="bk-chip bk-chip-hot" data-v="1,000+ units">1,000+<small>units</small></button>
+          <button class="bk-chip" data-v="Commercial / Other">Commercial<small>or other</small></button>
+        </div>
+      </div>
+
+      <!-- Step 3: Phone (and optional name) -->
+      <div class="bk-step" data-step="3">
+        <button class="bk-back" type="button">&larr; back</button>
+        <div class="bk-step-h">Best number to reach you?</div>
+        <div class="bk-summary" id="bkSummary"></div>
+        <div class="bk-fields">
+          <input type="text"  id="bkName"  class="inp" placeholder="Your name *" autocomplete="name"  required/>
+          <input type="email" id="bkEmail" class="inp" placeholder="Email *"     autocomplete="email" required/>
+          <input type="tel"   id="bkPhone" class="inp bk-phone" placeholder="(437) 410-2100 *" autocomplete="tel" inputmode="tel" required/>
+        </div>
+        <button class="form-btn bk-submit" id="bkSubmit" type="button">Book Site Visit &rarr;</button>
+        <p class="bk-fineprint">No spam. No pressure. We confirm within 1 business hour.</p>
+      </div>
+
+      <!-- Done state -->
+      <div class="bk-step bk-done" data-step="4">
+        <div class="bk-done-ring"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="bk-done-h">You're booked.</div>
+        <div class="bk-done-sub">We'll call you at <b id="bkDonePhone"></b> within 1 business hour. A confirmation just landed in your inbox if you shared an email.</div>
+        <a href="tel:+14374102100" class="bk-done-call">Need it sooner? Call (437) 410-2100</a>
       </div>
     </div>
   </div>
@@ -1778,7 +2406,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
 <div class="cta-band">
   <div class="wrap" style="display:flex;flex-direction:column;align-items:center">
     <h2 class="cta-band-h">Ready to simplify your<br><em>building's HVAC?</em></h2>
-    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Contract →</button>
+    <button class="btn-primary" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Site Visit &rarr;</button>
     <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:20px">Free building audit · Proposal within 24 hours · No commitment required</p>
   </div>
 </div>
@@ -1800,7 +2428,7 @@ html.cursor-on-el #cursor-ring{width:56px;height:56px;border-color:rgba(217,74,4
       </div>
       <div class="foot-col">
         <h4>Company</h4>
-        <a href="#why">Why PanCanAir</a>
+        <a href="about.html">About / Why Us</a>
         <a href="#pricing">Pricing</a>
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
@@ -1927,7 +2555,7 @@ const WX_CODES={
   80:{l:'Showers',t:'rain',d:'Light showers'},81:{l:'Showers',t:'rain',d:'Moderate showers'},82:{l:'Heavy Showers',t:'rain',d:'Heavy showers'},
   85:{l:'Snow Showers',t:'snow',d:'Snow showers'},95:{l:'Thunderstorm',t:'thunder',d:'Thunderstorm'},96:{l:'Thunder+Hail',t:'thunder',d:'Thunder with hail'}
 };
-function _wxTempColor(t){return t<=0?'#1a5fa8':t<=10?'#00AEEF':t<=20?'#2e6b4a':t<=28?'#8a5a15':'#d94a2b'}
+function _wxTempColor(t){return t<=0?'#1a5fa8':t<=10?'#1D4EA0':t<=20?'#2e6b4a':t<=28?'#8a5a15':'#d94a2b'}
 function _wxAlert(t,type){
   const mo=new Date().getMonth();const ac=mo>=3&&mo<=8;
   if(t<=0||type==='snow')return '⚠ Extreme cold — boiler & heating at peak load. 24/7 emergency dispatch ready.';
@@ -2152,23 +2780,9 @@ document.querySelectorAll('.comp-table').forEach(el => _compIO.observe(el));
 })();
 
 // Contact form with Supabase + GA4
-document.getElementById('cf-submit').addEventListener('click', async () => {
-  const btn = document.getElementById('cf-submit');
-  const name = document.getElementById('cf-name').value.trim();
-  const email = document.getElementById('cf-email').value.trim();
-  if(!name || !email){ alert('Please enter your name and email.'); return; }
-  btn.textContent = 'Sending…'; btn.disabled = true;
-  const data = {
-    name, email,
-    company: document.getElementById('cf-company').value.trim(),
-    phone: document.getElementById('cf-phone').value.trim(),
-    building: (document.getElementById('cf-building')||{}).value||'',
-    units: (document.getElementById('cf-units')||{}).value||'',
-    service: (document.getElementById('cf-service')||{}).value||'',
-    pain: (document.getElementById('cf-pain')||{}).value||'',
-    source: 'website', created_at: new Date().toISOString()
-  };
-  await saveLeadToSupabase(data);
+apiOk = res.ok;
+  } catch(e){ console.warn('api/lead failed, falling back to Supabase', e); }
+  if(!apiOk) await saveLeadToSupabase(data);
   if(typeof gtag !== 'undefined') gtag('event', 'lead_submit', { event_category: 'contact', event_label: data.building });
   btn.textContent = 'Sent ✓';
   document.getElementById('contact-form').innerHTML = '<p style="font-family:var(--ds);font-size:22px;font-style:italic;color:var(--accent);margin-top:16px">Thank you — we\'ll be in touch within 24 hours.</p>';
@@ -2221,6 +2835,204 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     if(!isOpen) item.classList.add('open');
   });
 });
+
+
+/* -- 3-TAP BOOKING LOGIC -- */
+(function(){
+  const card    = document.getElementById('bookCard');
+  if(!card) return;
+  const fill    = document.getElementById('bkRailFill');
+  const dots    = card.querySelectorAll('.bk-dot');
+  const steps   = card.querySelectorAll('.bk-step');
+  const summary = document.getElementById('bkSummary');
+  const phoneIn = document.getElementById('bkPhone');
+  const nameIn  = document.getElementById('bkName');
+  const emailIn = document.getElementById('bkEmail');
+  const submit  = document.getElementById('bkSubmit');
+  const donePh  = document.getElementById('bkDonePhone');
+  const state   = { service:'', units:'', step:1 };
+
+  function setStep(n){
+    state.step = n;
+    steps.forEach(s => s.classList.toggle('active', +s.dataset.step === n));
+    dots.forEach(d => { const v = +d.dataset.step; d.classList.toggle('active', v === n); d.classList.toggle('done', v < n); });
+    const pct = n === 1 ? 0 : n === 2 ? 50 : 100;
+    if(fill) fill.style.width = pct + '%';
+    if(n === 3) renderSummary();
+    if(n === 3 && nameIn) setTimeout(()=>nameIn.focus(), 250);
+  }
+  function renderSummary(){
+    if(!summary) return;
+    summary.innerHTML = (state.service ? `<span>${state.service}</span>` : '') + (state.units ? `<span>${state.units}</span>` : '');
+  }
+  card.querySelectorAll('.bk-chips').forEach(group => {
+    const field = group.dataset.field;
+    group.querySelectorAll('.bk-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        group.querySelectorAll('.bk-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        state[field] = chip.dataset.v;
+        setTimeout(() => setStep(state.step + 1), 220);
+      });
+    });
+  });
+  card.querySelectorAll('.bk-back').forEach(b => b.addEventListener('click', () => setStep(Math.max(1, state.step - 1))));
+  if(phoneIn){
+    phoneIn.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 10);
+      if(v.length > 6)      v = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+      else if(v.length > 3) v = `(${v.slice(0,3)}) ${v.slice(3)}`;
+      else if(v.length > 0) v = `(${v}`;
+      e.target.value = v;
+      e.target.style.borderColor=''; e.target.style.boxShadow='';
+    });
+    phoneIn.addEventListener('keydown', e => { if(e.key === 'Enter') submit.click(); });
+  }
+  [nameIn, emailIn].forEach(el => el && el.addEventListener('input', () => { el.style.borderColor=''; el.style.boxShadow=''; }));
+
+  submit && submit.addEventListener('click', async () => {
+    const phone = (phoneIn.value || '').trim();
+    const name  = (nameIn  ? nameIn.value  : '').trim();
+    const email = (emailIn ? emailIn.value : '').trim();
+    let ok = true;
+    const flag = (el) => { if(el){ el.style.borderColor='var(--accent)'; el.style.boxShadow='0 0 0 3px var(--a-glow)'; if(ok){ el.focus(); ok=false; } } };
+    if(name.length < 2) flag(nameIn);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) flag(emailIn);
+    if(phone.replace(/\D/g,'').length < 10) flag(phoneIn);
+    if(!ok) return;
+
+    submit.textContent = 'Booking...';
+    submit.disabled = true;
+    const payload = {
+      name, email, phone,
+      company:  '',
+      building: 'High-rise / Commercial',
+      units:    state.units,
+      service:  state.service,
+      pain:     '',
+      source:   'booking_3tap',
+      created_at: new Date().toISOString()
+    };
+    let apiOk = false;
+    try {
+      const res = await fetch('/api/lead', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      apiOk = res.ok;
+    } catch(e){ console.warn('api/lead failed, using Supabase fallback', e); }
+    if(!apiOk && typeof saveLeadToSupabase === 'function'){
+      try { await saveLeadToSupabase(payload); } catch(e){ console.warn(e); }
+    }
+    if(typeof gtag !== 'undefined'){
+      gtag('event', 'booking_submit', { event_category: 'booking', event_label: state.service, units: state.units });
+    }
+    if(donePh) donePh.textContent = phone;
+    setStep(4);
+  });
+})();
+
+/* Sync body class when sticky CTA hides — fallback for non-:has() browsers */
+(function(){
+  const sticky = document.querySelector('.sticky-cta');
+  if(!sticky) return;
+  const obs = new MutationObserver(() => {
+    document.body.classList.toggle('cta-hidden', sticky.classList.contains('hide'));
+  });
+  obs.observe(sticky, { attributes:true, attributeFilter:['class'] });
+})();
+
+/* Quick Book — self-contained 3-step flow that fires /api/lead */
+(function(){
+  const card    = document.getElementById('qbCard');
+  if(!card) return;
+  const chips   = card.querySelectorAll('.qb-chip');
+  const summary = document.getElementById('qbSummary');
+  const phoneIn = document.getElementById('qbPhone');
+  const nameIn  = document.getElementById('qbName');
+  const emailIn = document.getElementById('qbEmail');
+  const submit  = document.getElementById('qbSubmit');
+  const back    = card.querySelector('.qb-back');
+  const steps   = card.querySelectorAll('.qb-step');
+  const state   = { service:'', step:1 };
+
+  function showStep(n){
+    state.step = n;
+    steps.forEach(s => s.classList.toggle('active', +s.dataset.step === n));
+    if(n === 2){
+      if(summary) summary.innerHTML = state.service ? `<span>${state.service}</span>` : '';
+      setTimeout(() => nameIn && nameIn.focus(), 250);
+    }
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      state.service = chip.dataset.v;
+      setTimeout(() => showStep(2), 200);
+    });
+  });
+
+  back && back.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('selected'));
+    state.service = '';
+    showStep(1);
+  });
+
+  if(phoneIn){
+    phoneIn.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g,'').slice(0,10);
+      if(v.length > 6)      v = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+      else if(v.length > 3) v = `(${v.slice(0,3)}) ${v.slice(3)}`;
+      else if(v.length > 0) v = `(${v}`;
+      e.target.value = v;
+      e.target.classList.remove('qb-error');
+    });
+    phoneIn.addEventListener('keydown', e => { if(e.key === 'Enter') submit.click(); });
+  }
+  [nameIn, emailIn].forEach(el => el && el.addEventListener('input', () => el.classList.remove('qb-error')));
+
+  submit && submit.addEventListener('click', async () => {
+    const name  = (nameIn  ? nameIn.value  : '').trim();
+    const email = (emailIn ? emailIn.value : '').trim();
+    const phone = (phoneIn ? phoneIn.value : '').trim();
+    let ok = true;
+    const flag = (el, valid) => {
+      if(!el) return;
+      el.classList.toggle('qb-error', !valid);
+      if(!valid && ok){ el.focus(); ok = false; }
+    };
+    flag(nameIn,  name.length >= 2);
+    flag(emailIn, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    flag(phoneIn, phone.replace(/\D/g,'').length >= 10);
+    if(!ok) return;
+
+    submit.disabled = true;
+    submit.textContent = 'Sending...';
+
+    const payload = {
+      name, email, phone,
+      company: '',
+      building: 'High-rise / Commercial',
+      units: '',
+      service: state.service,
+      pain: '',
+      source: 'hero_quick_book',
+      created_at: new Date().toISOString()
+    };
+
+    let apiOk = false;
+    try {
+      const res = await fetch('/api/lead', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      apiOk = res.ok;
+    } catch(e){ console.warn('api/lead failed, using Supabase fallback', e); }
+    if(!apiOk && typeof saveLeadToSupabase === 'function'){
+      try { await saveLeadToSupabase(payload); } catch(e){ console.warn(e); }
+    }
+    if(typeof gtag !== 'undefined'){
+      gtag('event', 'qb_submit', { event_category:'booking', event_label: state.service, source:'hero_quick_book' });
+    }
+    showStep(3);
+  });
+})();
 </script>
 </body>
 </html>

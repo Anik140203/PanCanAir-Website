@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Condo High-Rise HVAC Maintenance &mdash; PanCanAir &middot; Toronto GTA</title>
+<meta name="description" content="Specialized HVAC maintenance contracts for Toronto-GTA high-rise condominiums (50-1000+ units). Boilers, chillers, MAUs, RTUs and centralized mechanical rooms. TSSA, ASHRAE, ACMO, BOMA compliant."/>
+<link rel="canonical" href="https://pancanair.com/services/condo-high-rise.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Condo High-Rise HVAC &mdash; PanCanAir"/>
+<meta property="og:description" content="Full-building HVAC maintenance for GTA high-rise condos. From $18/unit/month."/>
+<meta property="og:url" content="https://pancanair.com/services/condo-high-rise.html"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"High-Rise Condominium HVAC Maintenance","provider":{"@type":"LocalBusiness","name":"PanCanAir","telephone":"+14374102100","email":"info@pancanair.com","url":"https://pancanair.com"},"areaServed":["Toronto","Mississauga","Brampton","Vaughan","Markham","North York","Oakville"],"serviceType":"Commercial HVAC Maintenance","offers":{"@type":"Offer","priceCurrency":"CAD","priceSpecification":{"@type":"UnitPriceSpecification","price":"18.00","priceCurrency":"CAD","unitText":"per unit per month"}}}</script>
+<!-- Supabase (shared with home page) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPA_URL='https://zfeewaswxkdiicegcsqz.supabase.co';
+  const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmZWV3YXN3eGtkaWljZWdjc3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMzA5NjksImV4cCI6MjA5MTYwNjk2OX0.bRfFZlCHkPDqj5PBVnij9VM0gnWr9_eYYpHayB-GsPI';
+  const _supa=supabase.createClient(SUPA_URL,SUPA_KEY);
+  async function saveLeadToSupabase(data){if(!_supa)return;try{await _supa.from('leads').insert([data]);}catch(e){console.warn('Supabase insert failed',e);}}
+</script>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J06SNSNF64"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-J06SNSNF64');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet"/>
+<style>
+/* ── Brand tokens (verbatim from home) ── */
+:root{
+  --bg:#f5f2ed; --s0:#ffffff; --s1:#f0ece6; --s2:#e8e3db; --s3:#ddd8ce;
+  --accent:#d94a2b; --a-soft:rgba(217,74,43,.08); --a-glow:rgba(217,74,43,.14);
+  --blue:#1a5fa8; --b-soft:rgba(26,95,168,.08);
+  --border:rgba(0,0,0,.08); --bh:rgba(0,0,0,.15);
+  --t1:#1a1714; --t2:rgba(26,23,20,.72); --t3:rgba(26,23,20,.52); --t4:rgba(26,23,20,.16);
+  --ds:'DM Serif Display',Georgia,serif;
+  --body:'Satoshi','DM Sans',system-ui,sans-serif;
+  --r:20px; --r-sm:14px; --r-pill:100px;
+  --card-shadow:0 1px 4px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.05);
+  --card-shadow-h:0 8px 32px rgba(0,0,0,.10),0 0 0 1px rgba(0,0,0,.06);
+  --navy:#08122c;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::selection{background:var(--accent);color:#fff}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+.sec{padding:96px 0}
+@media(max-width:768px){.sec{padding:64px 0}.wrap{padding:0 20px}}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:66px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(8,18,44,.96);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:background .25s,box-shadow .25s;
+}
+.nav-inner{
+  width:100%;max-width:1160px;
+  padding:0 32px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+.nav-inner .nav-links{justify-self:center;}
+.nav-inner .nav-cta{justify-self:end;}
+nav.scrolled{background:rgba(8,18,44,1);box-shadow:0 2px 24px rgba(0,0,0,.28)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-text{display:flex;flex-direction:column}
+.nav-logo-name{font-family:var(--ds);font-size:20px;font-style:italic;color:#fff;line-height:1;letter-spacing:-.02em}
+.nav-logo-name b{font-style:normal;color:var(--accent)}
+.nav-logo-sub{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.4);margin-top:2px}
+.nav-links{display:flex;gap:2px;background:rgba(255,255,255,.06);padding:4px;border-radius:100px;border:1px solid rgba(255,255,255,.1)}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);padding:7px 16px;border-radius:100px;transition:color .2s,background .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a.nav-active{color:#fff;background:rgba(255,255,255,.14);font-weight:700;}
+.nav-cta{display:flex;align-items:center;gap:16px}
+.nav-phone{font-size:13px;font-weight:600;color:rgba(255,255,255,.55)}
+.btn-sm{background:var(--accent);color:#fff;font-family:var(--body);font-size:13px;font-weight:700;padding:9px 22px;border-radius:var(--r-pill);border:none;cursor:pointer;transition:filter .15s,transform .15s}
+.btn-sm:hover{filter:brightness(1.1);transform:translateY(-1px)}
+@media(max-width:860px){
+  .nav-links,.nav-phone{display:none}
+  .nav-inner{
+    padding:0 20px;
+    grid-template-columns:1fr auto;
+  }
+  .nav-inner .nav-cta{justify-self:end;display:flex;align-items:center;}
+}
+/* ── MOBILE NAV HAMBURGER ── */
+.nav-ham{display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;background:none;border:none;cursor:pointer;padding:8px;
+  border-radius:var(--r-sm);transition:background .15s}
+.nav-ham:hover{background:rgba(255,255,255,.08)}
+.nav-ham span{display:block;height:1.5px;background:#fff;border-radius:1px;
+  transition:transform .22s cubic-bezier(.25,.46,.45,.94),opacity .15s}
+@media(max-width:860px){.nav-ham{display:flex}.nav-cta .btn-sm{display:none}}
+/* Mobile menu overlay */
+#mob-menu{
+  display:none;position:fixed;top:66px;left:0;right:0;z-index:99;
+  background:rgba(8,18,44,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);padding:12px 20px 20px;
+  flex-direction:column;gap:4px;
+  box-shadow:0 8px 32px rgba(0,0,0,.36);
+}
+#mob-menu.open{display:flex}
+#mob-menu a{font-size:15px;font-weight:600;color:rgba(255,255,255,.85);padding:13px 16px;
+  border-radius:var(--r-sm);transition:background .15s;display:block}
+#mob-menu a:hover{background:rgba(255,255,255,.07)}
+#mob-menu .mob-cta{margin-top:8px;padding:14px;text-align:center;
+  background:var(--accent);color:#fff;font-weight:700;font-size:14px;
+  border-radius:var(--r-pill);border:none;cursor:pointer;transition:filter .15s;width:100%}
+#mob-menu .mob-cta:hover{filter:brightness(1.07)}}
+
+/* ── HERO ── */
+#sub-hero{
+  min-height:88svh;padding-top:120px;padding-bottom:64px;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse 70% 80% at 90% 10%, rgba(0,174,239,.13) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 65% at 12% 90%, rgba(29,78,160,.08) 0%, transparent 48%),
+    radial-gradient(ellipse 48% 52% at 18% 8%, rgba(217,74,43,.10) 0%, transparent 46%),
+    linear-gradient(160deg, #e8e3da 0%, #f5f2ed 38%, #f2efe9 72%, #ece7de 100%);
+}
+#sub-hero::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(26,23,20,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,23,20,.04) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 60% 65% at 50% 50%, transparent 8%, rgba(0,0,0,.7) 70%);
+  -webkit-mask-image:radial-gradient(ellipse 60% 65% at 50% 50%, transparent 8%, rgba(0,0,0,.7) 70%);
+}
+.sub-hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:80px;align-items:center}
+.sub-hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:24px}
+.sub-hero-tag::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.sub-hero-h1{font-family:var(--ds);font-size:clamp(40px,5vw,68px);line-height:1.04;letter-spacing:-.025em;color:var(--t1);margin-bottom:24px}
+.sub-hero-h1 em{font-style:italic;color:var(--t2)}
+.sub-hero-p{font-size:17px;color:var(--t2);line-height:1.65;max-width:480px;margin-bottom:36px}
+.sub-hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:520px;margin-bottom:36px}
+.sub-stat{padding:18px 20px;background:rgba(255,255,255,.55);border:1px solid var(--border);border-radius:var(--r-sm);backdrop-filter:blur(8px)}
+.sub-stat-num{font-family:var(--ds);font-size:32px;line-height:1;letter-spacing:-.02em;color:var(--accent);margin-bottom:4px}
+.sub-stat-lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
+.sub-hero-btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:700;padding:14px 28px;border-radius:var(--r-pill);font-size:14px;border:none;cursor:pointer;transition:all .2s}
+.btn-primary:hover{filter:brightness(1.07);transform:translateY(-2px);box-shadow:0 12px 32px var(--a-glow)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:var(--t1);font-weight:600;padding:14px 22px;border-radius:var(--r-pill);font-size:14px;border:1px solid var(--bh);cursor:pointer;background:transparent;transition:all .15s}
+.btn-ghost:hover{border-color:var(--t1);background:rgba(0,0,0,.04)}
+
+/* Animated tower SVG on hero right */
+.sub-hero-visual{position:relative;height:480px;display:flex;align-items:flex-end;justify-content:center}
+.hero-towers{width:100%;max-width:380px;height:auto;overflow:visible}
+.hero-towers .tw{animation:hero-tw-fade .9s cubic-bezier(.2,.7,.2,1) both;transform-origin:center bottom}
+.hero-towers .tw-1{animation-delay:.05s}
+.hero-towers .tw-2{animation-delay:.18s}
+.hero-towers .tw-3{animation-delay:.32s}
+@keyframes hero-tw-fade{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hero-tw-lit{animation:hero-win-glow 5s ease-in-out infinite;transform-origin:center}
+.hero-tw-lit-1{animation-delay:0s}
+.hero-tw-lit-2{animation-delay:.6s}
+.hero-tw-lit-3{animation-delay:1.2s}
+.hero-tw-lit-4{animation-delay:1.8s}
+.hero-tw-lit-5{animation-delay:2.4s}
+.hero-tw-lit-6{animation-delay:3.0s}
+.hero-tw-lit-7{animation-delay:3.6s}
+.hero-tw-lit-8{animation-delay:.9s}
+.hero-tw-lit-9{animation-delay:2.7s}
+.hero-tw-lit-10{animation-delay:4.2s}
+@keyframes hero-win-glow{0%,86%,100%{opacity:.18;filter:none}88%,94%{opacity:1;filter:drop-shadow(0 0 6px rgba(243,120,85,.7))}}
+.hero-beacon-pulse{transform-origin:177px 12px;animation:hero-beacon 1.4s ease-in-out infinite}
+@keyframes hero-beacon{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.6);opacity:.55}}
+@media (prefers-reduced-motion: reduce){
+  .hero-towers .tw,.hero-tw-lit,.hero-beacon-pulse{animation:none!important}
+}94%,97%{opacity:.05}}
+
+@media(max-width:860px){
+  .sub-hero-grid{grid-template-columns:1fr;gap:48px}
+  .sub-hero-stats{grid-template-columns:repeat(3,1fr)}
+  .sub-hero-visual{height:320px}
+  .tower-stage{width:240px;height:320px}
+}
+
+/* ── TRUST STRIP ── */
+.trust-strip{padding:36px 0;background:var(--navy);color:#fff;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.trust-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.trust-tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.55)}
+.trust-badges{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.trust-badges b{font-family:var(--body);font-size:13px;font-weight:800;letter-spacing:.16em;color:#fff}
+
+/* ── SECTION BASE ── */
+.sec-lbl{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:14px}
+.sec-h{font-family:var(--ds);font-size:clamp(32px,4.5vw,52px);line-height:1.05;letter-spacing:-.02em;color:var(--t1);margin-bottom:14px}
+.sec-h em{font-style:italic;color:var(--t2)}
+.sec-sub{font-size:16px;color:var(--t2);max-width:520px;line-height:1.65;margin-bottom:48px}
+.sec-head-c{text-align:center;max-width:680px;margin:0 auto 56px}
+.sec-head-c .sec-sub{margin-left:auto;margin-right:auto;margin-bottom:0}
+
+/* ── DIFFERENTIATORS (deep dive) ── */
+.diff-sec{background:var(--s0);border-bottom:1px solid var(--border)}
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.diff-tile{background:var(--s0);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;transition:border-color .25s,box-shadow .25s,transform .25s;display:flex;flex-direction:column;min-height:260px}
+.diff-tile:hover{border-color:var(--bh);box-shadow:var(--card-shadow-h);transform:translateY(-3px)}
+.diff-num{font-family:var(--ds);font-size:48px;line-height:1;color:var(--accent);opacity:.18;margin-bottom:12px}
+.diff-h{font-family:var(--ds);font-size:24px;line-height:1.2;letter-spacing:-.015em;color:var(--t1);margin-bottom:10px}
+.diff-p{font-size:14px;line-height:1.65;color:var(--t2);flex:1}
+.diff-p b{color:var(--t1)}
+.diff-meta{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}
+@media(max-width:1100px){.diff-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.diff-grid{grid-template-columns:1fr}}
+
+/* ── SYSTEMS WE MANAGE ── */
+.sys-sec{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sys-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sys-card{background:var(--s0);border:1px solid var(--border);border-radius:var(--r-sm);padding:24px 20px;transition:all .25s;cursor:default}
+.sys-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px var(--a-glow)}
+.sys-icon{width:40px;height:40px;border-radius:10px;background:var(--a-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:14px}
+.sys-icon svg{width:22px;height:22px}
+.sys-h{font-family:var(--ds);font-size:18px;letter-spacing:-.01em;color:var(--t1);margin-bottom:6px}
+.sys-d{font-size:12px;color:var(--t2);line-height:1.55}
+@media(max-width:900px){.sys-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── BUILDING TYPES (size brackets) ── */
+.size-sec{background:var(--s0);border-bottom:1px solid var(--border)}
+.size-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.size-card{position:relative;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:32px 18px;text-align:center;transition:all .2s}
+.size-card:hover{background:var(--s0);border-color:var(--accent);transform:translateY(-2px)}
+.size-num{font-family:var(--ds);font-size:30px;line-height:1;letter-spacing:-.02em;color:var(--t1);margin-bottom:6px}
+.size-num em{font-style:italic;color:var(--accent)}
+.size-lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
+.size-card.priority{background:var(--a-soft);border-color:rgba(217,74,43,.22)}
+.size-card.priority::after{content:'PRIORITY';position:absolute;top:-9px;right:50%;transform:translateX(50%);font-size:9px;font-weight:800;letter-spacing:.14em;color:#fff;background:var(--accent);padding:3px 10px;border-radius:100px}
+@media(max-width:900px){.size-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── CTA TILES (the reusable component) ── */
+.cta-sec{background:var(--s0);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cta-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(220px,auto);gap:14px}
+.cta-tile{position:relative;background:var(--s0);border:1px solid var(--border);border-radius:var(--r);padding:28px 26px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s}
+.cta-tile::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, var(--accent), transparent 70%);opacity:0;transition:opacity .25s;pointer-events:none}
+.cta-tile:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 16px 40px var(--a-glow)}
+.cta-tile:hover::before{opacity:.06}
+.cta-tile-icon{width:48px;height:48px;border-radius:14px;background:var(--a-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px;transition:background .25s,color .25s}
+.cta-tile:hover .cta-tile-icon{background:var(--accent);color:#fff}
+.cta-tile-h{font-family:var(--ds);font-size:24px;line-height:1.15;letter-spacing:-.015em;color:var(--t1);margin-bottom:8px}
+.cta-tile-p{font-size:13px;line-height:1.55;color:var(--t2);margin-bottom:18px}
+.cta-tile-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--accent);transition:gap .2s}
+.cta-tile:hover .cta-tile-link{gap:10px}
+/* Featured CTA tile (the big one) */
+.cta-tile-featured{grid-column:span 2;grid-row:span 2;background:linear-gradient(135deg, var(--navy) 0%, #122047 100%);color:#fff;border-color:transparent}
+.cta-tile-featured:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(8,18,44,.28)}
+.cta-tile-featured .cta-tile-icon{background:rgba(255,255,255,.1);color:#fff}
+.cta-tile-featured:hover .cta-tile-icon{background:var(--accent);color:#fff}
+.cta-tile-featured .cta-tile-h{color:#fff;font-size:32px;max-width:340px}
+.cta-tile-featured .cta-tile-p{color:rgba(255,255,255,.65);max-width:340px}
+.cta-tile-featured .cta-tile-link{color:var(--accent);font-size:14px}
+.cta-tile-featured::before{background:linear-gradient(135deg, rgba(217,74,43,.45), transparent 70%)}
+@media(max-width:1100px){.cta-grid{grid-template-columns:repeat(2,1fr)}.cta-tile-featured{grid-column:span 2}}
+@media(max-width:560px){.cta-grid{grid-template-columns:1fr}.cta-tile-featured{grid-column:span 1;grid-row:auto}}
+
+/* ── TESTIMONIAL ── */
+.testi-sec{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.testi{max-width:780px;margin:0 auto;text-align:center}
+.testi-quote{font-family:var(--ds);font-size:clamp(24px,3vw,34px);line-height:1.3;letter-spacing:-.01em;color:var(--t1);margin-bottom:24px;font-style:italic}
+.testi-attr{display:flex;align-items:center;justify-content:center;gap:14px}
+.testi-pic{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg, var(--accent), #f37855);display:grid;place-items:center;color:#fff;font-family:var(--ds);font-size:20px}
+.testi-name{font-size:14px;font-weight:700;color:var(--t1)}
+.testi-role{font-size:12px;color:var(--t3);margin-top:2px}
+
+/* ── FAQ ── */
+.faq-sec{background:var(--s0);border-bottom:1px solid var(--border)}
+.faq-list{max-width:780px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-q{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:none;cursor:pointer;font-family:var(--body);font-size:16px;font-weight:600;color:var(--t1);text-align:left;padding:0}
+.faq-q::after{content:'+';font-size:24px;font-weight:300;color:var(--accent);transition:transform .25s}
+.faq-item.open .faq-q::after{content:'–'}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:14px;color:var(--t2);line-height:1.65}
+.faq-item.open .faq-a{max-height:280px;padding-top:14px}
+
+/* ── BOOK SECTION (embedded 3-tap) — tokens already inherited ── */
+/* (booking section CSS lives inside the section markup below) */
+
+/* ── FOOTER ── */
+footer{background:var(--navy);color:rgba(255,255,255,.7);padding:64px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.foot-brand{font-family:var(--ds);font-size:24px;color:#fff;margin-bottom:12px}
+.foot-brand b{color:var(--accent)}
+.wm-can{color:#1D4EA0}.wm-air{color:var(--accent)}
+.foot-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,.55);max-width:280px}
+.foot-col h4{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px}
+.foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:10px;transition:color .15s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.4)}
+@media(max-width:768px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .tower,.tower-windows span{animation:none!important}
+}
+</style>
+<style>
+.sticky-cta{display:none;position:fixed;bottom:14px;left:14px;right:14px;z-index:90;align-items:center;gap:12px;padding:12px 16px;background:var(--accent);color:#fff;border-radius:16px;box-shadow:0 12px 32px rgba(217,74,43,.34),0 0 0 1px rgba(255,255,255,.06);text-decoration:none;animation:stickyIn .5s cubic-bezier(.2,.7,.2,1) .8s both}
+.sticky-cta-icon{flex:0 0 36px;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.18);display:grid;place-items:center;color:#fff}
+.sticky-cta-text{flex:1;display:flex;flex-direction:column;line-height:1.2;color:#fff}
+.sticky-cta-text b{font-family:var(--body);font-size:14px;font-weight:800}
+.sticky-cta-text small{font-size:11px;font-weight:500;opacity:.85;margin-top:2px}
+.sticky-cta-arrow{font-size:20px;font-weight:700}
+@keyframes stickyIn{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+@media(max-width:860px){.sticky-cta{display:flex}body{padding-bottom:84px}}
+.sticky-cta.hide{transform:translateY(120%);opacity:0;pointer-events:none}
+/* mid-funnel cta strip */
+.cta-strip{position:relative;padding:36px 0;background:linear-gradient(135deg, var(--navy) 0%, #122047 100%);color:#fff;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.cta-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta-strip-text{flex:1;min-width:220px}
+.cta-strip-h{font-family:var(--ds);font-size:clamp(22px,2.4vw,28px);line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:4px}
+.cta-strip-h em{font-style:italic;color:#f37855}
+.cta-strip-p{font-size:13px;color:rgba(255,255,255,.65)}
+.cta-strip-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:700;font-size:14px;padding:14px 28px;border-radius:100px;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.cta-strip-btn:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 12px 32px rgba(217,74,43,.45)}
+@media(max-width:768px){.cta-strip-inner{flex-direction:column;align-items:flex-start;gap:16px}.cta-strip-btn{width:100%;justify-content:center}}
+</style>
+<style>
+@media(max-width:860px){
+  .emer-fab{bottom:96px !important;right:14px !important;padding:11px 16px 11px 12px !important;font-size:12px !important;border-radius:100px !important}
+  .emer-fab .emer-fab-icon{width:32px !important;height:32px !important}
+  body.cta-hidden .emer-fab{bottom:24px !important}
+  body.cta-hidden{padding-bottom:24px !important}
+}
+</style>
+<script>
+(function(){
+  const sticky = document.querySelector('.sticky-cta');
+  if(!sticky) return;
+  const obs = new MutationObserver(() => {
+    document.body.classList.toggle('cta-hidden', sticky.classList.contains('hide'));
+  });
+  obs.observe(sticky, { attributes:true, attributeFilter:['class'] });
+})();
+</script>
+</head>
+<body>
+<a href="#book" class="sticky-cta" aria-label="Book a free building audit">
+  <span class="sticky-cta-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 14l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  <span class="sticky-cta-text"><b>Book Site Visit</b><small>3 taps. Free. 24-hour proposal.</small></span>
+  <span class="sticky-cta-arrow">&rarr;</span>
+</a>
+
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="nav-wm" href="../index.html"><b>Pan</b><span class="wm-can">Can</span><span class="wm-air">Air</span></a>
+    <div class="nav-links">
+      <a href="../index.html#services">Services</a>
+      <a href="condo-high-rise.html" class="nav-active">High-Rises</a>
+      <a href="../index.html#pricing">Pricing</a>
+      <a href="../index.html#reviews">Reviews</a>
+      <a href="../index.html#founder">About</a>
+    </div>
+    <div class="nav-cta">
+      <span class="nav-phone">+1 (437) 410-2100</span>
+      <button class="btn-sm" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Site Visit</button>
+      <button class="nav-ham" id="nav-ham" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<!-- Mobile menu -->
+<div id="mob-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="#services" id="mob-services">Services</a>
+  <a href="#highrise" id="mob-highrise">High-Rises</a>
+  <a href="#pricing" id="mob-pricing">Pricing</a>
+  <a href="#reviews" id="mob-reviews">Reviews</a>
+  <a href="#founder" id="mob-about">About</a>
+  <a href="#book" id="mob-book">Book a Visit</a>
+  <a href="#contact" id="mob-contact">Contact</a>
+  <button class="mob-cta" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'});document.getElementById('mob-menu').classList.remove('open')">Book Site Visit &rarr;</button>
+</div>
+
+<!-- HERO -->
+<section id="sub-hero">
+  <div class="wrap">
+    <div class="sub-hero-grid">
+      <div>
+        <div class="sub-hero-tag">Condo High-Rise HVAC</div>
+        <h1 class="sub-hero-h1">Built for buildings <em>of consequence.</em></h1>
+        <p class="sub-hero-p">PanCanAir is the GTA's specialist for high-rise condominium HVAC &mdash; centralized boilers, multi-loop chiller plants, makeup-air units, controls, and the people who keep them running. Most contractors dabble in commercial. We only do this.</p>
+        <div class="sub-hero-stats">
+          <div class="sub-stat"><div class="sub-stat-num">50+</div><div class="sub-stat-lbl">Buildings managed</div></div>
+          <div class="sub-stat"><div class="sub-stat-num">&lt;2h</div><div class="sub-stat-lbl">Avg dispatch</div></div>
+          <div class="sub-stat"><div class="sub-stat-num">$18</div><div class="sub-stat-lbl">/ unit / month</div></div>
+        </div>
+        <div class="sub-hero-btns">
+          <a class="btn-primary" href="#book">Book a free building audit &rarr;</a>
+          <a class="btn-ghost" href="#systems">See systems we manage</a>
+        </div>
+      </div>
+      <div class="sub-hero-visual" aria-hidden="true">
+        <svg class="hero-towers" viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="towerFace" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fcfaf6"/>
+              <stop offset="100%" stop-color="#ece6db"/>
+            </linearGradient>
+            <linearGradient id="towerSide" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d8d0c0"/>
+              <stop offset="100%" stop-color="#beb39e"/>
+            </linearGradient>
+            <linearGradient id="windowLit" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffd9b8" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="#f37855" stop-opacity=".75"/>
+            </linearGradient>
+            <pattern id="winGrid1" x="0" y="0" width="14" height="18" patternUnits="userSpaceOnUse">
+              <rect x="2" y="2" width="10" height="11" fill="#1a1714" opacity=".55" rx=".5"/>
+            </pattern>
+            <pattern id="winGrid2" x="0" y="0" width="16" height="22" patternUnits="userSpaceOnUse">
+              <rect x="3" y="3" width="11" height="14" fill="#1a1714" opacity=".55" rx=".5"/>
+            </pattern>
+            <pattern id="winGrid3" x="0" y="0" width="13" height="17" patternUnits="userSpaceOnUse">
+              <rect x="2" y="2" width="9" height="11" fill="#1a1714" opacity=".55" rx=".5"/>
+            </pattern>
+            <filter id="towerShadow" x="-50%" y="-20%" width="200%" height="140%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+              <feOffset dx="0" dy="8"/>
+              <feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer>
+              <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- ground line -->
+          <line x1="20" y1="466" x2="340" y2="466" stroke="#1a1714" stroke-width="1.4" opacity=".22"/>
+
+          <!-- TOWER 1 — back-left, shorter -->
+          <g class="tw tw-1" filter="url(#towerShadow)">
+            <rect x="22" y="180" width="86" height="286" fill="url(#towerFace)" stroke="#1a1714" stroke-opacity=".18" stroke-width=".8" rx="2"/>
+            <rect x="22" y="180" width="86" height="286" fill="url(#winGrid1)"/>
+            <!-- side shading (depth) -->
+            <rect x="108" y="186" width="6" height="280" fill="url(#towerSide)" opacity=".5"/>
+            <!-- crown -->
+            <rect x="46" y="172" width="38" height="10" fill="#1a1714"/>
+            <rect x="61" y="160" width="8" height="14" fill="#1a1714"/>
+            <line x1="65" y1="148" x2="65" y2="160" stroke="#d94a2b" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- random lit window -->
+            <rect class="hero-tw-lit hero-tw-lit-1" x="40" y="252" width="10" height="11" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-2" x="68" y="316" width="10" height="11" fill="url(#windowLit)" rx=".5"/>
+          </g>
+
+          <!-- TOWER 2 — center, tallest (the hero anchor) -->
+          <g class="tw tw-2" filter="url(#towerShadow)">
+            <rect x="118" y="60" width="118" height="406" fill="url(#towerFace)" stroke="#1a1714" stroke-opacity=".22" stroke-width="1" rx="3"/>
+            <rect x="118" y="60" width="118" height="406" fill="url(#winGrid2)"/>
+            <!-- side -->
+            <rect x="236" y="68" width="8" height="398" fill="url(#towerSide)" opacity=".55"/>
+            <!-- crown w/ accent beacon -->
+            <rect x="142" y="48" width="70" height="14" fill="#1a1714"/>
+            <rect x="170" y="30" width="14" height="20" fill="#1a1714"/>
+            <line x1="177" y1="10" x2="177" y2="30" stroke="#d94a2b" stroke-width="2" stroke-linecap="round"/>
+            <circle class="hero-beacon-pulse" cx="177" cy="12" r="3" fill="#d94a2b"/>
+            <!-- lit windows (animated) -->
+            <rect class="hero-tw-lit hero-tw-lit-3" x="138" y="120" width="11" height="14" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-4" x="186" y="180" width="11" height="14" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-5" x="154" y="252" width="11" height="14" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-6" x="202" y="324" width="11" height="14" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-7" x="138" y="384" width="11" height="14" fill="url(#windowLit)" rx=".5"/>
+            <!-- ground floor entrance -->
+            <rect x="166" y="436" width="22" height="30" fill="#1a1714" opacity=".75" rx="1"/>
+            <line x1="177" y1="436" x2="177" y2="466" stroke="#d94a2b" stroke-width=".8" opacity=".5"/>
+          </g>
+
+          <!-- TOWER 3 — right, mid-height -->
+          <g class="tw tw-3" filter="url(#towerShadow)">
+            <rect x="244" y="120" width="96" height="346" fill="url(#towerFace)" stroke="#1a1714" stroke-opacity=".18" stroke-width=".8" rx="2"/>
+            <rect x="244" y="120" width="96" height="346" fill="url(#winGrid3)"/>
+            <rect x="340" y="126" width="6" height="340" fill="url(#towerSide)" opacity=".5"/>
+            <rect x="266" y="112" width="52" height="10" fill="#1a1714"/>
+            <rect x="287" y="98" width="10" height="16" fill="#1a1714"/>
+            <line x1="292" y1="84" x2="292" y2="98" stroke="#d94a2b" stroke-width="1.5" stroke-linecap="round"/>
+            <rect class="hero-tw-lit hero-tw-lit-8" x="262" y="186" width="9" height="11" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-9" x="304" y="252" width="9" height="11" fill="url(#windowLit)" rx=".5"/>
+            <rect class="hero-tw-lit hero-tw-lit-10" x="288" y="358" width="9" height="11" fill="url(#windowLit)" rx=".5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="trust-strip-inner">
+      <span class="trust-tag">Standards-mapped to</span>
+      <div class="trust-badges">
+        <b>TSSA</b><b>ASHRAE</b><b>ACMO</b><b>BOMA</b><b>FULLY INSURED</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIFFERENTIATORS (deep dive of Pan's 8 points) -->
+<section class="sec diff-sec">
+  <div class="wrap">
+    <div class="sec-head-c">
+      <div class="sec-lbl">Why property managers choose us</div>
+      <h2 class="sec-h">Eight reasons. <em>Zero asterisks.</em></h2>
+      <p class="sec-sub">No tiered service levels, no surprise upcharges, no "we don't service that." This is what's covered when you sign with PanCanAir.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-tile">
+        <div class="diff-num">01</div>
+        <div class="diff-h">Full-building contracts</div>
+        <div class="diff-p">One flat rate. Boilers, chillers, MAUs, pumps, controls, RTUs &mdash; <b>everything mechanical</b> under one accountable team. No "that's not in scope" phone calls.</div>
+        <div class="diff-meta">Single contract &middot; Single PO</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">02</div>
+        <div class="diff-h">High-rise specialty</div>
+        <div class="diff-p">From 50-unit boutique towers to 1,000+ unit master-planned communities. Centralized hydronic, multi-loop chiller plants, MAUs in stack penthouses &mdash; the systems generic contractors avoid.</div>
+        <div class="diff-meta">50 to 1,000+ units</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">03</div>
+        <div class="diff-h">Highly competitive pricing</div>
+        <div class="diff-p">Flat-rate proposals from <b>$18 / unit / month</b>. Every quote benchmarked against real GTA comps and BOMA Canada figures &mdash; no padding, no surprise change orders.</div>
+        <div class="diff-meta">Locked-in for 12 months</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">04</div>
+        <div class="diff-h">24/7 emergency dispatch</div>
+        <div class="diff-p">Senior tech on-site in <b>under 2 hours</b> across the GTA &mdash; nights, weekends, statutory holidays. Real human answer, not a triage queue.</div>
+        <div class="diff-meta">Avg response 1h 47m</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">05</div>
+        <div class="diff-h">Complete system management</div>
+        <div class="diff-p">Boilers, chillers, MAUs, pumps, controls, RTUs, cooling towers, BAS integration. End-to-end ownership of the mechanical room &mdash; <b>not piecemeal</b>.</div>
+        <div class="diff-meta">8 system categories</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">06</div>
+        <div class="diff-h">Preventive maintenance programs</div>
+        <div class="diff-p">Quarterly inspections, seasonal changeovers, tracked component lifecycles. Programs designed to drop reactive call-outs by <b>60-80%</b> within the first contract year.</div>
+        <div class="diff-meta">12 PM visits / yr</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">07</div>
+        <div class="diff-h">Compliant by default</div>
+        <div class="diff-p">Every contract ships standards-mapped to <b>TSSA, ASHRAE, ACMO, and BOMA</b>. Monthly digital compliance reports &mdash; audit-ready, board-ready, AGM-ready.</div>
+        <div class="diff-meta">Audit pack every month</div>
+      </div>
+      <div class="diff-tile">
+        <div class="diff-num">08</div>
+        <div class="diff-h">Mechanical rooms &amp; centralized plants</div>
+        <div class="diff-p">Pressure vessels, three-way valves, VFDs, header isolation, glycol loops &mdash; we operate where the building's spine lives. Our techs come from industrial roots, not residential.</div>
+        <div class="diff-meta">Industrial-trained team</div>
+      </div>
+      <div class="diff-tile" style="background:var(--a-soft);border-color:rgba(217,74,43,.18)">
+        <div class="diff-num" style="color:var(--accent);opacity:1">+</div>
+        <div class="diff-h">The PanCanAir guarantee</div>
+        <div class="diff-p">If we miss a contracted PM visit, that month is on the house. If our 2-hour dispatch SLA fails twice in a quarter, you cancel without penalty. <b>Skin in the game.</b></div>
+        <div class="diff-meta">Performance-linked</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="cta-strip">
+  <div class="wrap">
+    <div class="cta-strip-inner">
+      <div class="cta-strip-text">
+        <div class="cta-strip-h">Sounds like your building? <em>Let's talk.</em></div>
+        <div class="cta-strip-p">90-minute audit. Flat-rate proposal in 24 hours. Zero pressure.</div>
+      </div>
+      <a href="#book" class="cta-strip-btn">Book Site Visit &rarr;</a>
+    </div>
+  </div>
+</div>
+<!-- SYSTEMS WE MANAGE -->
+<section id="systems" class="sec sys-sec">
+  <div class="wrap">
+    <div class="sec-head-c">
+      <div class="sec-lbl">Systems we manage</div>
+      <h2 class="sec-h">Every box. <em>Every loop.</em></h2>
+      <p class="sec-sub">Centralized mechanical rooms in high-rise condos are intricate. Here's what's covered the day you sign.</p>
+    </div>
+    <div class="sys-grid">
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v3M9 5h6M8 5v15a2 2 0 002 2h4a2 2 0 002-2V5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l1.5 2L11 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div class="sys-h">Boilers + Hydronic</div>
+        <div class="sys-d">Cast iron, fire-tube, condensing. Glycol loops, expansion tanks, primary/secondary piping, header isolation.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3L6.3 17.7" stroke="currentColor" stroke-width="1.2" opacity=".6"/></svg></div>
+        <div class="sys-h">Chillers</div>
+        <div class="sys-d">Air- and water-cooled, scroll/screw/centrifugal. Cooling tower management, condenser water loops, BAS-integrated.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 6V3M17 6V3M3 12h18" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="15" r="1" fill="currentColor"/><circle cx="16" cy="15" r="1" fill="currentColor"/></svg></div>
+        <div class="sys-h">MAUs</div>
+        <div class="sys-d">Makeup air units in penthouse stacks. Burner assemblies, filter banks, gas valves, dampers, full controls integration.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+        <div class="sys-h">Pumps</div>
+        <div class="sys-d">Inline, base-mounted, VFD-driven. Seal replacement, alignment, balancing, vibration analysis.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/><path d="M7 15h10" stroke="currentColor" stroke-width="1.4"/></svg></div>
+        <div class="sys-h">Controls + BAS</div>
+        <div class="sys-d">DDC controllers, sequence-of-operation tuning, alarm management. We work with Distech, Siemens, Honeywell, Tridium.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 21V8l9-5 9 5v13M3 21h18M9 21v-7h6v7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="sys-h">RTUs</div>
+        <div class="sys-d">Rooftop package units for amenity floors, mixed-use commercial. Belt drives, economizers, refrigerant work, recovery.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 19h14M7 19v-9l5-3 5 3v9M9 13h2M13 13h2M9 16h6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="sys-h">Cooling Towers</div>
+        <div class="sys-d">Open and closed-loop, FRP and galvanized. Basin cleaning, fill replacement, water treatment, Legionella programs.</div>
+      </div>
+      <div class="sys-card">
+        <div class="sys-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 0a4 4 0 014 4v8a2 2 0 01-2 2h-4a2 2 0 01-2-2v-8a4 4 0 014-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="14" r="1.5" fill="currentColor"/></svg></div>
+        <div class="sys-h">Pressure Vessels</div>
+        <div class="sys-d">TSSA-registered tanks, expansion tanks, hot water cylinders. Annual inspections, certifications, renewals.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDING SIZE BRACKETS -->
+<section class="sec size-sec">
+  <div class="wrap">
+    <div class="sec-head-c">
+      <div class="sec-lbl">We cover every size</div>
+      <h2 class="sec-h">From boutique to <em>master-planned.</em></h2>
+      <p class="sec-sub">Pricing scales with you, not against you. Larger buildings get better per-unit rates.</p>
+    </div>
+    <div class="size-grid">
+      <div class="size-card"><div class="size-num">50<em>-</em>100</div><div class="size-lbl">Boutique</div></div>
+      <div class="size-card"><div class="size-num">100<em>-</em>250</div><div class="size-lbl">Mid-rise</div></div>
+      <div class="size-card"><div class="size-num">250<em>-</em>500</div><div class="size-lbl">Tower</div></div>
+      <div class="size-card"><div class="size-num">500<em>-</em>1k</div><div class="size-lbl">Multi-tower</div></div>
+      <div class="size-card priority"><div class="size-num">1,000<em>+</em></div><div class="size-lbl">Master-planned</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="sec testi-sec">
+  <div class="wrap">
+    <div class="testi">
+      <div class="sec-lbl" style="display:block;margin-bottom:24px">A property manager said it best</div>
+      <p class="testi-quote">"We moved from a national chain to PanCanAir last year. Three things changed overnight: emergency calls dropped, the AGM compliance pack writes itself, and the board finally trusts the HVAC line item. That's a measurable rerating of the whole building."</p>
+      <div class="testi-attr">
+        <div class="testi-pic">M</div>
+        <div style="text-align:left">
+          <div class="testi-name">M. Rao</div>
+          <div class="testi-role">Property Manager &middot; 412-unit tower, North York</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA TILES (the reusable component) -->
+<section class="sec cta-sec">
+  <div class="wrap">
+    <div class="sec-head-c">
+      <div class="sec-lbl">Next steps</div>
+      <h2 class="sec-h">Pick your <em>path.</em></h2>
+    </div>
+    <div class="cta-grid">
+
+      <a href="#book" class="cta-tile cta-tile-featured">
+        <div>
+          <div class="cta-tile-icon"><svg viewBox="0 0 28 28" fill="none" width="26" height="26">
+            <rect x="3.5" y="6" width="21" height="19" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M3.5 11h21" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M9 3v5M19 3v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <circle cx="9" cy="3.5" r=".8" fill="currentColor"/><circle cx="19" cy="3.5" r=".8" fill="currentColor"/>
+            <path d="M9.5 17l2.2 2.2L18 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></div>
+          <div class="cta-tile-h">Book a free building audit</div>
+          <div class="cta-tile-p">90-minute site walkthrough. We map every system, flag deferred maintenance, and email you a one-page proposal within 24 hours.</div>
+        </div>
+        <div class="cta-tile-link">Three taps to book &rarr;</div>
+      </a>
+
+      <a href="../index.html#pricing" class="cta-tile">
+        <div>
+          <div class="cta-tile-icon"><svg viewBox="0 0 28 28" fill="none" width="26" height="26">
+            <path d="M14.5 2.5h7.5a2 2 0 012 2v7.5L13 23l-9.5-9.5L14.5 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="18.5" cy="8" r="1.6" fill="currentColor"/>
+            <path d="M9.5 13.5v-1.5h2c.55 0 1-.45 1-1s-.45-1-1-1h-1.5c-.55 0-1-.45-1-1s.45-1 1-1h2.5M11 8.5v7" stroke="#fff" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <path d="M11 8.5v-1M11 14.5v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" transform="rotate(-45 11 11.5)"/>
+          </svg></div>
+          <div class="cta-tile-h">See pricing</div>
+          <div class="cta-tile-p">Three flat-rate tiers. From $18/unit/month.</div>
+        </div>
+        <div class="cta-tile-link">View tiers &rarr;</div>
+      </a>
+
+      <a href="tel:+14374102100" class="cta-tile">
+        <div>
+          <div class="cta-tile-icon"><svg viewBox="0 0 28 28" fill="none" width="26" height="26">
+            <path d="M25 19.5v3.5a2 2 0 01-2.2 2 22 22 0 01-9.6-3.4A21.6 21.6 0 013.4 13a22 22 0 01-3.4-9.65A2 2 0 012 1.2h3.5a2 2 0 012 1.7c.14 1.1.4 2.16.78 3.18a2 2 0 01-.45 2.11L6.3 9.9a18 18 0 006.8 6.8l1.7-1.5a2 2 0 012.1-.45c1.02.38 2.08.64 3.18.78A2 2 0 0125 19.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="20.5" cy="5.5" r="3" fill="currentColor"/>
+            <text x="20.5" y="6.8" text-anchor="middle" font-size="3.5" font-weight="800" fill="#fff" font-family="Helvetica,sans-serif">24</text>
+          </svg></div>
+          <div class="cta-tile-h">Call dispatch 24/7</div>
+          <div class="cta-tile-p">Real human, any hour. Senior tech on-site in &lt;2h.</div>
+        </div>
+        <div class="cta-tile-link">+1 (437) 410-2100 &rarr;</div>
+      </a>
+
+      <a href="../index.html#reviews" class="cta-tile">
+        <div>
+          <div class="cta-tile-icon"><svg viewBox="0 0 28 28" fill="none" width="26" height="26">
+            <path d="M22 5H6a3 3 0 00-3 3v9a3 3 0 003 3h2.5l3 4 3-4H22a3 3 0 003-3V8a3 3 0 00-3-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M8.5 13.5c0-2 1-3.2 2.7-3.7M14.5 13.5c0-2 1-3.2 2.7-3.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            <circle cx="9.5" cy="15.5" r="1.4" fill="currentColor"/>
+            <circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/>
+            <path d="M19 7.5l1 1M21 7.5l-1 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+          </svg></div>
+          <div class="cta-tile-h">Read what managers say</div>
+          <div class="cta-tile-p">12 verified Google reviews from GTA property managers.</div>
+        </div>
+        <div class="cta-tile-link">Read reviews &rarr;</div>
+      </a>
+
+      <a href="mailto:info@pancanair.com?subject=Spec sheet request &mdash; PanCanAir" class="cta-tile">
+        <div>
+          <div class="cta-tile-icon"><svg viewBox="0 0 28 28" fill="none" width="26" height="26">
+            <path d="M16 2.5H7a2.5 2.5 0 00-2.5 2.5v18a2.5 2.5 0 002.5 2.5h14a2.5 2.5 0 002.5-2.5V10L16 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M16 2.5V8a2 2 0 002 2h5.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <!-- blueprint grid lines -->
+            <path d="M8 14h12M8 17h8M8 20h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".5"/>
+            <!-- accent compass / scale icon -->
+            <circle cx="14" cy="14" r="2.2" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <path d="M14 12.5L15 14M14 12.5L13 14" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/>
+            <!-- ribbon corner mark -->
+            <path d="M19.5 19.5l2 1.5-2 1.5z" fill="currentColor" opacity=".7"/>
+          </svg></div>
+          <div class="cta-tile-h">Get the spec sheet</div>
+          <div class="cta-tile-p">PDF detailing every covered system, SLA, and compliance pack.</div>
+        </div>
+        <div class="cta-tile-link">Email request &rarr;</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (sub-page specific) -->
+<section class="sec faq-sec">
+  <div class="wrap">
+    <div class="sec-head-c">
+      <div class="sec-lbl">Property manager FAQ</div>
+      <h2 class="sec-h">The questions <em>boards always ask.</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">Do you take over from an existing contractor mid-term?</button><div class="faq-a">Yes &mdash; about 70% of our onboardings are mid-cycle takeovers. We handle the handover audit, paperwork transfer with the prior vendor, and a 30-day shadow period at no charge so nothing falls through the cracks.</div></div>
+      <div class="faq-item"><button class="faq-q">What does the monthly compliance report include?</button><div class="faq-a">Photos of every visit, completed PM checklists, hours logged per system, parts replaced, TSSA log book updates, ASHRAE 188 (Legionella) program status, and a one-page summary the board can drop straight into AGM materials.</div></div>
+      <div class="faq-item"><button class="faq-q">How do you handle major capital replacements?</button><div class="faq-a">Anything outside flat-rate (full chiller swap, boiler replacement, BAS upgrade) is quoted separately and transparently &mdash; with at least three competitive bids on parts. We never mark up capital items.</div></div>
+      <div class="faq-item"><button class="faq-q">Can we audit your work?</button><div class="faq-a">Please do. We host a board portal with read-only access to every visit log, parts invoice, and dispatch ticket. Your manager and your board can audit live, no friction.</div></div>
+      <div class="faq-item"><button class="faq-q">Do you carry adequate insurance for high-rise work?</button><div class="faq-a">$5M general liability, $2M auto, WSIB clearance always current, full TSSA contractor licensing. We'll send certificates the moment you ask.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING (3-tap embedded) -->
+<section id="book" class="sec book-sec">
+  <div class="wrap">
+    <div class="book-head">
+      <div class="sec-lbl">Book a Site Visit</div>
+      <h2 class="sec-h">Three taps. <em>Done.</em></h2>
+      <p class="sec-sub">No long forms. Pick what you need, pick your size, drop a number &mdash; we call within an hour during business hours.</p>
+    </div>
+
+    <div class="book-card" id="bookCard">
+      <div class="bk-rail" aria-hidden="true">
+        <div class="bk-rail-fill" id="bkRailFill"></div>
+        <div class="bk-rail-dots">
+          <span class="bk-dot active" data-step="1">1</span>
+          <span class="bk-dot" data-step="2">2</span>
+          <span class="bk-dot" data-step="3">3</span>
+        </div>
+      </div>
+
+      <div class="bk-step active" data-step="1">
+        <div class="bk-step-h">What do you need?</div>
+        <div class="bk-chips" data-field="service">
+          <button class="bk-chip" data-v="Maintenance Contract">Maintenance Contract</button>
+          <button class="bk-chip" data-v="24/7 Emergency Dispatch">Emergency Call</button>
+          <button class="bk-chip" data-v="Free Building Audit">Free Building Audit</button>
+          <button class="bk-chip" data-v="Boilers + Hydronic">Boilers</button>
+          <button class="bk-chip" data-v="Chillers + Cooling Towers">Chillers</button>
+          <button class="bk-chip" data-v="Rooftop Units (RTU)">RTUs / MAUs</button>
+        </div>
+      </div>
+
+      <div class="bk-step" data-step="2">
+        <button class="bk-back" type="button">&larr; back</button>
+        <div class="bk-step-h">How big is the building?</div>
+        <div class="bk-chips bk-chips-size" data-field="units">
+          <button class="bk-chip" data-v="50 &ndash; 100 units">50&ndash;100<small>units</small></button>
+          <button class="bk-chip" data-v="100 &ndash; 250 units">100&ndash;250<small>units</small></button>
+          <button class="bk-chip" data-v="250 &ndash; 500 units">250&ndash;500<small>units</small></button>
+          <button class="bk-chip" data-v="500 &ndash; 1,000 units">500&ndash;1,000<small>units</small></button>
+          <button class="bk-chip bk-chip-hot" data-v="1,000+ units">1,000+<small>units</small></button>
+          <button class="bk-chip" data-v="Commercial / Other">Commercial<small>or other</small></button>
+        </div>
+      </div>
+
+      <div class="bk-step" data-step="3">
+        <button class="bk-back" type="button">&larr; back</button>
+        <div class="bk-step-h">Best number to reach you?</div>
+        <div class="bk-summary" id="bkSummary"></div>
+        <div class="bk-fields">
+          <input type="text"  id="bkName"  class="inp" placeholder="Your name *" autocomplete="name"  required/>
+          <input type="email" id="bkEmail" class="inp" placeholder="Email *"     autocomplete="email" required/>
+          <input type="tel"   id="bkPhone" class="inp bk-phone" placeholder="(437) 410-2100 *" autocomplete="tel" inputmode="tel" required/>
+        </div>
+        <button class="form-btn bk-submit" id="bkSubmit" type="button">Book Site Visit &rarr;</button>
+        <p class="bk-fineprint">No spam. No pressure. We confirm within 1 business hour.</p>
+      </div>
+
+      <div class="bk-step bk-done" data-step="4">
+        <div class="bk-done-ring"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="bk-done-h">You're booked.</div>
+        <div class="bk-done-sub">We'll call you at <b id="bkDonePhone"></b> within 1 business hour.</div>
+        <a href="tel:+14374102100" class="bk-done-call">Need it sooner? Call (437) 410-2100</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Booking inherits brand tokens — same scoping as home page */
+.book-sec{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.book-head{text-align:center;max-width:640px;margin:0 auto 56px}
+.book-head .sec-sub{margin-left:auto;margin-right:auto;margin-bottom:0}
+.book-card{position:relative;max-width:760px;margin:0 auto;background:var(--s0);border:1px solid var(--border);border-radius:28px;box-shadow:var(--card-shadow);padding:36px 36px 40px;overflow:hidden}
+.book-card::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 100% 0%, var(--a-soft), transparent 60%)}
+.bk-rail{position:relative;height:32px;margin-bottom:28px;display:flex;align-items:center;justify-content:center}
+.bk-rail::before{content:'';position:absolute;left:14%;right:14%;top:50%;height:2px;background:var(--s2);border-radius:2px}
+.bk-rail-fill{position:absolute;left:14%;top:50%;height:2px;background:var(--accent);border-radius:2px;width:0;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.bk-rail-dots{position:relative;display:flex;justify-content:space-between;width:72%;z-index:2}
+.bk-dot{width:30px;height:30px;border-radius:50%;background:var(--s0);border:2px solid var(--s2);display:grid;place-items:center;font-family:var(--body);font-size:12px;font-weight:700;color:var(--t3);transition:all .25s}
+.bk-dot.active{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px var(--a-soft)}
+.bk-dot.done{background:var(--accent);border-color:var(--accent);color:#fff}
+.bk-step{display:none;animation:bkIn .28s cubic-bezier(.2,.6,.2,1) both}
+.bk-step.active{display:block}
+@keyframes bkIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bk-step-h{font-family:var(--ds);font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em;color:var(--t1);margin-bottom:22px;text-align:center}
+.bk-back{position:absolute;top:24px;left:24px;background:none;border:none;cursor:pointer;font-family:var(--body);font-size:12px;font-weight:600;color:var(--t3);padding:6px 10px;border-radius:var(--r-sm);transition:color .15s,background .15s}
+.bk-back:hover{color:var(--accent);background:var(--a-soft)}
+.bk-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bk-chip{position:relative;padding:18px 16px;background:var(--s0);border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:var(--body);font-size:14px;font-weight:600;color:var(--t1);cursor:pointer;text-align:center;transition:border-color .18s,background .18s,transform .12s,box-shadow .18s}
+.bk-chip:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px var(--a-glow)}
+.bk-chip:active{transform:scale(.98)}
+.bk-chip.selected{border-color:var(--accent);background:var(--a-soft);box-shadow:0 0 0 3px var(--a-soft)}
+.bk-chips-size .bk-chip{font-family:var(--ds);font-size:22px;letter-spacing:-.01em;padding:22px 10px}
+.bk-chips-size .bk-chip small{display:block;font-family:var(--body);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--t3);margin-top:4px}
+.bk-chip-hot::after{content:'PRIORITY';position:absolute;top:-9px;right:10px;font-size:9px;font-weight:800;letter-spacing:.14em;color:#fff;background:var(--accent);padding:3px 8px;border-radius:100px}
+.bk-summary{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
+.bk-summary span{background:var(--a-soft);color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.04em;padding:6px 12px;border-radius:100px}
+.bk-fields{display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto 18px}
+.inp{background:var(--s0);color:var(--t1);border:1px solid var(--bh);border-radius:var(--r-sm);padding:12px 16px;font-family:var(--body);font-size:14px;width:100%;transition:border-color .15s,box-shadow .15s;appearance:none}
+.inp:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,74,43,.08)}
+.bk-phone{font-size:18px;font-weight:600;text-align:center;letter-spacing:.02em;padding:16px}
+.form-btn{background:var(--accent);color:#fff;font-family:var(--body);font-size:14px;font-weight:700;padding:14px;border-radius:var(--r-pill);border:none;cursor:pointer;transition:filter .15s,transform .15s}
+.form-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.bk-submit{width:100%;max-width:420px;margin:0 auto;display:block;font-size:15px;padding:16px}
+.bk-fineprint{text-align:center;font-size:11px;color:var(--t3);margin-top:14px;letter-spacing:.04em}
+.bk-done{text-align:center;padding:24px 0 16px}
+.bk-done-ring{width:72px;height:72px;border-radius:50%;background:var(--a-soft);color:var(--accent);display:grid;place-items:center;margin:0 auto 22px}
+.bk-done-ring svg{width:34px;height:34px}
+.bk-done-h{font-family:var(--ds);font-size:clamp(28px,3.6vw,40px);letter-spacing:-.02em;color:var(--t1);margin-bottom:10px}
+.bk-done-sub{font-size:15px;color:var(--t2);max-width:440px;margin:0 auto 22px;line-height:1.6}
+.bk-done-call{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);padding:10px 20px;border-radius:100px;background:var(--a-soft)}
+@media(max-width:720px){.book-card{padding:28px 18px 32px;border-radius:22px}.bk-chips,.bk-chips-size{grid-template-columns:repeat(2,1fr)}.bk-back{top:18px;left:14px}}
+</style>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><b>Pan</b><span class="wm-can">Can</span><span class="wm-air">Air</span></div>
+        <p class="foot-desc">Commercial HVAC maintenance and emergency dispatch for Toronto-GTA condos, offices, and commercial properties.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="condo-high-rise.html">Condo High-Rise</a>
+        <a href="../index.html#services">Preventive Maintenance</a>
+        <a href="../index.html#services">Emergency Dispatch</a>
+        <a href="../index.html#services">Compliance Reporting</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="../index.html#highrise">High-Rises</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../index.html#reviews">Reviews</a>
+        <a href="../index.html#founder">About</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+14374102100">+1 (437) 410-2100</a>
+        <a href="mailto:info@pancanair.com">info@pancanair.com</a>
+        <a href="../index.html#contact">Toronto &middot; GTA</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2025 PanCanAir. All rights reserved.</span>
+      <span>TSSA Licensed &middot; Fully Insured &middot; ASHRAE &middot; ACMO &middot; BOMA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* 3-tap booking — same logic as home page */
+(function(){
+  const card = document.getElementById('bookCard');
+  if(!card) return;
+  const fill = document.getElementById('bkRailFill');
+  const dots = card.querySelectorAll('.bk-dot');
+  const steps= card.querySelectorAll('.bk-step');
+  const summary = document.getElementById('bkSummary');
+  const phoneIn = document.getElementById('bkPhone');
+  const nameIn  = document.getElementById('bkName');
+  const emailIn = document.getElementById('bkEmail');
+  const submit  = document.getElementById('bkSubmit');
+  const donePh  = document.getElementById('bkDonePhone');
+  const state = { service:'', units:'', step:1 };
+
+  function setStep(n){
+    state.step = n;
+    steps.forEach(s => s.classList.toggle('active', +s.dataset.step === n));
+    dots.forEach(d => { const v = +d.dataset.step; d.classList.toggle('active', v === n); d.classList.toggle('done', v < n); });
+    const pct = n === 1 ? 0 : n === 2 ? 50 : 100;
+    if(fill) fill.style.width = pct + '%';
+    if(n === 3) renderSummary();
+    if(n === 3 && phoneIn) setTimeout(()=>phoneIn.focus(), 250);
+  }
+  function renderSummary(){
+    if(!summary) return;
+    summary.innerHTML = (state.service ? `<span>${state.service}</span>` : '') + (state.units ? `<span>${state.units}</span>` : '');
+  }
+  card.querySelectorAll('.bk-chips').forEach(group => {
+    const field = group.dataset.field;
+    group.querySelectorAll('.bk-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        group.querySelectorAll('.bk-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        state[field] = chip.dataset.v;
+        setTimeout(() => setStep(state.step + 1), 220);
+      });
+    });
+  });
+  card.querySelectorAll('.bk-back').forEach(b => b.addEventListener('click', () => setStep(Math.max(1, state.step - 1))));
+  if(phoneIn){
+    phoneIn.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 10);
+      if(v.length > 6)      v = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+      else if(v.length > 3) v = `(${v.slice(0,3)}) ${v.slice(3)}`;
+      else if(v.length > 0) v = `(${v}`;
+      e.target.value = v;
+    });
+    phoneIn.addEventListener('keydown', e => { if(e.key === 'Enter') submit.click(); });
+  }
+  submit && submit.addEventListener('click', async () => {
+    const phone = (phoneIn.value || '').trim();
+    const name  = (nameIn ? nameIn.value : '').trim();
+    const email = (emailIn ? emailIn.value : '').trim();
+    let ok = true;
+    const flag = (el) => { if(el){ el.style.borderColor='var(--accent)'; el.style.boxShadow='0 0 0 3px var(--a-glow)'; if(ok){ el.focus(); ok=false; } } };
+    if(name.length < 2) flag(nameIn);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) flag(emailIn);
+    if(phone.replace(/\D/g,'').length < 10) flag(phoneIn);
+    if(!ok) return;
+    submit.textContent = 'Booking...'; submit.disabled = true;
+    const payload = {
+      name: (nameIn.value || '').trim(), email: (emailIn.value || '').trim(), phone,
+      company: '', building: 'High-rise / Condo', units: state.units, service: state.service, pain: '',
+      source: 'subpage_condo_highrise', created_at: new Date().toISOString()
+    };
+    let apiOk = false;
+    try {
+      const res = await fetch('/api/lead', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      apiOk = res.ok;
+    } catch(e){ console.warn('api/lead failed, using Supabase fallback', e); }
+    try {
+      if(!apiOk && typeof saveLeadToSupabase === 'function') await saveLeadToSupabase(payload);
+      if(typeof gtag !== 'undefined') gtag('event', 'booking_submit', { event_category:'booking', event_label:state.service, units:state.units, source:'subpage_condo_highrise' });
+    } catch(e){ console.warn('Booking save failed', e); }
+    if(donePh) donePh.textContent = phone;
+    setStep(4);
+  });
+})();
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+
+/* Mobile hamburger toggle */
+(function(){
+  const ham = document.getElementById('nav-ham');
+  const menu = document.getElementById('mob-menu');
+  if(!ham || !menu) return;
+  ham.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+})();
+
+(function(){
+  const sticky = document.querySelector('.sticky-cta');
+  const book = document.getElementById('book');
+  if(!sticky || !book) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => sticky.classList.toggle('hide', e.isIntersecting));
+  }, { threshold: 0.15 });
+  io.observe(book);
+})();
+</script>
+
+</body>
+</html>
