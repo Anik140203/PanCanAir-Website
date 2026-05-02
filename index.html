@@ -2779,14 +2779,6 @@ document.querySelectorAll('.comp-table').forEach(el => _compIO.observe(el));
   setTimeout(type, 400);
 })();
 
-// Contact form with Supabase + GA4
-apiOk = res.ok;
-  } catch(e){ console.warn('api/lead failed, falling back to Supabase', e); }
-  if(!apiOk) await saveLeadToSupabase(data);
-  if(typeof gtag !== 'undefined') gtag('event', 'lead_submit', { event_category: 'contact', event_label: data.building });
-  btn.textContent = 'Sent ✓';
-  document.getElementById('contact-form').innerHTML = '<p style="font-family:var(--ds);font-size:22px;font-style:italic;color:var(--accent);margin-top:16px">Thank you — we\'ll be in touch within 24 hours.</p>';
-});
 
 /* ── ROI CALCULATOR ── */
 (()=>{
