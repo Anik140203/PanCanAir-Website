@@ -17,7 +17,10 @@
 //  they provided an email.
 // ============================================================
 
-const TO_INTERNAL = "info@pancanair.com";
+// INTERNAL_EMAIL = where lead notifications go. Set this in Vercel env vars.
+// Default = pancanair@gmail.com (works under Resend sandbox).
+// After domain verification, change to "info@pancanair.com" (or any pancanair.com address).
+const TO_INTERNAL = process.env.INTERNAL_EMAIL || "pancanair@gmail.com";
 const FROM_EMAIL  = process.env.FROM_EMAIL || "PanCanAir <onboarding@resend.dev>";
 // Until pancanair.com is verified in Resend, FROM_EMAIL falls back to
 // onboarding@resend.dev (Resend's sandbox sender — no DNS needed).
@@ -79,27 +82,105 @@ function internalHtml(r) {
 </body></html>`;
 }
 
+// ---- service-aware copy: each chip the user picks gets a tailored email body ----
+const SERVICE_COPY = {
+  "Maintenance Contract": {
+    headline: "Let's lock in your maintenance plan.",
+    intro: "You picked our flat-rate maintenance contract — the one most GTA property managers move to after their first surprise repair bill. Pan or a senior tech will reach out within <b>24 hours</b> with a one-page proposal grounded in real comps for buildings like yours.",
+    nextLabel: "What happens next on your contract",
+    next: [
+      "We review your building size, system mix, and current pain points.",
+      "We benchmark against 240+ GTA buildings we manage to ground your flat rate.",
+      "You get a one-page contract proposal — boilers, chillers, RTUs, MAUs, controls — all-in, no asterisks."
+    ]
+  },
+  "24/7 Emergency Dispatch": {
+    headline: "Emergency call received — we're on it.",
+    intro: "If this is an active emergency right now, <b>call (437) 410-2100</b>. We dispatch a senior tech 24/7 across the GTA — average on-site response under 2 hours including nights, weekends, and holidays. Otherwise, Pan will reach out within the next business hour to confirm dispatch and timing.",
+    nextLabel: "What happens next on your dispatch",
+    next: [
+      "We confirm building access, system, and severity.",
+      "Senior tech rolls within 2 hours (most often under 90 min in core GTA).",
+      "On-site diagnosis + same-day fix where possible. Flat-rate billing afterward."
+    ]
+  },
+  "Free Building Audit": {
+    headline: "Your free building audit is queued.",
+    intro: "You requested our complimentary HVAC audit — no commitment, no pressure. We'll walk every system in your building, document deferred maintenance, and email you a one-page assessment with flat-rate options within <b>48 hours</b>.",
+    nextLabel: "What happens during your audit",
+    next: [
+      "90-minute on-site walkthrough — boilers, chillers, MAUs, pumps, controls, RTUs.",
+      "We photograph every system, log condition, and flag anything urgent.",
+      "You get a board-ready PDF with flat-rate maintenance options. No upsell. Zero obligation."
+    ]
+  },
+  "Boilers + Hydronic": {
+    headline: "Boiler + hydronic specialist incoming.",
+    intro: "Boilers are our specialty. Pan or a TSSA-licensed boiler tech will reach out within <b>24 hours</b> with a flat-rate proposal — covering the boiler, expansion tank, glycol loops, header isolation, three-way valves, and pressure-reducing setup.",
+    nextLabel: "What we cover for boilers",
+    next: [
+      "Cast-iron, fire-tube, and condensing — we service every type the GTA runs.",
+      "Annual TSSA inspection prep, log book updates, and pressure-vessel certs included.",
+      "Flat-rate proposal grounded in real comps — no per-call surprise billing."
+    ]
+  },
+  "Chillers + Cooling Towers": {
+    headline: "Chiller specialist incoming.",
+    intro: "Chillers + cooling towers — our wheelhouse. A senior chiller tech will reach out within <b>24 hours</b> with a proposal covering the chiller plant, cooling tower water treatment, condenser water loops, and BAS integration.",
+    nextLabel: "What we cover for chillers",
+    next: [
+      "Air-cooled and water-cooled, scroll/screw/centrifugal — every variety.",
+      "Cooling tower basin cleaning, fill replacement, ASHRAE 188 (Legionella) program.",
+      "Annual plant tune + flat-rate maintenance. No per-call surprise billing."
+    ]
+  },
+  "Rooftop Units (RTU)": {
+    headline: "RTU + MAU specialist incoming.",
+    intro: "Rooftop and makeup-air units — including the ones in stack penthouses everyone else avoids. Pan or a senior RTU tech will reach out within <b>24 hours</b> with a flat-rate proposal covering belt drives, economizers, refrigerant work, burner assemblies, and full controls integration.",
+    nextLabel: "What we cover for RTUs / MAUs",
+    next: [
+      "Package units, MAUs, gas-fired heaters — penthouse and rooftop.",
+      "Refrigerant recovery + recharge, burner tuning, damper service, sensor calibration.",
+      "Flat-rate maintenance + emergency dispatch — one contract for everything."
+    ]
+  }
+};
+const DEFAULT_COPY = {
+  headline: "We've got it.",
+  intro: "Your request just landed in our queue. Pan or one of our senior techs will reach out within <b>24 hours</b> with a flat-rate proposal tailored to your building.",
+  nextLabel: "What happens next",
+  next: [
+    "We review your building size, system mix, and current pain points.",
+    "We pull comparable jobs in the GTA to ground the proposal in real numbers.",
+    "You get a one-page flat-rate quote &mdash; boilers, chillers, RTUs, MAUs, controls, all-in."
+  ]
+};
+
 function customerHtml(r) {
   const first = (r.name || "").split(" ")[0] || "there";
+  const copy  = SERVICE_COPY[r.service] || DEFAULT_COPY;
+  const summaryChip = (label) => `<span style="display:inline-block;background:rgba(217,74,43,.08);color:#d94a2b;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 11px;border-radius:100px;margin-right:6px">${safe(label)}</span>`;
   return `<!doctype html>
 <html><body style="margin:0;padding:0;background:#f5f2ed;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1a1714">
   <div style="max-width:560px;margin:0 auto;padding:40px 24px">
     <div style="font-family:'DM Serif Display',Georgia,serif;font-size:30px;letter-spacing:-.02em;margin-bottom:32px">
       <b>Pan</b><span style="color:#1D4EA0">Can</span><span style="color:#d94a2b">Air</span>
     </div>
-    <h1 style="font-family:'DM Serif Display',Georgia,serif;font-size:32px;line-height:1.1;letter-spacing:-.02em;margin:0 0 18px">
-      Thanks, ${safe(first)} &mdash; <em style="color:rgba(26,23,20,.6)">we've got it.</em>
+    <h1 style="font-family:'DM Serif Display',Georgia,serif;font-size:30px;line-height:1.12;letter-spacing:-.02em;margin:0 0 12px">
+      Thanks, ${safe(first)}.
     </h1>
-    <p style="font-size:16px;line-height:1.6;color:rgba(26,23,20,.78);margin:0 0 24px">
-      Your request just landed in our queue. Pan or one of our senior techs will reach out within
-      <b>24 hours</b> with a flat-rate proposal tailored to your building.
+    <h2 style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;line-height:1.2;font-style:italic;color:rgba(26,23,20,.7);margin:0 0 22px">${copy.headline}</h2>
+    <div style="margin:0 0 22px">
+      ${r.service ? summaryChip(r.service) : ''}
+      ${r.units   ? summaryChip(r.units)   : ''}
+    </div>
+    <p style="font-size:16px;line-height:1.62;color:rgba(26,23,20,.82);margin:0 0 24px">
+      ${copy.intro}
     </p>
     <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:20px 22px;margin:0 0 24px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#d94a2b;margin-bottom:10px">What happens next</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#d94a2b;margin-bottom:10px">${copy.nextLabel}</div>
       <ol style="margin:0;padding-left:18px;font-size:14px;line-height:1.65;color:rgba(26,23,20,.78)">
-        <li style="margin-bottom:6px">We review your building size, system mix, and current pain points.</li>
-        <li style="margin-bottom:6px">We pull comparable jobs in the GTA to ground the proposal in real numbers.</li>
-        <li>You get a one-page flat-rate quote &mdash; boilers, chillers, RTUs, MAUs, controls, all-in.</li>
+        ${copy.next.map(step => `<li style="margin-bottom:6px">${step}</li>`).join('')}
       </ol>
     </div>
     <p style="font-size:14px;color:rgba(26,23,20,.6);margin:0 0 6px">Need it sooner?</p>
