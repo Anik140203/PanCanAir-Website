@@ -84,7 +84,12 @@ a{text-decoration:none;color:inherit}
   overflow:hidden;
   isolation:isolate;
 }
-/* Poster image (instant — no white flash, always paints first) */
+/* Solid black floor sits BELOW everything (so image/video paint on top of it) */
+.truck-showcase::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:#0a0a0a;pointer-events:none;
+}
+/* Poster image — z-index:1, sits above the black floor */
 .ts-bg-img{
   position:absolute;
   top:0;left:0;
@@ -93,7 +98,7 @@ a{text-decoration:none;color:inherit}
   object-fit:cover;
   object-position:center;
   background:#0a0a0a;
-  z-index:0;
+  z-index:1;
   user-select:none;
   -webkit-user-drag:none;
   pointer-events:none;
@@ -102,7 +107,7 @@ a{text-decoration:none;color:inherit}
   animation-timeline:view();
   animation-range:entry 0% exit 100%;
 }
-/* Looping video sits on top of the poster, fades in once it's actually playing */
+/* Looping video — z-index:2, fades in over the poster once it's actually playing */
 .ts-bg-video{
   position:absolute;
   top:0;left:0;
@@ -111,7 +116,7 @@ a{text-decoration:none;color:inherit}
   object-fit:cover;
   object-position:center;
   background:#0a0a0a;
-  z-index:1;
+  z-index:2;
   opacity:0;
   transition:opacity .6s ease;
   will-change:transform,opacity;
@@ -121,11 +126,6 @@ a{text-decoration:none;color:inherit}
   animation-range:entry 0% exit 100%;
 }
 .ts-bg-video.is-playing{opacity:1}
-/* Solid black underlay (just-in-case for any pixel gap) */
-.truck-showcase::after{
-  content:'';position:absolute;inset:0;z-index:0;
-  background:#0a0a0a;pointer-events:none;
-}
 @keyframes truckPan{
   0%   { transform:translate3d(-7%,0,0) scale(1.08); }
   50%  { transform:translate3d(0%,0,0)  scale(1.10); }
@@ -133,7 +133,7 @@ a{text-decoration:none;color:inherit}
 }
 /* Cinematic gradient overlay — protects text without killing the image */
 .ts-overlay{
-  position:absolute;inset:0;z-index:2;
+  position:absolute;inset:0;z-index:3;
   pointer-events:none;
   background:
     linear-gradient(180deg,
@@ -151,13 +151,13 @@ a{text-decoration:none;color:inherit}
 }
 /* Subtle film grain for cinematic feel */
 .ts-grain{
-  position:absolute;inset:0;z-index:2;pointer-events:none;
+  position:absolute;inset:0;z-index:3;pointer-events:none;
   background-image:radial-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
   background-size:3px 3px;
   mix-blend-mode:overlay;opacity:.45;
 }
 .ts-content-full{
-  position:relative;z-index:4;
+  position:relative;z-index:5;
   width:100%;
   height:100%;min-height:100vh;
   max-width:1400px;
@@ -229,7 +229,7 @@ a{text-decoration:none;color:inherit}
   position:absolute;
   bottom:20px;left:50%;
   transform:translateX(-50%);
-  z-index:4;
+  z-index:5;
   display:flex;flex-direction:column;align-items:center;gap:8px;
   font-size:9px;font-weight:700;letter-spacing:.30em;
   text-transform:uppercase;color:rgba(255,255,255,.55);
