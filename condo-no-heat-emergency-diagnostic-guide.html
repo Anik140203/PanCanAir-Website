@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Condo Has No Heat? 10-Minute Emergency Diagnostic Guide for Toronto PMs · PanCanAir</title>
+<meta name="description" content="Toronto property manager's 10-step emergency diagnostic for condo no-heat situations. Triage boiler, hydronic, MAU and controls failures before paying after-hours rates. Written by GTA HVAC engineers."/>
+<link rel="canonical" href="https://pancanair.com/blog/condo-no-heat-emergency-diagnostic-guide.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Condo Has No Heat? 10-Minute Emergency Diagnostic for Toronto PMs"/>
+<meta property="og:description" content="The 10-step diagnostic our techs run before dispatching a truck. Triage on a Saturday night before paying after-hours rates."/>
+<meta property="og:url" content="https://pancanair.com/blog/condo-no-heat-emergency-diagnostic-guide.html"/>
+<meta property="article:published_time" content="2026-06-22T08:00:00-04:00"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<!-- HowTo schema for rich snippets -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"10-Minute Condo No-Heat Emergency Diagnostic","description":"Step-by-step diagnostic for property managers facing a no-heat emergency in a Toronto high-rise condo.","totalTime":"PT10M","tool":[{"@type":"HowToTool","name":"Building automation system (BAS) login or interface"},{"@type":"HowToTool","name":"Flashlight"},{"@type":"HowToTool","name":"Mechanical room access keys"}],"step":[{"@type":"HowToStep","name":"Confirm whether the outage is building-wide or zone-specific","text":"Call two units on different floors. Same problem = building-wide system fault. Different rooms = zone or in-suite issue.","position":1},{"@type":"HowToStep","name":"Check the boiler is firing","text":"Visit the mechanical room and confirm boilers are firing. Display panels show 'standby', 'firing', 'lockout' or fault codes.","position":2},{"@type":"HowToStep","name":"Read fault codes","text":"Photograph any fault code on each boiler. Codes like E04, F32 etc translate directly to known faults.","position":3},{"@type":"HowToStep","name":"Check circulator pump operation","text":"Confirm hydronic circulator pumps are running by feel (vibration) and sound. A non-running pump means hot water isn't reaching units.","position":4},{"@type":"HowToStep","name":"Check expansion tank pressure","text":"Verify system pressure on the boiler gauge — should be 12–25 psi cold. Below 10 psi means make-up water has failed.","position":5},{"@type":"HowToStep","name":"Check make-up water valve","text":"Confirm the automatic fill valve is open and water is reaching the boiler.","position":6},{"@type":"HowToStep","name":"Check zone valves and aquastat","text":"For zone-specific issues, check that zone valves are opening and the aquastat is calling for heat.","position":7},{"@type":"HowToStep","name":"Check building automation system","text":"Log into the BAS and check that setpoints are correct and there are no override modes active.","position":8},{"@type":"HowToStep","name":"Check makeup-air unit if penthouse-fed","text":"If your building uses MAUs for corridor pressurization, confirm they're running. MAU failure can present as no-heat in upper units.","position":9},{"@type":"HowToStep","name":"Document and call dispatch","text":"With fault codes, pressure readings, and pump status documented, you'll save 30–60 minutes of diagnostic time when the tech arrives.","position":10}]}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pancanair.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://pancanair.com/blog.html"},{"@type":"ListItem","position":3,"name":"Condo No-Heat Diagnostic","item":"https://pancanair.com/blog/condo-no-heat-emergency-diagnostic-guide.html"}]}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's the most common cause of no heat in a Toronto condo?","acceptedAnswer":{"@type":"Answer","text":"In GTA high-rises, the top three causes of building-wide no-heat are: boiler lockout (often from low water pressure or flue-gas issues), circulator pump failure, and make-up water valve failure. Zone-specific outages are usually controls — failed zone valve, broken aquastat, or BAS override."}},{"@type":"Question","name":"Can a property manager fix no heat without calling a contractor?","acceptedAnswer":{"@type":"Answer","text":"For some issues yes — resetting a boiler after a lockout, opening a manual make-up water valve, or clearing a BAS override. For anything involving combustion, refrigerant, or pressure vessels, you must call a licensed contractor. TSSA regulations in Ontario require licensed personnel for boiler service."}},{"@type":"Question","name":"How long does a no-heat repair take?","acceptedAnswer":{"@type":"Answer","text":"For common faults: simple resets and pressure restoration take 30–60 minutes. Pump replacement is typically 2–4 hours. Boiler component failures can take 1–3 days if parts need to be sourced. Doing the 10-step diagnostic before dispatch saves significant time."}}]}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet"/>
+
+<style>
+:root{--bg:#f5f2ed;--s0:#ffffff;--s1:#f0ece6;--accent:#d94a2b;--a-soft:rgba(217,74,43,.08);--navy:#0a2a5e;--border:rgba(0,0,0,.08);--t1:#1a1714;--t2:rgba(26,23,20,.78);--t3:rgba(26,23,20,.52);--ds:'DM Serif Display',Georgia,serif;--body:'Satoshi','DM Sans',system-ui,sans-serif;--r:20px;--r-sm:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:var(--accent)}a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 32px}
+@media(max-width:768px){.wrap{padding:0 20px}}
+nav{position:sticky;top:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:center;background:rgba(8,18,44,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{width:100%;max-width:1160px;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo-name{font-family:var(--ds);font-size:20px;font-style:italic;color:#fff}.nav-logo-name b{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:2px;background:rgba(255,255,255,.06);padding:4px;border-radius:100px;border:1px solid rgba(255,255,255,.1)}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);padding:7px 16px;border-radius:100px}.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-cta{background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:9px 22px;border-radius:100px;border:none;cursor:pointer}
+@media(max-width:768px){.nav-links{display:none}}
+
+.art-hero{padding:64px 0 40px;background:var(--s1);border-bottom:1px solid var(--border)}
+.crumbs{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--t3);margin-bottom:24px}
+.crumbs a{color:var(--t3)}.crumbs .sep{margin:0 8px;opacity:.5}.crumbs .current{color:var(--accent)}
+.art-cat{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--a-soft);color:var(--accent);font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-radius:100px;margin-bottom:24px}
+.art-h1{font-family:var(--ds);font-size:clamp(36px,5.2vw,58px);line-height:1.04;letter-spacing:-.025em;margin-bottom:24px}
+.art-h1 em{font-style:italic;color:var(--t2)}
+.art-meta{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--t3)}.art-meta .author{font-weight:600;color:var(--t1)}.art-meta .sep{opacity:.5}
+@media(max-width:768px){.art-hero{padding:40px 0 28px}.art-h1{font-size:30px}}
+
+.art-body{padding:48px 0 80px}
+.lede{font-family:var(--ds);font-size:22px;line-height:1.4;color:var(--t2);margin-bottom:40px;font-style:italic;border-left:3px solid var(--accent);padding-left:24px}
+.art-body p{margin-bottom:20px;color:var(--t2);font-size:17px;line-height:1.75}
+.art-body p strong{color:var(--t1);font-weight:600}
+.art-body h2{font-family:var(--ds);font-size:30px;line-height:1.1;letter-spacing:-.02em;margin:48px 0 16px}
+.art-body h3{font-size:18px;font-weight:700;margin:24px 0 10px;color:var(--t1)}
+.art-body ul,.art-body ol{margin:16px 0 24px 24px;color:var(--t2)}
+.art-body li{margin-bottom:8px;font-size:17px;line-height:1.7}
+
+.step{background:var(--s0);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;margin:24px 0;position:relative;padding-left:80px}
+.step-num{position:absolute;top:28px;left:24px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace}
+.step h3{margin:0 0 12px;font-family:var(--ds);font-size:22px;line-height:1.2;color:var(--t1);letter-spacing:-.01em}
+.step p{font-size:15px;line-height:1.65;color:var(--t2);margin-bottom:10px}
+.step p:last-child{margin-bottom:0}
+.step .time{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block}
+
+.alert{background:#fef4e9;border:1px solid #f5d09a;border-radius:var(--r-sm);padding:20px 24px;margin:32px 0;color:#7a4e10;font-size:15px}
+.alert strong{color:#5a3a08;display:block;margin-bottom:6px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+
+.inline-cta{background:var(--t1);color:#fff;border-radius:var(--r);padding:36px 40px;margin:48px 0;text-align:center}
+.inline-cta h3{font-family:var(--ds);font-size:26px;color:#fff;margin-bottom:8px}
+.inline-cta h3 em{font-style:italic;color:var(--accent)}
+.inline-cta p{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:20px}
+.inline-cta-btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:12px 26px;border-radius:100px;text-decoration:none}
+
+.faq{margin:48px 0}.faq h2{margin-bottom:24px}
+.faq-item{background:var(--s0);border:1px solid var(--border);border-radius:var(--r-sm);padding:20px 24px;margin-bottom:12px}
+.faq-q{font-weight:700;color:var(--t1);margin-bottom:8px;font-size:16px}
+.faq-a{color:var(--t2);font-size:15px;line-height:1.7}
+
+.related{padding:64px 0;background:var(--s1);border-top:1px solid var(--border)}
+.related h2{font-family:var(--ds);font-size:28px;margin-bottom:24px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.related a{display:block;background:var(--s0);border:1px solid var(--border);border-radius:var(--r-sm);padding:24px;color:var(--t1)}
+.related .cat{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block}
+.related h3{font-family:var(--ds);font-size:20px;line-height:1.2;color:var(--t1);margin-bottom:8px}
+.related p{font-size:13px;color:var(--t3);line-height:1.5}
+@media(max-width:768px){.related-grid{grid-template-columns:1fr}}
+
+footer{padding:48px 0;background:#08122c;color:rgba(255,255,255,.45);font-size:13px;text-align:center}
+footer a{color:rgba(255,255,255,.7)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" style="text-decoration:none"><span class="nav-logo-name"><b>PanCan</b>Air</span></a>
+    <div class="nav-links"><a href="/#services">Services</a><a href="/#highrise">High-Rises</a><a href="/#pricing">Pricing</a><a href="/blog.html">Blog</a></div>
+    <button class="nav-cta" onclick="location.href='/#book'">Book Site Visit</button>
+  </div>
+</nav>
+
+<header class="art-hero">
+  <div class="wrap">
+    <nav class="crumbs"><a href="/">Home</a><span class="sep">/</span><a href="/blog.html">Blog</a><span class="sep">/</span><span class="current">No-Heat Diagnostic</span></nav>
+    <span class="art-cat">Quick Repair · Emergency</span>
+    <h1 class="art-h1">Condo has no heat? A <em>10-minute</em> emergency diagnostic for PMs.</h1>
+    <div class="art-meta">
+      <span class="author">By Pankaj Oberoi</span><span class="sep">·</span>
+      <span>Owner &amp; HVAC Engineer</span><span class="sep">·</span>
+      <span>Jun 22, 2026</span><span class="sep">·</span>
+      <span>8 min read</span>
+    </div>
+  </div>
+</header>
+
+<article class="art-body">
+  <div class="wrap">
+    <p class="lede">It's 8pm on a Saturday in February. Residents are calling. The board chair is texting. Before you dispatch an emergency callout at $385/hour minimum, run this 10-step diagnostic. Half the time you'll catch the fix yourself; the other half, you'll save 30–60 minutes of tech time once they arrive.</p>
+
+    <div class="alert">
+      <strong>Safety First</strong>
+      If you smell gas, hear a sustained hissing near the boiler, or see scorch marks, leave the mechanical room immediately and call 911 + Enbridge (1-866-763-5427). Do not attempt diagnostic steps on a system that's showing signs of combustion failure.
+    </div>
+
+    <h2>What you need before you start</h2>
+    <ul>
+      <li>Building access keys (mechanical room, electrical room)</li>
+      <li>Flashlight</li>
+      <li>Phone with camera (for photographing fault codes)</li>
+      <li>Building Automation System (BAS) login if you have one</li>
+      <li>Most recent boiler inspection report for reference</li>
+    </ul>
+
+    <h2>The 10-step diagnostic</h2>
+
+    <div class="step">
+      <span class="step-num">1</span>
+      <span class="time">~30 seconds</span>
+      <h3>Confirm whether it's building-wide or zone-specific</h3>
+      <p>Call back two of the complaining residents and ask them to confirm: are all their radiators cold, or just some? Are they on the same floor or different floors?</p>
+      <p>Different floors with full no-heat = building-wide. Same floor or same stack only = zone-specific. This determines whether you're chasing a central plant issue or a distribution issue, and where you walk first.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">2</span>
+      <span class="time">~1 minute</span>
+      <h3>Walk into the mechanical room and look at the boilers</h3>
+      <p>Each boiler will have a display panel showing one of four states: <strong>STANDBY</strong> (sitting idle waiting for a call), <strong>FIRING</strong> (currently running), <strong>LOCKOUT</strong> (faulted and refusing to fire), or a numerical fault code.</p>
+      <p>If all boilers show LOCKOUT or a fault code — you have a central plant problem. Continue to Step 3.</p>
+      <p>If boilers are firing but heat isn't reaching units — skip to Step 4 (circulator pumps).</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">3</span>
+      <span class="time">~1 minute</span>
+      <h3>Photograph every fault code</h3>
+      <p>Take a clear photo of each boiler's display showing the fault code. Common codes you'll see:</p>
+      <ul>
+        <li><strong>E04 / F32 / "Low water"</strong> — make-up water failure or system leak (go to Step 5)</li>
+        <li><strong>E22 / F22 / "Ignition lockout"</strong> — flame failed to establish; usually gas supply or igniter</li>
+        <li><strong>E33 / "Flue gas"</strong> — exhaust path blocked (snow on rooftop intake/vent is common in winter)</li>
+        <li><strong>"Sensor fault"</strong> — failed temperature sensor; tech needs to attend</li>
+      </ul>
+      <p>Photograph everything before resetting. You'll need the codes for the tech.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">4</span>
+      <span class="time">~1 minute</span>
+      <h3>Confirm circulator pumps are running</h3>
+      <p>Put your hand on each circulator pump housing. A running pump vibrates and is warm. A failed pump is silent and cold to the touch.</p>
+      <p>If pumps are off but should be running: check the pump breakers in the electrical room. A tripped breaker is common.</p>
+      <p>If pumps are running but flow isn't reaching units: probable cause is an air-locked loop or closed isolation valve. Tech required.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">5</span>
+      <span class="time">~2 minutes</span>
+      <h3>Check system pressure on the boiler gauge</h3>
+      <p>Each boiler has a pressure gauge on the front (psi). Normal cold operating pressure: <strong>12–25 psi</strong>.</p>
+      <p>If pressure reads below 10 psi — your make-up water has failed. The boiler will lock out on low water as a safety measure. Continue to Step 6.</p>
+      <p>If pressure reads above 30 psi — the expansion tank has likely failed (waterlogged). Tech required, but the boiler will run safely on the relief valve in the short term.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">6</span>
+      <span class="time">~1 minute</span>
+      <h3>Check the make-up water valve</h3>
+      <p>The make-up water valve is the brass valve on a small pipe coming off the cold-water main into the boiler loop. It should be partially open (handle parallel to pipe = open; perpendicular = closed).</p>
+      <p>If the valve is closed: open it. System pressure will start to rise within 2–3 minutes. Once pressure reaches 15 psi, you can reset the boilers.</p>
+      <p>If the valve is open but pressure isn't rising: there's a leak somewhere in the system. Tech required.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">7</span>
+      <span class="time">~1 minute</span>
+      <h3>For zone-specific issues, check zone valves and aquastat</h3>
+      <p>If only certain stacks or floors are cold, the issue is usually in distribution. Locate the zone valve panel (often in a sub-mechanical closet near the affected stack). Each zone valve should be opening when the thermostat calls for heat.</p>
+      <p>Listen for the valve motor clicking and the actuator turning. A stuck or failed zone valve will require tech replacement, but you've now isolated the problem.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">8</span>
+      <span class="time">~2 minutes</span>
+      <h3>Check the Building Automation System (BAS)</h3>
+      <p>Log into your BAS (Honeywell, Siemens, Delta, Distech, etc.) and check:</p>
+      <ul>
+        <li>Is the heating schedule active? (Sometimes a schedule gets accidentally overridden to "off")</li>
+        <li>Are setpoints reasonable? (A staff member may have set them to 50°F for "energy saving")</li>
+        <li>Are there any active alarms?</li>
+        <li>Is any mode override active? ("Manual", "Off", "Holiday")</li>
+      </ul>
+      <p>Clear any incorrect overrides. Many no-heat calls turn out to be BAS schedule issues, not equipment failures.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">9</span>
+      <span class="time">~30 seconds</span>
+      <h3>For penthouse-fed buildings, confirm MAU operation</h3>
+      <p>If your high-rise uses a penthouse-mounted Make-Up Air Unit (MAU) for corridor pressurization, walk up and confirm it's running. A failed MAU often presents as "no heat in upper floors" because the heating coil inside the MAU isn't transferring heat to incoming air.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">10</span>
+      <span class="time">~1 minute</span>
+      <h3>Document everything and call dispatch</h3>
+      <p>You should now have:</p>
+      <ul>
+        <li>Photo of every boiler fault code</li>
+        <li>Reading of current system pressure</li>
+        <li>Confirmation of which pumps are running / not running</li>
+        <li>Status of make-up water valve</li>
+        <li>BAS schedule / setpoint status</li>
+      </ul>
+      <p>When you call your contractor's emergency line, lead with this information. A tech who arrives knowing the fault code, pressure reading, and confirmed pump status can often have heat restored in 30–60 minutes instead of 2–3 hours.</p>
+    </div>
+
+    <div class="inline-cta">
+      <h3>Need someone <em>walking your building</em> right now?</h3>
+      <p>PanCanAir contract clients get 24/7 dispatch with under-2-hour GTA response and no after-hours premium. (437) 410-2100.</p>
+      <a href="tel:+14374102100" class="inline-cta-btn">Call Emergency Dispatch  →</a>
+    </div>
+
+    <h2>What you can fix yourself, and what you can't</h2>
+    <p>Things a property manager can safely do without violating TSSA regulations:</p>
+    <ul>
+      <li>Reset a boiler after a lockout (press the reset button)</li>
+      <li>Open the make-up water valve to restore system pressure</li>
+      <li>Reset tripped circuit breakers</li>
+      <li>Clear BAS schedule overrides</li>
+      <li>Document fault codes for the tech</li>
+    </ul>
+    <p>Things that require licensed personnel under Ontario TSSA regulations:</p>
+    <ul>
+      <li>Any work involving gas connections or combustion components</li>
+      <li>Pressure vessel work (boiler internals, expansion tank replacement)</li>
+      <li>Refrigerant work on chillers or heat pumps</li>
+      <li>Anything requiring entry into the firebox or burner assembly</li>
+    </ul>
+
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <p class="faq-q">What's the most common cause of no heat in a Toronto condo?</p>
+        <p class="faq-a">In GTA high-rises, the top three causes of building-wide no-heat are: boiler lockout (often from low water pressure or flue-gas issues), circulator pump failure, and make-up water valve failure. Zone-specific outages are usually controls — failed zone valve, broken aquastat, or BAS override.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Can a property manager fix no heat without calling a contractor?</p>
+        <p class="faq-a">For some issues yes — resetting a boiler after a lockout, opening a manual make-up water valve, or clearing a BAS override. For anything involving combustion, refrigerant, or pressure vessels, you must call a licensed contractor. TSSA regulations in Ontario require licensed personnel for boiler service.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">How long does a no-heat repair take?</p>
+        <p class="faq-a">For common faults: simple resets and pressure restoration take 30–60 minutes. Pump replacement is typically 2–4 hours. Boiler component failures can take 1–3 days if parts need to be sourced. Doing the 10-step diagnostic before dispatch saves significant time.</p>
+      </div>
+    </section>
+  </div>
+</article>
+
+<section class="related">
+  <div class="wrap">
+    <h2>Related guides</h2>
+    <div class="related-grid">
+      <a href="/blog/commercial-hvac-maintenance-mistakes-property-managers.html">
+        <span class="cat">PROPERTY MANAGER GUIDE</span>
+        <h3>7 Commercial HVAC mistakes GTA property managers make.</h3>
+        <p>The seven contract patterns we see every quarter that quietly add $15k–$80k a year to mechanical-system spend.</p>
+      </a>
+      <a href="/blog/tssa-boiler-inspection-toronto-checklist.html">
+        <span class="cat">COMPLIANCE</span>
+        <h3>TSSA boiler inspection Toronto: 2026 compliance checklist.</h3>
+        <p>Every clause of the Ontario TSSR your boiler plant has to satisfy in 2026.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>PanCanAir</strong> · Commercial HVAC · Toronto, ON · <a href="tel:+14374102100">(437) 410-2100</a> · <a href="mailto:info@pancanair.com">info@pancanair.com</a></p>
+    <p style="margin-top:8px;font-size:11px;opacity:.6">TSSA · ASHRAE · ACMO · BOMA · Toronto · Mississauga · Brampton · Vaughan · North York · Markham · Oakville · Hamilton</p>
+  </div>
+</footer>
+
+</body>
+</html>

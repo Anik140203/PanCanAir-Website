@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HVAC Insights & Guides for GTA Property Managers · PanCanAir Blog</title>
+<meta name="description" content="Expert HVAC guides, costly mistakes, and quick-fix diagnostics for Toronto property managers and condo boards. TSSA, ASHRAE & ACMO compliance written by working GTA engineers."/>
+<link rel="canonical" href="https://pancanair.com/blog.html"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="HVAC Insights for GTA Property Managers · PanCanAir"/>
+<meta property="og:description" content="Guides, mistakes & quick repair diagnostics for Toronto high-rise HVAC. Written by working engineers."/>
+<meta property="og:url" content="https://pancanair.com/blog.html"/>
+<meta property="og:site_name" content="PanCanAir"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="HVAC Insights for GTA Property Managers"/>
+
+<!-- Schema.org: Blog + Organization -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"PanCanAir Insights","description":"HVAC guides and quick-fix diagnostics for Toronto property managers and condo boards.","url":"https://pancanair.com/blog.html","publisher":{"@type":"Organization","name":"PanCanAir","url":"https://pancanair.com","logo":{"@type":"ImageObject","url":"https://pancanair.com/logo.png"}}}</script>
+
+<!-- Breadcrumbs -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pancanair.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://pancanair.com/blog.html"}]}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet"/>
+
+<style>
+:root{
+  --bg:#f5f2ed; --s0:#ffffff; --s1:#f0ece6; --s2:#e8e3db;
+  --accent:#d94a2b; --a-soft:rgba(217,74,43,.08); --navy:#0a2a5e;
+  --border:rgba(0,0,0,.08);
+  --t1:#1a1714; --t2:rgba(26,23,20,.72); --t3:rgba(26,23,20,.52);
+  --ds:'DM Serif Display',Georgia,serif;
+  --body:'Satoshi','DM Sans',system-ui,sans-serif;
+  --r:20px; --r-sm:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+@media(max-width:768px){.wrap{padding:0 20px}}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:center;background:rgba(8,18,44,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{width:100%;max-width:1160px;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-name{font-family:var(--ds);font-size:20px;font-style:italic;color:#fff;line-height:1;letter-spacing:-.02em}
+.nav-logo-name b{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:2px;background:rgba(255,255,255,.06);padding:4px;border-radius:100px;border:1px solid rgba(255,255,255,.1)}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);padding:7px 16px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-cta{background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:9px 22px;border-radius:100px;border:none;cursor:pointer;transition:filter .15s}
+.nav-cta:hover{filter:brightness(1.07)}
+@media(max-width:768px){.nav-links{display:none}}
+
+/* Hero */
+.blog-hero{padding:88px 0 56px;background:linear-gradient(180deg,var(--bg) 0%,var(--s1) 100%);border-bottom:1px solid var(--border)}
+.blog-crumb{display:inline-block;font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);margin-bottom:18px}
+.blog-h1{font-family:var(--ds);font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.025em;color:var(--t1);margin-bottom:18px;max-width:780px}
+.blog-h1 em{font-style:italic;color:var(--t2)}
+.blog-sub{font-size:18px;color:var(--t2);line-height:1.55;max-width:560px}
+@media(max-width:768px){.blog-hero{padding:56px 0 32px}.blog-h1{font-size:38px}.blog-sub{font-size:15px}}
+
+/* Tags filter */
+.tag-bar{padding:24px 0;border-bottom:1px solid var(--border)}
+.tag-bar-inner{display:flex;gap:8px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--s0);border:1px solid var(--border);border-radius:100px;font-size:12px;font-weight:600;color:var(--t2);transition:all .15s;cursor:pointer}
+.tag:hover,.tag.active{background:var(--t1);color:#fff;border-color:var(--t1)}
+.tag .count{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;opacity:.6}
+
+/* Post grid */
+.posts{padding:64px 0 96px}
+.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
+@media(max-width:768px){.post-grid{grid-template-columns:1fr;gap:32px}.posts{padding:40px 0 64px}}
+
+.post-card{background:var(--s0);border:1px solid var(--border);border-radius:var(--r);padding:32px;transition:transform .25s ease,box-shadow .25s ease;position:relative;overflow:hidden}
+.post-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.08)}
+.post-card.featured{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;background:var(--t1);color:#fff;padding:48px}
+.post-card.featured .post-meta{color:rgba(255,255,255,.6)}
+.post-card.featured h2{color:#fff;font-size:36px}
+.post-card.featured .post-excerpt{color:rgba(255,255,255,.78)}
+.post-card.featured .post-art{background:linear-gradient(135deg,var(--accent),#a32d2d);border-radius:var(--r-sm);min-height:240px;display:flex;align-items:flex-end;padding:32px;position:relative;overflow:hidden}
+.post-card.featured .post-art::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.post-card.featured .post-art-num{font-family:var(--ds);font-size:120px;line-height:.9;color:rgba(255,255,255,.18);font-style:italic;position:absolute;right:24px;bottom:-12px}
+.post-card.featured .post-art-label{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.85);text-transform:uppercase;position:relative;z-index:2}
+@media(max-width:768px){.post-card.featured{grid-template-columns:1fr;padding:28px}.post-card.featured h2{font-size:26px}.post-card.featured .post-art-num{font-size:80px}}
+
+.post-meta{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:18px}
+.post-meta .cat{color:var(--accent)}
+.post-meta::before{content:'';display:none}
+.post-card h2{font-family:var(--ds);font-size:28px;line-height:1.08;letter-spacing:-.02em;color:var(--t1);margin-bottom:14px}
+.post-card h2 em{font-style:italic;color:var(--t2)}
+.post-excerpt{font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:24px}
+.post-cta{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);transition:gap .2s}
+.post-card:hover .post-cta{gap:14px}
+.post-cta::after{content:'→'}
+
+/* Newsletter / CTA strip */
+.cta-strip{background:var(--t1);color:#fff;padding:64px 0;text-align:center}
+.cta-strip-h{font-family:var(--ds);font-size:36px;line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.cta-strip-h em{font-style:italic;color:var(--accent)}
+.cta-strip-p{font-size:15px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 28px}
+.cta-strip-btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:14px;padding:14px 32px;border-radius:100px;border:none;cursor:pointer;transition:filter .2s}
+.cta-strip-btn:hover{filter:brightness(1.07)}
+
+footer{padding:48px 0;background:#08122c;color:rgba(255,255,255,.45);font-size:13px;text-align:center}
+footer a{color:rgba(255,255,255,.7)}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">
+      <span class="nav-logo-name"><b>PanCan</b>Air</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#services">Services</a>
+      <a href="/#highrise">High-Rises</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/blog.html">Blog</a>
+    </div>
+    <button class="nav-cta" onclick="location.href='/#book'">Book Site Visit</button>
+  </div>
+</nav>
+
+<header class="blog-hero">
+  <div class="wrap">
+    <div class="blog-crumb">PanCanAir · Insights</div>
+    <h1 class="blog-h1">HVAC guides &<br/><em>quick-fix diagnostics.</em></h1>
+    <p class="blog-sub">Field-tested guides, costly mistakes to avoid, and quick repair diagnostics for property managers and condo boards across the GTA. Written by working engineers — TSSA, ASHRAE, ACMO compliant.</p>
+  </div>
+</header>
+
+<section class="tag-bar">
+  <div class="wrap tag-bar-inner">
+    <button class="tag active">All <span class="count">3</span></button>
+    <button class="tag">Property Manager Guides <span class="count">1</span></button>
+    <button class="tag">Quick Repair <span class="count">1</span></button>
+    <button class="tag">Compliance & TSSA <span class="count">1</span></button>
+  </div>
+</section>
+
+<section class="posts">
+  <div class="wrap">
+    <div class="post-grid">
+
+      <!-- FEATURED POST -->
+      <a class="post-card featured" href="/blog/commercial-hvac-maintenance-mistakes-property-managers.html">
+        <div>
+          <div class="post-meta">
+            <span class="cat">PROPERTY MANAGER GUIDE</span>
+            <span>·</span>
+            <span>12 MIN READ</span>
+            <span>·</span>
+            <span>JUN 2026</span>
+          </div>
+          <h2>7 Commercial HVAC mistakes <em>GTA property managers make</em> (and what they cost).</h2>
+          <p class="post-excerpt">The single highest-leverage read for any property manager overseeing 50–1,000+ unit high-rises. Seven contract patterns we see every quarter that quietly add $15k–$80k to your annual mechanical-system spend — and how to fix each one before the next AGM.</p>
+          <span class="post-cta">Read the guide</span>
+        </div>
+        <div class="post-art">
+          <span class="post-art-num">01</span>
+          <span class="post-art-label">FOR PMS · CONDO BOARDS</span>
+        </div>
+      </a>
+
+      <!-- POST 2: QUICK REPAIR -->
+      <a class="post-card" href="/blog/condo-no-heat-emergency-diagnostic-guide.html">
+        <div class="post-meta">
+          <span class="cat">QUICK REPAIR</span>
+          <span>·</span>
+          <span>8 MIN READ</span>
+          <span>·</span>
+          <span>JUN 2026</span>
+        </div>
+        <h2>Condo has no heat? A <em>10-minute</em> emergency diagnostic for PMs.</h2>
+        <p class="post-excerpt">The 10-step diagnostic our techs run before dispatching a truck — works for boilers, hydronic loops, MAU failures, and zone-controller faults. Designed so a PM can triage on a Saturday night before paying after-hours rates.</p>
+        <span class="post-cta">Read the guide</span>
+      </a>
+
+      <!-- POST 3: COMPLIANCE -->
+      <a class="post-card" href="/blog/tssa-boiler-inspection-toronto-checklist.html">
+        <div class="post-meta">
+          <span class="cat">COMPLIANCE</span>
+          <span>·</span>
+          <span>10 MIN READ</span>
+          <span>·</span>
+          <span>JUN 2026</span>
+        </div>
+        <h2>TSSA boiler inspection Toronto: <em>2026 compliance</em> checklist.</h2>
+        <p class="post-excerpt">Every clause of the Ontario TSSR your boiler plant has to satisfy in 2026, written in plain English. Includes the 14 items inspectors fail on most often, and the documents you need on-site the day they show up.</p>
+        <span class="post-cta">Read the guide</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="wrap">
+    <h2 class="cta-strip-h">Want a real engineer<br/><em>walking your building?</em></h2>
+    <p class="cta-strip-p">Free 90-minute mechanical room audit for GTA condo boards and property managers. We deliver a written report within 48 hours — no obligation, no upsell.</p>
+    <button class="cta-strip-btn" onclick="location.href='/#book'">Book a Site Visit  →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>PanCanAir</strong> · Commercial HVAC · Toronto, ON · <a href="tel:+14374102100">(437) 410-2100</a> · <a href="mailto:info@pancanair.com">info@pancanair.com</a></p>
+    <p style="margin-top:8px;font-size:11px;opacity:.6">TSSA · ASHRAE · ACMO · BOMA  ·  Toronto · Mississauga · Brampton · Vaughan · North York · Markham · Oakville · Hamilton</p>
+  </div>
+</footer>
+
+</body>
+</html>
