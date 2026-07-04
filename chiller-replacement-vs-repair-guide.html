@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Chiller Replacement vs Repair: Decision Framework for GTA High-Rise PMs (2026) · PanCanAir</title>
+<meta name="description" content="Complete decision framework for property managers facing commercial chiller replacement vs repair. Chiller lifespan tables, 2026 cost comparisons, and the 6-question decision tree we use at every audit."/>
+<link rel="canonical" href="https://pancanair.com/blog/chiller-replacement-vs-repair-guide.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Chiller Replacement vs Repair: Decision Framework for GTA PMs"/>
+<meta property="og:description" content="Chiller lifespan tables, 2026 cost comparisons, and the 6-question decision tree we use at every audit."/>
+<meta property="og:url" content="https://pancanair.com/blog/chiller-replacement-vs-repair-guide.html"/>
+<meta property="article:published_time" content="2026-06-27T08:00:00-04:00"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="shortcut icon" href="/favicon.ico"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<meta name="theme-color" content="#0a2a5e"/>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Chiller Replacement vs Repair: Decision Framework for GTA High-Rise PMs","author":{"@type":"Person","name":"Pankaj Oberoi","jobTitle":"Owner & HVAC Engineer","worksFor":{"@type":"Organization","name":"PanCanAir"}},"publisher":{"@type":"Organization","name":"PanCanAir","logo":{"@type":"ImageObject","url":"https://pancanair.com/favicon-96x96.png"}},"datePublished":"2026-06-27","dateModified":"2026-06-27","mainEntityOfPage":{"@type":"WebPage","@id":"https://pancanair.com/blog/chiller-replacement-vs-repair-guide.html"},"keywords":"chiller replacement cost, chiller repair vs replace, commercial chiller lifespan, Toronto HVAC, GTA chiller"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pancanair.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://pancanair.com/blog.html"},{"@type":"ListItem","position":3,"name":"Chiller Replacement vs Repair","item":"https://pancanair.com/blog/chiller-replacement-vs-repair-guide.html"}]}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How long does a commercial chiller last?","acceptedAnswer":{"@type":"Answer","text":"Air-cooled screw chillers typically last 15–20 years. Water-cooled centrifugal chillers can last 25–30 years with proper maintenance. Actual service life depends heavily on water treatment quality, runtime hours, and refrigerant leak history."}},{"@type":"Question","name":"When should a chiller be replaced instead of repaired?","acceptedAnswer":{"@type":"Answer","text":"Replace when: (1) the chiller is over 80% of rated service life; (2) the repair exceeds 40% of replacement cost; (3) the refrigerant has been phased out (R-22, R-11); (4) the compressor is failing for the second time; (5) major structural corrosion is present; (6) energy consumption is 20%+ above manufacturer spec."}},{"@type":"Question","name":"What refrigerants have been phased out for commercial chillers?","acceptedAnswer":{"@type":"Answer","text":"R-11 (CFC) was fully phased out in 1996. R-22 (HCFC) was phased out for new equipment in 2010 and for all production in 2020. R-123 phased out for new equipment in 2020. Current commercial standards are R-134a and R-1234ze, with R-514A gaining adoption."}},{"@type":"Question","name":"How much can new chillers save on energy costs?","acceptedAnswer":{"@type":"Answer","text":"A 2026-spec chiller typically operates at 0.55–0.62 kW/ton versus 0.75–0.90 kW/ton for early-2000s equipment — a 20–30% efficiency improvement. On a 400-ton chiller running 2,000 hours/year, that translates to $18,000–$32,000 in annual electricity savings at current Ontario commercial rates."}}]}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f5f2ed;--s0:#ffffff;--s1:#f0ece6;--accent:#d94a2b;--a-soft:rgba(217,74,43,.08);--navy:#0a2a5e;--border:rgba(0,0,0,.08);--t1:#1a1714;--t2:rgba(26,23,20,.78);--t3:rgba(26,23,20,.52);--ds:'DM Serif Display',Georgia,serif;--body:'Satoshi','DM Sans',system-ui,sans-serif;--r:20px;--r-sm:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--t1);font-family:var(--body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}a{text-decoration:none;color:var(--accent)}a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 32px}@media(max-width:768px){.wrap{padding:0 20px}}
+nav{position:sticky;top:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:center;background:rgba(8,18,44,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{width:100%;max-width:1160px;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo-name{font-family:var(--ds);font-size:20px;font-style:italic;color:#fff}.nav-logo-name b{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:2px;background:rgba(255,255,255,.06);padding:4px;border-radius:100px;border:1px solid rgba(255,255,255,.1)}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);padding:7px 16px;border-radius:100px}
+.nav-cta{background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:9px 22px;border-radius:100px;border:none;cursor:pointer}
+@media(max-width:768px){.nav-links{display:none}}
+.art-hero{padding:64px 0 40px;background:var(--s1);border-bottom:1px solid var(--border)}
+.crumbs{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--t3);margin-bottom:24px}
+.crumbs a{color:var(--t3)}.crumbs .sep{margin:0 8px;opacity:.5}.crumbs .current{color:var(--accent)}
+.art-cat{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--a-soft);color:var(--accent);font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-radius:100px;margin-bottom:24px}
+.art-h1{font-family:var(--ds);font-size:clamp(36px,5.2vw,58px);line-height:1.04;letter-spacing:-.025em;margin-bottom:24px}
+.art-h1 em{font-style:italic;color:var(--t2)}
+.art-meta{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--t3)}.art-meta .author{font-weight:600;color:var(--t1)}.art-meta .sep{opacity:.5}
+@media(max-width:768px){.art-hero{padding:40px 0 28px}.art-h1{font-size:30px}}
+.art-body{padding:48px 0 80px}
+.lede{font-family:var(--ds);font-size:22px;line-height:1.4;color:var(--t2);margin-bottom:40px;font-style:italic;border-left:3px solid var(--accent);padding-left:24px}
+.art-body p{margin-bottom:20px;color:var(--t2);font-size:17px;line-height:1.75}.art-body p strong{color:var(--t1);font-weight:600}
+.art-body h2{font-family:var(--ds);font-size:30px;line-height:1.1;letter-spacing:-.02em;margin:48px 0 16px}
+.art-body h3{font-size:18px;font-weight:700;margin:24px 0 10px;color:var(--t1)}
+.art-body ul,.art-body ol{margin:16px 0 24px 24px;color:var(--t2)}.art-body li{margin-bottom:8px;font-size:17px;line-height:1.7}
+.q-tree{background:var(--s0);border:1px solid var(--border);border-radius:var(--r);padding:32px;margin:32px 0}
+.q-tree h3{font-family:var(--ds);font-size:22px;margin-bottom:20px;color:var(--t1)}
+.q-item{padding:14px 0;border-top:1px solid var(--border);display:flex;gap:14px}
+.q-item:first-of-type{border-top:none;padding-top:0}
+.q-item .q{font-weight:600;color:var(--t1);flex:1;font-size:16px;line-height:1.5}
+.q-item .a{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:2px}
+.cost-table{width:100%;border-collapse:collapse;margin:24px 0;background:var(--s0);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;font-size:14px}
+.cost-table th{background:var(--t1);color:#fff;text-align:left;padding:14px 18px;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.cost-table td{padding:14px 18px;border-top:1px solid var(--border);color:var(--t2)}.cost-table td:first-child{font-weight:600;color:var(--t1)}
+.cost-table td:last-child{text-align:right;font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-weight:600;color:var(--t1)}
+.callout{background:var(--s0);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;margin:32px 0;position:relative}
+.callout::before{content:'';position:absolute;left:0;top:24px;bottom:24px;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
+.callout-label{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.callout p{font-size:15px;margin-bottom:0;color:var(--t1)}
+.inline-cta{background:var(--t1);color:#fff;border-radius:var(--r);padding:36px 40px;margin:48px 0;text-align:center}
+.inline-cta h3{font-family:var(--ds);font-size:26px;color:#fff;margin-bottom:8px}.inline-cta h3 em{font-style:italic;color:var(--accent)}
+.inline-cta p{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:20px}
+.inline-cta-btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:12px 26px;border-radius:100px;text-decoration:none}
+.faq{margin:48px 0}.faq h2{margin-bottom:24px}
+.faq-item{background:var(--s0);border:1px solid var(--border);border-radius:var(--r-sm);padding:20px 24px;margin-bottom:12px}
+.faq-q{font-weight:700;color:var(--t1);margin-bottom:8px;font-size:16px}.faq-a{color:var(--t2);font-size:15px;line-height:1.7}
+.related{padding:64px 0;background:var(--s1);border-top:1px solid var(--border)}
+.related h2{font-family:var(--ds);font-size:28px;margin-bottom:24px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.related a{display:block;background:var(--s0);border:1px solid var(--border);border-radius:var(--r-sm);padding:24px;color:var(--t1)}
+.related .cat{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block}
+.related h3{font-family:var(--ds);font-size:20px;line-height:1.2;color:var(--t1);margin-bottom:8px}.related p{font-size:13px;color:var(--t3);line-height:1.5}
+@media(max-width:768px){.related-grid{grid-template-columns:1fr}}
+footer{padding:48px 0;background:#08122c;color:rgba(255,255,255,.45);font-size:13px;text-align:center}footer a{color:rgba(255,255,255,.7)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" style="text-decoration:none"><span class="nav-logo-name"><b>PanCan</b>Air</span></a>
+    <div class="nav-links"><a href="/#services">Services</a><a href="/#highrise">High-Rises</a><a href="/#pricing">Pricing</a><a href="/blog.html">Blog</a></div>
+    <button class="nav-cta" onclick="location.href='/#book'">Book Site Visit</button>
+  </div>
+</nav>
+
+<header class="art-hero">
+  <div class="wrap">
+    <nav class="crumbs"><a href="/">Home</a><span class="sep">/</span><a href="/blog.html">Blog</a><span class="sep">/</span><span class="current">Chiller Replace vs Repair</span></nav>
+    <span class="art-cat">Property Manager Guide · Capital Decision</span>
+    <h1 class="art-h1">Chiller replacement vs repair: <em>the framework we use at every audit.</em></h1>
+    <div class="art-meta"><span class="author">By Pankaj Oberoi</span><span class="sep">·</span><span>Owner &amp; HVAC Engineer</span><span class="sep">·</span><span>Jun 27, 2026</span><span class="sep">·</span><span>11 min read</span></div>
+  </div>
+</header>
+
+<article class="art-body">
+  <div class="wrap">
+    <p class="lede">A chiller is the single most expensive piece of mechanical equipment most property managers will ever authorize. Getting the replace-versus-repair decision wrong costs a building anywhere from $80k (wasted repair on a dead unit) to $250k (replacing a unit that had 8 more good years). Here's the six-question framework we use.</p>
+
+    <h2>How long does a commercial chiller actually last?</h2>
+    <p>Chiller service life is more variable than most people realize. Water treatment, runtime, and refrigerant leak history matter more than the manufacturer nameplate.</p>
+
+    <table class="cost-table">
+      <thead><tr><th>Chiller Type</th><th>Realistic Service Life</th></tr></thead>
+      <tbody>
+        <tr><td>Air-cooled reciprocating</td><td>12–18 years</td></tr>
+        <tr><td>Air-cooled screw</td><td>15–20 years</td></tr>
+        <tr><td>Water-cooled scroll</td><td>18–22 years</td></tr>
+        <tr><td>Water-cooled screw</td><td>20–25 years</td></tr>
+        <tr><td>Water-cooled centrifugal</td><td>25–30 years</td></tr>
+        <tr><td>Absorption (steam or hot water)</td><td>20–25 years</td></tr>
+      </tbody>
+    </table>
+
+    <p>A water-cooled centrifugal chiller with excellent water treatment and modest runtime can hit 35 years. A well-treated air-cooled screw at high runtime can die at year 12. <strong>Rated life is a starting point, not a guarantee</strong>.</p>
+
+    <h2>The 6-question decision framework</h2>
+    <p>When we're called for a chiller repair-versus-replace assessment, this is the sequence we work through with the property manager. Answer all six honestly and the decision usually becomes obvious.</p>
+
+    <div class="q-tree">
+      <h3>The decision tree</h3>
+      <div class="q-item"><span class="q">1. Is the chiller over 80% of its rated service life?</span><span class="a">Replace weight ++</span></div>
+      <div class="q-item"><span class="q">2. Does the repair exceed 40% of replacement cost?</span><span class="a">Replace weight ++</span></div>
+      <div class="q-item"><span class="q">3. Does it run refrigerant that's been phased out (R-22, R-11, R-123)?</span><span class="a">Replace weight +++</span></div>
+      <div class="q-item"><span class="q">4. Is this the second major compressor failure?</span><span class="a">Replace weight ++</span></div>
+      <div class="q-item"><span class="q">5. Is measured efficiency ≥ 20% above nameplate?</span><span class="a">Replace weight ++</span></div>
+      <div class="q-item"><span class="q">6. Is major structural corrosion present in the evaporator or condenser tubes?</span><span class="a">Replace weight +++</span></div>
+    </div>
+
+    <p>Two or more "yes" answers usually mean replace. Three or more, replace immediately. Even a single "yes" to Question 3 (obsolete refrigerant) is often decisive on its own because the operating cost of maintaining an R-22 unit through refrigerant sourcing markets has become punishing.</p>
+
+    <h2>Question-by-question detail</h2>
+
+    <h3>Q1 · Service life percentage</h3>
+    <p>A 15-year-old air-cooled screw is at year 15 of a 15–20 year expected life. That's 75–100% of expected life. Even if it's operating fine today, you're on borrowed time and every additional year of runtime accelerates failure risk on the compressor windings and expansion valves.</p>
+
+    <h3>Q2 · Repair vs replacement ratio</h3>
+    <p>The 40% rule: if repair cost exceeds 40% of replacement cost, replace. Repair on a $260k chiller with a $115k tube-bundle replacement quote (44% of replacement) is a no-brainer replacement decision. Repair on the same chiller with a $32k compressor swap (12%) is a straightforward repair.</p>
+
+    <div class="callout">
+      <div class="callout-label">FORMULA</div>
+      <p>Repair Ratio = (Full Repair Cost) ÷ (Full Replacement Cost, including crane and disposal). Ratio &gt; 40% = replace. Ratio 25–40% with equipment past 70% life = replace. Ratio &lt; 25% = repair unless other questions are triggered.</p>
+    </div>
+
+    <h3>Q3 · Refrigerant phase-out</h3>
+    <p>Refrigerant compliance is now the fastest-moving replacement driver in commercial HVAC:</p>
+    <ul>
+      <li><strong>R-11 (CFC)</strong> — fully phased out 1996. Cannot be legally sourced.</li>
+      <li><strong>R-22 (HCFC)</strong> — production ended 2020. Available only from recovered stock at 4–7× historical pricing.</li>
+      <li><strong>R-123 (HCFC)</strong> — phased out new production 2020. Existing units grandfathered but availability declining.</li>
+      <li><strong>R-134a, R-1234ze</strong> — current commercial standards.</li>
+    </ul>
+    <p>If your chiller runs R-22, the economic case for replacement is nearly automatic. A single major refrigerant leak now costs $8,000–$18,000 to top up — the same leak on an R-134a unit would cost $1,200–$2,800.</p>
+
+    <h3>Q4 · Second compressor failure</h3>
+    <p>A first compressor failure can be attributed to random variance, a bad batch, or a preceding maintenance event. A <em>second</em> compressor failure — even if separated by years — is almost always a system-level issue: refrigerant contamination, chronic overload, incorrect superheat, or oil chemistry problems. Fixing the second failure without addressing the root cause usually produces a third within 18 months.</p>
+
+    <h3>Q5 · Efficiency drift</h3>
+    <p>A chiller's kW/ton (energy input per ton of cooling produced) is the single best indicator of long-term health. Compare measured performance against manufacturer nameplate:</p>
+    <ul>
+      <li>Within 10% of nameplate: healthy</li>
+      <li>10–20% above nameplate: aging, worth investigating</li>
+      <li>&gt;20% above nameplate: significant degradation, replacement analysis warranted</li>
+    </ul>
+    <p>On a 400-ton chiller, going from 0.62 kW/ton to 0.85 kW/ton costs the building roughly $22,000 additional electricity annually. A new chiller at 0.55 kW/ton pays back its capital cost in ~7–9 years just on electricity savings.</p>
+
+    <h3>Q6 · Structural corrosion</h3>
+    <p>Tube-bundle corrosion, cracked shells, or perforated evaporators are not economically repairable. If any of these are present, the chiller is at end-of-life regardless of runtime or age. Corrosion assessments require an eddy-current test — insist on the report before authorizing any repair over $20k on an aging chiller.</p>
+
+    <h2>The replacement cost picture in 2026 GTA</h2>
+    <p>For anchor numbers, current installed replacement costs in the GTA:</p>
+
+    <table class="cost-table">
+      <thead><tr><th>Chiller Type &amp; Size</th><th>Installed 2026 Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Air-cooled screw, 100 tons</td><td>$110,000 – $170,000</td></tr>
+        <tr><td>Air-cooled screw, 200 tons</td><td>$180,000 – $260,000</td></tr>
+        <tr><td>Air-cooled screw, 300 tons</td><td>$240,000 – $340,000</td></tr>
+        <tr><td>Water-cooled centrifugal, 400 tons</td><td>$310,000 – $480,000</td></tr>
+        <tr><td>Water-cooled centrifugal, 750 tons</td><td>$520,000 – $780,000</td></tr>
+      </tbody>
+    </table>
+
+    <p>Add 15–25% for buildings with rooftop crane requirements or difficult mechanical penthouse access. Add 5–10% for BAS integration if your existing controls are pre-2015.</p>
+
+    <div class="inline-cta">
+      <h3>Free chiller assessment <em>at your building.</em></h3>
+      <p>We'll walk your mechanical room, run this 6-question framework, and deliver a written recommendation within 48 hours. Free for GTA condo boards and PMs.</p>
+      <a href="/#book" class="inline-cta-btn">Book a Chiller Audit  →</a>
+    </div>
+
+    <h2>The financing side most PMs miss</h2>
+    <p>Chiller replacement is a capital reserve draw. Two structural options that reduce the immediate reserve hit:</p>
+    <ol>
+      <li><strong>Chiller-as-a-Service financing</strong> — vendors like Trane and Carrier now offer 10-year lease programs where you pay monthly instead of capital-up-front. Interest costs 6–9% but the reserve preservation can be worth it if your fund is tight.</li>
+      <li><strong>Save-on-Energy incentives</strong> — Ontario's Independent Electricity System Operator (IESO) runs incentive programs (currently the Retrofit Program) that pay up to $0.15/kWh saved for chiller replacements. For a 400-ton upgrade saving 60,000 kWh/year, that's a $9,000 rebate.</li>
+    </ol>
+
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item"><p class="faq-q">How long does a commercial chiller last?</p><p class="faq-a">Air-cooled screw chillers: 15–20 years. Water-cooled centrifugal: 25–30 years with proper water treatment. Actual life depends on runtime hours and refrigerant leak history.</p></div>
+      <div class="faq-item"><p class="faq-q">When should a chiller be replaced instead of repaired?</p><p class="faq-a">Replace when: over 80% of rated life, repair exceeds 40% of replacement, refrigerant is phased out, second compressor failure, efficiency is 20%+ above spec, or major structural corrosion.</p></div>
+      <div class="faq-item"><p class="faq-q">What refrigerants have been phased out for commercial chillers?</p><p class="faq-a">R-11 (fully phased out 1996), R-22 (production ended 2020), R-123 (new production phased out 2020). Current standards: R-134a, R-1234ze, and R-514A.</p></div>
+      <div class="faq-item"><p class="faq-q">How much can new chillers save on energy costs?</p><p class="faq-a">2026-spec chillers operate at 0.55–0.62 kW/ton vs 0.75–0.90 for early-2000s equipment — 20–30% improvement. On a 400-ton chiller at 2,000 hours/year, that's $18k–$32k annual electricity savings.</p></div>
+    </section>
+  </div>
+</article>
+
+<section class="related">
+  <div class="wrap">
+    <h2>Related guides</h2>
+    <div class="related-grid">
+      <a href="/blog/commercial-hvac-cost-toronto-2026-guide.html"><span class="cat">PRICING</span><h3>Commercial HVAC costs in Toronto: 2026 pricing guide.</h3><p>Per-unit rates, boiler/chiller replacement costs, and what a 240-unit high-rise spends.</p></a>
+      <a href="/blog/hvac-5-year-capital-plan-template.html"><span class="cat">CAPITAL PLANNING</span><h3>5-year HVAC capital plan template for high-rise condos.</h3><p>Reserve fund allocation, equipment life tables, and a template your board can use at the next AGM.</p></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><p><strong>PanCanAir</strong> · Commercial HVAC · Toronto, ON · <a href="tel:+14374102100">(437) 410-2100</a> · <a href="mailto:info@pancanair.com">info@pancanair.com</a></p><p style="margin-top:8px;font-size:11px;opacity:.6">TSSA · ASHRAE · ACMO · BOMA</p></div>
+</footer>
+</body>
+</html>
